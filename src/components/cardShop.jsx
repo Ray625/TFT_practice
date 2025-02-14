@@ -1,9 +1,67 @@
+import { useState, useEffect, useCallback } from "react"
 import champion from "../assets/tft-champion-set13.json"
+import trait from "../assets/tft-trait-set13.json"
+import shopRates from "../assets/tft-shop-drop-rates-data.json"
 
 const Shop = () => {
+  const [level, setLevel] = useState(7)
+  const [xp, setXp] = useState(0)
+  const [total, setTotal] = useState(80)
+  const xpList = [2, 2, 6, 10, 20, 36, 48, 76, 84, 0]
+  const levelNeededXp = xpList[level - 1];
+  const levelRate = shopRates.data.Shop[`${level - 1}`].dropRatesByTier
+
+  console.log("champion", champion);
   const items = [1, 2, 3, 4, 5]
 
-  console.log(champion)
+  const singedData = champion.data.TFT13_Singed;
+  const traitList = singedData.trait
+
+  useEffect(() => {
+    const handlePressKeyF = (event) => {
+      if (event.keyCode === 70) {
+        handleBuyXp();
+      }
+
+      if (event.keyCode === 68) {
+        alert("刷新");
+      }
+    };
+
+    window.addEventListener("keydown", handlePressKeyF);
+
+    return () => {
+      window.removeEventListener("keydown", handlePressKeyF);
+    };
+  },[level, xp, total]);
+
+  const handleBuyXp = useCallback(() => {
+    if (level >= 10) return; // 滿等時無法購買經驗
+
+    if (levelNeededXp - xp > 4) {
+      // 在購買經驗後不足以提升等級時
+      if (total >= 4) {
+        setTotal((prevTotal) => prevTotal - 4);
+        setXp((prevXp) => prevXp + 4);
+      }
+      if (total < 4) {
+        // 錢不夠4元時無法購買經驗
+        return;
+      }
+    }
+
+    if (levelNeededXp - xp <= 4) {
+      // 在購買經驗後將提升等級時
+      if (total >= 4) {
+        setTotal((prevTotal) => prevTotal - 4);
+        setXp((prevXp) => 4 - levelNeededXp + prevXp);
+        setLevel((prevLevel) => prevLevel + 1);
+      }
+      if (total < 4) {
+        return;
+      }
+    }
+  }, [level, xp, total, levelNeededXp]);
 
   return (
     <>
@@ -13,9 +71,9 @@ const Shop = () => {
             <div className="w-full p-1 aspect-[75/16] bg-bg-black [clip-path:polygon(0%_0%,85%_0%,100%_100%,0%_100%)]">
               <div className="flex flex-row items-end w-full">
                 <h5 className="text-2xl/7 pl-1 text-text-white text-left">
-                  等級 8
+                  {`等級 ${level}`}
                 </h5>
-                <p className="text-l ml-[34%] text-text-white">12/76</p>
+                <p className="text-l ml-[34%] text-text-white">{`${xp}/${levelNeededXp}`}</p>
               </div>
             </div>
           </div>
@@ -23,23 +81,23 @@ const Shop = () => {
             <div className="flex flex-row items-center justify-between w-4/5 h-full mx-auto opacity-90">
               <div className="flex flex-row items-center gap-2">
                 <div className="w-2 h-2 bg-one-cost rounded-full"></div>
-                <p className="text-one-cost font-extralight">30%</p>
+                <p className="text-one-cost font-extralight">{`${levelRate[0].rate}%`}</p>
               </div>
               <div className="flex flex-row items-center gap-2">
                 <div className="w-2 h-2 bg-two-cost rounded-full"></div>
-                <p className="text-two-cost font-extralight">40%</p>
+                <p className="text-two-cost font-extralight">{`${levelRate[1].rate}%`}</p>
               </div>
               <div className="flex flex-row items-center gap-2">
                 <div className="w-2 h-2 bg-three-cost [clip-path:polygon(50%_0%,100%_100%,0%_100%)]"></div>
-                <p className="text-three-cost font-extralight">25%</p>
+                <p className="text-three-cost font-extralight">{`${levelRate[2].rate}%`}</p>
               </div>
               <div className="flex flex-row items-center gap-2">
                 <div className="w-1.5 h-1.5 bg-four-cost rotate-45"></div>
-                <p className="text-four-cost font-extralight">5%</p>
+                <p className="text-four-cost font-extralight">{`${levelRate[3].rate}%`}</p>
               </div>
               <div className="flex flex-row items-center gap-2">
                 <div className="w-2 h-2 bg-five-cost [clip-path:polygon(50%_0%,100%_39.5%,80.5%_100%,19.5%_100%,0%_39.5%)]"></div>
-                <p className="text-five-cost font-extralight">0%</p>
+                <p className="text-five-cost font-extralight">{`${levelRate[4].rate}%`}</p>
               </div>
             </div>
           </div>
@@ -51,7 +109,7 @@ const Shop = () => {
                   src="/img/item/Gold.png"
                   alt="icon"
                 />
-                60
+                {total}
               </h5>
             </div>
           </div>
@@ -59,8 +117,9 @@ const Shop = () => {
         <div className="relative z-0 grid grid-cols-6 gap-2 w-full p-2 aspect-[104/14] bg-bg-black border-4 border-border-gold shadow-[4px_4px_4px_0_rgba(0,0,0,0.25)]">
           <div className="flex flex-col gap-2 h-full bg-bg-black">
             <button
-              className="relative h-full flex flex-col bg-xp-bg border-2 border-xp-border hover:opacity-80 hover:cursor-pointer transition-opacity duration-150"
-              onClick={() => alert("購買XP")}
+              className="relative h-full flex flex-col bg-xp-bg border-2 border-xp-border active:opacity-90 hover:opacity-80 hover:cursor-pointer transition-opacity duration-150"
+              onClick={handleBuyXp}
+              title="購買經驗(F)"
             >
               <h6 className="text-xl m-0 pt-1 pl-2 text-text-white text-left">
                 購買XP
@@ -82,8 +141,8 @@ const Shop = () => {
               </div>
             </button>
             <button
-              className="relative h-full flex flex-col bg-reroll-bg border-2 border-reroll-border hover:opacity-80 hover:cursor-pointer transition-opacity duration-150"
-              onClick={() => alert("刷新")}
+              className="relative h-full flex flex-col bg-reroll-bg border-2 border-reroll-border active:opacity-90 hover:opacity-80 hover:cursor-pointer transition-opacity duration-150"
+              title="刷新商店(D)"
             >
               <h6 className="text-xl m-0 pt-1 pl-2 text-text-white text-left">
                 刷新
@@ -106,291 +165,78 @@ const Shop = () => {
             </button>
           </div>
           {items.map((item) => {
-            let body
+            let star;
             switch (item) {
               case 1:
-                body = (
-                  <>
-                    <div className="relative border-2 border-one-cost-card-light">
-                      <div className="border border-card-border">
-                        <img
-                          className="w-full aspect-[69/40]"
-                          src="/img/champion/TFT13_Lux.TFT_Set13.png"
-                          alt="champion"
-                        />
-                      </div>
-                      <div className="absolute top-0 left-0 flex flex-col justify-end pl-1 w-full h-full">
-                        <div className="flex flex-row">
-                          <div className="w-fit h-fit p-[1px] mr-1 bg-trait-icon-shadow [clip-path:polygon(0%_25%,50%_0%,100%_25%,100%_75%,50%_100%,0%_75%)]">
-                            <div className="flex justify-center items-center w-5 h-6 bg-trait-icon-bg [clip-path:polygon(0%_25%,50%_0%,100%_25%,100%_75%,50%_100%,0%_75%)]">
-                              <img
-                                src="/img/trait/Trait_Icon_13_Academy.TFT_Set13.png"
-                                alt="icon"
-                                className="w-3 h-3"
-                              />
-                            </div>
-                          </div>
-                          <p className="text-lg text-text-white text-left">
-                            戰爭學院
-                          </p>
-                        </div>
-                        <div className="flex flex-row">
-                          <div className="w-fit h-fit p-[1px] mr-1 bg-trait-icon-shadow [clip-path:polygon(0%_25%,50%_0%,100%_25%,100%_75%,50%_100%,0%_75%)]">
-                            <div className="flex justify-center items-center w-5 h-6 bg-trait-icon-bg [clip-path:polygon(0%_25%,50%_0%,100%_25%,100%_75%,50%_100%,0%_75%)]">
-                              <img
-                                src="/img/trait/Trait_Icon_13_Sorcerer.TFT_Set13.png"
-                                alt="icon"
-                                className="w-3 h-3 border-4"
-                              />
-                            </div>
-                          </div>
-                          <p className="text-lg text-text-white text-left">
-                            巫師
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="flex flex-row justify-between items-center px-2 bg-linear-to-r from-one-cost-card-dark to-one-cost-card-light grow">
-                      <p className="text-xl text-text-white">拉克斯</p>
-                      <p className="flex items-center justify-start text-lg text-text-white font-light font-sans leading-none">
-                        <img
-                          className="w-4 h-4 mr-2 mt-1"
-                          src="/img/item/Gold.png"
-                          alt="icon"
-                        />
-                        1
-                      </p>
-                    </div>
-                  </>
-                );
+                star = "one";
                 break;
               case 2:
-                body = (
-                  <>
-                    <div className="relative border-2 border-two-cost-card-light">
-                      <div className="border border-card-border">
-                        <img
-                          className="w-full aspect-[69/40]"
-                          src="/img/champion/TFT13_RenataGlasc.TFT_Set13.png"
-                          alt="champion"
-                          />
-                      </div>
-                      <div className="absolute top-0 left-0 flex flex-col justify-end pl-1 w-full h-full">
-                        <div className="flex flex-row">
-                          <div className="w-fit h-fit p-[1px] mr-1 bg-trait-icon-shadow [clip-path:polygon(0%_25%,50%_0%,100%_25%,100%_75%,50%_100%,0%_75%)]">
-                            <div className="flex justify-center items-center w-5 h-6 bg-trait-icon-bg [clip-path:polygon(0%_25%,50%_0%,100%_25%,100%_75%,50%_100%,0%_75%)]">
-                              <img
-                                src="/img/trait/Trait_Icon_13_Academy.TFT_Set13.png"
-                                alt="icon"
-                                className="w-3 h-3"
-                              />
-                            </div>
-                          </div>
-                          <p className="text-lg text-text-white text-left">
-                            戰爭學院
-                          </p>
-                        </div>
-                        <div className="flex flex-row">
-                          <div className="w-fit h-fit p-[1px] mr-1 bg-trait-icon-shadow [clip-path:polygon(0%_25%,50%_0%,100%_25%,100%_75%,50%_100%,0%_75%)]">
-                            <div className="flex justify-center items-center w-5 h-6 bg-trait-icon-bg [clip-path:polygon(0%_25%,50%_0%,100%_25%,100%_75%,50%_100%,0%_75%)]">
-                              <img
-                                src="/img/trait/Trait_Icon_13_Sorcerer.TFT_Set13.png"
-                                alt="icon"
-                                className="w-3 h-3"
-                              />
-                            </div>
-                          </div>
-                          <p className="text-lg text-text-white text-left">
-                            巫師
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="flex flex-row justify-between items-center px-2 bg-linear-to-r from-two-cost-card-dark to-two-cost-card-light grow">
-                      <p className="text-xl text-text-white">
-                        睿娜妲．格萊斯克
-                      </p>
-                      <p className="flex items-center justify-start text-lg text-text-white font-light font-sans leading-none">
-                        <img
-                          className="w-4 h-4 mr-2 mt-1"
-                          src="/img/item/Gold.png"
-                          alt="icon"
-                        />
-                        2
-                      </p>
-                    </div>
-                  </>
-                );
+                star = "two";
                 break;
               case 3:
-                body = (
-                  <>
-                    <div className="relative border-2 border-three-cost-card-light">
-                      <div className="border border-card-border">
-                        <img
-                          className="w-full aspect-[69/40]"
-                          src="/img/champion/TFT13_Blitzcrank.TFT_Set13.png"
-                          alt="champion"
-                        />
-                      </div>
-                      <div className="absolute top-0 left-0 flex flex-col justify-end pl-1 w-full h-full">
-                        <div className="flex flex-row">
-                          <div className="w-fit h-fit p-[1px] mr-1 bg-trait-icon-shadow [clip-path:polygon(0%_25%,50%_0%,100%_25%,100%_75%,50%_100%,0%_75%)]">
-                            <div className="flex justify-center items-center w-5 h-6 bg-trait-icon-bg [clip-path:polygon(0%_25%,50%_0%,100%_25%,100%_75%,50%_100%,0%_75%)]">
-                              <img
-                                src="/img/trait/Trait_Icon_13_Academy.TFT_Set13.png"
-                                alt="icon"
-                                className="w-3 h-3"
-                              />
-                            </div>
-                          </div>
-                          <p className="text-lg text-text-white text-left">
-                            戰爭學院
-                          </p>
-                        </div>
-                        <div className="flex flex-row">
-                          <div className="w-fit h-fit p-[1px] mr-1 bg-trait-icon-shadow [clip-path:polygon(0%_25%,50%_0%,100%_25%,100%_75%,50%_100%,0%_75%)]">
-                            <div className="flex justify-center items-center w-5 h-6 bg-trait-icon-bg [clip-path:polygon(0%_25%,50%_0%,100%_25%,100%_75%,50%_100%,0%_75%)]">
-                              <img
-                                src="/img/trait/Trait_Icon_13_Sorcerer.TFT_Set13.png"
-                                alt="icon"
-                                className="w-3 h-3"
-                              />
-                            </div>
-                          </div>
-                          <p className="text-lg text-text-white text-left">
-                            巫師
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="flex flex-row justify-between items-center px-2 bg-linear-to-r from-three-cost-card-dark to-three-cost-card-light grow">
-                      <p className="text-xl text-text-white">布里茨</p>
-                      <p className="flex items-center justify-start text-lg text-text-white font-light font-sans leading-none">
-                        <img
-                          className="w-4 h-4 mr-2 mt-1"
-                          src="/img/item/Gold.png"
-                          alt="icon"
-                        />
-                        3
-                      </p>
-                    </div>
-                  </>
-                );
+                star = "three";
                 break;
               case 4:
-                body = (
-                  <>
-                    <div className="relative border-2 border-four-cost-card-light">
-                      <div className="border border-card-border">
-                        <img
-                          className="w-full aspect-[69/40]"
-                          src="/img/champion/TFT13_Silco.TFT_Set13.png"
-                          alt="champion"
-                        />
-                      </div>
-                      <div className="absolute top-0 left-0 flex flex-col justify-end pl-1 w-full h-full">
-                        <div className="flex flex-row">
-                          <div className="w-fit h-fit p-[1px] mr-1 bg-trait-icon-shadow [clip-path:polygon(0%_25%,50%_0%,100%_25%,100%_75%,50%_100%,0%_75%)]">
-                            <div className="flex justify-center items-center w-5 h-6 bg-trait-icon-bg [clip-path:polygon(0%_25%,50%_0%,100%_25%,100%_75%,50%_100%,0%_75%)]">
-                              <img
-                                src="/img/trait/Trait_Icon_13_Academy.TFT_Set13.png"
-                                alt="icon"
-                                className="w-3 h-3"
-                              />
-                            </div>
-                          </div>
-                          <p className="text-lg text-text-white text-left">
-                            戰爭學院
-                          </p>
-                        </div>
-                        <div className="flex flex-row">
-                          <div className="w-fit h-fit p-[1px] mr-1 bg-trait-icon-shadow [clip-path:polygon(0%_25%,50%_0%,100%_25%,100%_75%,50%_100%,0%_75%)]">
-                            <div className="flex justify-center items-center w-5 h-6 bg-trait-icon-bg [clip-path:polygon(0%_25%,50%_0%,100%_25%,100%_75%,50%_100%,0%_75%)]">
-                              <img
-                                src="/img/trait/Trait_Icon_13_Sorcerer.TFT_Set13.png"
-                                alt="icon"
-                                className="w-3 h-3"
-                              />
-                            </div>
-                          </div>
-                          <p className="text-lg text-text-white text-left">
-                            巫師
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="flex flex-row justify-between items-center px-2 bg-linear-to-r from-four-cost-card-dark to-four-cost-card-light grow">
-                      <p className="text-xl text-text-white">希爾科</p>
-                      <p className="flex items-center justify-start text-lg text-text-white font-light font-sans leading-none">
-                        <img
-                          className="w-4 h-4 mr-2 mt-1"
-                          src="/img/item/Gold.png"
-                          alt="icon"
-                        />
-                        4
-                      </p>
-                    </div>
-                  </>
-                );
+                star = "four";
                 break;
               case 5:
-                body = (
-                  <>
-                    <div className="relative border-2 border-five-cost-card-light">
-                      <div className="border border-card-border">
-                        <img
-                          className="w-full aspect-[69/40]"
-                          src="/img/champion/TFT13_Rumble.TFT_Set13.png"
-                          alt="champion"
-                        />
-                      </div>
-                      <div className="absolute top-0 left-0 flex flex-col justify-end pl-1 w-full h-full">
-                        <div className="flex flex-row">
-                          <div className="w-fit h-fit p-[1px] mr-1 bg-trait-icon-shadow [clip-path:polygon(0%_25%,50%_0%,100%_25%,100%_75%,50%_100%,0%_75%)]">
-                            <div className="flex justify-center items-center w-5 h-6 bg-trait-icon-bg [clip-path:polygon(0%_25%,50%_0%,100%_25%,100%_75%,50%_100%,0%_75%)]">
-                              <img
-                                src="/img/trait/Trait_Icon_13_Academy.TFT_Set13.png"
-                                alt="icon"
-                                className="w-3 h-3"
-                              />
-                            </div>
-                          </div>
-                          <p className="text-lg text-text-white text-left">
-                            戰爭學院
-                          </p>
-                        </div>
-                        <div className="flex flex-row">
-                          <div className="w-fit h-fit p-[1px] mr-1 bg-trait-icon-shadow [clip-path:polygon(0%_25%,50%_0%,100%_25%,100%_75%,50%_100%,0%_75%)]">
-                            <div className="flex justify-center items-center w-5 h-6 bg-trait-icon-bg [clip-path:polygon(0%_25%,50%_0%,100%_25%,100%_75%,50%_100%,0%_75%)]">
-                              <img
-                                src="/img/trait/Trait_Icon_13_Sorcerer.TFT_Set13.png"
-                                alt="icon"
-                                className="w-3 h-3"
-                              />
-                            </div>
-                          </div>
-                          <p className="text-lg text-text-white text-left">
-                            巫師
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="flex flex-row justify-between items-center px-2 bg-linear-to-r from-five-cost-card-dark to-five-cost-card-light grow">
-                      <p className="text-xl text-text-white">藍寶</p>
-                      <p className="flex items-center justify-start text-lg text-text-white font-light font-sans leading-none">
-                        <img
-                          className="w-4 h-4 mr-2 mt-1"
-                          src="/img/item/Gold.png"
-                          alt="icon"
-                        />
-                        5
-                      </p>
-                    </div>
-                  </>
-                );
+                star = "five";
                 break;
+              default:
+                star = null;
             }
+            const body = (
+              <>
+                <div
+                  className={`relative border-2 border-${star}-cost-card-light`}
+                >
+                  <div className="border border-card-border">
+                    <img
+                      className="w-full aspect-[69/40]"
+                      src={`/img/champion/${singedData.image.full}`}
+                      alt="champion"
+                    />
+                  </div>
+                  <div className="absolute top-0 left-0 flex flex-col justify-end pl-1 w-full h-full">
+                    {traitList.map((traitName) => {
+                      const traitData = trait.data[`TFT13_${traitName}`];
+
+                      return (
+                        <>
+                          <div className="flex flex-row">
+                            <div className="w-fit h-fit p-[1px] mr-1 bg-trait-icon-shadow [clip-path:polygon(0%_25%,50%_0%,100%_25%,100%_75%,50%_100%,0%_75%)]">
+                              <div className="flex justify-center items-center w-5 h-6 bg-trait-icon-bg [clip-path:polygon(0%_25%,50%_0%,100%_25%,100%_75%,50%_100%,0%_75%)]">
+                                <img
+                                  src={`/img/trait/${traitData.image.full}`}
+                                  alt="icon"
+                                  className="w-3 h-3"
+                                />
+                              </div>
+                            </div>
+                            <p className="text-lg text-text-white text-left">
+                              {traitData.name}
+                            </p>
+                          </div>
+                        </>
+                      );
+                    })}
+                  </div>
+                </div>
+                <div
+                  className={`flex flex-row justify-between items-center px-2 bg-linear-to-r from-${star}-cost-card-dark to-${star}-cost-card-light grow`}
+                >
+                  <p className="text-xl text-text-white">{singedData.name}</p>
+                  <p className="flex items-center justify-start text-lg text-text-white font-light font-sans leading-none">
+                    <img
+                      className="w-4 h-4 mr-2 mt-1"
+                      src="/img/item/Gold.png"
+                      alt="icon"
+                    />
+                    {item}
+                  </p>
+                </div>
+              </>
+            );
 
             return (
               <div

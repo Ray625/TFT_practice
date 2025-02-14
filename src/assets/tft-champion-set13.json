@@ -6,7 +6,8 @@
       "tier": 1,
       "image": {
         "full": "TFT13_Singed.TFT_Set13.png"
-      }
+      },
+      "trait": ["Crime", "Titan"]
     },
     "TFT13_RenataGlasc": {
       "id": "TFT13_RenataGlasc",
@@ -14,7 +15,9 @@
       "tier": 2,
       "image": {
         "full": "TFT13_RenataGlasc.TFT_Set13.png"
-      }
+      },
+      "trait": ["Crime", "Invoker"]
+
     },
     "TFT13_Silco": {
       "id": "TFT13_Silco",
@@ -22,7 +25,8 @@
       "tier": 4,
       "image": {
         "full": "TFT13_Silco.TFT_Set13.png"
-      }
+      },
+      "trait": ["Crime", "Infused"]
     },
     "TFT13_Camille": {
       "id": "TFT13_Camille",
@@ -30,7 +34,8 @@
       "tier": 2,
       "image": {
         "full": "TFT13_Camille.TFT_Set13.png"
-      }
+      },
+      "trait": ["Squad", "Ambusher"]
     },
     "TFT13_Blitzcrank": {
       "id": "TFT13_Blitzcrank",
@@ -38,7 +43,8 @@
       "tier": 3,
       "image": {
         "full": "TFT13_Blitzcrank.TFT_Set13.png"
-      }
+      },
+      "trait": ["Hextech", "Infused"]
     },
     "TFT13_Vi": {
       "id": "TFT13_Vi",
@@ -46,7 +52,8 @@
       "tier": 4,
       "image": {
         "full": "TFT13_Vi.TFT_Set13.png"
-      }
+      },
+      "trait": ["Squad", "Pugilist"]
     },
     "TFT13_Caitlyn": {
       "id": "TFT13_Caitlyn",
@@ -54,7 +61,8 @@
       "tier": 5,
       "image": {
         "full": "TFT13_Caitlyn.TFT_Set13.png"
-      }
+      },
+      "trait": ["Squad", "Sniper"]
     },
     "TFT13_Ekko": {
       "id": "TFT13_Ekko",
@@ -62,7 +70,8 @@
       "tier": 4,
       "image": {
         "full": "TFT13_Ekko.TFT_Set13.png"
-      }
+      },
+      "trait": ["Hoverboard", "Ambusher"]
     },
     "TFT13_Amumu": {
       "id": "TFT13_Amumu",
@@ -70,7 +79,8 @@
       "tier": 1,
       "image": {
         "full": "TFT13_Amumu.TFT_Set13.png"
-      }
+      },
+      "trait": ["Hextech", "Watcher"]
     },
     "TFT13_Malzahar": {
       "id": "TFT13_Malzahar",
@@ -78,7 +88,8 @@
       "tier": 5,
       "image": {
         "full": "TFT13_Malzahar.TFT_Set13.png"
-      }
+      },
+      "trait": ["Hextech", "Invoker"]
     },
     "TFT13_DrMundo": {
       "id": "TFT13_DrMundo",
@@ -86,7 +97,8 @@
       "tier": 4,
       "image": {
         "full": "TFT13_DrMundo.TFT_Set13.png"
-      }
+      },
+      "trait": ["Experiment", "Infused"]
     },
     "TFT13_Twitch": {
       "id": "TFT13_Twitch",
@@ -94,7 +106,8 @@
       "tier": 4,
       "image": {
         "full": "TFT13_Twitch.TFT_Set13.png"
-      }
+      },
+      "trait": ["Experiment", "Sniper"]
     },
     "TFT13_Akali": {
       "id": "TFT13_Akali",
@@ -102,7 +115,8 @@
       "tier": 2,
       "image": {
         "full": "TFT13_Akali.TFT_Set13.png"
-      }
+      },
+      "trait": ["Rebel", "Challenger"]
     },
     "TFT13_Sett": {
       "id": "TFT13_Sett",
@@ -110,7 +124,8 @@
       "tier": 2,
       "image": {
         "full": "TFT13_Sett.TFT_Set13.png"
-      }
+      },
+      "trait": ["Rebel", "Bruiser"]
     },
     "TFT13_Ezreal": {
       "id": "TFT13_Ezreal",
@@ -118,7 +133,8 @@
       "tier": 3,
       "image": {
         "full": "TFT13_Ezreal.TFT_Set13.png"
-      }
+      },
+      "trait": ["Academy","Rebel", "Martialist"]
     },
     "TFT13_Illaoi": {
       "id": "TFT13_Illaoi",
@@ -126,7 +142,8 @@
       "tier": 4,
       "image": {
         "full": "TFT13_Illaoi.TFT_Set13.png"
-      }
+      },
+      "trait": ["Rebel", "Titan"]
     },
     "TFT13_Draven": {
       "id": "TFT13_Draven",
@@ -134,7 +151,8 @@
       "tier": 1,
       "image": {
         "full": "TFT13_Draven.TFT_Set13.png"
-      }
+      },
+      "trait": ["Warband", "Pugilist"]
     },
     "TFT13_Rell": {
       "id": "TFT13_Rell",
@@ -142,7 +160,8 @@
       "tier": 2,
       "image": {
         "full": "TFT13_Rell.TFT_Set13.png"
-      }
+      },
+      "trait": ["Warband", "Titan", "Invoker"]
     },
     "TFT13_Cassiopeia": {
       "id": "TFT13_Cassiopeia",
@@ -150,7 +169,8 @@
       "tier": 3,
       "image": {
         "full": "TFT13_Cassiopeia.TFT_Set13.png"
-      }
+      },
+      "trait": ["Cabal", "Infused"]
     },
     "TFT13_Vladimir": {
       "id": "TFT13_Vladimir",
@@ -158,7 +178,8 @@
       "tier": 2,
       "image": {
         "full": "TFT12_Vladimir.TFT_Set13.png"
-      }
+      },
+      "trait": ["Cabal", "Watcher", "Sorcerer"]
     },
     "TFT13_Elise": {
       "id": "TFT13_Elise",
@@ -166,7 +187,8 @@
       "tier": 4,
       "image": {
         "full": "TFT13_Elise.TFT_Set13.png"
-      }
+      },
+      "trait": ["Cabal", "FormSwapper", "Bruiser"]
     },
     "TFT13_LeBlanc": {
       "id": "TFT13_LeBlanc",
@@ -174,7 +196,8 @@
       "tier": 5,
       "image": {
         "full": "TFT13_LeBlanc.TFT_Set13.png"
-      }
+      },
+      "trait": ["Cabal", "Sorcerer"]
     },
     "TFT13_Heimerdinger": {
       "id": "TFT13_Heimerdinger",
@@ -182,7 +205,8 @@
       "tier": 4,
       "image": {
         "full": "TFT13_Heimerdinger.TFT_Set13.png"
-      }
+      },
+      "trait": ["Academy", "Invoker"]
     },
     "TFT13_Jayce": {
       "id": "TFT13_Jayce",
@@ -190,7 +214,8 @@
       "tier": 5,
       "image": {
         "full": "TFT13_Jayce.TFT_Set13.png"
-      }
+      },
+      "trait": ["Academy", "FormSwapper"]
     },
     "TFT13_Trundle": {
       "id": "TFT13_Trundle",
@@ -198,7 +223,8 @@
       "tier": 1,
       "image": {
         "full": "TFT13_Trundle.TFT_Set13.png"
-      }
+      },
+      "trait": ["Scrap", "Bruiser"]
     },
     "TFT13_Ziggs": {
       "id": "TFT13_Ziggs",
@@ -206,7 +232,8 @@
       "tier": 2,
       "image": {
         "full": "TFT13_Ziggs.TFT_Set13.png"
-      }
+      },
+      "trait": ["Scrap", "Infused"]
     },
     "TFT13_Rumble": {
       "id": "TFT13_Rumble",
@@ -214,7 +241,8 @@
       "tier": 5,
       "image": {
         "full": "TFT13_Rumble.TFT_Set13.png"
-      }
+      },
+      "trait": ["JunkerKing", "Scrap", "Titan"]
     },
     "TFT13_Gremlin": {
       "id": "TFT13_Gremlin",
@@ -222,7 +250,8 @@
       "tier": 3,
       "image": {
         "full": "TFT13_Gremlin.TFT_Set13.png"
-      }
+      },
+      "trait": ["Crime", "Ambusher"]
     },
     "TFT13_Lieutenant": {
       "id": "TFT13_Lieutenant",
@@ -230,7 +259,8 @@
       "tier": 5,
       "image": {
         "full": "TFT13_Lieutenant.TFT_Set13.png"
-      }
+      },
+      "trait": ["HighRoller", "Crime", "Pugilist"]
     },
     "TFT13_Chainsaw": {
       "id": "TFT13_Chainsaw",
@@ -238,7 +268,8 @@
       "tier": 3,
       "image": {
         "full": "TFT13_Chainsaw.TFT_Set13.png"
-      }
+      },
+      "trait": ["Crime", "Bruiser"]
     },
     "TFT13_Beardy": {
       "id": "TFT13_Beardy",
@@ -246,7 +277,8 @@
       "tier": 3,
       "image": {
         "full": "TFT13_Beardy.TFT_Set13.png"
-      }
+      },
+      "trait": ["Squad", "Titan"]
     },
     "TFT13_Fish": {
       "id": "TFT13_Fish",
@@ -254,7 +286,8 @@
       "tier": 1,
       "image": {
         "full": "TFT13_Fish.TFT_Set13.png"
-      }
+      },
+      "trait": ["Squad", "Bruiser"]
     },
     "TFT13_Shooter": {
       "id": "TFT13_Shooter",
@@ -262,7 +295,8 @@
       "tier": 1,
       "image": {
         "full": "TFT13_Shooter.TFT_Set13.png"
-      }
+      },
+      "trait": ["Squad", "Sniper"]
     },
     "TFT13_Blue": {
       "id": "TFT13_Blue",
@@ -270,7 +304,8 @@
       "tier": 1,
       "image": {
         "full": "TFT13_Blue.TFT_Set13.png"
-      }
+      },
+      "trait": ["Family", "Scrap", "Ambusher"]
     },
     "TFT13_Prime": {
       "id": "TFT13_Prime",
@@ -278,7 +313,8 @@
       "tier": 2,
       "image": {
         "full": "TFT13_Prime.TFT_Set13.png"
-      }
+      },
+      "trait": ["Family", "Watcher"]
     },
     "TFT13_FlyGuy": {
       "id": "TFT13_FlyGuy",
@@ -286,7 +322,8 @@
       "tier": 3,
       "image": {
         "full": "TFT13_Flyguy.TFT_Set13.png"
-      }
+      },
+      "trait": ["Hoverboard", "Watcher"]
     },
     "TFT13_NunuWillump": {
       "id": "TFT13_NunuWillump",
@@ -294,7 +331,8 @@
       "tier": 3,
       "image": {
         "full": "TFT13_NunuWillump.TFT_Set13.png"
-      }
+      },
+      "trait": ["Experiment", "Bruiser", "Invoker"]
     },
     "TFT13_Jinx": {
       "id": "TFT13_Jinx",
@@ -302,7 +340,8 @@
       "tier": 5,
       "image": {
         "full": "TFT13_Jinx.TFT_Set13.png"
-      }
+      },
+      "trait": ["Rebel", "Ambusher"]
     },
     "TFT13_Zeri": {
       "id": "TFT13_Zeri",
@@ -310,7 +349,8 @@
       "tier": 2,
       "image": {
         "full": "TFT13_Zeri.TFT_Set13.png"
-      }
+      },
+      "trait": ["Hoverboard", "Sniper"]
     },
     "TFT13_Red": {
       "id": "TFT13_Red",
@@ -318,7 +358,8 @@
       "tier": 1,
       "image": {
         "full": "TFT13_Red.TFT_Set13.png"
-      }
+      },
+      "trait": ["Family", "Pugilist"]
     },
     "TFT13_Nami": {
       "id": "TFT13_Nami",
@@ -326,7 +367,8 @@
       "tier": 3,
       "image": {
         "full": "TFT13_Nami.TFT_Set13.png"
-      }
+      },
+      "trait": ["Ambassador", "Sorcerer"]
     },
     "TFT13_Corki": {
       "id": "TFT13_Corki",
@@ -334,7 +376,8 @@
       "tier": 4,
       "image": {
         "full": "TFT13_Corki.TFT_Set13.png"
-      }
+      },
+      "trait": ["Scrap", "Martialist"]
     },
     "TFT13_Garen": {
       "id": "TFT13_Garen",
@@ -342,7 +385,8 @@
       "tier": 4,
       "image": {
         "full": "TFT13_Garen.TFT_Set13.png"
-      }
+      },
+      "trait": ["Ambassador", "Watcher"]
     },
     "TFT13_Vex": {
       "id": "TFT13_Vex",
@@ -350,7 +394,8 @@
       "tier": 1,
       "image": {
         "full": "TFT13_Vex.TFT_Set13.png"
-      }
+      },
+      "trait": ["Rebel", "Invoker"]
     },
     "TFT13_Nocturne": {
       "id": "TFT13_Nocturne",
@@ -358,7 +403,8 @@
       "tier": 2,
       "image": {
         "full": "TFT13_Nocturne.TFT_Set13.png"
-      }
+      },
+      "trait": ["Hextech", "Challenger"]
     },
     "TFT13_Darius": {
       "id": "TFT13_Darius",
@@ -366,7 +412,8 @@
       "tier": 1,
       "image": {
         "full": "TFT13_Darius.TFT_Set13.png"
-      }
+      },
+      "trait": ["Warband", "Watcher"]
     },
     "TFT13_Irelia": {
       "id": "TFT13_Irelia",
@@ -374,7 +421,8 @@
       "tier": 1,
       "image": {
         "full": "TFT13_Irelia.TFT_Set13.png"
-      }
+      },
+      "trait": ["Rebel", "Titan"]
     },
     "TFT13_Ambessa": {
       "id": "TFT13_Ambessa",
@@ -382,7 +430,8 @@
       "tier": 4,
       "image": {
         "full": "TFT13_Ambessa.TFT_Set13.png"
-      }
+      },
+      "trait": ["Ambassador", "Warband", "Challenger"]
     },
     "TFT13_Zyra": {
       "id": "TFT13_Zyra",
@@ -390,7 +439,8 @@
       "tier": 1,
       "image": {
         "full": "TFT13_Zyra.TFT_Set13.png"
-      }
+      },
+      "trait": ["Experiment", "Sorcerer"]
     },
     "TFT13_Gangplank": {
       "id": "TFT13_Gangplank",
@@ -398,7 +448,8 @@
       "tier": 3,
       "image": {
         "full": "TFT13_Gangplank.TFT_Set13.png"
-      }
+      },
+      "trait": ["Scrap", "FormSwapper", "Pugilist"]
     },
     "TFT13_Leona": {
       "id": "TFT13_Leona",
@@ -406,7 +457,8 @@
       "tier": 2,
       "image": {
         "full": "TFT13_Leona.TFT_Set13.png"
-      }
+      },
+      "trait": ["Academy", "Titan"]
     },
     "TFT13_KogMaw": {
       "id": "TFT13_KogMaw",
@@ -414,7 +466,8 @@
       "tier": 3,
       "image": {
         "full": "TFT13_KogMaw.TFT_Set13.png"
-      }
+      },
+      "trait": ["Hextech", "Sniper"]
     },
     "TFT13_TwistedFate": {
       "id": "TFT13_TwistedFate",
@@ -422,7 +475,8 @@
       "tier": 3,
       "image": {
         "full": "TFT13_TwistedFate.TFT_Set13.png"
-      }
+      },
+      "trait": ["Squad", "Challenger"]
     },
     "TFT13_Lux": {
       "id": "TFT13_Lux",
@@ -430,7 +484,8 @@
       "tier": 1,
       "image": {
         "full": "TFT13_Lux.TFT_Set13.png"
-      }
+      },
+      "trait": ["Academy", "Sorcerer"]
     },
     "TFT13_Mordekaiser": {
       "id": "TFT13_Mordekaiser",
@@ -438,7 +493,8 @@
       "tier": 5,
       "image": {
         "full": "TFT13_Mordekaiser.TFT_Set13.png"
-      }
+      },
+      "trait": ["Warband", "Infused"]
     },
     "TFT13_Morgana": {
       "id": "TFT13_Morgana",
@@ -446,7 +502,8 @@
       "tier": 1,
       "image": {
         "full": "TFT13_Morgana.TFT_Set13.png"
-      }
+      },
+      "trait": ["Cabal", "Invoker"]
     },
     "TFT13_Tristana": {
       "id": "TFT13_Tristana",
@@ -454,7 +511,8 @@
       "tier": 2,
       "image": {
         "full": "TFT13_Tristana.TFT_Set13.png"
-      }
+      },
+      "trait": ["Ambassador", "Martialist"]
     },
     "TFT13_Swain": {
       "id": "TFT13_Swain",
@@ -462,7 +520,8 @@
       "tier": 3,
       "image": {
         "full": "TFT13_Swain.TFT_Set13.png"
-      }
+      },
+      "trait": ["Warband", "FormSwapper", "Sorcerer"]
     },
     "TFT13_Urgot": {
       "id": "TFT13_Urgot",
@@ -470,7 +529,8 @@
       "tier": 2,
       "image": {
         "full": "TFT13_Urgot.TFT_Set13.png"
-      }
+      },
+      "trait": ["Experiment", "Pugilist", "Martialist"]
     },
     "TFT13_Zoe": {
       "id": "TFT13_Zoe",
@@ -478,7 +538,8 @@
       "tier": 4,
       "image": {
         "full": "TFT13_Zoe.TFT_Set13.png"
-      }
+      },
+      "trait": ["Rebel", "Sorcerer"]
     },
     "TFT13_Viktor": {
       "id": "TFT13_Viktor",
@@ -486,7 +547,8 @@
       "tier": 6,
       "image": {
         "full": "TFT13_Viktor.TFT_Set13_Evolved.png"
-      }
+      },
+      "trait": ["MachineHerald"]
     },
     "TFT13_MissMage": {
       "id": "TFT13_MissMage",
@@ -494,7 +556,8 @@
       "tier": 6,
       "image": {
         "full": "TFT13_MissMage.TFT_Set13_Evolved.png"
-      }
+      },
+      "trait": ["MissMageTrait"]
     },
     "TFT13_Warwick": {
       "id": "TFT13_Warwick",
@@ -502,7 +565,8 @@
       "tier": 6,
       "image": {
         "full": "TFT13_Warwick.TFT_Set13_Evolved.png"
-      }
+      },
+      "trait": [ "Experiment", "BloodHunter"]
     }
   }
 }

@@ -1,0 +1,209 @@
+{
+  "type": "tft-trait",
+  "version": "15.3.1",
+  "data": {
+    "TFT13_Academy": {
+      "id": "TFT13_Academy",
+      "name": "戰爭學院",
+      "image": {
+        "full": "Trait_Icon_13_Academy.TFT_Set13.png"
+      }
+    },
+    "TFT13_Ambassador": {
+      "id": "TFT13_Ambassador",
+      "name": "使者",
+      "image": {
+        "full": "Trait_Icon_13_Diplomat.TFT_Set13.png"
+      }
+    },
+    "TFT13_Ambusher": {
+      "id": "TFT13_Ambusher",
+      "name": "潛伏者",
+      "image": {
+        "full": "Trait_Icon_13_Ambusher.TFT_Set13.png"
+      }
+    },
+    "TFT13_Bruiser": {
+      "id": "TFT13_Bruiser",
+      "name": "蠻勇鬥士",
+      "image": {
+        "full": "Trait_Icon_13_Bruiser.png"
+      }
+    },
+    "TFT13_Cabal": {
+      "id": "TFT13_Cabal",
+      "name": "黑玫瑰",
+      "image": {
+        "full": "Trait_Icon_13_Cabal.TFT_Set13.png"
+      }
+    },
+    "TFT13_Challenger": {
+      "id": "TFT13_Challenger",
+      "name": "極速先鋒",
+      "image": {
+        "full": "Trait_Icon_13_Quickstriker.TFT_Set13.png"
+      }
+    },
+    "TFT13_Crime": {
+      "id": "TFT13_Crime",
+      "name": "化學巨頭",
+      "image": {
+        "full": "Trait_Icon_13_Crime.TFT_Set13.png"
+      }
+    },
+    "TFT13_Experiment": {
+      "id": "TFT13_Experiment",
+      "name": "實驗體",
+      "image": {
+        "full": "Trait_Icon_13_Experiment.TFT_Set13.png"
+      }
+    },
+    "TFT13_Family": {
+      "id": "TFT13_Family",
+      "name": "家族",
+      "image": {
+        "full": "Trait_Icon_13_Family.TFT_Set13.png"
+      }
+    },
+    "TFT13_FormSwapper": {
+      "id": "TFT13_FormSwapper",
+      "name": "變形大師",
+      "image": {
+        "full": "Trait_Icon_13_FormSwapper.TFT_Set13.png"
+      }
+    },
+    "TFT13_Hextech": {
+      "id": "TFT13_Hextech",
+      "name": "機器人",
+      "image": {
+        "full": "Trait_Icon_13_Automata.TFT_Set13.png"
+      }
+    },
+    "TFT13_Hoverboard": {
+      "id": "TFT13_Hoverboard",
+      "name": "野火幫",
+      "image": {
+        "full": "Trait_Icon_13_Hoverboard.TFT_Set13.png"
+      }
+    },
+    "TFT13_Invoker": {
+      "id": "TFT13_Invoker",
+      "name": "先知",
+      "image": {
+        "full": "Trait_Icon_13_Visionary.TFT_Set13.png"
+      }
+    },
+    "TFT13_Martialist": {
+      "id": "TFT13_Martialist",
+      "name": "巨砲專家",
+      "image": {
+        "full": "Trait_Icon_13_Artillerist.TFT_Set13.png"
+      }
+    },
+    "TFT13_Pugilist": {
+      "id": "TFT13_Pugilist",
+      "name": "競技鬥士",
+      "image": {
+        "full": "Trait_Icon_13_PitFighter.TFT_Set13.png"
+      }
+    },
+    "TFT13_Rebel": {
+      "id": "TFT13_Rebel",
+      "name": "反叛軍",
+      "image": {
+        "full": "Trait_Icon_13_Rebel.TFT_Set13.png"
+      }
+    },
+    "TFT13_Scrap": {
+      "id": "TFT13_Scrap",
+      "name": "拼裝高手",
+      "image": {
+        "full": "Trait_Icon_13_Scrap.png"
+      }
+    },
+    "TFT13_Sniper": {
+      "id": "TFT13_Sniper",
+      "name": "狙擊專家",
+      "image": {
+        "full": "Trait_Icon_13_Sniper.png"
+      }
+    },
+    "TFT13_Squad": {
+      "id": "TFT13_Squad",
+      "name": "執法者",
+      "image": {
+        "full": "Trait_Icon_13_Squad.TFT_Set13.png"
+      }
+    },
+    "TFT13_Titan": {
+      "id": "TFT13_Titan",
+      "name": "前哨部隊",
+      "image": {
+        "full": "Trait_Icon_13_Warden.png"
+      }
+    },
+    "TFT13_Warband": {
+      "id": "TFT13_Warband",
+      "name": "征服者",
+      "image": {
+        "full": "Trait_Icon_13_Conqueror.TFT_Set13.png"
+      }
+    },
+    "TFT13_Watcher": {
+      "id": "TFT13_Watcher",
+      "name": "守望者",
+      "image": {
+        "full": "Trait_Icon_13_Watcher.TFT_Set13.png"
+      }
+    },
+    "TFT13_JunkerKing": {
+      "id": "TFT13_JunkerKing",
+      "name": "廢鐵之王",
+      "image": {
+        "full": "Trait_Icon_13_JunkerKing.TFT_Set13.png"
+      }
+    },
+    "TFT13_Sorcerer": {
+      "id": "TFT13_Sorcerer",
+      "name": "巫師",
+      "image": {
+        "full": "Trait_Icon_3_Sorcerer.png"
+      }
+    },
+    "TFT13_Infused": {
+      "id": "TFT13_Infused",
+      "name": "霸主",
+      "image": {
+        "full": "Trait_Icon_13_Dominator.TFT_Set13.png"
+      }
+    },
+    "TFT13_HighRoller": {
+      "id": "TFT13_HighRoller",
+      "name": "豪氣賭客",
+      "image": {
+        "full": "Trait_Icon_13_HighRoller.TFT_Set13.png"
+      }
+    },
+    "TFT13_MissMageTrait": {
+      "id": "TFT13_MissMageTrait",
+      "name": "流放法師",
+      "image": {
+        "full": "Trait_Icon_13_BanishedMage.TFT_Set13.png"
+      }
+    },
+    "TFT13_MachineHerald": {
+      "id": "TFT13_MachineHerald",
+      "name": "機械使徒",
+      "image": {
+        "full": "Trait_Icon_13_MachineHerald.TFT_Set13.png"
+      }
+    },
+    "TFT13_BloodHunter": {
+      "id": "TFT13_BloodHunter",
+      "name": "嗜血獵手",
+      "image": {
+        "full": "Trait_Icon_13_BloodHunter.TFT_Set13.png"
+      }
+    }
+  }
+}

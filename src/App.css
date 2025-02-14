@@ -1,8 +1,37 @@
 @import "tailwindcss";
 
+@theme {
+  --color-bg-black: #101919;
+  --color-xp-bg: #111B24;
+  --color-xp-icon: #223C4B;
+  --color-xp-border: #466274;
+  --color-reroll-bg: #1E2119;
+  --color-reroll-icon: #45402D;
+  --color-reroll-border: #5A543F;
+  --color-border-gold: #90784B;
+  --color-gold-bg: #172020;
+  --color-text-white: #E0DDD3;
+  --color-one-cost: #97978E;
+  --color-two-cost: #48B75A;
+  --color-three-cost: #44C4FD;
+  --color-four-cost: #C825F0;
+  --color-five-cost: #FD9A29;
+  --color-one-cost-card-dark: #152432;
+  --color-one-cost-card-light: #26323B;
+  --color-two-cost-card-dark: #14362E;
+  --color-two-cost-card-light: #22603C;
+  --color-three-cost-card-dark: #1C2048;
+  --color-three-cost-card-light: #115D84;
+  --color-four-cost-card-dark: #4A0E49;
+  --color-four-cost-card-light: #930B6E;
+  --color-five-cost-card-dark: #895115;
+  --color-five-cost-card-light: #D4873A;
+  --color-trait-icon-bg: #35383B;
+  --color-trait-icon-shadow: #0E1826;
+  --color-card-border: #0B1C1E;
+}
+
 #root {
-  max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
   text-align: center;
 }

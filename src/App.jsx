@@ -1,11 +1,12 @@
 import "normalize.css"
 import './App.css'
+import Shop from "./components/cardShop"
 
 function App() {
   return (
     <>
-      <div className="w-full h-full bg-white text-black">
-        123
+      <div className="flex items-center w-full h-screen bg-neutral-300/55 text-black">
+        <Shop />
       </div>
     </>
   )

@@ -29,6 +29,16 @@
   --color-trait-icon-bg: #35383B;
   --color-trait-icon-shadow: #0E1826;
   --color-card-border: #0B1C1E;
+  --color-seat-bg: #777777;
+  --color-empty-card-wrapper: #050807;
+  --color-empty-card-border: #162221;
+  --color-empty-card-bg: #071010;
+}
+
+@layer utilities {
+  .text-shadow {
+    text-shadow: -1px 0 5px #000, 0 1px 5px #000, 1px 0 5px #000, 0 -1px 5px #000;
+  }
 }
 
 #root {

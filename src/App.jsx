@@ -1,15 +1,25 @@
 import "normalize.css"
 import './App.css'
 import Shop from "./components/cardShop"
+import Seat from "./components/seat"
+import { useState } from "react"
 
 function App() {
+  const [seat, setSeat] = useState([{}, {}, {}, {}, {}, {}, {}, {}, {}]);
+  const [hoverCard, setHoverCard] = useState(null)
+
   return (
     <>
-      <div className="flex items-center w-full h-screen bg-neutral-300/55 text-black">
-        <Shop />
+      <div className="flex flex-col items-center justify-end w-full h-screen bg-neutral-300/55 text-black">
+        <Seat seat={seat} setHoverCard={setHoverCard} />
+        <Shop
+          setSeat={setSeat}
+          hoverCard={hoverCard}
+          setHoverCard={setHoverCard}
+        />
       </div>
     </>
-  )
+  );
 }
 
 export default App

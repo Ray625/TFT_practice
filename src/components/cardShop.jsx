@@ -3,37 +3,151 @@ import champion from "../assets/tft-champion-set13.json"
 import trait from "../assets/tft-trait-set13.json"
 import shopRates from "../assets/tft-shop-drop-rates-data.json"
 
-const Shop = () => {
-  const [level, setLevel] = useState(7)
-  const [xp, setXp] = useState(0)
-  const [total, setTotal] = useState(80)
-  const xpList = [2, 2, 6, 10, 20, 36, 48, 76, 84, 0]
+const Shop = ({ setSeat, hoverCard, setHoverCard }) => {
+  const [level, setLevel] = useState(8);
+  const [xp, setXp] = useState(0);
+  const [total, setTotal] = useState(40);
+  const xpList = [2, 2, 6, 10, 20, 36, 48, 76, 84, 0];
   const levelNeededXp = xpList[level - 1];
-  const levelRate = shopRates.data.Shop[`${level - 1}`].dropRatesByTier
+  const levelRate = shopRates.data.Shop[`${level - 1}`].dropRatesByTier;
 
-  console.log("champion", champion);
-  const items = [1, 2, 3, 4, 5]
+  const [shopList, setShopList] = useState([
+    {
+      count: 30,
+      id: "TFT13_Singed",
+      name: "辛吉德",
+      tier: 1,
+      image: {
+        full: "TFT13_Singed.TFT_Set13.png",
+      },
+      trait: ["Crime", "Titan"],
+    },
+    {
+      count: 30,
+      id: "TFT13_Amumu",
+      name: "阿姆姆",
+      tier: 1,
+      image: {
+        full: "TFT13_Amumu.TFT_Set13.png",
+      },
+      trait: ["Hextech", "Watcher"],
+    },
+    {
+      count: 30,
+      id: "TFT13_Singed",
+      name: "辛吉德",
+      tier: 1,
+      image: {
+        full: "TFT13_Singed.TFT_Set13.png",
+      },
+      trait: ["Crime", "Titan"],
+    },
+    {
+      count: 30,
+      id: "TFT13_Amumu",
+      name: "阿姆姆",
+      tier: 1,
+      image: {
+        full: "TFT13_Amumu.TFT_Set13.png",
+      },
+      trait: ["Hextech", "Watcher"],
+    },
+    {
+      count: 30,
+      id: "TFT13_Singed",
+      name: "辛吉德",
+      tier: 1,
+      image: {
+        full: "TFT13_Singed.TFT_Set13.png",
+      },
+      trait: ["Crime", "Titan"],
+    },
+  ]);
 
-  const singedData = champion.data.TFT13_Singed;
-  const traitList = singedData.trait
+  const championList = { ...champion.data }; // 將json資料複製出來，並給角色加上卡池張數，再存於state中備用
+  Object.values(championList).map((item) => {
+    switch (item.tier) {
+      case 1:
+        item.count = 30;
+        break;
+      case 2:
+        item.count = 22;
+        break;
+      case 3:
+        item.count = 17;
+        break;
+      case 4:
+        item.count = 10;
+        break;
+      case 5:
+        item.count = 9;
+        break;
+      case 6:
+        item.count = 9;
+        break;
+    }
+  });
+  const [banner, setBanner] = useState(championList);
+
+  const handleDrawCard = () => {
+    if (total < 2) return
+    let cards = [];
+    let shop = [];
+    for (let i = 0; i < 5; i++) {
+      let rateSum = 0;
+      const starIndex = Math.floor(Math.random() * 100);
+      for (let item of levelRate) {
+        rateSum += item.rate;
+        if (starIndex <= rateSum) {
+          cards.push(item.cost);
+          break;
+        }
+      }
+    }
+    cards.map((card) => {
+      let bannerTotal = 0;
+      Object.values(banner).map((cardData) => {
+        if (cardData.tier === card) {
+          bannerTotal += cardData.count;
+        }
+      });
+      let cardTotal = 0;
+      const cardIndex = Math.floor(Math.random() * bannerTotal);
+      for (let cardData of Object.values(banner)) {
+        if (cardData.tier === card) {
+          cardTotal += cardData.count;
+        }
+        if (cardIndex <= cardTotal) {
+          shop.push(cardData);
+          break;
+        }
+      }
+    });
+    setShopList(shop);
+    setTotal(preTotal => preTotal - 2)
+  };
 
   useEffect(() => {
-    const handlePressKeyF = (event) => {
+    const handlePressKey = (event) => {
       if (event.keyCode === 70) {
         handleBuyXp();
       }
 
       if (event.keyCode === 68) {
-        alert("刷新");
+        handleDrawCard();
+      }
+
+      if (event.keyCode === 69) {
+        handleSellCard(hoverCard);
       }
     };
 
-    window.addEventListener("keydown", handlePressKeyF);
+    window.addEventListener("keydown", handlePressKey);
 
     return () => {
-      window.removeEventListener("keydown", handlePressKeyF);
+      window.removeEventListener("keydown", handlePressKey);
     };
-  },[level, xp, total]);
+  }, [level, xp, total, hoverCard]);
 
   const handleBuyXp = useCallback(() => {
     if (level >= 10) return; // 滿等時無法購買經驗
@@ -62,6 +176,37 @@ const Shop = () => {
       }
     }
   }, [level, xp, total, levelNeededXp]);
+
+  const handleBuyCard = (card, index) => {
+    const cost = card.tier
+    if (total < cost) return
+    // 將商店該牌移除
+    setShopList((prevShopList) =>
+      prevShopList.map((item, i) => (i === index ? {} : item))
+    );
+
+    // 將該牌加入備戰席
+    setSeat((prevSeat) => {
+      let done = false;
+      return prevSeat.map((item) => {
+        if (!item.name && !done) {
+          done = true;
+          return { ...card };
+        }
+        return item;
+      });
+    });
+
+    setTotal(prevTotal=> prevTotal - cost)
+  };
+
+  const handleSellCard = (hoverCard) => {
+    if (hoverCard) {
+      setSeat(prevSeat => prevSeat.map((item, i) => (i === hoverCard.index) ? {} : item))
+      setTotal(prevTotal => prevTotal + hoverCard.tier)
+      setHoverCard(null)
+    }
+  };
 
   return (
     <>
@@ -102,10 +247,10 @@ const Shop = () => {
             </div>
           </div>
           <div className="absolute left-1/2 h-full p-1 aspect-[15/4] bg-border-gold [clip-path:polygon(20%_0%,80%_0%,100%_100%,0%_100%)]">
-            <div className="w-full aspect-[15/4] p-1 bg-gold-bg [clip-path:polygon(20%_0%,80%_0%,100%_100%,0%_100%)]">
-              <h5 className="flex items-center justify-center text-2xl/7 text-text-white text-center">
+            <div className="w-full aspect-[15/4] p-1.5 bg-gold-bg [clip-path:polygon(20%_0%,80%_0%,100%_100%,0%_100%)]">
+              <h5 className="flex items-center justify-center pt-1 text-2xl/7 text-text-white text-center">
                 <img
-                  className="w-5 h-5 mr-2 mt-1"
+                  className="w-5 h-5 mr-2"
                   src="/img/item/Gold.png"
                   alt="icon"
                 />
@@ -143,6 +288,7 @@ const Shop = () => {
             <button
               className="relative h-full flex flex-col bg-reroll-bg border-2 border-reroll-border active:opacity-90 hover:opacity-80 hover:cursor-pointer transition-opacity duration-150"
               title="刷新商店(D)"
+              onClick={handleDrawCard}
             >
               <h6 className="text-xl m-0 pt-1 pl-2 text-text-white text-left">
                 刷新
@@ -164,75 +310,83 @@ const Shop = () => {
               </div>
             </button>
           </div>
-          {items.map((item) => {
-            let star;
-            switch (item) {
+          {shopList.map((item, index) => {
+            if (!item.name)
+              return (
+                <div
+                  className="flex flex-col justify-center items-center h-full p-1 bg-empty-card-wrapper border "
+                  key={index}
+                >
+                  <div className="w-9/10 h-9/10 border-2 border-empty-card-border bg-empty-card-bg"></div>
+                </div>
+              );
+
+            let cost;
+            switch (item?.tier) {
               case 1:
-                star = "one";
+                cost = "one";
                 break;
               case 2:
-                star = "two";
+                cost = "two";
                 break;
               case 3:
-                star = "three";
+                cost = "three";
                 break;
               case 4:
-                star = "four";
+                cost = "four";
                 break;
               case 5:
-                star = "five";
+                cost = "five";
                 break;
               default:
-                star = null;
+                cost = null;
             }
             const body = (
               <>
                 <div
-                  className={`relative border-2 border-${star}-cost-card-light`}
+                  className={`relative border-2 border-${cost}-cost-card-light`}
+                  onClick={() => handleBuyCard(item, index)}
                 >
                   <div className="border border-card-border">
                     <img
                       className="w-full aspect-[69/40]"
-                      src={`/img/champion/${singedData.image.full}`}
+                      src={`/img/champion/${item.image.full}`}
                       alt="champion"
                     />
                   </div>
                   <div className="absolute top-0 left-0 flex flex-col justify-end pl-1 w-full h-full">
-                    {traitList.map((traitName) => {
+                    {item.trait.map((traitName) => {
                       const traitData = trait.data[`TFT13_${traitName}`];
-
                       return (
-                        <>
-                          <div className="flex flex-row">
-                            <div className="w-fit h-fit p-[1px] mr-1 bg-trait-icon-shadow [clip-path:polygon(0%_25%,50%_0%,100%_25%,100%_75%,50%_100%,0%_75%)]">
-                              <div className="flex justify-center items-center w-5 h-6 bg-trait-icon-bg [clip-path:polygon(0%_25%,50%_0%,100%_25%,100%_75%,50%_100%,0%_75%)]">
-                                <img
-                                  src={`/img/trait/${traitData.image.full}`}
-                                  alt="icon"
-                                  className="w-3 h-3"
-                                />
-                              </div>
+                        <div className="flex flex-row" key={traitData.id}>
+                          <div className="w-fit h-fit p-[1px] mr-1 bg-trait-icon-shadow [clip-path:polygon(0%_25%,50%_0%,100%_25%,100%_75%,50%_100%,0%_75%)]">
+                            <div className="flex justify-center items-center w-5 h-6 bg-trait-icon-bg [clip-path:polygon(0%_25%,50%_0%,100%_25%,100%_75%,50%_100%,0%_75%)]">
+                              <img
+                                src={`/img/trait/${traitData.image.full}`}
+                                alt="icon"
+                                className="w-3 h-3"
+                              />
                             </div>
-                            <p className="text-lg text-text-white text-left">
-                              {traitData.name}
-                            </p>
                           </div>
-                        </>
+                          <p className="text-lg text-text-white text-left">
+                            {traitData.name}
+                          </p>
+                        </div>
                       );
                     })}
                   </div>
                 </div>
                 <div
-                  className={`flex flex-row justify-between items-center px-2 bg-linear-to-r from-${star}-cost-card-dark to-${star}-cost-card-light grow`}
+                  className={`flex flex-row justify-between items-center px-2 bg-linear-to-r from-${cost}-cost-card-dark to-${cost}-cost-card-light grow`}
                 >
-                  <p className="text-xl text-text-white">{singedData.name}</p>
+                  <p className="text-xl text-text-white">{item.name}</p>
                   <p className="flex items-center justify-start text-lg text-text-white font-light font-sans leading-none">
                     <img
                       className="w-4 h-4 mr-2 mt-1"
                       src="/img/item/Gold.png"
                       alt="icon"
                     />
-                    {item}
+                    {item.tier}
                   </p>
                 </div>
               </>
@@ -241,7 +395,7 @@ const Shop = () => {
             return (
               <div
                 className="flex flex-col h-full p-1 bg-bg-black border hover:opacity-90 hover:cursor-pointer transition-opacity duration-150"
-                key={item}
+                key={index}
               >
                 {body}
               </div>
@@ -251,6 +405,6 @@ const Shop = () => {
       </div>
     </>
   );
-}
+};
 
 export default Shop

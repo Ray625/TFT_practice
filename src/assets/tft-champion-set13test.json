@@ -1,0 +1,31 @@
+{
+  "data": {
+    "TFT13_Blitzcrank": {
+      "id": "TFT13_Blitzcrank",
+      "name": "布里茨",
+      "tier": 3,
+      "image": {
+        "full": "TFT13_Blitzcrank.TFT_Set13.png"
+      },
+      "trait": ["Hextech", "Infused"]
+    },
+    "TFT13_Vi": {
+      "id": "TFT13_Vi",
+      "name": "菲艾",
+      "tier": 4,
+      "image": {
+        "full": "TFT13_Vi.TFT_Set13.png"
+      },
+      "trait": ["Squad", "Pugilist"]
+    },
+    "TFT13_Silco": {
+      "id": "TFT13_Silco",
+      "name": "希爾科",
+      "tier": 4,
+      "image": {
+        "full": "TFT13_Silco.TFT_Set13.png"
+      },
+      "trait": ["Crime", "Infused"]
+    }
+  }
+}

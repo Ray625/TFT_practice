@@ -1,67 +1,18 @@
 import { useState, useEffect, useCallback } from "react"
-import champion from "../assets/tft-champion-set13.json"
+import champion from "../assets/tft-champion-set13test.json"
 import trait from "../assets/tft-trait-set13.json"
 import shopRates from "../assets/tft-shop-drop-rates-data.json"
 
 const Shop = ({ setSeat, hoverCard, setHoverCard }) => {
   const [level, setLevel] = useState(8);
   const [xp, setXp] = useState(0);
-  const [total, setTotal] = useState(40);
+  const [total, setTotal] = useState(240);
   const xpList = [2, 2, 6, 10, 20, 36, 48, 76, 84, 0];
   const levelNeededXp = xpList[level - 1];
   const levelRate = shopRates.data.Shop[`${level - 1}`].dropRatesByTier;
 
   const [shopList, setShopList] = useState([
-    {
-      count: 30,
-      id: "TFT13_Singed",
-      name: "辛吉德",
-      tier: 1,
-      image: {
-        full: "TFT13_Singed.TFT_Set13.png",
-      },
-      trait: ["Crime", "Titan"],
-    },
-    {
-      count: 30,
-      id: "TFT13_Amumu",
-      name: "阿姆姆",
-      tier: 1,
-      image: {
-        full: "TFT13_Amumu.TFT_Set13.png",
-      },
-      trait: ["Hextech", "Watcher"],
-    },
-    {
-      count: 30,
-      id: "TFT13_Singed",
-      name: "辛吉德",
-      tier: 1,
-      image: {
-        full: "TFT13_Singed.TFT_Set13.png",
-      },
-      trait: ["Crime", "Titan"],
-    },
-    {
-      count: 30,
-      id: "TFT13_Amumu",
-      name: "阿姆姆",
-      tier: 1,
-      image: {
-        full: "TFT13_Amumu.TFT_Set13.png",
-      },
-      trait: ["Hextech", "Watcher"],
-    },
-    {
-      count: 30,
-      id: "TFT13_Singed",
-      name: "辛吉德",
-      tier: 1,
-      image: {
-        full: "TFT13_Singed.TFT_Set13.png",
-      },
-      trait: ["Crime", "Titan"],
-    },
+    {}, {}, {}, {}, {}
   ]);
 
   const championList = { ...champion.data }; // 將json資料複製出來，並給角色加上卡池張數，再存於state中備用
@@ -71,10 +22,10 @@ const Shop = ({ setSeat, hoverCard, setHoverCard }) => {
         item.count = 30;
         break;
       case 2:
-        item.count = 22;
+        item.count = 25;
         break;
       case 3:
-        item.count = 17;
+        item.count = 18;
         break;
       case 4:
         item.count = 10;
@@ -91,38 +42,72 @@ const Shop = ({ setSeat, hoverCard, setHoverCard }) => {
 
   const handleDrawCard = () => {
     if (total < 2) return
+
     let cards = [];
     let shop = [];
+    let tempBanner = { ...banner }
+
+    // 將商店上一輪沒有買下的卡放回牌池
+    shopList.forEach(card => {
+      if (Object.keys(card).length === 0) return
+      const key = Object.keys(tempBanner).find(key => tempBanner[key].name === card.name)
+      if (key) {
+        tempBanner[key] = {
+          ...tempBanner[key],
+          count: tempBanner[key].count + 1
+        }
+      }
+    })
+
+    // 如果有某一費用牌池抽空，則須重新計算機率
+    const availableLevels = levelRate.filter(level => {
+      return Object.values(tempBanner).some(card => card.tier === level.cost && card.count > 0)
+    })
+
+    const totalRate = availableLevels.reduce((sum, level) => sum + level.rate, 0)
+    const finalRate = availableLevels.map(level => ({
+        cost: level.cost,
+        rate: (level.rate / totalRate) * 100
+      })
+    )
+
     for (let i = 0; i < 5; i++) {
       let rateSum = 0;
       const starIndex = Math.floor(Math.random() * 100);
-      for (let item of levelRate) {
+      for (let item of finalRate) {
         rateSum += item.rate;
-        if (starIndex <= rateSum) {
+        if (starIndex < rateSum) {
           cards.push(item.cost);
           break;
         }
       }
     }
-    cards.map((card) => {
+
+    cards.forEach((cardTier) => {
       let bannerTotal = 0;
-      Object.values(banner).map((cardData) => {
-        if (cardData.tier === card) {
+      Object.values(tempBanner).forEach((cardData) => {
+        if (cardData.tier === cardTier) {
           bannerTotal += cardData.count;
         }
       });
+
       let cardTotal = 0;
       const cardIndex = Math.floor(Math.random() * bannerTotal);
-      for (let cardData of Object.values(banner)) {
-        if (cardData.tier === card) {
-          cardTotal += cardData.count;
-        }
-        if (cardIndex <= cardTotal) {
+      for (let [key, cardData] of Object.entries(tempBanner)) {
+        if (cardData.tier !== cardTier) continue
+        if (cardData.count === 0) continue
+        cardTotal += cardData.count;
+        if (cardIndex < cardTotal) {
+          tempBanner[key] = {
+            ...tempBanner[key],
+            count: tempBanner[key].count - 1
+          }
           shop.push(cardData);
           break;
         }
       }
     });
+    setBanner(tempBanner)
     setShopList(shop);
     setTotal(preTotal => preTotal - 2)
   };
@@ -202,6 +187,16 @@ const Shop = ({ setSeat, hoverCard, setHoverCard }) => {
 
   const handleSellCard = (hoverCard) => {
     if (hoverCard) {
+      setBanner((prevBanner) => {
+        const key = Object.keys(prevBanner).find(key => prevBanner[key].name === hoverCard.name)
+        return {
+          ...prevBanner,
+          [key]: {
+            ...prevBanner[key],
+            count: prevBanner[key].count + 1
+          }
+        }
+      })
       setSeat(prevSeat => prevSeat.map((item, i) => (i === hoverCard.index) ? {} : item))
       setTotal(prevTotal => prevTotal + hoverCard.tier)
       setHoverCard(null)

@@ -37,6 +37,7 @@ const Seat = ({ seat, setHoverCard }) => {
                     index: index,
                     tier: item.tier,
                     star: 1,
+                    name: item.name
                   })
                 }
                 onMouseLeave={() => setHoverCard(null)}

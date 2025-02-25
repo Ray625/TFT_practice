@@ -33,11 +33,149 @@
   --color-empty-card-wrapper: #050807;
   --color-empty-card-border: #162221;
   --color-empty-card-bg: #071010;
+  --color-two-star-light: #DAE0E6;
+  --color-two-star-shine: #FBFBFA;
+  --color-two-star-dark: #7B5F86;
+  --color-three-star-light: #F7FC33;
+  --color-three-star-shine: #FFFF3C;
+  --color-three-star-dark: #C1B771;
+  --color-three-star-border: #FDFF00;
+
+  --animate-flash: flash 2s linear infinite;
+  --animate-to-right: right 3s linear infinite;
+  --animate-to-bottom: bottom 3s linear infinite 0.85s;
+  --animate-to-left: left 3s linear infinite 1.5s;
+  --animate-to-top: top 3s linear infinite 2.35s;
+  --animate-level-up: levelUp 0.5s ease-out;
+
+  @keyframes flash {
+    0% {
+      opacity: 0%;
+    }
+
+    35% {
+      opacity: 90%;
+    }
+
+    50% {
+      opacity: 100%;
+    }
+
+    65% {
+      opacity: 90%;
+    }
+
+    100% {
+      opacity: 0%;
+    }
+  }
+
+
+  @keyframes right {
+    0% {
+      transform: translate(0)
+    }
+
+    57.5% {
+      transform: translate(200%, 0)
+    }
+
+    100% {
+      transform: translate(200%, 0)
+    }
+  }
+
+
+  @keyframes bottom {
+    0% {
+      transform: translate(0)
+    }
+
+    42% {
+      transform: translate(0, 200%)
+    }
+
+    100% {
+      transform: translate(0, 200%)
+    }
+  }
+
+
+  @keyframes left {
+    0% {
+      transform: translate(0)
+    }
+
+    57.5% {
+      transform: translate(-200%, 0)
+    }
+
+    100% {
+      transform: translate(-200%, 0)
+    }
+  }
+
+
+  @keyframes top {
+    0% {
+      transform: translate(0)
+    }
+
+    42% {
+      transform: translate(0, -200%)
+    }
+
+    100% {
+      transform: translate(0, -200%)
+    }
+  }
+
+  @keyframes levelUp {
+    from {
+      opacity: 100%;
+      transform: scale(1.25, 1.25)
+    }
+
+    to {
+      opacity: 0%;
+      transform: scale(1, 1)
+    }
+  }
 }
 
 @layer utilities {
   .text-shadow {
     text-shadow: -1px 0 5px #000, 0 1px 5px #000, 1px 0 5px #000, 0 -1px 5px #000;
+  }
+
+  .animate-circle {
+    transform-origin: center;
+    animation: circle 4.5s linear infinite
+  }
+
+  .animate-circle-two {
+    transform-origin: center;
+    animation: circle-two 4.5s linear infinite
+  }
+
+  @keyframes circle {
+    from {
+      transform: rotate(-45deg)
+    }
+
+    to {
+      transform: rotate(315deg)
+    }
+  }
+
+  @keyframes circle-two {
+    from {
+      transform: rotate(-225deg)
+    }
+
+    to {
+      transform: rotate(135deg)
+    }
   }
 }
 

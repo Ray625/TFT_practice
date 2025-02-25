@@ -1,22 +1,27 @@
-import { useState, useEffect, useCallback } from "react"
-import champion from "../assets/tft-champion-set13test.json"
-import trait from "../assets/tft-trait-set13.json"
-import shopRates from "../assets/tft-shop-drop-rates-data.json"
+import { useState, useEffect, useCallback } from "react";
+import champion from "../assets/tft-champion-set13.json";
+import trait from "../assets/tft-trait-set13.json";
+import shopRates from "../assets/tft-shop-drop-rates-data.json";
 
-const Shop = ({ setSeat, hoverCard, setHoverCard }) => {
+const Shop = ({
+  seat,
+  setSeat,
+  hoverCard,
+  setHoverCard,
+  playerSide,
+  setPlayerSide,
+}) => {
   const [level, setLevel] = useState(8);
   const [xp, setXp] = useState(0);
-  const [total, setTotal] = useState(240);
+  const [total, setTotal] = useState(120);
   const xpList = [2, 2, 6, 10, 20, 36, 48, 76, 84, 0];
   const levelNeededXp = xpList[level - 1];
   const levelRate = shopRates.data.Shop[`${level - 1}`].dropRatesByTier;
 
-  const [shopList, setShopList] = useState([
-    {}, {}, {}, {}, {}
-  ]);
+  const [shopList, setShopList] = useState([{}, {}, {}, {}, {}]);
 
   const championList = { ...champion.data }; // 將json資料複製出來，並給角色加上卡池張數，再存於state中備用
-  Object.values(championList).map((item) => {
+  Object.values(championList).forEach((item) => {
     switch (item.tier) {
       case 1:
         item.count = 30;
@@ -41,35 +46,41 @@ const Shop = ({ setSeat, hoverCard, setHoverCard }) => {
   const [banner, setBanner] = useState(championList);
 
   const handleDrawCard = () => {
-    if (total < 2) return
+    if (total < 2) return;
 
     let cards = [];
     let shop = [];
-    let tempBanner = { ...banner }
+    let tempBanner = { ...banner };
 
     // 將商店上一輪沒有買下的卡放回牌池
-    shopList.forEach(card => {
-      if (Object.keys(card).length === 0) return
-      const key = Object.keys(tempBanner).find(key => tempBanner[key].name === card.name)
+    shopList.forEach((card) => {
+      if (Object.keys(card).length === 0) return;
+      const key = Object.keys(tempBanner).find(
+        (key) => tempBanner[key].name === card.name
+      );
       if (key) {
         tempBanner[key] = {
           ...tempBanner[key],
-          count: tempBanner[key].count + 1
-        }
+          count: tempBanner[key].count + 1,
+        };
       }
-    })
+    });
 
     // 如果有某一費用牌池抽空，則須重新計算機率
-    const availableLevels = levelRate.filter(level => {
-      return Object.values(tempBanner).some(card => card.tier === level.cost && card.count > 0)
-    })
+    const availableLevels = levelRate.filter((level) => {
+      return Object.values(tempBanner).some(
+        (card) => card.tier === level.cost && card.count > 0
+      );
+    });
 
-    const totalRate = availableLevels.reduce((sum, level) => sum + level.rate, 0)
-    const finalRate = availableLevels.map(level => ({
-        cost: level.cost,
-        rate: (level.rate / totalRate) * 100
-      })
-    )
+    const totalRate = availableLevels.reduce(
+      (sum, level) => sum + level.rate,
+      0
+    );
+    const finalRate = availableLevels.map((level) => ({
+      cost: level.cost,
+      rate: (level.rate / totalRate) * 100,
+    }));
 
     for (let i = 0; i < 5; i++) {
       let rateSum = 0;
@@ -94,22 +105,22 @@ const Shop = ({ setSeat, hoverCard, setHoverCard }) => {
       let cardTotal = 0;
       const cardIndex = Math.floor(Math.random() * bannerTotal);
       for (let [key, cardData] of Object.entries(tempBanner)) {
-        if (cardData.tier !== cardTier) continue
-        if (cardData.count === 0) continue
+        if (cardData.tier !== cardTier) continue;
+        if (cardData.count === 0) continue;
         cardTotal += cardData.count;
         if (cardIndex < cardTotal) {
           tempBanner[key] = {
             ...tempBanner[key],
-            count: tempBanner[key].count - 1
-          }
+            count: tempBanner[key].count - 1,
+          };
           shop.push(cardData);
           break;
         }
       }
     });
-    setBanner(tempBanner)
+    setBanner(tempBanner);
     setShopList(shop);
-    setTotal(preTotal => preTotal - 2)
+    setTotal((preTotal) => preTotal - 2);
   };
 
   useEffect(() => {
@@ -122,7 +133,7 @@ const Shop = ({ setSeat, hoverCard, setHoverCard }) => {
         handleDrawCard();
       }
 
-      if (event.keyCode === 69) {
+      if (event.keyCode === 69 && hoverCard) {
         handleSellCard(hoverCard);
       }
     };
@@ -163,45 +174,172 @@ const Shop = ({ setSeat, hoverCard, setHoverCard }) => {
   }, [level, xp, total, levelNeededXp]);
 
   const handleBuyCard = (card, index) => {
-    const cost = card.tier
-    if (total < cost) return
+    const canIncreaseStars =
+      playerSide[card.id]?.owned === 2 || playerSide[card.id]?.owned === 5;
+    const canIncreaseThreeStars = playerSide[card.id]?.owned === 8;
+
+    // 若購買英雄費用不足則取消
+    const cost = card.tier;
+    if (total < cost) return;
+
     // 將商店該牌移除
     setShopList((prevShopList) =>
       prevShopList.map((item, i) => (i === index ? {} : item))
     );
 
+    if (canIncreaseStars) {
+      handleGetTwoStar(card, 2);
+    }
+
+    if (canIncreaseThreeStars) {
+      handleGetTwoStar(card, 3);
+    }
+
     // 將該牌加入備戰席
-    setSeat((prevSeat) => {
-      let done = false;
-      return prevSeat.map((item) => {
-        if (!item.name && !done) {
-          done = true;
-          return { ...card };
-        }
-        return item;
+    if (!canIncreaseStars && !canIncreaseThreeStars) {
+      setSeat((prevSeat) => {
+        let done = false;
+        return prevSeat.map((item) => {
+          if (!item.name && !done) {
+            done = true;
+            return {
+              ...card,
+              star: 1,
+            };
+          }
+          return item;
+        });
       });
+    }
+
+    // 將該牌加入玩家擁有卡牌數量統計
+    setPlayerSide((prevPlayerSide) => {
+      const newCounter = { ...prevPlayerSide };
+      if (!newCounter[card.id]) {
+        newCounter[card.id] = {
+          owned: 0,
+        };
+      }
+      return {
+        ...newCounter,
+        [card.id]: {
+          owned: newCounter[card.id].owned + 1,
+        },
+      };
     });
 
-    setTotal(prevTotal=> prevTotal - cost)
+    // 將購買英雄費用扣除
+    setTotal((prevTotal) => prevTotal - cost);
+  };
+
+  const handleGetTwoStar = (card, willBeStar) => {
+    let prevCard;
+    if (willBeStar === 2) {
+      prevCard = seat.reduce((acc, item, index) => {
+        if (item.id === card.id && item.star === willBeStar - 1)
+          acc.push(index);
+        return acc;
+      }, []);
+
+      setSeat((prevSeat) => {
+        let done = false;
+        let newSeat = [...prevSeat];
+        prevCard.forEach((item) => {
+          if (done) {
+            newSeat[item] = {};
+          }
+          if (!done) {
+            done = true;
+            newSeat[item] = {
+              ...card,
+              star: 2,
+            };
+          }
+        });
+
+        return newSeat;
+      });
+    }
+
+    if (willBeStar === 3) {
+      prevCard = seat.reduce((acc, item, index) => {
+        if (item.id === card.id) acc.push(index);
+        return acc;
+      }, []);
+
+      setSeat((prevSeat) => {
+        let done = false;
+        let newSeat = [...prevSeat];
+        prevCard.forEach((item) => {
+          if (done) {
+            newSeat[item] = {};
+          }
+          if (!done) {
+            done = true;
+            newSeat[item] = {
+              ...card,
+              star: 3,
+            };
+          }
+        });
+
+        return newSeat;
+      });
+    }
   };
 
   const handleSellCard = (hoverCard) => {
+    let cardCount;
+    switch (hoverCard.star) {
+      case 1:
+        cardCount = 1;
+        break;
+      case 2:
+        cardCount = 3;
+        break;
+      case 3:
+        cardCount = 9;
+        break;
+      default:
+        cardCount = 1;
+    }
     if (hoverCard) {
+      // 將牌放回牌庫中
       setBanner((prevBanner) => {
-        const key = Object.keys(prevBanner).find(key => prevBanner[key].name === hoverCard.name)
+        const key = Object.keys(prevBanner).find(
+          (key) => prevBanner[key].name === hoverCard.name
+        );
         return {
           ...prevBanner,
           [key]: {
             ...prevBanner[key],
-            count: prevBanner[key].count + 1
-          }
-        }
-      })
-      setSeat(prevSeat => prevSeat.map((item, i) => (i === hoverCard.index) ? {} : item))
-      setTotal(prevTotal => prevTotal + hoverCard.tier)
-      setHoverCard(null)
+            count: prevBanner[key].count + cardCount,
+          },
+        };
+      });
+
+      // 將備戰席該位置清空
+      setSeat((prevSeat) =>
+        prevSeat.map((item, i) => (i === hoverCard.index ? {} : item))
+      );
+
+      // 從玩家擁有卡牌數量統計中扣除
+      setPlayerSide((prevPlayerSide) => {
+        return {
+          ...prevPlayerSide,
+          [hoverCard.id]: {
+            owned: prevPlayerSide[hoverCard.id].owned - cardCount,
+          },
+        };
+      });
+
+      // 得到賣英雄的費用
+      setTotal((prevTotal) => prevTotal + hoverCard.tier * cardCount);
+      setHoverCard(null);
     }
   };
+
+  console.log(banner)
 
   return (
     <>
@@ -243,13 +381,27 @@ const Shop = ({ setSeat, hoverCard, setHoverCard }) => {
           </div>
           <div className="absolute left-1/2 h-full p-1 aspect-[15/4] bg-border-gold [clip-path:polygon(20%_0%,80%_0%,100%_100%,0%_100%)]">
             <div className="w-full aspect-[15/4] p-1.5 bg-gold-bg [clip-path:polygon(20%_0%,80%_0%,100%_100%,0%_100%)]">
-              <h5 className="flex items-center justify-center pt-1 text-2xl/7 text-text-white text-center">
+              <h5 className="flex items-center justify-center text-2xl/7 text-text-white text-center">
                 <img
                   className="w-5 h-5 mr-2"
                   src="/img/item/Gold.png"
                   alt="icon"
                 />
-                {total}
+                <input
+                  type="num"
+                  value={total}
+                  className="w-12 h-fit m-0 flex items-center justify-center pt-1 text-2xl/7 text-text-white text-center"
+                  min={0}
+                  max={999}
+                  onChange={(event) => {
+                    setTotal(event.target.value)
+                  }}
+                  onKeyDown={(event) => {
+                    if (event.key === "Enter") {
+                      event.target.blur()
+                    }
+                  }}
+                />
               </h5>
             </div>
           </div>
@@ -306,6 +458,11 @@ const Shop = ({ setSeat, hoverCard, setHoverCard }) => {
             </button>
           </div>
           {shopList.map((item, index) => {
+            const canIncreaseStars =
+              playerSide[item.id]?.owned === 2 ||
+              playerSide[item.id]?.owned === 5;
+            const canIncreaseThreeStars = playerSide[item.id]?.owned === 8;
+
             if (!item.name)
               return (
                 <div
@@ -342,6 +499,21 @@ const Shop = ({ setSeat, hoverCard, setHoverCard }) => {
                   className={`relative border-2 border-${cost}-cost-card-light`}
                   onClick={() => handleBuyCard(item, index)}
                 >
+                  {canIncreaseStars && (
+                    <div className="absolute top-0 left-2 flex flex-row gap-0.5 -translate-y-2/5 animate-flash">
+                      <div className="w-3.75 h-3.75 bg-linear-to-t from-two-star-dark via-two-star-shine to-two-star-light [clip-path:polygon(50%_0%,66%_32%,100%_38%,75%_64%,81%_100%,50%_83%,17%_100%,25%_64%,0%_38%,34%_32%)]"></div>
+                      <div className="w-3.75 h-3.75 bg-linear-to-t from-two-star-dark via-two-star-shine to-two-star-light [clip-path:polygon(50%_0%,66%_32%,100%_38%,75%_64%,81%_100%,50%_83%,17%_100%,25%_64%,0%_38%,34%_32%)]"></div>
+                    </div>
+                  )}
+                  {canIncreaseThreeStars && (
+                    <div className="absolute top-0 left-2 flex flex-col items-center -translate-y-1/5 animate-flash">
+                      <div className="w-3.75 h-3.75 bg-linear-to-t from-three-star-dark via-three-star-shine to-three-star-light [clip-path:polygon(50%_0%,66%_32%,100%_38%,75%_64%,81%_100%,50%_83%,17%_100%,25%_64%,0%_38%,34%_32%)]"></div>
+                      <div className="flex flex-row items-center">
+                        <div className="w-3.75 h-3.75 bg-linear-to-t from-three-star-dark via-three-star-shine to-three-star-light [clip-path:polygon(50%_0%,66%_32%,100%_38%,75%_64%,81%_100%,50%_83%,17%_100%,25%_64%,0%_38%,34%_32%)]"></div>
+                        <div className="w-3.75 h-3.75 bg-linear-to-t from-three-star-dark via-three-star-shine to-three-star-light [clip-path:polygon(50%_0%,66%_32%,100%_38%,75%_64%,81%_100%,50%_83%,17%_100%,25%_64%,0%_38%,34%_32%)]"></div>
+                      </div>
+                    </div>
+                  )}
                   <div className="border border-card-border">
                     <img
                       className="w-full aspect-[69/40]"
@@ -389,10 +561,51 @@ const Shop = ({ setSeat, hoverCard, setHoverCard }) => {
 
             return (
               <div
-                className="flex flex-col h-full p-1 bg-bg-black border hover:opacity-90 hover:cursor-pointer transition-opacity duration-150"
+                className={`flex flex-col h-full p-0.5 border bg-empty-card-wrapper hover:opacity-90 hover:cursor-pointer transition-opacity duration-150`}
                 key={index}
               >
-                {body}
+                <div
+                  className={`relative z-1 p-0.5 ${
+                    !canIncreaseStars && "bg-empty-card-wrapper"
+                  }`}
+                >
+                  {canIncreaseStars && (
+                    <>
+                      <div className="absolute top-0 right-0 left-0 bottom-0 overflow-hidden">
+                        <div className="absolute -z-10 top-0 left-0 w-full h-0.5 bg-linear-to-r from-black/0 from-40% via-white/60 via-60% to-white/100 to-90% rounded -translate-x-full animate-to-right"></div>
+                        <div className="absolute -z-20 -top-1 right-0 w-0.5 h-full bg-linear-to-b from-black/0 from-40% via-white/80 via-60% to-white/100 to-90% rounded -translate-y-full animate-to-bottom"></div>
+                        <div className="absolute -z-30 bottom-0 left-0 w-full h-0.5 bg-linear-to-l from-black/0 from-40% via-white/60 via-60% to-white/100 to-90% rounded translate-x-full animate-to-left"></div>
+                        <div className="absolute -z-40 -bottom-1 left-0 w-0.5 h-full bg-linear-to-t from-black/0 from-40% via-white/80 via-60% to-white/100 to-90% rounded translate-y-full animate-to-top"></div>
+                        {/* <div className="animate-circle absolute -z-10 top-0 left-0 w-76 -translate-x-10.5 -translate-y-18 rounded-full bg-conic from-white/30 via-black/0 to-white/80 aspect-square pointer-events-none"></div>
+                        <div className="animate-circle-two absolute -z-10 top-0 left-0 w-76 -translate-x-10.5 -translate-y-18 rounded-full bg-conic from-white/30 via-black/0 to-white/80 aspect-square pointer-events-none"></div> */}
+                      </div>
+                      <div className="absolute top-0 right-0 left-0 bottom-0 overflow-hidden rotate-180">
+                        <div className="absolute -z-10 top-0 left-0 w-full h-0.5 bg-linear-to-r from-black/0 from-40% via-white/60 via-60% to-white/100 to-90% rounded -translate-x-full animate-to-right"></div>
+                        <div className="absolute -z-20 -top-1 right-0 w-0.5 h-full bg-linear-to-b from-black/0 from-40% via-white/80 via-60% to-white/100 to-90% rounded -translate-y-full animate-to-bottom"></div>
+                        <div className="absolute -z-30 bottom-0 left-0 w-full h-0.5 bg-linear-to-l from-black/0 from-40% via-white/60 via-60% to-white/100 to-90% rounded translate-x-full animate-to-left"></div>
+                        <div className="absolute -z-40 -bottom-1 left-0 w-0.5 h-full bg-linear-to-t from-black/0 from-40% via-white/80 via-60% to-white/100 to-90% rounded translate-y-full animate-to-top"></div>
+                      </div>
+                    </>
+                  )}
+                  {canIncreaseThreeStars && (
+                    <>
+                      <div className="absolute top-0 right-0 left-0 bottom-0 overflow-hidden">
+                        <div className="absolute -z-10 top-0 left-0 w-full h-0.5 bg-linear-to-r from-black/0 from-20% via-three-star-border/60 via-50% to-three-star-border/100 to-85% rounded -translate-x-full animate-to-right"></div>
+                        <div className="absolute -z-20 -top-1 right-0 w-0.5 h-full bg-linear-to-b from-black/0 from-20% via-three-star-border/80 via-50% to-three-star-border/100 to-85% rounded -translate-y-full animate-to-bottom"></div>
+                        <div className="absolute -z-30 bottom-0 left-0 w-full h-0.5 bg-linear-to-l from-black/0 from-20% via-three-star-border/60 via-50% to-three-star-border/100 to-85% rounded translate-x-full animate-to-left"></div>
+                        <div className="absolute -z-40 -bottom-1 left-0 w-0.5 h-full bg-linear-to-t from-black/0 from-20% via-three-star-border/80 via-50% to-three-star-border/100 to-85% rounded translate-y-full animate-to-top"></div>
+                      </div>
+                      <div className="absolute top-0 right-0 left-0 bottom-0 overflow-hidden rotate-180">
+                        <div className="absolute -z-10 top-0 left-0 w-full h-0.5 bg-linear-to-r from-black/0 from-20% via-three-star-border/60 via-50% to-three-star-border/100 to-85% rounded -translate-x-full animate-to-right"></div>
+                        <div className="absolute -z-20 -top-1 right-0 w-0.5 h-full bg-linear-to-b from-black/0 from-20% via-three-star-border/80 via-50% to-three-star-border/100 to-85% rounded -translate-y-full animate-to-bottom"></div>
+                        <div className="absolute -z-30 bottom-0 left-0 w-full h-0.5 bg-linear-to-l from-black/0 from-20% via-three-star-border/60 via-50% to-three-star-border/100 to-85% rounded translate-x-full animate-to-left"></div>
+                        <div className="absolute -z-40 -bottom-1 left-0 w-0.5 h-full bg-linear-to-t from-black/0 from-20% via-three-star-border/80 via-50% to-three-star-border/100 to-85% rounded translate-y-full animate-to-top"></div>
+                      </div>
+                    </>
+                  )}
+
+                  {body}
+                </div>
               </div>
             );
           })}
@@ -402,4 +615,4 @@ const Shop = ({ setSeat, hoverCard, setHoverCard }) => {
   );
 };
 
-export default Shop
+export default Shop;

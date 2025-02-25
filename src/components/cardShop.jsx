@@ -381,27 +381,39 @@ const Shop = ({
           </div>
           <div className="absolute left-1/2 h-full p-1 aspect-[15/4] bg-border-gold [clip-path:polygon(20%_0%,80%_0%,100%_100%,0%_100%)]">
             <div className="w-full aspect-[15/4] p-1.5 bg-gold-bg [clip-path:polygon(20%_0%,80%_0%,100%_100%,0%_100%)]">
-              <h5 className="flex items-center justify-center text-2xl/7 text-text-white text-center">
-                <img
-                  className="w-5 h-5 mr-2"
-                  src="/img/item/Gold.png"
-                  alt="icon"
-                />
+              <h5 className="flex items-center justify-center gap-2 text-2xl/7 text-text-white text-center">
+                <img className="w-5 h-5" src="/img/item/Gold.png" alt="icon" />
                 <input
                   type="num"
                   value={total}
                   className="w-12 h-fit m-0 flex items-center justify-center pt-1 text-2xl/7 text-text-white text-center"
                   min={0}
                   max={999}
+                  title="Enter money"
                   onChange={(event) => {
-                    setTotal(event.target.value)
+                    if (isNaN(event.target.value)) {
+                      alert("請輸入數字");
+                      return setTotal((prevTotal) => prevTotal);
+                    }
+                    setTotal(Number(event.target.value));
                   }}
                   onKeyDown={(event) => {
                     if (event.key === "Enter") {
-                      event.target.blur()
+                      event.target.blur();
                     }
                   }}
                 />
+                <div className="mt-1">
+                  <button
+                    className="flex justify-center items-center w-5 h-5 bg-bg-black rounded-full border border-white hover:cursor-pointer select-none"
+                    title="+10 Gold"
+                    onClick={() => setTotal((prevTotal) => prevTotal + 10)}
+                    >
+                    <p className="text-lg/normal text-start pointer-events-none select-none ">
+                      +
+                    </p>
+                  </button>
+                </div>
               </h5>
             </div>
           </div>
@@ -463,6 +475,7 @@ const Shop = ({
               playerSide[item.id]?.owned === 5;
             const canIncreaseThreeStars = playerSide[item.id]?.owned === 8;
 
+            // 卡被抽出後，留下空位
             if (!item.name)
               return (
                 <div
@@ -473,6 +486,7 @@ const Shop = ({
                 </div>
               );
 
+            // 不同費用外框不同顏色
             let cost;
             switch (item?.tier) {
               case 1:
@@ -499,6 +513,7 @@ const Shop = ({
                   className={`relative border-2 border-${cost}-cost-card-light`}
                   onClick={() => handleBuyCard(item, index)}
                 >
+                  {/* 可升星時出現提示 */}
                   {canIncreaseStars && (
                     <div className="absolute top-0 left-2 flex flex-row gap-0.5 -translate-y-2/5 animate-flash">
                       <div className="w-3.75 h-3.75 bg-linear-to-t from-two-star-dark via-two-star-shine to-two-star-light [clip-path:polygon(50%_0%,66%_32%,100%_38%,75%_64%,81%_100%,50%_83%,17%_100%,25%_64%,0%_38%,34%_32%)]"></div>

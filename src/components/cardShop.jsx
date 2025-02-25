@@ -44,6 +44,7 @@ const Shop = ({
     }
   });
   const [banner, setBanner] = useState(championList);
+  console.log(banner);
 
   const handleDrawCard = () => {
     if (total < 2) return;
@@ -77,6 +78,7 @@ const Shop = ({
       (sum, level) => sum + level.rate,
       0
     );
+
     const finalRate = availableLevels.map((level) => ({
       cost: level.cost,
       rate: (level.rate / totalRate) * 100,
@@ -96,8 +98,11 @@ const Shop = ({
 
     cards.forEach((cardTier) => {
       let bannerTotal = 0;
-      Object.values(tempBanner).forEach((cardData) => {
+      Object.entries(tempBanner).forEach(([key, cardData]) => {
         if (cardData.tier === cardTier) {
+          if (playerSide[key]?.owned >= 9) {
+            return
+          }
           bannerTotal += cardData.count;
         }
       });
@@ -107,6 +112,7 @@ const Shop = ({
       for (let [key, cardData] of Object.entries(tempBanner)) {
         if (cardData.tier !== cardTier) continue;
         if (cardData.count === 0) continue;
+        if (playerSide[key]?.owned >= 9) continue;
         cardTotal += cardData.count;
         if (cardIndex < cardTotal) {
           tempBanner[key] = {
@@ -339,8 +345,6 @@ const Shop = ({
     }
   };
 
-  console.log(banner)
-
   return (
     <>
       <div className="relative flex flex-col w-360 mx-auto font-sans">
@@ -351,7 +355,21 @@ const Shop = ({
                 <h5 className="text-2xl/7 pl-1 text-text-white text-left">
                   {`等級 ${level}`}
                 </h5>
-                <p className="text-l ml-[34%] text-text-white">{`${xp}/${levelNeededXp}`}</p>
+                <div className="flex flex-row gap-1 items-center h-7 ml-2">
+                  <button className="w-4 h-4 m-0 p-0 border border-white rounded-full bg-bg-black text-white hover:cursor-pointer" onClick={() => {
+                    if (level >= 10) return
+                    setLevel(prevLevel => prevLevel + 1)
+                  }}>
+                    <p className="text-sm/tight select-none">+</p>
+                  </button>
+                  <button className="w-4 h-4 m-0 p-0 border border-white rounded-full bg-bg-black text-white hover:cursor-pointer" onClick={() => {
+                    if (level <= 1) return;
+                    setLevel((prevLevel) => prevLevel - 1);
+                  }}>
+                    <p className="text-sm/tight select-none">-</p>
+                  </button>
+                </div>
+                <p className="text-l ml-[20%] text-text-white">{`${xp}/${levelNeededXp}`}</p>
               </div>
             </div>
           </div>
@@ -408,7 +426,7 @@ const Shop = ({
                     className="flex justify-center items-center w-5 h-5 bg-bg-black rounded-full border border-white hover:cursor-pointer select-none"
                     title="+10 Gold"
                     onClick={() => setTotal((prevTotal) => prevTotal + 10)}
-                    >
+                  >
                     <p className="text-lg/normal text-start pointer-events-none select-none ">
                       +
                     </p>

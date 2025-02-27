@@ -30,7 +30,7 @@ const Seat = ({ seat, setHoverCard }) => {
           >
             {item.name && (
               <div
-                className={`relative border-3 border-${cost}-cost-card-light`}
+                className={`relative w-full h-full border-3 border-${cost}-cost-card-light`}
                 onMouseEnter={() =>
                   setHoverCard({
                     index: index,

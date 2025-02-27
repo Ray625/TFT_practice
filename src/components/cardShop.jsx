@@ -13,7 +13,7 @@ const Shop = ({
 }) => {
   const [level, setLevel] = useState(8);
   const [xp, setXp] = useState(0);
-  const [total, setTotal] = useState(120);
+  const [total, setTotal] = useState(50);
   const xpList = [2, 2, 6, 10, 20, 36, 48, 76, 84, 0];
   const levelNeededXp = xpList[level - 1];
   const levelRate = shopRates.data.Shop[`${level - 1}`].dropRatesByTier;
@@ -44,8 +44,31 @@ const Shop = ({
     }
   });
   const [banner, setBanner] = useState(championList);
-  console.log(banner);
 
+  // 設立監聽器，當使用者按下F時購買經驗，D刷新商店，E販賣hover卡牌
+  useEffect(() => {
+    const handlePressKey = (event) => {
+      if (event.keyCode === 70) {
+        handleBuyXp();
+      }
+
+      if (event.keyCode === 68) {
+        handleDrawCard();
+      }
+
+      if (event.keyCode === 69 && hoverCard) {
+        handleSellCard(hoverCard);
+      }
+    };
+
+    window.addEventListener("keydown", handlePressKey);
+
+    return () => {
+      window.removeEventListener("keydown", handlePressKey);
+    };
+  }, [level, xp, total, hoverCard]);
+
+  // 刷新商店
   const handleDrawCard = () => {
     if (total < 2) return;
 
@@ -84,6 +107,7 @@ const Shop = ({
       rate: (level.rate / totalRate) * 100,
     }));
 
+    // 抽出5張卡牌之[費用]，由等級決定抽出之機率
     for (let i = 0; i < 5; i++) {
       let rateSum = 0;
       const starIndex = Math.floor(Math.random() * 100);
@@ -96,6 +120,7 @@ const Shop = ({
       }
     }
 
+    // 再由費用列表中，對該費用抽出一張卡牌，若某一張卡牌使用者已擁有三星(9張相同卡牌)，則將該卡牌排除後再抽出。
     cards.forEach((cardTier) => {
       let bannerTotal = 0;
       Object.entries(tempBanner).forEach(([key, cardData]) => {
@@ -129,28 +154,7 @@ const Shop = ({
     setTotal((preTotal) => preTotal - 2);
   };
 
-  useEffect(() => {
-    const handlePressKey = (event) => {
-      if (event.keyCode === 70) {
-        handleBuyXp();
-      }
-
-      if (event.keyCode === 68) {
-        handleDrawCard();
-      }
-
-      if (event.keyCode === 69 && hoverCard) {
-        handleSellCard(hoverCard);
-      }
-    };
-
-    window.addEventListener("keydown", handlePressKey);
-
-    return () => {
-      window.removeEventListener("keydown", handlePressKey);
-    };
-  }, [level, xp, total, hoverCard]);
-
+  // 購買經驗
   const handleBuyXp = useCallback(() => {
     if (level >= 10) return; // 滿等時無法購買經驗
 
@@ -179,14 +183,27 @@ const Shop = ({
     }
   }, [level, xp, total, levelNeededXp]);
 
+  // 購買卡牌
   const handleBuyCard = (card, index) => {
-    const canIncreaseStars =
-      playerSide[card.id]?.owned === 2 || playerSide[card.id]?.owned === 5;
+    const canIncreaseStars = playerSide[card.id]?.owned === 2 || playerSide[card.id]?.owned === 5;
     const canIncreaseThreeStars = playerSide[card.id]?.owned === 8;
+
+    let full = true
 
     // 若購買英雄費用不足則取消
     const cost = card.tier;
     if (total < cost) return;
+
+    // 檢查備戰席位是否已滿
+    for (let item of Object.values(seat)) {
+      if (Object.keys(item).length === 0) {
+        full = false
+        break
+      }
+    }
+
+    // 如果購買英雄無法升星，備戰席又已經滿了，則return
+    if (full && !(canIncreaseStars || canIncreaseThreeStars)) return;
 
     // 將商店該牌移除
     setShopList((prevShopList) =>
@@ -194,11 +211,11 @@ const Shop = ({
     );
 
     if (canIncreaseStars) {
-      handleGetTwoStar(card, 2);
+      handleGetUpStar(card, 2);
     }
 
     if (canIncreaseThreeStars) {
-      handleGetTwoStar(card, 3);
+      handleGetUpStar(card, 3);
     }
 
     // 將該牌加入備戰席
@@ -238,7 +255,8 @@ const Shop = ({
     setTotal((prevTotal) => prevTotal - cost);
   };
 
-  const handleGetTwoStar = (card, willBeStar) => {
+  // 購買卡牌時若玩家以擁有相同卡牌數張，則可以升級
+  const handleGetUpStar = (card, willBeStar) => {
     let prevCard;
     if (willBeStar === 2) {
       prevCard = seat.reduce((acc, item, index) => {
@@ -294,6 +312,7 @@ const Shop = ({
     }
   };
 
+  // 販賣卡牌
   const handleSellCard = (hoverCard) => {
     let cardCount;
     switch (hoverCard.star) {
@@ -345,6 +364,7 @@ const Shop = ({
     }
   };
 
+
   return (
     <>
       <div className="relative flex flex-col w-360 mx-auto font-sans">
@@ -356,17 +376,29 @@ const Shop = ({
                   {`等級 ${level}`}
                 </h5>
                 <div className="flex flex-row gap-1 items-center h-7 ml-2">
-                  <button className="w-4 h-4 m-0 p-0 border border-white rounded-full bg-bg-black text-white hover:cursor-pointer" onClick={() => {
-                    if (level >= 10) return
-                    setLevel(prevLevel => prevLevel + 1)
-                  }}>
-                    <p className="text-sm/tight select-none">+</p>
+                  <button
+                    className="w-4 h-4 m-0 p-0 border border-white rounded-full bg-bg-black text-white hover:cursor-pointer hover:opacity-80"
+                    onClick={() => {
+                      if (level >= 10) return;
+                      setLevel((prevLevel) => prevLevel + 1);
+                    }}
+                    title="Level up"
+                  >
+                    <div className="flex justify-center items-center text-sm select-none">
+                      <i className="fa-solid fa-plus fa-sm"></i>
+                    </div>
                   </button>
-                  <button className="w-4 h-4 m-0 p-0 border border-white rounded-full bg-bg-black text-white hover:cursor-pointer" onClick={() => {
-                    if (level <= 1) return;
-                    setLevel((prevLevel) => prevLevel - 1);
-                  }}>
-                    <p className="text-sm/tight select-none">-</p>
+                  <button
+                    className="w-4 h-4 m-0 p-0 border border-white rounded-full bg-bg-black text-white hover:cursor-pointer hover:opacity-80"
+                    onClick={() => {
+                      if (level <= 1) return;
+                      setLevel((prevLevel) => prevLevel - 1);
+                    }}
+                    title="Level down"
+                  >
+                    <div className="flex justify-center items-center text-sm select-none">
+                      <i className="fa-solid fa-minus fa-sm"></i>
+                    </div>
                   </button>
                 </div>
                 <p className="text-l ml-[20%] text-text-white">{`${xp}/${levelNeededXp}`}</p>
@@ -421,15 +453,15 @@ const Shop = ({
                     }
                   }}
                 />
-                <div className="mt-1">
+                <div className="mt-0.5">
                   <button
-                    className="flex justify-center items-center w-5 h-5 bg-bg-black rounded-full border border-white hover:cursor-pointer select-none"
+                    className="flex justify-center items-center w-5 h-5 m-0 p-0 bg-bg-black rounded-full border border-white hover:opacity-80 hover:cursor-pointer select-none"
                     title="+10 Gold"
                     onClick={() => setTotal((prevTotal) => prevTotal + 10)}
                   >
-                    <p className="text-lg/normal text-start pointer-events-none select-none ">
-                      +
-                    </p>
+                    <div className="flex justify-center items-center text-sm mt-0.5 select-none">
+                      <i className="fa-solid fa-plus fa-sm"></i>
+                    </div>
                   </button>
                 </div>
               </h5>

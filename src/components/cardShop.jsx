@@ -4,12 +4,14 @@ import trait from "../assets/tft-trait-set13.json";
 import shopRates from "../assets/tft-shop-drop-rates-data.json";
 
 const Shop = ({
+  spaceList,
+  setSpaceList,
   seat,
   setSeat,
   hoverCard,
   setHoverCard,
   playerSide,
-  setPlayerSide,
+  setPlayerSide
 }) => {
   const [level, setLevel] = useState(8);
   const [xp, setXp] = useState(0);
@@ -234,6 +236,20 @@ const Shop = ({
         });
       });
     }
+
+    setSpaceList((prevSpaceList) => {
+      let done = false;
+      return prevSpaceList.map((item) => {
+        if (!item.name && !done) {
+          done = true;
+          return {
+            ...card,
+            star: 1,
+          };
+        }
+        return item;
+      });
+    });
 
     // 將該牌加入玩家擁有卡牌數量統計
     setPlayerSide((prevPlayerSide) => {

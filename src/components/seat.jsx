@@ -46,8 +46,16 @@ const Seat = ({ seat, setHoverCard }) => {
                 {item.star === 2 && (
                   <>
                     <div className="absolute top-0 left-0 right-0 flex flex-row justify-center gap-0.5 pt-2 pointer-events-none">
-                      <div className="w-3.75 h-3.75 bg-linear-to-t from-two-star-dark via-two-star-shine to-two-star-light [clip-path:polygon(50%_0%,66%_32%,100%_38%,75%_64%,81%_100%,50%_83%,17%_100%,25%_64%,0%_38%,34%_32%)]"></div>
-                      <div className="w-3.75 h-3.75 bg-linear-to-t from-two-star-dark via-two-star-shine to-two-star-light [clip-path:polygon(50%_0%,66%_32%,100%_38%,75%_64%,81%_100%,50%_83%,17%_100%,25%_64%,0%_38%,34%_32%)]"></div>
+                      {[1, 2].map((item) => {
+                        return (
+                          <img
+                            src="/img/svg/twoStar.svg"
+                            alt="starIcon"
+                            className="drop-shadow-black"
+                            key={item}
+                          />
+                        );
+                      })}
                     </div>
                     <div className="absolute top-0 left-0 right-0 bottom-0 bg-two-star-light animate-level-up opacity-0"></div>
                   </>
@@ -55,14 +63,21 @@ const Seat = ({ seat, setHoverCard }) => {
                 {item.star === 3 && (
                   <>
                     <div className="absolute top-0 left-0 right-0 flex flex-row justify-center gap-0.5 pt-2 pointer-events-none">
-                      <div className="w-3.75 h-3.75 bg-linear-to-t from-three-star-dark via-three-star-shine to-three-star-light [clip-path:polygon(50%_0%,66%_32%,100%_38%,75%_64%,81%_100%,50%_83%,17%_100%,25%_64%,0%_38%,34%_32%)]"></div>
-                      <div className="w-3.75 h-3.75 bg-linear-to-t from-three-star-dark via-three-star-shine to-three-star-light [clip-path:polygon(50%_0%,66%_32%,100%_38%,75%_64%,81%_100%,50%_83%,17%_100%,25%_64%,0%_38%,34%_32%)]"></div>
-                      <div className="w-3.75 h-3.75 bg-linear-to-t from-three-star-dark via-three-star-shine to-three-star-light [clip-path:polygon(50%_0%,66%_32%,100%_38%,75%_64%,81%_100%,50%_83%,17%_100%,25%_64%,0%_38%,34%_32%)]"></div>
+                      {[1, 2, 3].map((item) => {
+                        return (
+                          <img
+                            src="/img/svg/threeStar.svg"
+                            alt="starIcon"
+                            className="drop-shadow-black"
+                            key={item}
+                          />
+                        );
+                      })}
                     </div>
                     <div className="absolute top-0 left-0 right-0 bottom-0 bg-three-star-light animate-level-up opacity-0"></div>
                   </>
                 )}
-                <p className="absolute left-0 bottom-0 w-full pb-1 pl-1 text-white text-lg whitespace-nowrap overflow-hidden pointer-events-none text-shadow">
+                <p className="absolute left-0 bottom-0 w-full pb-1 text-white text-lg whitespace-nowrap overflow-hidden pointer-events-none text-shadow">
                   {item.name}
                 </p>
                 <img

@@ -1,0 +1,26 @@
+<svg
+  version="1.1"
+  baseProfile="full"
+  xmlns="http://www.w3.org/2000/svg"
+  width="15"
+  height="15"
+  viewBox="0 0 100 100"
+>
+  <defs>
+    <linearGradient
+      id="GrandientWhite"
+      x1="0"
+      x2="0"
+      y1="1"
+      y2="0"
+    >
+      <stop offset="0%" stop-color="#C1B771" />
+      <stop offset="50%" stop-color="#FFFF3C" />
+      <stop offset="100%" stop-color="#F7FC33" />
+    </linearGradient>
+  </defs>
+  <path
+    d="M50 0 L66 32 L100 38 L75 64 L81 100 L50 83 L17 100 L25 64 L0 38 L34 32 Z"
+    fill="url(#GrandientWhite)"
+  />
+</svg>

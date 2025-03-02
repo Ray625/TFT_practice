@@ -40,6 +40,7 @@
   --color-three-star-shine: #FFFF3C;
   --color-three-star-dark: #C1B771;
   --color-three-star-border: #FDFF00;
+  --color-empty-space: #112C4E;
 
   --animate-flash: flash 2s linear infinite;
   --animate-to-right: right 3s linear infinite;
@@ -146,6 +147,10 @@
 @layer utilities {
   .text-shadow {
     text-shadow: -1px 0 5px #000, 0 1px 5px #000, 1px 0 5px #000, 0 -1px 5px #000;
+  }
+
+  .drop-shadow-black {
+    filter: drop-shadow(1px 1px 2px #000);
   }
 
   .animate-circle {

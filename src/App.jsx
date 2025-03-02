@@ -6,6 +6,7 @@ import Seat from "./components/seat"
 import Space from "./components/space"
 
 function App() {
+  const [spaceList, setSpaceList] = useState([{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}]);
   const [seat, setSeat] = useState([{}, {}, {}, {}, {}, {}, {}, {}, {}]);
   const [hoverCard, setHoverCard] = useState(null)
   const [playerSide, setPlayerSide] = useState({})
@@ -13,9 +14,11 @@ function App() {
   return (
     <>
       <div className="flex flex-col items-center justify-end w-full h-screen bg-neutral-300/55 text-black">
-        <Space />
+        <Space spaceList={spaceList} />
         <Seat seat={seat} setHoverCard={setHoverCard} />
         <Shop
+          spaceList={spaceList}
+          setSpaceList={setSpaceList}
           seat={seat}
           setSeat={setSeat}
           hoverCard={hoverCard}

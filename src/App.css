@@ -41,6 +41,8 @@
   --color-three-star-dark: #C1B771;
   --color-three-star-border: #FDFF00;
   --color-empty-space: #112C4E;
+  --color-trait-bg: #111111;
+  --color-trait-border: #464646;
 
   --animate-flash: flash 2s linear infinite;
   --animate-to-right: right 3s linear infinite;
@@ -183,6 +185,7 @@
     }
   }
 }
+
 
 #root {
   margin: 0 auto;

@@ -20,9 +20,16 @@ const Seat = ({ seat, setHoverCard }) => {
           case 5:
             cost = "five";
             break;
-          default:
-            cost = null;
         }
+
+        const borderColors = {
+          one: "border-one-cost-card-light",
+          two: "border-two-cost-card-light",
+          three: "border-three-cost-card-light",
+          four: "border-four-cost-card-light",
+          five: "border-five-cost-card-light",
+        };
+
         return (
           <div
             className="w-25.5 h-25.5 bg-seat-bg p-2 hover:opacity-80"
@@ -30,7 +37,7 @@ const Seat = ({ seat, setHoverCard }) => {
           >
             {item.name && (
               <div
-                className={`relative w-full h-full border-3 border-${cost}-cost-card-light`}
+                className={`relative w-full h-full border-3 ${borderColors[cost]}`}
                 onMouseEnter={() =>
                   setHoverCard({
                     index: index,

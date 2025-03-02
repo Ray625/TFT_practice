@@ -237,20 +237,6 @@ const Shop = ({
       });
     }
 
-    setSpaceList((prevSpaceList) => {
-      let done = false;
-      return prevSpaceList.map((item) => {
-        if (!item.name && !done) {
-          done = true;
-          return {
-            ...card,
-            star: 1,
-          };
-        }
-        return item;
-      });
-    });
-
     // 將該牌加入玩家擁有卡牌數量統計
     setPlayerSide((prevPlayerSide) => {
       const newCounter = { ...prevPlayerSide };
@@ -570,28 +556,71 @@ const Shop = ({
               case 5:
                 cost = "five";
                 break;
-              default:
-                cost = null;
             }
+
+            const borderColors = {
+              one: "border-one-cost-card-light",
+              two: "border-two-cost-card-light",
+              three: "border-three-cost-card-light",
+              four: "border-four-cost-card-light",
+              five: "border-five-cost-card-light",
+            };
+
+            const cardFooterColorFrom = {
+              one: "from-one-cost-card-dark",
+              two: "from-two-cost-card-dark",
+              three: "from-three-cost-card-dark",
+              four: "from-four-cost-card-dark",
+              five: "from-five-cost-card-dark",
+            };
+
+            const cardFooterColorTo = {
+              one: "to-one-cost-card-light",
+              two: "to-two-cost-card-light",
+              three: "to-three-cost-card-light",
+              four: "to-four-cost-card-light",
+              five: "to-five-cost-card-light",
+            };
+
             const body = (
               <>
                 <div
-                  className={`relative border-2 border-${cost}-cost-card-light`}
+                  className={`relative border-2 ${borderColors[cost]}`}
                   onClick={() => handleBuyCard(item, index)}
                 >
                   {/* 可升星時出現提示 */}
                   {canIncreaseStars && (
                     <div className="absolute top-0 left-2 flex flex-row gap-0.5 -translate-y-2/5 animate-flash">
-                      <div className="w-3.75 h-3.75 bg-linear-to-t from-two-star-dark via-two-star-shine to-two-star-light [clip-path:polygon(50%_0%,66%_32%,100%_38%,75%_64%,81%_100%,50%_83%,17%_100%,25%_64%,0%_38%,34%_32%)]"></div>
-                      <div className="w-3.75 h-3.75 bg-linear-to-t from-two-star-dark via-two-star-shine to-two-star-light [clip-path:polygon(50%_0%,66%_32%,100%_38%,75%_64%,81%_100%,50%_83%,17%_100%,25%_64%,0%_38%,34%_32%)]"></div>
+                      {[1, 2].map((item) => {
+                        return (
+                          <img
+                            src="/img/svg/twoStar.svg"
+                            alt="starIcon"
+                            className="drop-shadow-black"
+                            key={item}
+                          />
+                        );
+                      })}
                     </div>
                   )}
                   {canIncreaseThreeStars && (
                     <div className="absolute top-0 left-2 flex flex-col items-center -translate-y-1/5 animate-flash">
-                      <div className="w-3.75 h-3.75 bg-linear-to-t from-three-star-dark via-three-star-shine to-three-star-light [clip-path:polygon(50%_0%,66%_32%,100%_38%,75%_64%,81%_100%,50%_83%,17%_100%,25%_64%,0%_38%,34%_32%)]"></div>
+                      <img
+                        src="/img/svg/threeStar.svg"
+                        alt="starIcon"
+                        className="drop-shadow-black"
+                      />
                       <div className="flex flex-row items-center">
-                        <div className="w-3.75 h-3.75 bg-linear-to-t from-three-star-dark via-three-star-shine to-three-star-light [clip-path:polygon(50%_0%,66%_32%,100%_38%,75%_64%,81%_100%,50%_83%,17%_100%,25%_64%,0%_38%,34%_32%)]"></div>
-                        <div className="w-3.75 h-3.75 bg-linear-to-t from-three-star-dark via-three-star-shine to-three-star-light [clip-path:polygon(50%_0%,66%_32%,100%_38%,75%_64%,81%_100%,50%_83%,17%_100%,25%_64%,0%_38%,34%_32%)]"></div>
+                        {[1, 2].map((item) => {
+                          return (
+                            <img
+                              src="/img/svg/threeStar.svg"
+                              alt="starIcon"
+                              className="drop-shadow-black"
+                              key={item}
+                            />
+                          );
+                        })}
                       </div>
                     </div>
                   )}
@@ -625,7 +654,7 @@ const Shop = ({
                   </div>
                 </div>
                 <div
-                  className={`flex flex-row justify-between items-center px-2 bg-linear-to-r from-${cost}-cost-card-dark to-${cost}-cost-card-light grow`}
+                  className={`flex flex-row justify-between items-center px-2 bg-linear-to-r ${cardFooterColorFrom[cost]} ${cardFooterColorTo[cost]} grow`}
                 >
                   <p className="text-xl text-text-white">{item.name}</p>
                   <p className="flex items-center justify-start text-lg text-text-white font-light font-sans leading-none">

@@ -1,5 +1,4 @@
-const Seat = ({ seat, setHoverCard }) => {
-
+const Seat = ({ seat, setHoverCard, seatAnimate }) => {
   return (
     <div className="flex flex-row items-center justify-center gap-0.5 w-fit h-fit ml-22 mb-4 border-2 border-bg-black bg-bg-black/30">
       {seat.map((item, index) => {
@@ -37,22 +36,19 @@ const Seat = ({ seat, setHoverCard }) => {
           >
             {item.name && (
               <div
-                className={`relative w-full h-full border-3 ${borderColors[cost]}`}
+                className={`relative w-full h-full border-3 ${borderColors[cost]} `}
                 onMouseEnter={() =>
                   setHoverCard({
+                    place: "seat",
                     index: index,
-                    tier: item.tier,
-                    star: item.star,
-                    name: item.name,
-                    id: item.id,
+                    cardData: item,
                   })
                 }
                 onMouseLeave={() => setHoverCard(null)}
-                title="出售英雄(E)"
               >
                 {item.star === 2 && (
                   <>
-                    <div className="absolute top-0 left-0 right-0 flex flex-row justify-center gap-0.5 pt-2 pointer-events-none">
+                    <div className="absolute top-0 left-0 right-0 flex flex-row justify-center gap-0.5 pt-2 pointer-events-none select-none">
                       {[1, 2].map((item) => {
                         return (
                           <img
@@ -64,12 +60,11 @@ const Seat = ({ seat, setHoverCard }) => {
                         );
                       })}
                     </div>
-                    <div className="absolute top-0 left-0 right-0 bottom-0 bg-two-star-light animate-level-up opacity-0"></div>
                   </>
                 )}
                 {item.star === 3 && (
                   <>
-                    <div className="absolute top-0 left-0 right-0 flex flex-row justify-center gap-0.5 pt-2 pointer-events-none">
+                    <div className="absolute top-0 left-0 right-0 flex flex-row justify-center gap-0.5 pt-2 pointer-events-none select-none">
                       {[1, 2, 3].map((item) => {
                         return (
                           <img
@@ -81,9 +76,16 @@ const Seat = ({ seat, setHoverCard }) => {
                         );
                       })}
                     </div>
-                    <div className="absolute top-0 left-0 right-0 bottom-0 bg-three-star-light animate-level-up opacity-0"></div>
                   </>
                 )}
+                {seatAnimate.has(index) &&
+                  seatAnimate.get(index) === 2 && (
+                    <div className="absolute top-0 left-0 right-0 bottom-0 bg-two-star-light animate-level-up opacity-0 pointer-events-none select-none"></div>
+                  )}
+                {seatAnimate.has(index) &&
+                  seatAnimate.get(index) === 3 && (
+                    <div className="absolute top-0 left-0 right-0 bottom-0 bg-three-star-light animate-level-up opacity-0 pointer-events-none select-none"></div>
+                  )}
                 <p className="absolute left-0 bottom-0 w-full pb-1 text-white text-lg whitespace-nowrap overflow-hidden pointer-events-none text-shadow">
                   {item.name}
                 </p>

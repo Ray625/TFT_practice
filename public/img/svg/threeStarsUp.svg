@@ -1,0 +1,19 @@
+<svg
+  version="1.1"
+  baseProfile="full"
+  xmlns="http://www.w3.org/2000/svg"
+  width="78"
+  height="90"
+  viewBox="0 0 88 100"
+  className="animate-level-up opacity-0 pointer-events-none select-none"
+>
+  <defs>
+    <clipPath id="hexClip">
+      <path d="M44 0 L 88 25 L 88 75 L44 100 L 0 75 L 0 25 Z" />
+    </clipPath>
+  </defs>
+  <path
+    d="M44 0 L 88 25 L 88 75 L44 100 L 0 75 L 0 25 Z"
+    fill="#F7FC33"
+  />
+</svg>

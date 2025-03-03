@@ -26,18 +26,18 @@ const OneGrid = ({ cardData }) => {
         version="1.1"
         baseProfile="full"
         xmlns="http://www.w3.org/2000/svg"
-        width="70"
-        height="86"
-        viewBox="0 0 96 100"
+        width="78"
+        height="90"
+        viewBox="0 0 88 100"
       >
         <defs>
           <clipPath id="hexClip">
-            <path d="M48 0 L 96 25 L 96 75 L48 100 L 0 75 L 0 25 Z" />
+            <path d="M44 0 L 88 25 L 88 75 L44 100 L 0 75 L 0 25 Z" />
           </clipPath>
         </defs>
         {!cardData.name && (
           <path
-            d="M48 0 L 96 25 L 96 75 L48 100 L 0 75 L 0 25 Z"
+            d="M44 0 L 88 25 L 88 75 L44 100 L 0 75 L 0 25 Z"
             style={{ fill: `var(--color-bg-black)` }}
           />
         )}
@@ -47,14 +47,14 @@ const OneGrid = ({ cardData }) => {
               <image
                 x="0"
                 y="0"
-                width="96"
+                width="88"
                 height="100"
                 preserveAspectRatio="xMidYMid slice"
                 href={`/img/face/${cardData.id}.avif`}
               />
             </g>
             <path
-              d="M48 0 L94 25 L94 75 L48 100 L2 75 L2 25 Z"
+              d="M44 2 L86 26 L86 74 L44 98 L2 74 L2 26 Z"
               strokeWidth="4px"
               fill="none"
               style={{ stroke: `var(--color-${cost}-cost-card-light)` }}
@@ -72,28 +72,28 @@ const OneGrid = ({ cardData }) => {
                   version="1.1"
                   baseProfile="full"
                   xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 96 100"
-                  width="18"
+                  viewBox="0 0 88 100"
+                  width="15.6"
                   height="18"
                   key={traitName}
                 >
                   <rect
-                    width="96"
+                    width="88"
                     height="100"
                     style={{ fill: "var(--color-trait-bg)" }}
                     clipPath="url(#hexClip)"
                   />
                   <image
-                    x="7.2"
-                    y="7.5"
-                    width="81.6"
-                    height="85"
+                    x="8.8"
+                    y="10"
+                    width="70.4"
+                    height="80"
                     preserveAspectRatio="xMidYMid slice"
                     href={`/img/trait/${traitData.image.full}`}
                     clipPath="url(#hexClip)"
                   />
                   <path
-                    d="M48 4 L90 27 L90 73 L48 96 L6 73 L6 27 Z"
+                    d="M44 4 L84 27 L84 73 L44 96 L4 73 L4 27 Z"
                     strokeWidth="4px"
                     fill="none"
                     style={{ stroke: "var(--color-trait-border)" }}
@@ -144,45 +144,62 @@ const OneGrid = ({ cardData }) => {
   );
 };
 
-const Space = ({ spaceList }) => {
+const Space = ({ space, setHoverCard, spaceAnimate }) => {
   return (
     <div className="flex flex-col w-fit h-fit mb-8 p-8 bg-seat-bg">
-      <div className="flex flex-row gap-2">
-        {spaceList.slice(0, 7).map((item, index) => {
-          return (
-            <div key={index}>
-              <OneGrid cardData={item} />
-            </div>
-          );
-        })}
-      </div>
-      <div className="flex flex-row gap-2 ml-10.25">
-        {spaceList.slice(7, 14).map((item, index) => {
-          return (
-            <div key={index}>
-              <OneGrid cardData={item} />
-            </div>
-          );
-        })}
-      </div>
-      <div className="flex flex-row gap-2">
-        {spaceList.slice(14, 21).map((item, index) => {
-          return (
-            <div key={index}>
-              <OneGrid cardData={item} />
-            </div>
-          );
-        })}
-      </div>
-      <div className="flex flex-row gap-2 ml-10.25">
-        {spaceList.slice(21, 28).map((item, index) => {
-          return (
-            <div key={index}>
-              <OneGrid cardData={item} />
-            </div>
-          );
-        })}
-      </div>
+      {Array.from({ length: 4 }, (_, rowIndex) => (
+        <div
+          key={rowIndex}
+          className={`flex flex-row gap-2 ${
+            rowIndex % 2 === 1 ? "ml-10.75" : ""
+          }`}
+        >
+          {space
+            .slice(rowIndex * 7, rowIndex * 7 + 7)
+            .map((item, index) => {
+              return Object.keys(item).length !== 0 ? (
+                <div
+                  key={rowIndex * 7 + index}
+                  onMouseEnter={() =>
+                    setHoverCard({
+                      place: "space",
+                      index: rowIndex * 7 + index,
+                      cardData: item,
+                    })
+                  }
+                  onMouseLeave={() => setHoverCard(null)}
+                  className="relative"
+                >
+                  <OneGrid cardData={item} />
+                  {spaceAnimate.has(rowIndex * 7 + index) &&
+                    spaceAnimate.get(index) === 2 && (
+                      <div className="absolute top-0 left-0 right-0 bottom-0">
+                        <img
+                          src="/img/svg/twoStarsUp.svg"
+                          alt="animate"
+                          className="animate-level-up opacity-0 pointer-events-none select-none"
+                        />
+                      </div>
+                    )}
+                  {spaceAnimate.has(rowIndex * 7 + index) &&
+                    spaceAnimate.get(index) === 3 && (
+                      <div className="absolute top-0 left-0 right-0 bottom-0">
+                        <img
+                          src="/img/svg/threeStarsUp.svg"
+                          alt="animate"
+                          className="animate-level-up opacity-0 pointer-events-none select-none"
+                        />
+                      </div>
+                    )}
+                </div>
+              ) : (
+                <div key={rowIndex * 7 + index}>
+                  <OneGrid cardData={item} />
+                </div>
+              );
+            })}
+        </div>
+      ))}
     </div>
   );
 };

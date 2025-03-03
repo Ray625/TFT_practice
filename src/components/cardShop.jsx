@@ -4,23 +4,25 @@ import trait from "../assets/tft-trait-set13.json";
 import shopRates from "../assets/tft-shop-drop-rates-data.json";
 
 const Shop = ({
-  spaceList,
-  setSpaceList,
+  space,
+  setSpace,
   seat,
   setSeat,
   hoverCard,
   setHoverCard,
   playerSide,
-  setPlayerSide
+  setPlayerSide,
+  setSeatAnimate,
+  setSpaceAnimate,
 }) => {
   const [level, setLevel] = useState(8);
   const [xp, setXp] = useState(0);
-  const [total, setTotal] = useState(50);
+  const [total, setTotal] = useState(100);
   const xpList = [2, 2, 6, 10, 20, 36, 48, 76, 84, 0];
   const levelNeededXp = xpList[level - 1];
   const levelRate = shopRates.data.Shop[`${level - 1}`].dropRatesByTier;
 
-  const [shopList, setShopList] = useState([{}, {}, {}, {}, {}]);
+  const [shopList, setShopList] = useState(Array.from({ length: 5 }, () => {return{}}));
 
   const championList = { ...champion.data }; // 將json資料複製出來，並給角色加上卡池張數，再存於state中備用
   Object.values(championList).forEach((item) => {
@@ -60,6 +62,10 @@ const Shop = ({
 
       if (event.keyCode === 69 && hoverCard) {
         handleSellCard(hoverCard);
+      }
+
+      if (event.keyCode === 87 && hoverCard) {
+        handlePlaceCardToSpace(hoverCard);
       }
     };
 
@@ -128,7 +134,7 @@ const Shop = ({
       Object.entries(tempBanner).forEach(([key, cardData]) => {
         if (cardData.tier === cardTier) {
           if (playerSide[key]?.owned >= 9) {
-            return
+            return;
           }
           bannerTotal += cardData.count;
         }
@@ -153,7 +159,7 @@ const Shop = ({
     });
     setBanner(tempBanner);
     setShopList(shop);
-    setTotal((preTotal) => preTotal - 2);
+    setTotal((prev) => prev - 2);
   };
 
   // 購買經驗
@@ -163,8 +169,8 @@ const Shop = ({
     if (levelNeededXp - xp > 4) {
       // 在購買經驗後不足以提升等級時
       if (total >= 4) {
-        setTotal((prevTotal) => prevTotal - 4);
-        setXp((prevXp) => prevXp + 4);
+        setTotal((prev) => prev - 4);
+        setXp((prev) => prev + 4);
       }
       if (total < 4) {
         // 錢不夠4元時無法購買經驗
@@ -175,9 +181,9 @@ const Shop = ({
     if (levelNeededXp - xp <= 4) {
       // 在購買經驗後將提升等級時
       if (total >= 4) {
-        setTotal((prevTotal) => prevTotal - 4);
-        setXp((prevXp) => 4 - levelNeededXp + prevXp);
-        setLevel((prevLevel) => prevLevel + 1);
+        setTotal((prev) => prev - 4);
+        setXp((prev) => 4 - levelNeededXp + prev);
+        setLevel((prev) => prev + 1);
       }
       if (total < 4) {
         return;
@@ -187,20 +193,21 @@ const Shop = ({
 
   // 購買卡牌
   const handleBuyCard = (card, index) => {
-    const canIncreaseStars = playerSide[card.id]?.owned === 2 || playerSide[card.id]?.owned === 5;
+    const canIncreaseStars =
+      playerSide[card.id]?.owned === 2 || playerSide[card.id]?.owned === 5;
     const canIncreaseThreeStars = playerSide[card.id]?.owned === 8;
-
-    let full = true
 
     // 若購買英雄費用不足則取消
     const cost = card.tier;
     if (total < cost) return;
 
     // 檢查備戰席位是否已滿
+    let full = true;
+
     for (let item of Object.values(seat)) {
       if (Object.keys(item).length === 0) {
-        full = false
-        break
+        full = false;
+        break;
       }
     }
 
@@ -208,8 +215,8 @@ const Shop = ({
     if (full && !(canIncreaseStars || canIncreaseThreeStars)) return;
 
     // 將商店該牌移除
-    setShopList((prevShopList) =>
-      prevShopList.map((item, i) => (i === index ? {} : item))
+    setShopList((prev) =>
+      prev.map((item, i) => (i === index ? {} : item))
     );
 
     if (canIncreaseStars) {
@@ -222,9 +229,9 @@ const Shop = ({
 
     // 將該牌加入備戰席
     if (!canIncreaseStars && !canIncreaseThreeStars) {
-      setSeat((prevSeat) => {
+      setSeat((prev) => {
         let done = false;
-        return prevSeat.map((item) => {
+        return prev.map((item) => {
           if (!item.name && !done) {
             done = true;
             return {
@@ -238,8 +245,8 @@ const Shop = ({
     }
 
     // 將該牌加入玩家擁有卡牌數量統計
-    setPlayerSide((prevPlayerSide) => {
-      const newCounter = { ...prevPlayerSide };
+    setPlayerSide((prev) => {
+      const newCounter = { ...prev };
       if (!newCounter[card.id]) {
         newCounter[card.id] = {
           owned: 0,
@@ -254,70 +261,98 @@ const Shop = ({
     });
 
     // 將購買英雄費用扣除
-    setTotal((prevTotal) => prevTotal - cost);
+    setTotal((prev) => prev - cost);
   };
 
+  // 找尋相同卡牌
+  const findMatchingCards = (space, seat, card, willBeStars) => {
+    let matches = [];
+
+    if (willBeStars === 2) {
+      space.forEach((item, index) => {
+        if (item.id === card.id && item.star === willBeStars - 1)
+          matches.push(["space", index]);
+      });
+
+      seat.forEach((item, index) => {
+        if (item.id === card.id && item.star === willBeStars - 1)
+          matches.push(["seat", index]);
+      });
+    }
+
+    if (willBeStars === 3) {
+      space.forEach((item, index) => {
+        if (item.id === card.id)
+          matches.push(["space", index]);
+      });
+
+      seat.forEach((item, index) => {
+        if (item.id === card.id)
+          matches.push(["seat", index]);
+      });
+    }
+
+    return matches;
+  };
+
+  // 設置升星動畫
+  const playMergeAnimation = (site, index, willBeStars) => {
+    if (site === "space") {
+      setSpaceAnimate((prev) => new Map(prev).set(index, willBeStars));
+      setTimeout(() => {
+        setSpaceAnimate(prev => {
+          const newMap = new Map(prev)
+          newMap.delete(index)
+          return newMap
+        })
+      }, 1000)
+    } else {
+      setSeatAnimate((prev) => new Map(prev).set(index, willBeStars));
+      setTimeout(() => {
+        setSeatAnimate((prev) => {
+          const newMap = new Map(prev);
+          newMap.delete(index);
+          return newMap;
+        });
+      }, 1000);
+    }
+  }
+
+  // 合成卡牌
+  const mergeCards = (matches, card, willBeStars) => {
+    let updatedSpace = [...space]
+    let updatedSeat = [...seat]
+    let mergeIndex = matches[0][1] // 合成的位置
+    let mergeSite = matches[0][0] // 合成的場地
+
+    // 將多餘卡牌清除
+    matches.slice(1).forEach(([site, index]) => {
+      if (site === "space") updatedSpace[index] = {}
+      if (site === "seat") updatedSeat[index] = {};
+    })
+
+    // 將卡牌升星
+    if (mergeSite === "space") updatedSpace[mergeIndex] = { ...card, star: willBeStars };
+    if (mergeSite === "seat") updatedSeat[mergeIndex] = { ...card, star: willBeStars };
+
+    // 設置動畫
+    playMergeAnimation(mergeSite, mergeIndex, willBeStars)
+
+    setSpace(updatedSpace);
+    setSeat(updatedSeat)
+  }
+
   // 購買卡牌時若玩家以擁有相同卡牌數張，則可以升級
-  const handleGetUpStar = (card, willBeStar) => {
-    let prevCard;
-    if (willBeStar === 2) {
-      prevCard = seat.reduce((acc, item, index) => {
-        if (item.id === card.id && item.star === willBeStar - 1)
-          acc.push(index);
-        return acc;
-      }, []);
+  const handleGetUpStar = (card, willBeStars) => {
+    const matches = findMatchingCards(space, seat, card, willBeStars);
 
-      setSeat((prevSeat) => {
-        let done = false;
-        let newSeat = [...prevSeat];
-        prevCard.forEach((item) => {
-          if (done) {
-            newSeat[item] = {};
-          }
-          if (!done) {
-            done = true;
-            newSeat[item] = {
-              ...card,
-              star: 2,
-            };
-          }
-        });
-
-        return newSeat;
-      });
-    }
-
-    if (willBeStar === 3) {
-      prevCard = seat.reduce((acc, item, index) => {
-        if (item.id === card.id) acc.push(index);
-        return acc;
-      }, []);
-
-      setSeat((prevSeat) => {
-        let done = false;
-        let newSeat = [...prevSeat];
-        prevCard.forEach((item) => {
-          if (done) {
-            newSeat[item] = {};
-          }
-          if (!done) {
-            done = true;
-            newSeat[item] = {
-              ...card,
-              star: 3,
-            };
-          }
-        });
-
-        return newSeat;
-      });
-    }
+    mergeCards(matches, card, willBeStars);
   };
 
   // 販賣卡牌
   const handleSellCard = (hoverCard) => {
     let cardCount;
-    switch (hoverCard.star) {
+    switch (hoverCard.cardData.star) {
       case 1:
         cardCount = 1;
         break;
@@ -332,40 +367,121 @@ const Shop = ({
     }
     if (hoverCard) {
       // 將牌放回牌庫中
-      setBanner((prevBanner) => {
-        const key = Object.keys(prevBanner).find(
-          (key) => prevBanner[key].name === hoverCard.name
+      setBanner((prev) => {
+        const key = Object.keys(prev).find(
+          (key) => prev[key].name === hoverCard.cardData.name
         );
         return {
-          ...prevBanner,
+          ...prev,
           [key]: {
-            ...prevBanner[key],
-            count: prevBanner[key].count + cardCount,
+            ...prev[key],
+            count: prev[key].count + cardCount,
           },
         };
       });
 
       // 將備戰席該位置清空
-      setSeat((prevSeat) =>
-        prevSeat.map((item, i) => (i === hoverCard.index ? {} : item))
-      );
+      if (hoverCard.place === "seat") {
+        setSeat((prev) =>
+          prev.map((item, index) => (index === hoverCard.index ? {} : item))
+        );
+      }
+
+      if (hoverCard.place === "space") {
+        setSpace((prev) =>
+          prev.map((item, index) =>
+            index === hoverCard.index ? {} : item
+          )
+        );
+      }
 
       // 從玩家擁有卡牌數量統計中扣除
-      setPlayerSide((prevPlayerSide) => {
+      setPlayerSide((prev) => {
         return {
-          ...prevPlayerSide,
-          [hoverCard.id]: {
-            owned: prevPlayerSide[hoverCard.id].owned - cardCount,
+          ...prev,
+          [hoverCard.cardData.id]: {
+            owned: prev[hoverCard.cardData.id].owned - cardCount,
           },
         };
       });
 
       // 得到賣英雄的費用
-      setTotal((prevTotal) => prevTotal + hoverCard.tier * cardCount);
+      setTotal((prev) => prev + hoverCard.cardData.tier * cardCount);
       setHoverCard(null);
     }
   };
 
+  // 將卡牌從備戰席移至戰區，或從戰區移至備戰席
+  const handlePlaceCardToSpace = (hoverCard) => {
+    // 若是對著備戰席的棋子使用
+    if (hoverCard.place === "seat") {
+      // 檢查備戰區是否已滿
+      let full = true;
+
+      let spaceCount = 0;
+      for (let item of Object.values(space)) {
+        if (Object.keys(item).length !== 0) {
+          spaceCount += 1;
+        }
+      }
+
+      if (spaceCount < level) {
+        full = false;
+      }
+
+      if (full) return;
+
+      setSeat((prev) =>
+        prev.map((item, i) => (i === hoverCard.index ? {} : item))
+      );
+
+      setSpace((prev) => {
+        let done = false;
+        return prev.map((item) => {
+          if (!item.name && !done) {
+            done = true;
+            return {
+              ...hoverCard.cardData,
+            };
+          }
+          return item;
+        });
+      });
+    }
+
+    if (hoverCard.place === "space") {
+      // 檢查備戰席位是否已滿
+      let full = true;
+
+      for (let item of Object.values(seat)) {
+        if (Object.keys(item).length === 0) {
+          full = false;
+          break;
+        }
+      }
+
+      if (full) return;
+
+      setSpace((prev) =>
+        prev.map((item, i) => (i === hoverCard.index ? {} : item))
+      );
+
+      setSeat((prev) => {
+        let done = false;
+        return prev.map((item) => {
+          if (!item.name && !done) {
+            done = true;
+            return {
+              ...hoverCard.cardData,
+            };
+          }
+          return item;
+        });
+      });
+    }
+
+    setHoverCard(null);
+  };
 
   return (
     <>
@@ -382,7 +498,7 @@ const Shop = ({
                     className="w-4 h-4 m-0 p-0 border border-white rounded-full bg-bg-black text-white hover:cursor-pointer hover:opacity-80"
                     onClick={() => {
                       if (level >= 10) return;
-                      setLevel((prevLevel) => prevLevel + 1);
+                      setLevel((prev) => prev + 1);
                     }}
                     title="Level up"
                   >
@@ -394,7 +510,7 @@ const Shop = ({
                     className="w-4 h-4 m-0 p-0 border border-white rounded-full bg-bg-black text-white hover:cursor-pointer hover:opacity-80"
                     onClick={() => {
                       if (level <= 1) return;
-                      setLevel((prevLevel) => prevLevel - 1);
+                      setLevel((prev) => prev - 1);
                     }}
                     title="Level down"
                   >
@@ -445,7 +561,7 @@ const Shop = ({
                   onChange={(event) => {
                     if (isNaN(event.target.value)) {
                       alert("請輸入數字");
-                      return setTotal((prevTotal) => prevTotal);
+                      return setTotal((prev) => prev);
                     }
                     setTotal(Number(event.target.value));
                   }}
@@ -459,7 +575,7 @@ const Shop = ({
                   <button
                     className="flex justify-center items-center w-5 h-5 m-0 p-0 bg-bg-black rounded-full border border-white hover:opacity-80 hover:cursor-pointer select-none"
                     title="+10 Gold"
-                    onClick={() => setTotal((prevTotal) => prevTotal + 10)}
+                    onClick={() => setTotal((prev) => prev + 10)}
                   >
                     <div className="flex justify-center items-center text-sm mt-0.5 select-none">
                       <i className="fa-solid fa-plus fa-sm"></i>

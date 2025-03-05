@@ -52,7 +52,7 @@ const Seat = ({ seat, setHoverCard, seatAnimate }) => {
                       {[1, 2].map((item) => {
                         return (
                           <img
-                            src="/img/svg/twoStar.svg"
+                            src="img/svg/twoStar.svg"
                             alt="starIcon"
                             className="drop-shadow-black"
                             key={item}
@@ -68,7 +68,7 @@ const Seat = ({ seat, setHoverCard, seatAnimate }) => {
                       {[1, 2, 3].map((item) => {
                         return (
                           <img
-                            src="/img/svg/threeStar.svg"
+                            src="img/svg/threeStar.svg"
                             alt="starIcon"
                             className="drop-shadow-black"
                             key={item}
@@ -91,7 +91,7 @@ const Seat = ({ seat, setHoverCard, seatAnimate }) => {
                 </p>
                 <img
                   className="hover:cursor-pointer"
-                  src={`/img/face/${item.id}.avif`}
+                  src={`img/face/${item.id}.avif`}
                   alt="champion"
                 />
               </div>

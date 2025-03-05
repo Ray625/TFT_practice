@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import champion from "../assets/tft-champion-set13.json";
 import trait from "../assets/tft-trait-set13.json";
 import shopRates from "../assets/tft-shop-drop-rates-data.json";
+import useThrottle from "../hooks/useThrottle";
 
 const Shop = ({
   space,
@@ -53,11 +54,11 @@ const Shop = ({
   useEffect(() => {
     const handlePressKey = (event) => {
       if (event.keyCode === 70) {
-        handleBuyXp();
+        throttleBuyXp();
       }
 
       if (event.keyCode === 68) {
-        handleDrawCard();
+        throttleDrawCard();
       }
 
       if (event.keyCode === 69 && hoverCard) {
@@ -483,6 +484,9 @@ const Shop = ({
     setHoverCard(null);
   };
 
+  const throttleDrawCard = useThrottle(handleDrawCard, 250);
+  const throttleBuyXp = useThrottle(handleBuyXp, 100)
+
   return (
     <>
       <div className="relative flex flex-col w-360 mx-auto font-sans">
@@ -550,7 +554,7 @@ const Shop = ({
           <div className="absolute left-1/2 h-full p-1 aspect-[15/4] bg-border-gold [clip-path:polygon(20%_0%,80%_0%,100%_100%,0%_100%)]">
             <div className="w-full aspect-[15/4] p-1.5 bg-gold-bg [clip-path:polygon(20%_0%,80%_0%,100%_100%,0%_100%)]">
               <h5 className="flex items-center justify-center gap-2 text-2xl/7 text-text-white text-center">
-                <img className="w-5 h-5" src="/img/item/Gold.png" alt="icon" />
+                <img className="w-5 h-5" src="img/item/Gold.png" alt="icon" />
                 <input
                   type="num"
                   value={total}
@@ -599,7 +603,7 @@ const Shop = ({
               <p className="flex items-center justify-start pl-2 text-xl  text-text-white">
                 <img
                   className="w-4 h-4 mr-2 mt-1"
-                  src="/img/item/Gold.png"
+                  src="img/item/Gold.png"
                   alt="icon"
                 />
                 4
@@ -607,7 +611,7 @@ const Shop = ({
               <div className="absolute right-0 top-0 w-full h-full bg-xp-icon [clip-path:polygon(42%_0%,100%_0%,100%_100%,73%_100%)]">
                 <img
                   className="absolute right-3 top-3 w-12 h-12"
-                  src="/img/item/xp.png"
+                  src="img/item/xp.png"
                   alt="icon"
                 />
               </div>
@@ -623,7 +627,7 @@ const Shop = ({
               <p className="flex items-center justify-start pl-2 text-xl  text-text-white">
                 <img
                   className="w-4 h-4 mr-2 mt-1"
-                  src="/img/item/Gold.png"
+                  src="img/item/Gold.png"
                   alt="icon"
                 />
                 2
@@ -631,7 +635,7 @@ const Shop = ({
               <div className="absolute right-0 top-0 w-full h-full bg-reroll-icon [clip-path:polygon(42%_0%,100%_0%,100%_100%,73%_100%)]">
                 <img
                   className="absolute right-3 top-3 w-12 h-12"
-                  src="/img/item/reroll.png"
+                  src="img/item/reroll.png"
                   alt="icon"
                 />
               </div>
@@ -710,7 +714,7 @@ const Shop = ({
                       {[1, 2].map((item) => {
                         return (
                           <img
-                            src="/img/svg/twoStar.svg"
+                            src="img/svg/twoStar.svg"
                             alt="starIcon"
                             className="drop-shadow-black"
                             key={item}
@@ -722,7 +726,7 @@ const Shop = ({
                   {canIncreaseThreeStars && (
                     <div className="absolute top-0 left-2 flex flex-col items-center -translate-y-1/5 animate-flash">
                       <img
-                        src="/img/svg/threeStar.svg"
+                        src="img/svg/threeStar.svg"
                         alt="starIcon"
                         className="drop-shadow-black"
                       />
@@ -730,7 +734,7 @@ const Shop = ({
                         {[1, 2].map((item) => {
                           return (
                             <img
-                              src="/img/svg/threeStar.svg"
+                              src="img/svg/threeStar.svg"
                               alt="starIcon"
                               className="drop-shadow-black"
                               key={item}
@@ -743,7 +747,7 @@ const Shop = ({
                   <div className="border border-card-border">
                     <img
                       className="w-full aspect-[69/40]"
-                      src={`/img/champion/${item.image.full}`}
+                      src={`img/champion/${item.image.full}`}
                       alt="champion"
                     />
                   </div>
@@ -755,7 +759,7 @@ const Shop = ({
                           <div className="w-fit h-fit p-[1px] mr-1 bg-trait-icon-shadow [clip-path:polygon(0%_25%,50%_0%,100%_25%,100%_75%,50%_100%,0%_75%)]">
                             <div className="flex justify-center items-center w-5 h-6 bg-trait-icon-bg [clip-path:polygon(0%_25%,50%_0%,100%_25%,100%_75%,50%_100%,0%_75%)]">
                               <img
-                                src={`/img/trait/${traitData.image.full}`}
+                                src={`img/trait/${traitData.image.full}`}
                                 alt="icon"
                                 className="w-3 h-3"
                               />
@@ -776,7 +780,7 @@ const Shop = ({
                   <p className="flex items-center justify-start text-lg text-text-white font-light font-sans leading-none">
                     <img
                       className="w-4 h-4 mr-2 mt-1"
-                      src="/img/item/Gold.png"
+                      src="img/item/Gold.png"
                       alt="icon"
                     />
                     {item.tier}

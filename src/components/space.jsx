@@ -50,7 +50,7 @@ const OneGrid = ({ cardData }) => {
                 width="88"
                 height="100"
                 preserveAspectRatio="xMidYMid slice"
-                href={`/img/face/${cardData.id}.avif`}
+                href={`img/face/${cardData.id}.avif`}
               />
             </g>
             <path
@@ -89,7 +89,7 @@ const OneGrid = ({ cardData }) => {
                     width="70.4"
                     height="80"
                     preserveAspectRatio="xMidYMid slice"
-                    href={`/img/trait/${traitData.image.full}`}
+                    href={`img/trait/${traitData.image.full}`}
                     clipPath="url(#hexClip)"
                   />
                   <path
@@ -109,7 +109,7 @@ const OneGrid = ({ cardData }) => {
                 {[1, 2].map((item) => {
                   return (
                     <img
-                      src="/img/svg/twoStar.svg"
+                      src="img/svg/twoStar.svg"
                       alt="starIcon"
                       className="drop-shadow-black"
                       key={item}
@@ -125,7 +125,7 @@ const OneGrid = ({ cardData }) => {
                 {[1, 2, 3].map((item) => {
                   return (
                     <img
-                      src="/img/svg/threeStar.svg"
+                      src="img/svg/threeStar.svg"
                       alt="starIcon"
                       className="drop-shadow-black"
                       key={item}
@@ -175,7 +175,7 @@ const Space = ({ space, setHoverCard, spaceAnimate }) => {
                     spaceAnimate.get(index) === 2 && (
                       <div className="absolute top-0 left-0 right-0 bottom-0">
                         <img
-                          src="/img/svg/twoStarsUp.svg"
+                          src="img/svg/twoStarsUp.svg"
                           alt="animate"
                           className="animate-level-up opacity-0 pointer-events-none select-none"
                         />
@@ -185,7 +185,7 @@ const Space = ({ space, setHoverCard, spaceAnimate }) => {
                     spaceAnimate.get(index) === 3 && (
                       <div className="absolute top-0 left-0 right-0 bottom-0">
                         <img
-                          src="/img/svg/threeStarsUp.svg"
+                          src="img/svg/threeStarsUp.svg"
                           alt="animate"
                           className="animate-level-up opacity-0 pointer-events-none select-none"
                         />

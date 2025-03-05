@@ -146,7 +146,7 @@ const OneGrid = ({ cardData }) => {
 
 const Space = ({ space, setHoverCard, spaceAnimate }) => {
   return (
-    <div className="flex flex-col w-fit h-fit mb-8 p-8 bg-seat-bg">
+    <div className="flex flex-col w-fit h-fit mb-8 mx-auto p-8 bg-seat-bg">
       {Array.from({ length: 4 }, (_, rowIndex) => (
         <div
           key={rowIndex}

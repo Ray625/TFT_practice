@@ -1,6 +1,6 @@
 const Seat = ({ seat, setHoverCard, seatAnimate }) => {
   return (
-    <div className="flex flex-row items-center justify-center gap-0.5 w-fit h-fit ml-22 mb-4 border-2 border-bg-black bg-bg-black/30">
+    <div className="flex flex-row items-center justify-center gap-0.5 w-fit h-fit mx-auto mb-4 border-2 border-bg-black bg-bg-black/30">
       {seat.map((item, index) => {
         let cost;
         switch (item?.tier) {

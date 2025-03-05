@@ -77,6 +77,34 @@ const Shop = ({
     };
   }, [level, xp, total, hoverCard]);
 
+  // 預載英雄、特性圖片
+  useEffect(() => {
+    const championImages = [];
+    const traitImages = [];
+
+    for (let item of Object.values(champion.data)) {
+      championImages.push(item.id);
+    }
+    for (let item of Object.values(trait.data)) {
+      traitImages.push(item.image.full);
+    }
+
+    championImages.forEach((img) => {
+      const imgObj = new Image();
+      imgObj.src = `img/champion/${img}.TFT_Set13.png`;
+    });
+
+    championImages.forEach((img) => {
+      const faceObj = new Image();
+      faceObj.src = `img/face/${img}.avif`;
+    });
+
+    traitImages.forEach((img) => {
+      const imgObj = new Image();
+      imgObj.src = `img/trait/${img}`;
+    });
+  },[])
+
   // 刷新商店
   const handleDrawCard = () => {
     if (total < 2) return;
@@ -556,6 +584,7 @@ const Shop = ({
               <h5 className="flex items-center justify-center gap-2 text-2xl/7 text-text-white text-center">
                 <img className="w-5 h-5" src="img/item/Gold.png" alt="icon" />
                 <input
+                  name="gold"
                   type="num"
                   value={total}
                   className="w-12 h-fit m-0 flex items-center justify-center pt-1 text-2xl/7 text-text-white text-center"

@@ -1,0 +1,33 @@
+<svg width="100" height="100" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient
+      id="GrandientYellow1"
+      x1="0"
+      x2="0"
+      y1="1"
+      y2="0"
+    >
+      <stop offset="0" stop-color="#695728"/>
+      <stop offset="1" stop-color="#C4B682"/>
+    </linearGradient>
+    <linearGradient
+      id="GrandientYellow2"
+      x1="0"
+      x2="0"
+      y1="1"
+      y2="0"
+    >
+      <stop offset="0" stop-color="#B1A371"/>
+      <stop offset="1" stop-color="#C5B77A"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 箭頭 -->
+  <path d="M176 11 L176 86 L97 86 L143 57 Z" fill="url(#GrandientYellow2)" stroke="#3A351F" stroke-width="3"/>
+
+  <path d="M 151 151 A 72 72 0 1 1 141 54.5" stroke="#3A351F" fill="none" stroke-width="36"/>
+  <!-- 315° 圓弧 -->
+  <path d="M 151 151 A 72 72 0 1 1 144 59" stroke="url(#GrandientYellow1)" fill="none" stroke-width="30"/>
+</svg>
+
+

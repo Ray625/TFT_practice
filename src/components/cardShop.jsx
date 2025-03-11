@@ -640,7 +640,7 @@ const Shop = ({
               <div className="absolute right-0 top-0 w-full h-full bg-xp-icon [clip-path:polygon(42%_0%,100%_0%,100%_100%,73%_100%)]">
                 <img
                   className="absolute right-3 top-3 w-12 h-12"
-                  src="img/item/xp.png"
+                  src="img/svg/xp.svg"
                   alt="icon"
                 />
               </div>
@@ -664,7 +664,7 @@ const Shop = ({
               <div className="absolute right-0 top-0 w-full h-full bg-reroll-icon [clip-path:polygon(42%_0%,100%_0%,100%_100%,73%_100%)]">
                 <img
                   className="absolute right-3 top-3 w-12 h-12"
-                  src="img/item/reroll.png"
+                  src="img/svg/reroll.svg"
                   alt="icon"
                 />
               </div>

@@ -45,10 +45,6 @@
   --color-trait-border: #464646;
 
   --animate-flash: flash 2s linear infinite;
-  --animate-to-right: right 3s linear infinite;
-  --animate-to-bottom: bottom 3s linear infinite 0.85s;
-  --animate-to-left: left 3s linear infinite 1.5s;
-  --animate-to-top: top 3s linear infinite 2.35s;
   --animate-level-up: levelUp 0.5s ease-out;
 
   @keyframes flash {
@@ -70,66 +66,6 @@
 
     100% {
       opacity: 0%;
-    }
-  }
-
-
-  @keyframes right {
-    0% {
-      transform: translate(0)
-    }
-
-    57.5% {
-      transform: translate(200%, 0)
-    }
-
-    100% {
-      transform: translate(200%, 0)
-    }
-  }
-
-
-  @keyframes bottom {
-    0% {
-      transform: translate(0)
-    }
-
-    42% {
-      transform: translate(0, 200%)
-    }
-
-    100% {
-      transform: translate(0, 200%)
-    }
-  }
-
-
-  @keyframes left {
-    0% {
-      transform: translate(0)
-    }
-
-    57.5% {
-      transform: translate(-200%, 0)
-    }
-
-    100% {
-      transform: translate(-200%, 0)
-    }
-  }
-
-
-  @keyframes top {
-    0% {
-      transform: translate(0)
-    }
-
-    42% {
-      transform: translate(0, -200%)
-    }
-
-    100% {
-      transform: translate(0, -200%)
     }
   }
 

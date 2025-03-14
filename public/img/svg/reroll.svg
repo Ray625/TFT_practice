@@ -25,6 +25,7 @@
   <!-- 箭頭 -->
   <path d="M176 11 L176 86 L97 86 L143 57 Z" fill="url(#GrandientYellow2)" stroke="#3A351F" stroke-width="3"/>
 
+  <!-- 線條陰影 -->
   <path d="M 151 151 A 72 72 0 1 1 141 54.5" stroke="#3A351F" fill="none" stroke-width="36"/>
   <!-- 315° 圓弧 -->
   <path d="M 151 151 A 72 72 0 1 1 144 59" stroke="url(#GrandientYellow1)" fill="none" stroke-width="30"/>

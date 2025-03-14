@@ -16,7 +16,7 @@ const Shop = ({
   setSeatAnimate,
   setSpaceAnimate,
 }) => {
-  const [level, setLevel] = useState(8);
+  const [level, setLevel] = useState(2);
   const [xp, setXp] = useState(0);
   const [total, setTotal] = useState(100);
   const xpList = [2, 2, 6, 10, 20, 36, 48, 76, 84, 0];
@@ -515,6 +515,7 @@ const Shop = ({
   const throttleDrawCard = useThrottle(handleDrawCard, 250);
   const throttleBuyXp = useThrottle(handleBuyXp, 100)
 
+
   return (
     <>
       <div className="relative flex flex-col w-360 mx-auto font-sans">
@@ -806,7 +807,7 @@ const Shop = ({
                   className={`flex flex-row justify-between items-center px-2 bg-linear-to-r ${cardFooterColorFrom[cost]} ${cardFooterColorTo[cost]} grow`}
                 >
                   <p className="text-xl text-text-white">{item.name}</p>
-                  <p className="flex items-center justify-start text-lg text-text-white font-light font-sans leading-none">
+                  <p className="flex items-end justify-start text-lg text-text-white font-light font-sans leading-none ">
                     <img
                       className="w-4 h-4 mr-2 mt-1"
                       src="img/item/Gold.png"
@@ -830,35 +831,15 @@ const Shop = ({
                 >
                   {canIncreaseStars && (
                     <>
-                      <div className="absolute top-0 right-0 left-0 bottom-0 overflow-hidden">
-                        <div className="absolute -z-10 top-0 left-0 w-full h-0.5 bg-linear-to-r from-black/0 from-40% via-white/60 via-60% to-white/100 to-90% rounded -translate-x-full animate-to-right"></div>
-                        <div className="absolute -z-20 -top-1 right-0 w-0.5 h-full bg-linear-to-b from-black/0 from-40% via-white/80 via-60% to-white/100 to-90% rounded -translate-y-full animate-to-bottom"></div>
-                        <div className="absolute -z-30 bottom-0 left-0 w-full h-0.5 bg-linear-to-l from-black/0 from-40% via-white/60 via-60% to-white/100 to-90% rounded translate-x-full animate-to-left"></div>
-                        <div className="absolute -z-40 -bottom-1 left-0 w-0.5 h-full bg-linear-to-t from-black/0 from-40% via-white/80 via-60% to-white/100 to-90% rounded translate-y-full animate-to-top"></div>
-                        {/* <div className="animate-circle absolute -z-10 top-0 left-0 w-76 -translate-x-10.5 -translate-y-18 rounded-full bg-conic from-white/30 via-black/0 to-white/80 aspect-square pointer-events-none"></div>
-                        <div className="animate-circle-two absolute -z-10 top-0 left-0 w-76 -translate-x-10.5 -translate-y-18 rounded-full bg-conic from-white/30 via-black/0 to-white/80 aspect-square pointer-events-none"></div> */}
-                      </div>
-                      <div className="absolute top-0 right-0 left-0 bottom-0 overflow-hidden rotate-180">
-                        <div className="absolute -z-10 top-0 left-0 w-full h-0.5 bg-linear-to-r from-black/0 from-40% via-white/60 via-60% to-white/100 to-90% rounded -translate-x-full animate-to-right"></div>
-                        <div className="absolute -z-20 -top-1 right-0 w-0.5 h-full bg-linear-to-b from-black/0 from-40% via-white/80 via-60% to-white/100 to-90% rounded -translate-y-full animate-to-bottom"></div>
-                        <div className="absolute -z-30 bottom-0 left-0 w-full h-0.5 bg-linear-to-l from-black/0 from-40% via-white/60 via-60% to-white/100 to-90% rounded translate-x-full animate-to-left"></div>
-                        <div className="absolute -z-40 -bottom-1 left-0 w-0.5 h-full bg-linear-to-t from-black/0 from-40% via-white/80 via-60% to-white/100 to-90% rounded translate-y-full animate-to-top"></div>
+                      <div className="absolute top-0 right-0 left-0 bottom-0 -z-10 overflow-hidden">
+                        <img src="img/svg/levelUp.svg" alt="levelUpAnimation" />
                       </div>
                     </>
                   )}
                   {canIncreaseThreeStars && (
                     <>
-                      <div className="absolute top-0 right-0 left-0 bottom-0 overflow-hidden">
-                        <div className="absolute -z-10 top-0 left-0 w-full h-0.5 bg-linear-to-r from-black/0 from-20% via-three-star-border/60 via-50% to-three-star-border/100 to-85% rounded -translate-x-full animate-to-right"></div>
-                        <div className="absolute -z-20 -top-1 right-0 w-0.5 h-full bg-linear-to-b from-black/0 from-20% via-three-star-border/80 via-50% to-three-star-border/100 to-85% rounded -translate-y-full animate-to-bottom"></div>
-                        <div className="absolute -z-30 bottom-0 left-0 w-full h-0.5 bg-linear-to-l from-black/0 from-20% via-three-star-border/60 via-50% to-three-star-border/100 to-85% rounded translate-x-full animate-to-left"></div>
-                        <div className="absolute -z-40 -bottom-1 left-0 w-0.5 h-full bg-linear-to-t from-black/0 from-20% via-three-star-border/80 via-50% to-three-star-border/100 to-85% rounded translate-y-full animate-to-top"></div>
-                      </div>
-                      <div className="absolute top-0 right-0 left-0 bottom-0 overflow-hidden rotate-180">
-                        <div className="absolute -z-10 top-0 left-0 w-full h-0.5 bg-linear-to-r from-black/0 from-20% via-three-star-border/60 via-50% to-three-star-border/100 to-85% rounded -translate-x-full animate-to-right"></div>
-                        <div className="absolute -z-20 -top-1 right-0 w-0.5 h-full bg-linear-to-b from-black/0 from-20% via-three-star-border/80 via-50% to-three-star-border/100 to-85% rounded -translate-y-full animate-to-bottom"></div>
-                        <div className="absolute -z-30 bottom-0 left-0 w-full h-0.5 bg-linear-to-l from-black/0 from-20% via-three-star-border/60 via-50% to-three-star-border/100 to-85% rounded translate-x-full animate-to-left"></div>
-                        <div className="absolute -z-40 -bottom-1 left-0 w-0.5 h-full bg-linear-to-t from-black/0 from-20% via-three-star-border/80 via-50% to-three-star-border/100 to-85% rounded translate-y-full animate-to-top"></div>
+                      <div className="absolute top-0 right-0 left-0 bottom-0 -z-10 overflow-hidden">
+                        <img src="img/svg/levelUpThreeStar.svg" alt="levelUpAnimation" />
                       </div>
                     </>
                   )}

@@ -1,0 +1,44 @@
+<svg
+  version="1.1"
+  baseProfile="full"
+  xmlns="http://www.w3.org/2000/svg"
+  width="225"
+  height="163"
+  viewBox="0 0 225 163"
+>
+  {/* 定義發光效果濾鏡 */}
+    <defs>
+      <filter id="glow">
+        <feGaussianBlur stdDeviation="3" result="blur" />
+        <feMerge>
+          <feMergeNode in="blur" />
+          <feMergeNode in="SourceGraphic" />
+        </feMerge>
+      </filter>
+    </defs>
+
+    {/* 繞著邊框移動的發光線 */}
+    <path
+      d="M1 1 H 224 V 162 H 1 Z"
+      fill="none"
+      stroke="#FDFF00"
+      stroke-width="4"
+      stroke-dasharray="184 200"
+      filter="url(#glow)"
+      stroke-opacity="0.8"
+    >
+      <animate
+        attributeName="stroke-dashoffset"
+        from="0"
+        to="-384"
+        dur="3s"
+        repeatCount="indefinite"
+      />
+      <animate
+        attributeName="stroke-opacity"
+        values="0.3; 1; 0.3"
+        dur="2s"
+        repeatCount="indefinite"
+      />
+    </path>
+</svg>

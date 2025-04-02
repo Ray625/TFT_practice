@@ -1,24 +1,28 @@
-const Seat = ({ seat, setHoverCard, seatAnimate }) => {
+import { useSiteStore } from "../store/siteStore"
+
+const Seat = () => {
+  const { seat, seatAnimate, setHoverCard } = useSiteStore()
+
   return (
     <div className="flex flex-row items-center justify-center gap-0.5 w-fit h-fit mx-auto mb-4 border-2 border-bg-black bg-bg-black/30">
       {seat.map((item, index) => {
-        let cost;
+        let cost
         switch (item?.tier) {
           case 1:
-            cost = "one";
-            break;
+            cost = "one"
+            break
           case 2:
-            cost = "two";
-            break;
+            cost = "two"
+            break
           case 3:
-            cost = "three";
-            break;
+            cost = "three"
+            break
           case 4:
-            cost = "four";
-            break;
+            cost = "four"
+            break
           case 5:
-            cost = "five";
-            break;
+            cost = "five"
+            break
         }
 
         const borderColors = {
@@ -27,7 +31,7 @@ const Seat = ({ seat, setHoverCard, seatAnimate }) => {
           three: "border-three-cost-card-light",
           four: "border-four-cost-card-light",
           five: "border-five-cost-card-light",
-        };
+        }
 
         return (
           <div
@@ -57,7 +61,7 @@ const Seat = ({ seat, setHoverCard, seatAnimate }) => {
                             className="drop-shadow-black"
                             key={item}
                           />
-                        );
+                        )
                       })}
                     </div>
                   </>
@@ -73,7 +77,7 @@ const Seat = ({ seat, setHoverCard, seatAnimate }) => {
                             className="drop-shadow-black"
                             key={item}
                           />
-                        );
+                        )
                       })}
                     </div>
                   </>
@@ -97,10 +101,10 @@ const Seat = ({ seat, setHoverCard, seatAnimate }) => {
               </div>
             )}
           </div>
-        );
+        )
       })}
     </div>
-  );
-};
+  )
+}
 
 export default Seat

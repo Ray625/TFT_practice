@@ -1,23 +1,24 @@
-import trait from "../assets/tft-trait-set13.json";
+import trait from "../assets/tft-trait-set13.json"
+import { useSiteStore } from "../store/siteStore"
 
 const OneGrid = ({ cardData }) => {
-  let cost;
+  let cost
   switch (cardData?.tier) {
     case 1:
-      cost = "one";
-      break;
+      cost = "one"
+      break
     case 2:
-      cost = "two";
-      break;
+      cost = "two"
+      break
     case 3:
-      cost = "three";
-      break;
+      cost = "three"
+      break
     case 4:
-      cost = "four";
-      break;
+      cost = "four"
+      break
     case 5:
-      cost = "five";
-      break;
+      cost = "five"
+      break
   }
 
   return (
@@ -66,7 +67,7 @@ const OneGrid = ({ cardData }) => {
         <>
           <div className="absolute z-10 flex flex-row gap-0.5 top-0 left-0 justify-center w-full pt-1.5">
             {cardData.trait.map((traitName) => {
-              const traitData = trait.data[`TFT13_${traitName}`];
+              const traitData = trait.data[`TFT13_${traitName}`]
               return (
                 <svg
                   version="1.1"
@@ -99,7 +100,7 @@ const OneGrid = ({ cardData }) => {
                     style={{ stroke: "var(--color-trait-border)" }}
                   />
                 </svg>
-              );
+              )
             })}
           </div>
 
@@ -114,7 +115,7 @@ const OneGrid = ({ cardData }) => {
                       className="drop-shadow-black"
                       key={item}
                     />
-                  );
+                  )
                 })}
               </div>
             </>
@@ -130,7 +131,7 @@ const OneGrid = ({ cardData }) => {
                       className="drop-shadow-black"
                       key={item}
                     />
-                  );
+                  )
                 })}
               </div>
             </>
@@ -141,10 +142,12 @@ const OneGrid = ({ cardData }) => {
         </>
       )}
     </div>
-  );
-};
+  )
+}
 
-const Space = ({ space, setHoverCard, spaceAnimate }) => {
+const Space = () => {
+  const { space, spaceAnimate, setHoverCard } = useSiteStore()
+
   return (
     <div className="flex flex-col w-fit h-fit mb-8 mx-auto p-8 bg-seat-bg">
       {Array.from({ length: 4 }, (_, rowIndex) => (
@@ -196,12 +199,12 @@ const Space = ({ space, setHoverCard, spaceAnimate }) => {
                 <div key={rowIndex * 7 + index}>
                   <OneGrid cardData={item} />
                 </div>
-              );
+              )
             })}
         </div>
       ))}
     </div>
-  );
-};
+  )
+}
 
-export default Space;
+export default Space

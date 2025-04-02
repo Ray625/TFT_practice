@@ -1,8 +1,44 @@
-# React + Vite
+## TFT聯盟戰棋模擬器
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+這是一個簡單的《聯盟戰棋》（TFT）模擬器，讓玩家體驗選秀、購買棋子及升星的機制。本專案專注於基本棋子管理與升級機制，不包含裝備與對戰系統。
 
-Currently, two official plugins are available:
+### 功能
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+選秀階段：玩家可以選擇英雄。
+
+商店系統：從商店購買角色。
+
+升星機制：三合一升級為更高星級的角色。
+
+備戰席管理：確保棋子擺放位置正確，避免空間不足。
+
+未來計劃：可能會加入拖曳棋子功能，提高操作流暢度。
+
+### 技術棧
+
+React：前端框架，構建 UI。
+
+Zustand：將狀態集中管理。
+
+Tailwind CSS：使用簡潔且高效的 CSS 框架進行設計。
+
+### 安裝與執行
+
+clone此專案：
+```
+git clone https://github.com/Ray625/TFT_practice.git
+```
+進入專案資料夾：
+```
+cd TFT_practice
+```
+安裝套件：
+```
+npm install
+```
+啟動開發伺服器：
+```
+npm run dev
+```
+
+此專案目前為個人學習用途，但歡迎提出問題或建議改進方式！

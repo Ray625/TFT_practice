@@ -2,28 +2,31 @@ import { create } from "zustand"
 import champion from "../assets/tft-champion-set13.json"
 import shopRates from "../assets/tft-shop-drop-rates-data.json"
 import { useSiteStore } from "./siteStore"
+import { ChampionData, ChampionJSON, ShopStore, MatchesTuple, MatchesType } from "../types/shopStoreTypes"
 
-const initializeBanner = () => {
+const initializeBanner = (): Record<string,ChampionData> => {
   // 將json資料複製出來，並給角色加上卡池張數，再存於state中備用
-  const championList = { ...champion.data }
+  const championList = { ...champion.data } as ChampionJSON["data"]
   Object.values(championList).forEach((item) => {
-    item.count = [30, 25, 18, 10, 9, 9][item.tier - 1] || 0
+    (item as ChampionData).count = [30, 25, 18, 10, 9, 9][item.tier - 1] || 0
   })
-  return championList
+  return championList as Record<string, ChampionData>
 }
 
-export const useShopStore = create((set, get) => {
+export const useShopStore = create<ShopStore>((set, get) => {
   // 找尋場上及備戰席相同卡牌
-  const findMatchingCards = (card, willBeStars) => {
+  const findMatchingCards = (card: ChampionData, willBeStars: number): MatchesType => {
     const { space, seat } = useSiteStore.getState()
-    let matches = []
+    let matches: MatchesType = []
+
+    const toMatchTuple = (i: number, index: number): MatchesTuple => [i === 0 ? "space" : "seat", index]
 
     if (willBeStars === 2) {
       matches = [space, seat]
         .flatMap((list, i) =>
           list.flatMap((item, index) =>
             item.id === card.id && item.star === willBeStars - 1
-              ? [[i === 0 ? "space" : "seat", index]]
+              ? [toMatchTuple(i, index)]
               : []
           )
         )
@@ -34,7 +37,7 @@ export const useShopStore = create((set, get) => {
         .flatMap((list, i) =>
           list.flatMap((item, index) =>
             item.id === card.id
-              ? [[i === 0 ? "space" : "seat", index]]
+              ? [toMatchTuple(i, index)]
               : []
           )
         )
@@ -44,7 +47,7 @@ export const useShopStore = create((set, get) => {
   }
 
   // 設置升星動畫
-  const playMergeAnimation = (site, index, willBeStars) => {
+  const playMergeAnimation = (site: "seat" | "space", index: number, willBeStars: number) => {
     const { setSpaceAnimate, setSeatAnimate } = useSiteStore.getState()
 
     if (site === "space") {
@@ -69,7 +72,7 @@ export const useShopStore = create((set, get) => {
   }
 
   // 合成卡牌
-  const mergeCards = (matches, card, willBeStars) => {
+  const mergeCards = (matches: MatchesType, card: ChampionData, willBeStars: number) => {
     const { seat, space, setSeat, setSpace } = useSiteStore.getState()
     let updatedSpace = [...space]
     let updatedSeat = [...seat]
@@ -77,7 +80,7 @@ export const useShopStore = create((set, get) => {
     let mergeIndex = matches[0][1] // 合成的位置
 
     // 將多餘卡牌清除
-    matches.slice(1).forEach(([site, index]) => {
+    matches.slice(1).forEach(([site, index]: [string, number]) => {
       if (site === "space") updatedSpace[index] = {}
       if (site === "seat") updatedSeat[index] = {}
     })
@@ -100,7 +103,7 @@ export const useShopStore = create((set, get) => {
   }
 
   // 購買卡牌時若玩家擁有相同卡牌則可升星
-  const getUpStars = (card, willBeStars) => {
+  const getUpStars = (card: ChampionData, willBeStars: number) => {
     const matches = findMatchingCards(card, willBeStars)
 
     mergeCards(matches, card, willBeStars)
@@ -132,7 +135,7 @@ export const useShopStore = create((set, get) => {
       if (total < 2) return
 
       let cards = []
-      let shop = []
+      let shop: ChampionData[] = []
       let tempBanner = { ...banner }
 
       const levelRate = shopRates.data.Shop[`${level - 1}`].dropRatesByTier
@@ -291,6 +294,7 @@ export const useShopStore = create((set, get) => {
       if (!canIncreaseStars && !canIncreaseThreeStars) {
         setSeat((prev) => {
           let done = false
+          console.log("card", card)
           return prev.map((item) => {
             if (!item.name && !done) {
               done = true
@@ -339,15 +343,16 @@ export const useShopStore = create((set, get) => {
           (key) => banner[key].name === hoverCard.cardData.name
         )
 
-        set({
-          banner: {
-            ...banner,
-            [key]: {
-              ...banner[key],
-              count: banner[key].count + cardCount,
+        if (key)
+          set({
+            banner: {
+              ...banner,
+              [key]: {
+                ...banner[key],
+                count: banner[key].count + cardCount,
+              },
             },
-          },
-        })
+          })
       }
 
       // 將場地內位置清空

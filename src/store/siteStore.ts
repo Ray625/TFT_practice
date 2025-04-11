@@ -1,6 +1,33 @@
 import { create } from "zustand"
+import { ChampionData } from "../types/shopStoreTypes"
 
-export const useSiteStore = create((set, get) => ({
+type BoardUnit = ChampionData | Partial<ChampionData>
+type AnimationMap = Map<number, number>
+type Updater<T> = T | ((prev: T) => T)
+
+interface SiteStore {
+  seat: BoardUnit[]
+  space: BoardUnit[]
+  seatAnimate: AnimationMap
+  spaceAnimate: AnimationMap
+  hoverCard: BoardUnit | null
+  playerSide: {
+    [key: string]: {
+    owned: number
+  }}
+
+  setSeat: (updater: Updater<BoardUnit[]>) => void
+  setSpace: (updater: Updater<BoardUnit[]>) => void
+  setPlayerSide: (updater: Updater<{
+    [key: string]: {
+    owned: number
+  }}>) => void
+  setSeatAnimate: (updater: Updater<AnimationMap>) => void
+  setSpaceAnimate: (updater: Updater<AnimationMap>) => void
+  setHoverCard: (updater: Updater<BoardUnit | null>) => void
+}
+
+export const useSiteStore = create<SiteStore>((set) => ({
   seat: Array.from({ length: 9 }, () => ({})),
   space: Array.from({ length: 28 }, () => ({})),
   seatAnimate: new Map(),

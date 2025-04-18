@@ -8,7 +8,7 @@ const initializeBanner = (): Record<string,ChampionData> => {
   // 將json資料複製出來，並給角色加上卡池張數，再存於state中備用
   const championList = { ...champion.data } as ChampionJSON["data"]
   Object.values(championList).forEach((item) => {
-    (item as ChampionData).count = [30, 25, 18, 10, 9, 9][item.tier - 1] || 0
+    (item as ChampionData).count = [30, 25, 18, 10, 9, 9][item.tier - 1]
   })
   return championList as Record<string, ChampionData>
 }
@@ -25,7 +25,7 @@ export const useShopStore = create<ShopStore>((set, get) => {
       matches = [space, seat]
         .flatMap((list, i) =>
           list.flatMap((item, index) =>
-            item.id === card.id && item.star === willBeStars - 1
+            item && item.id === card.id && item.star === willBeStars - 1
               ? [toMatchTuple(i, index)]
               : []
           )
@@ -36,7 +36,7 @@ export const useShopStore = create<ShopStore>((set, get) => {
       matches = [space, seat]
         .flatMap((list, i) =>
           list.flatMap((item, index) =>
-            item.id === card.id
+            item && item.id === card.id
               ? [toMatchTuple(i, index)]
               : []
           )
@@ -81,8 +81,8 @@ export const useShopStore = create<ShopStore>((set, get) => {
 
     // 將多餘卡牌清除
     matches.slice(1).forEach(([site, index]: [string, number]) => {
-      if (site === "space") updatedSpace[index] = {}
-      if (site === "seat") updatedSeat[index] = {}
+      if (site === "space") updatedSpace[index] = null
+      if (site === "seat") updatedSeat[index] = null
     })
 
     // 將卡牌升星
@@ -113,7 +113,8 @@ export const useShopStore = create<ShopStore>((set, get) => {
     level: 8,
     xp: 0,
     total: 50,
-    shopList: Array.from({ length: 5 }, () => ({})),
+    set: "set13",
+    shopList: Array(5).fill(null),
     banner: initializeBanner(),
 
     setLevel: (updater) => {
@@ -132,7 +133,8 @@ export const useShopStore = create<ShopStore>((set, get) => {
     drawCard: () => {
       const { level, total, shopList, banner } = get()
       const { playerSide } = useSiteStore.getState()
-      if (total < 2) return
+      const numberTotal = Number(total)
+      if (numberTotal < 2) return
 
       let cards = []
       let shop: ChampionData[] = []
@@ -142,7 +144,7 @@ export const useShopStore = create<ShopStore>((set, get) => {
 
       // 將商店上一輪沒有買下的卡放回牌池
       shopList.forEach((card) => {
-        if (Object.keys(card).length === 0) return
+        if (!card) return
         const key = Object.keys(tempBanner).find((key) => tempBanner[key].name === card.name)
         if (key) {
           tempBanner[key] = {
@@ -218,7 +220,7 @@ export const useShopStore = create<ShopStore>((set, get) => {
       set({
         banner: tempBanner,
         shopList: shop,
-        total: total - 2,
+        total: numberTotal - 2,
       })
     },
 
@@ -227,14 +229,15 @@ export const useShopStore = create<ShopStore>((set, get) => {
       const { level, total, xp } = get()
       const xpList = [2, 2, 6, 10, 20, 36, 48, 76, 84, 0]
       const levelNeededXp = xpList[level - 1]
+      const numberTotal = Number(total)
 
       if (level >= 10) return // 滿等時無法購買經驗
-      if (total < 4) return // 錢不夠時無法購買
+      if (numberTotal < 4) return // 錢不夠時無法購買
 
       // 當升級xp不會造成等級提升時
       if (levelNeededXp - xp > 4) {
         set({
-          total: total - 4,
+          total: numberTotal - 4,
           xp: xp + 4,
         })
       }
@@ -242,7 +245,7 @@ export const useShopStore = create<ShopStore>((set, get) => {
       // 當升級xp會造成等級提升時
       if (levelNeededXp - xp <= 4) {
         set({
-          total: total - 4,
+          total: numberTotal - 4,
           xp: 4 - levelNeededXp + xp,
           level: level + 1,
         })
@@ -254,9 +257,10 @@ export const useShopStore = create<ShopStore>((set, get) => {
       const { total, shopList } = get()
       const { playerSide, setPlayerSide, seat, setSeat } =
         useSiteStore.getState()
+      const numberTotal = Number(total)
 
       const cost = card.tier
-      if (total < cost) return
+      if (numberTotal < cost) return
 
       // 檢查購買後是否升星
       const canIncreaseStars =
@@ -266,7 +270,7 @@ export const useShopStore = create<ShopStore>((set, get) => {
       // 檢查備戰席是否已滿
       let full = true
       for (let item of Object.values(seat)) {
-        if (Object.keys(item).length === 0) {
+        if (!item) {
           full = false
           break
         }
@@ -277,7 +281,7 @@ export const useShopStore = create<ShopStore>((set, get) => {
 
       // 以下開始購買流程，從商店將牌取出
       set({
-        shopList: shopList.map((item, i) => (i === index ? {} : item)),
+        shopList: shopList.map((item, i) => (i === index ? null : item)),
       })
 
       // 若購買卡牌後可升至二星
@@ -294,9 +298,8 @@ export const useShopStore = create<ShopStore>((set, get) => {
       if (!canIncreaseStars && !canIncreaseThreeStars) {
         setSeat((prev) => {
           let done = false
-          console.log("card", card)
           return prev.map((item) => {
-            if (!item.name && !done) {
+            if (!item && !done) {
               done = true
               return {
                 ...card,
@@ -326,7 +329,7 @@ export const useShopStore = create<ShopStore>((set, get) => {
 
       // 扣除購買英雄費用
       set({
-        total: total - cost,
+        total: numberTotal - cost,
       })
     },
 
@@ -336,6 +339,7 @@ export const useShopStore = create<ShopStore>((set, get) => {
       const { setSeat, setSpace, setPlayerSide, setHoverCard } =
         useSiteStore.getState()
       const cardCount = [1, 3, 9][hoverCard.cardData.star - 1]
+      const numberTotal = Number(total)
 
       // 增加卡池該卡牌數量
       if (hoverCard) {
@@ -358,12 +362,12 @@ export const useShopStore = create<ShopStore>((set, get) => {
       // 將場地內位置清空
       if (hoverCard.place === "seat") {
         setSeat((prev) =>
-          prev.map((item, index) => (index === hoverCard.index ? {} : item))
+          prev.map((item, index) => (index === hoverCard.index ? null : item))
         )
       }
       if (hoverCard.place === "space") {
         setSpace((prev) =>
-          prev.map((item, index) => (index === hoverCard.index ? {} : item))
+          prev.map((item, index) => (index === hoverCard.index ? null : item))
         )
       }
 
@@ -379,7 +383,7 @@ export const useShopStore = create<ShopStore>((set, get) => {
 
       // 獲得販賣卡牌費用
       set({
-        total: total + hoverCard.cardData.tier * cardCount
+        total: numberTotal + hoverCard.cardData.tier * cardCount
       })
 
       // 將存放所選卡牌state清空
@@ -398,7 +402,7 @@ export const useShopStore = create<ShopStore>((set, get) => {
         let full = true
 
         const spaceCount = space.reduce((acc, item) => {
-          if (Object.keys(item).length !== 0) acc += 1
+          if (item) acc += 1
           return acc
         }, 0)
 
@@ -408,13 +412,13 @@ export const useShopStore = create<ShopStore>((set, get) => {
         if (full) return
 
         // 將備戰區該位置清空
-        setSeat((prev) => prev.map((item, i) => (i === hoverCard.index ? {} : item)))
+        setSeat((prev) => prev.map((item, i) => (i === hoverCard.index ? null : item)))
 
         // 移至戰區
         setSpace((prev) => {
           let done = false
           return prev.map((item) => {
-            if (!item.name && !done) {
+            if (!item && !done) {
               done = true
               return {
                 ...hoverCard.cardData,
@@ -431,7 +435,7 @@ export const useShopStore = create<ShopStore>((set, get) => {
         let full = true
 
         for (let item of seat) {
-          if (Object.keys(item).length === 0) {
+          if (!item) {
             full = false
             break
           }
@@ -441,13 +445,13 @@ export const useShopStore = create<ShopStore>((set, get) => {
         if (full) return
 
         // 將戰區該位置清空
-        setSpace((prev) => prev.map((item, i) => (i === hoverCard.index ? {} : item)))
+        setSpace((prev) => prev.map((item, i) => (i === hoverCard.index ? null : item)))
 
         // 移至備戰區
         setSeat((prev) => {
           let done = false
           return prev.map((item) => {
-            if (!item.name && !done) {
+            if (!item && !done) {
               done = true
               return {
                 ...hoverCard.cardData,

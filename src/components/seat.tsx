@@ -6,26 +6,10 @@ const Seat = () => {
   return (
     <div className="flex flex-row items-center justify-center gap-0.5 w-fit h-fit mx-auto mb-4 border-2 border-bg-black bg-bg-black/30">
       {seat.map((item, index) => {
-        let cost
-        switch (item?.tier) {
-          case 1:
-            cost = "one"
-            break
-          case 2:
-            cost = "two"
-            break
-          case 3:
-            cost = "three"
-            break
-          case 4:
-            cost = "four"
-            break
-          case 5:
-            cost = "five"
-            break
-        }
+        let cost = ""
+        if (item && item.tier) cost = ["one", "two", "three", "four", "five"][item.tier - 1]
 
-        const borderColors = {
+        const borderColors: Record<string, string> = {
           one: "border-one-cost-card-light",
           two: "border-two-cost-card-light",
           three: "border-three-cost-card-light",
@@ -38,9 +22,9 @@ const Seat = () => {
             className="w-25.5 h-25.5 bg-seat-bg p-2 hover:opacity-80"
             key={index}
           >
-            {item.name && (
+            {item && item.name && (
               <div
-                className={`relative w-full h-full border-3 ${borderColors[cost]} `}
+                className={`relative w-full h-full border-3 ${borderColors[cost]}`}
                 onMouseEnter={() =>
                   setHoverCard({
                     place: "seat",

@@ -1,0 +1,490 @@
+{
+  "data": {
+    "TFT14_Brand": {
+      "id": "TFT14_Brand",
+      "name": "布蘭德",
+      "tier": 4,
+      "image": {
+        "full": "TFT14_Brand.TFT_Set14.png"
+      }
+    },
+    "TFT14_Darius": {
+      "id": "TFT14_Darius",
+      "name": "達瑞斯",
+      "tier": 2,
+      "image": {
+        "full": "TFT14_Darius.TFT_Set14.png"
+      }
+    },
+    "TFT14_DrMundo": {
+      "id": "TFT14_DrMundo",
+      "name": "蒙多醫生",
+      "tier": 1,
+      "image": {
+        "full": "TFT14_DrMundo.TFT_Set14.png"
+      }
+    },
+    "TFT14_Elise": {
+      "id": "TFT14_Elise",
+      "name": "伊莉絲",
+      "tier": 3,
+      "image": {
+        "full": "TFT14_Elise.TFT_Set14.png"
+      }
+    },
+    "TFT14_Fiddlesticks": {
+      "id": "TFT14_Fiddlesticks",
+      "name": "費德提克",
+      "tier": 3,
+      "image": {
+        "full": "TFT14_Fiddlesticks.TFT_Set14.png"
+      }
+    },
+    "TFT14_Galio": {
+      "id": "TFT14_Galio",
+      "name": "加里歐",
+      "tier": 3,
+      "image": {
+        "full": "TFT14_Galio.TFT_Set14.png"
+      }
+    },
+    "TFT14_Garen": {
+      "id": "TFT14_Garen",
+      "name": "蓋倫",
+      "tier": 5,
+      "image": {
+        "full": "TFT14_Garen.TFT_Set14.png"
+      }
+    },
+    "TFT14_LeBlanc": {
+      "id": "TFT14_LeBlanc",
+      "name": "勒布朗",
+      "tier": 2,
+      "image": {
+        "full": "TFT14_LeBlanc.TFT_Set14.png"
+      }
+    },
+    "TFT14_MissFortune": {
+      "id": "TFT14_MissFortune",
+      "name": "好運姐",
+      "tier": 4,
+      "image": {
+        "full": "TFT14_MissFortune.TFT_Set14.png"
+      }
+    },
+    "TFT14_Morgana": {
+      "id": "TFT14_Morgana",
+      "name": "魔甘娜",
+      "tier": 1,
+      "image": {
+        "full": "TFT14_Morgana.TFT_Set14.png"
+      }
+    },
+    "TFT14_Neeko": {
+      "id": "TFT14_Neeko",
+      "name": "妮可",
+      "tier": 4,
+      "image": {
+        "full": "TFT14_Neeko.TFT_Set14.png"
+      }
+    },
+    "TFT14_Renekton": {
+      "id": "TFT14_Renekton",
+      "name": "雷尼克頓",
+      "tier": 5,
+      "image": {
+        "full": "TFT14_Renekton.TFT_Set14.png"
+      }
+    },
+    "TFT14_Rengar": {
+      "id": "TFT14_Rengar",
+      "name": "雷葛爾",
+      "tier": 3,
+      "image": {
+        "full": "TFT14_Rengar.TFT_Set14.png"
+      }
+    },
+    "TFT14_Samira": {
+      "id": "TFT14_Samira",
+      "name": "煞蜜拉",
+      "tier": 5,
+      "image": {
+        "full": "TFT14_Samira.TFT_Set14.png"
+      }
+    },
+    "TFT14_Senna": {
+      "id": "TFT14_Senna",
+      "name": "姍娜",
+      "tier": 3,
+      "image": {
+        "full": "TFT14_Senna.TFT_Set14.png"
+      }
+    },
+    "TFT14_Shaco": {
+      "id": "TFT14_Shaco",
+      "name": "薩科",
+      "tier": 1,
+      "image": {
+        "full": "TFT14_Shaco.TFT_Set14.png"
+      }
+    },
+    "TFT14_TwistedFate": {
+      "id": "TFT14_TwistedFate",
+      "name": "逆命",
+      "tier": 2,
+      "image": {
+        "full": "TFT14_TwistedFate.TFT_Set14.png"
+      }
+    },
+    "TFT14_Varus": {
+      "id": "TFT14_Varus",
+      "name": "法洛士",
+      "tier": 3,
+      "image": {
+        "full": "TFT14_Varus.TFT_Set14.png"
+      }
+    },
+    "TFT14_Veigar": {
+      "id": "TFT14_Veigar",
+      "name": "維迦",
+      "tier": 2,
+      "image": {
+        "full": "TFT14_Veigar.TFT_Set14.png"
+      }
+    },
+    "TFT14_Vex": {
+      "id": "TFT14_Vex",
+      "name": "薇可絲",
+      "tier": 4,
+      "image": {
+        "full": "TFT14_Vex.TFT_Set14.png"
+      }
+    },
+    "TFT14_Zed": {
+      "id": "TFT14_Zed",
+      "name": "劫",
+      "tier": 4,
+      "image": {
+        "full": "TFT14_Zed.TFT_Set14.png"
+      }
+    },
+    "TFT14_Zeri": {
+      "id": "TFT14_Zeri",
+      "name": "婕莉",
+      "tier": 4,
+      "image": {
+        "full": "TFT14_Zeri.TFT_Set14.png"
+      }
+    },
+    "TFT14_Zyra": {
+      "id": "TFT14_Zyra",
+      "name": "枷蘿",
+      "tier": 1,
+      "image": {
+        "full": "TFT14_Zyra.TFT_Set14.png"
+      }
+    },
+    "TFT14_Braum": {
+      "id": "TFT14_Braum",
+      "name": "布郎姆",
+      "tier": 3,
+      "image": {
+        "full": "TFT14_Braum.TFT_Set14.png"
+      }
+    },
+    "TFT14_NidaleeCougar": {
+      "id": "TFT14_NidaleeCougar",
+      "name": "奈德麗",
+      "tier": 1,
+      "image": {
+        "full": "TFT14_NidaleeCougar.TFT_Set14.png"
+      }
+    },
+    "TFT14_Shyvana": {
+      "id": "TFT14_Shyvana",
+      "name": "希瓦娜",
+      "tier": 2,
+      "image": {
+        "full": "TFT14_Shyvana.TFT_Set14.png"
+      }
+    },
+    "TFT14_Kindred": {
+      "id": "TFT14_Kindred",
+      "name": "鏡爪",
+      "tier": 1,
+      "image": {
+        "full": "TFT14_Kindred.TFT_Set14.png"
+      }
+    },
+    "TFT14_Yuumi": {
+      "id": "TFT14_Yuumi",
+      "name": "悠咪",
+      "tier": 3,
+      "image": {
+        "full": "TFT14_Yuumi.TFT_Set14.png"
+      }
+    },
+    "TFT14_Illaoi": {
+      "id": "TFT14_Illaoi",
+      "name": "伊羅旖",
+      "tier": 2,
+      "image": {
+        "full": "TFT14_Illaoi.TFT_Set14.png"
+      }
+    },
+    "TFT14_Seraphine": {
+      "id": "TFT14_Seraphine",
+      "name": "瑟菈紛",
+      "tier": 1,
+      "image": {
+        "full": "TFT14_Seraphine.TFT_Set14.png"
+      }
+    },
+    "TFT14_Xayah": {
+      "id": "TFT14_Xayah",
+      "name": "剎雅",
+      "tier": 4,
+      "image": {
+        "full": "TFT14_Xayah.TFT_Set14.png"
+      }
+    },
+    "TFT14_Jhin": {
+      "id": "TFT14_Jhin",
+      "name": "燼",
+      "tier": 2,
+      "image": {
+        "full": "TFT14_Jhin.TFT_Set14.png"
+      }
+    },
+    "TFT14_Naafiri": {
+      "id": "TFT14_Naafiri",
+      "name": "娜菲芮",
+      "tier": 2,
+      "image": {
+        "full": "TFT14_Naafiri.TFT_Set14.png"
+      }
+    },
+    "TFT14_Gragas": {
+      "id": "TFT14_Gragas",
+      "name": "古拉格斯",
+      "tier": 3,
+      "image": {
+        "full": "TFT14_Gragas.TFT_Set14.png"
+      }
+    },
+    "TFT14_KogMaw": {
+      "id": "TFT14_KogMaw",
+      "name": "寇格魔",
+      "tier": 1,
+      "image": {
+        "full": "TFT14_KogMaw.TFT_Set14.png"
+      }
+    },
+    "TFT14_Skarner": {
+      "id": "TFT14_Skarner",
+      "name": "史加納",
+      "tier": 2,
+      "image": {
+        "full": "TFT14_Skarner.TFT_Set14.png"
+      }
+    },
+    "TFT14_Jax": {
+      "id": "TFT14_Jax",
+      "name": "賈克斯",
+      "tier": 1,
+      "image": {
+        "full": "TFT14_Jax.TFT_Set14.png"
+      }
+    },
+    "TFT14_Kobuko": {
+      "id": "TFT14_Kobuko",
+      "name": "柯布柯",
+      "tier": 5,
+      "image": {
+        "full": "TFT14_Kobuko.TFT_Set14.png"
+      }
+    },
+    "TFT14_Sejuani": {
+      "id": "TFT14_Sejuani",
+      "name": "史瓦妮",
+      "tier": 4,
+      "image": {
+        "full": "TFT14_Sejuani.TFT_Set14.png"
+      }
+    },
+    "TFT14_Poppy": {
+      "id": "TFT14_Poppy",
+      "name": "波比",
+      "tier": 1,
+      "image": {
+        "full": "TFT14_Poppy.TFT_Set14.png"
+      }
+    },
+    "TFT14_Ziggs": {
+      "id": "TFT14_Ziggs",
+      "name": "希格斯",
+      "tier": 4,
+      "image": {
+        "full": "TFT14_Ziggs.TFT_Set14.png"
+      }
+    },
+    "TFT14_Chogath": {
+      "id": "TFT14_Chogath",
+      "name": "科加斯",
+      "tier": 4,
+      "image": {
+        "full": "TFT14_ChoGath.TFT_Set14.png"
+      }
+    },
+    "TFT14_Urgot": {
+      "id": "TFT14_Urgot",
+      "name": "烏爾加特",
+      "tier": 5,
+      "image": {
+        "full": "TFT14_Urgot.TFT_Set14.png"
+      }
+    },
+    "TFT14_Sylas": {
+      "id": "TFT14_Sylas",
+      "name": "賽勒斯",
+      "tier": 1,
+      "image": {
+        "full": "TFT14_Sylas.TFT_Set14.png"
+      }
+    },
+    "TFT14_Aurora": {
+      "id": "TFT14_Aurora",
+      "name": "歐羅拉",
+      "tier": 5,
+      "image": {
+        "full": "TFT14_Aurora.TFT_Set14.png"
+      }
+    },
+    "TFT14_Vayne": {
+      "id": "TFT14_Vayne",
+      "name": "汎",
+      "tier": 2,
+      "image": {
+        "full": "TFT14_Vayne.TFT_Set14.png"
+      }
+    },
+    "TFT14_Leona": {
+      "id": "TFT14_Leona",
+      "name": "雷歐娜",
+      "tier": 4,
+      "image": {
+        "full": "TFT14_Leona.TFT_Set14.png"
+      }
+    },
+    "TFT14_Vi": {
+      "id": "TFT14_Vi",
+      "name": "菲艾",
+      "tier": 1,
+      "image": {
+        "full": "TFT14_Vi.TFT_Set14.png"
+      }
+    },
+    "TFT14_Mordekaiser": {
+      "id": "TFT14_Mordekaiser",
+      "name": "魔鬥凱薩",
+      "tier": 3,
+      "image": {
+        "full": "TFT14_Mordekaiser.TFT_Set14.png"
+      }
+    },
+    "TFT14_Alistar": {
+      "id": "TFT14_Alistar",
+      "name": "亞歷斯塔",
+      "tier": 1,
+      "image": {
+        "full": "TFT14_Alistar.TFT_Set14.png"
+      }
+    },
+    "TFT14_Viego": {
+      "id": "TFT14_Viego",
+      "name": "維爾戈",
+      "tier": 5,
+      "image": {
+        "full": "TFT14_Viego.TFT_Set14.png"
+      }
+    },
+    "TFT14_Jarvan": {
+      "id": "TFT14_Jarvan",
+      "name": "嘉文四世",
+      "tier": 3,
+      "image": {
+        "full": "TFT14_Jarvan.TFT_Set14.png"
+      }
+    },
+    "TFT14_Graves": {
+      "id": "TFT14_Graves",
+      "name": "葛雷夫",
+      "tier": 2,
+      "image": {
+        "full": "TFT14_Graves.TFT_Set14.png"
+      }
+    },
+    "TFT14_Annie": {
+      "id": "TFT14_Annie",
+      "name": "安妮",
+      "tier": 4,
+      "image": {
+        "full": "TFT14_Annie.TFT_Set14.png"
+      }
+    },
+    "TFT14_Rhaast": {
+      "id": "TFT14_Rhaast",
+      "name": "勒哈斯特",
+      "tier": 2,
+      "image": {
+        "full": "TFT14_Rhaast.TFT_Set14.png"
+      }
+    },
+    "TFT14_Draven": {
+      "id": "TFT14_Draven",
+      "name": "達瑞文",
+      "tier": 3,
+      "image": {
+        "full": "TFT14_Draven.TFT_Set14.png"
+      }
+    },
+    "TFT14_Zac": {
+      "id": "TFT14_Zac",
+      "name": "札克",
+      "tier": 5,
+      "image": {
+        "full": "TFT14_Zac.TFT_Set14.png"
+      }
+    },
+    "TFT14_Jinx": {
+      "id": "TFT14_Jinx",
+      "name": "吉茵珂絲",
+      "tier": 3,
+      "image": {
+        "full": "TFT14_Jinx.TFT_Set14.png"
+      }
+    },
+    "TFT14_Ekko": {
+      "id": "TFT14_Ekko",
+      "name": "艾克",
+      "tier": 2,
+      "image": {
+        "full": "TFT14_Ekko.TFT_Set14.png"
+      }
+    },
+    "TFT14_Aphelios": {
+      "id": "TFT14_Aphelios",
+      "name": "亞菲利歐",
+      "tier": 4,
+      "image": {
+        "full": "TFT14_Aphelios.TFT_Set14.png",
+        "sprite": "tft-champion3.png",
+        "group": "tft-champion",
+        "x": 48,
+        "y": 48,
+        "w": 48,
+        "h": 48
+      }
+    }
+  }
+}

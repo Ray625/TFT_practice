@@ -1,16 +1,18 @@
 import { useEffect } from "react"
 import champion from "../assets/tft-champion-set13.json"
-import trait from "../assets/tft-trait-set13.json"
+import traitJSON from "../assets/tft-trait-set13.json"
 import shopRates from "../assets/tft-shop-drop-rates-data.json"
 import useThrottle from "../hooks/useThrottle"
 import { useShopStore } from "../store/shopStore"
 import { useSiteStore } from "../store/siteStore"
+import { TraitData } from "../types/shopStoreTypes"
 
 const Shop = () => {
   const {
     level,
     xp,
     total,
+    set,
     shopList,
     drawCard,
     buyXp,
@@ -30,7 +32,7 @@ const Shop = () => {
 
   // 設立監聽器，當使用者按下F時購買經驗，D刷新商店，E販賣hover卡牌
   useEffect(() => {
-    const handlePressKey = (event) => {
+    const handlePressKey = (event: any) => {
       if (event.keyCode === 70) {
         throttleBuyXp()
       }
@@ -63,7 +65,7 @@ const Shop = () => {
     for (let item of Object.values(champion.data)) {
       championImages.push(item.id)
     }
-    for (let item of Object.values(trait.data)) {
+    for (let item of Object.values(traitJSON.data)) {
       traitImages.push(item.image.full)
     }
 
@@ -161,20 +163,25 @@ const Shop = () => {
                   title="Enter money"
                   onChange={(event) => {
                     const value = event.target.value
-                    if (isNaN(value) && value.length !== 0) {
+                    if (value.length === 0) return setTotal("")
+
+                    const numeric = Number(value)
+                    if (isNaN(numeric)) {
                       alert("請輸入數字")
-                      return setTotal(0)
+                      return
                     }
-                    if (value.length === 0) return setTotal(value)
-                    if (value > 999) return setTotal(999)
-                    if (value <= 0) return setTotal(0)
-                    setTotal(Number(value))
+                    if (numeric > 999) return setTotal("999")
+                    if (numeric <= 0) return setTotal("0")
+
+                    setTotal(value)
                   }}
                   onKeyDown={(event) => {
                     if (event.key === "Enter") {
-                      if (total.length === 0) setTotal(0)
-                      event.target.blur()
+                      event.currentTarget.blur()
                     }
+                  }}
+                  onBlur={() => {
+                    if (typeof total === "string" && total.length === 0) setTotal("0")
                   }}
                 />
                 <div className="mt-0.5">
@@ -182,7 +189,11 @@ const Shop = () => {
                     className="flex justify-center items-center w-5 h-5 m-0 p-0 bg-bg-black rounded-full border border-white hover:opacity-80 hover:cursor-pointer select-none"
                     title="+10 Gold"
                     onClick={() => {
-                      setTotal(prev => prev + 10)
+                      setTotal((prev) => {
+                        const num = Number(prev || "0");
+                        const added = Math.min(num + 10, 999) // 最大不超過 999
+                        return added
+                      })
                     }}
                   >
                     <div className="flex justify-center items-center text-sm mt-0.5 select-none">
@@ -246,13 +257,8 @@ const Shop = () => {
             </button>
           </div>
           {shopList.map((item, index) => {
-            const canIncreaseStars =
-              playerSide[item.id]?.owned === 2 ||
-              playerSide[item.id]?.owned === 5
-            const canIncreaseThreeStars = playerSide[item.id]?.owned === 8
-
             // 卡被抽出後，留下空位
-            if (!item.name)
+            if (!item) {
               return (
                 <div
                   className="flex flex-col justify-center items-center h-full p-1 bg-empty-card-wrapper border "
@@ -261,28 +267,17 @@ const Shop = () => {
                   <div className="w-9/10 h-9/10 border-2 border-empty-card-border bg-empty-card-bg"></div>
                 </div>
               )
-
-            // 不同費用外框不同顏色
-            let cost
-            switch (item?.tier) {
-              case 1:
-                cost = "one"
-                break
-              case 2:
-                cost = "two"
-                break
-              case 3:
-                cost = "three"
-                break
-              case 4:
-                cost = "four"
-                break
-              case 5:
-                cost = "five"
-                break
             }
 
-            const borderColors = {
+            const canIncreaseStars =
+              (item.id && playerSide[item.id]?.owned === 2) ||
+              (item.id && playerSide[item.id]?.owned === 5)
+            const canIncreaseThreeStars = (item.id && playerSide[item.id]?.owned) === 8
+
+            // 不同費用外框不同顏色
+            const cost = (item.tier && ["one", "two", "three", "four", "five"][item.tier - 1])
+
+            const borderColors: Record<string,string> = {
               one: "border-one-cost-card-light",
               two: "border-two-cost-card-light",
               three: "border-three-cost-card-light",
@@ -290,7 +285,7 @@ const Shop = () => {
               five: "border-five-cost-card-light",
             }
 
-            const cardFooterColorFrom = {
+            const cardFooterColorFrom: Record<string,string> = {
               one: "from-one-cost-card-dark",
               two: "from-two-cost-card-dark",
               three: "from-three-cost-card-dark",
@@ -298,7 +293,7 @@ const Shop = () => {
               five: "from-five-cost-card-dark",
             }
 
-            const cardFooterColorTo = {
+            const cardFooterColorTo: Record<string,string> = {
               one: "to-one-cost-card-light",
               two: "to-two-cost-card-light",
               three: "to-three-cost-card-light",
@@ -310,7 +305,9 @@ const Shop = () => {
               <>
                 <div
                   className={`relative border-2 ${borderColors[cost]}`}
-                  onClick={() => buyCard(item, index)}
+                  onClick={() => {
+                    buyCard(item, index)
+                  }}
                 >
                   {/* 可升星時出現提示 */}
                   {canIncreaseStars && (
@@ -351,26 +348,27 @@ const Shop = () => {
                   <div className="border border-card-border">
                     <img
                       className="w-full aspect-[69/40]"
-                      src={`img/champion/${item.image.full}`}
+                      src={`img/champion/${set}/${item.image.full}`}
                       alt="champion"
                     />
                   </div>
                   <div className="absolute top-0 left-0 flex flex-col justify-end pl-1 w-full h-full">
-                    {item.trait.map((traitName) => {
-                      const traitData = trait.data[`TFT13_${traitName}`]
+                    {item.trait?.map((traitName) => {
+                      const traitData: TraitData["data"] = traitJSON.data
+                      const trait = traitData[`TFT13_${traitName}`]
                       return (
-                        <div className="flex flex-row" key={traitData.id}>
+                        <div className="flex flex-row" key={trait.id}>
                           <div className="w-fit h-fit p-[1px] mr-1 bg-trait-icon-shadow [clip-path:polygon(0%_25%,50%_0%,100%_25%,100%_75%,50%_100%,0%_75%)]">
                             <div className="flex justify-center items-center w-5 h-6 bg-trait-icon-bg [clip-path:polygon(0%_25%,50%_0%,100%_25%,100%_75%,50%_100%,0%_75%)]">
                               <img
-                                src={`img/trait/${traitData.image.full}`}
+                                src={`img/trait/${trait.image.full}`}
                                 alt="icon"
                                 className="w-3 h-3"
                               />
                             </div>
                           </div>
                           <p className="text-lg text-text-white text-left">
-                            {traitData.name}
+                            {trait.name}
                           </p>
                         </div>
                       )

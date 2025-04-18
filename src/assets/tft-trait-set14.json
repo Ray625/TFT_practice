@@ -1,0 +1,181 @@
+{
+  "type": "tft-trait",
+  "version": "15.7.1",
+  "data": {
+    "TFT14_Immortal": {
+      "id": "TFT14_Immortal",
+      "name": "開運金牛",
+      "image": {
+        "full": "Trait_Icon_14_GoldenOx.TFT_Set14.png"
+      }
+    },
+    "TFT14_Cutter": {
+      "id": "TFT14_Cutter",
+      "name": "處刑者",
+      "image": {
+        "full": "Trait_Icon_4_Executioner.png"
+      }
+    },
+    "TFT14_Strong": {
+      "id": "TFT14_Strong",
+      "name": "殺戮者",
+      "image": {
+        "full": "Trait_Icon_4_Slayer.png"
+      }
+    },
+    "TFT14_Marksman": {
+      "id": "TFT14_Marksman",
+      "name": "射手",
+      "image": {
+        "full": "Trait_Icon_14_Marksman.TFT_Set14.png"
+      }
+    },
+    "TFT14_Techie": {
+      "id": "TFT14_Techie",
+      "name": "技師",
+      "image": {
+        "full": "Trait_Icon_14_Techie.TFT_Set14.png"
+      }
+    },
+    "TFT14_Controller": {
+      "id": "TFT14_Controller",
+      "name": "戰略軍師",
+      "image": {
+        "full": "Trait_Icon_9_Strategist.png"
+      }
+    },
+    "TFT14_Armorclad": {
+      "id": "TFT14_Armorclad",
+      "name": "堡壘衛士",
+      "image": {
+        "full": "Trait_Icon_9_Bastion.png"
+      }
+    },
+    "TFT14_Supercharge": {
+      "id": "TFT14_Supercharge",
+      "name": "A.M.P.",
+      "image": {
+        "full": "Trait_Icon_14_Amp.TFT_Set14.png"
+      }
+    },
+    "TFT14_HotRod": {
+      "id": "TFT14_HotRod",
+      "name": "爆燃戰隊",
+      "image": {
+        "full": "Trait_Icon_14_NitroForge.TFT_Set14.png"
+      }
+    },
+    "TFT14_Cyberboss": {
+      "id": "TFT14_Cyberboss",
+      "name": "賽博霸主",
+      "image": {
+        "full": "Trait_Icon_14_Cyberbosses.TFT_Set14.png"
+      }
+    },
+    "TFT14_Divinicorp": {
+      "id": "TFT14_Divinicorp",
+      "name": "神諭集團",
+      "image": {
+        "full": "Trait_Icon_14_Divinicorp.TFT_Set14.png"
+      }
+    },
+    "TFT14_EdgeRunner": {
+      "id": "TFT14_EdgeRunner",
+      "name": "極限科技",
+      "image": {
+        "full": "Trait_Icon_14_Exotech.TFT_Set14.png"
+      }
+    },
+    "TFT14_Bruiser": {
+      "id": "TFT14_Bruiser",
+      "name": "蠻勇鬥士",
+      "image": {
+        "full": "Trait_Icon_14_Bruiser.TFT_Set14.png"
+      }
+    },
+    "TFT14_Thirsty": {
+      "id": "TFT14_Thirsty",
+      "name": "發電機",
+      "image": {
+        "full": "Trait_Icon_14_Dynamo.TFT_Set14.png"
+      }
+    },
+    "TFT14_Mob": {
+      "id": "TFT14_Mob",
+      "name": "罪惡集團",
+      "image": {
+        "full": "Trait_Icon_14_Mob.TFT_Set14.png"
+      }
+    },
+    "TFT14_Netgod": {
+      "id": "TFT14_Netgod",
+      "name": "網路之神",
+      "image": {
+        "full": "Trait_Icon_14_GodoftheNet.TFT_Set14.png"
+      }
+    },
+    "TFT14_Swift": {
+      "id": "TFT14_Swift",
+      "name": "速射",
+      "image": {
+        "full": "Trait_Icon_10_Rapidfire.png"
+      }
+    },
+    "TFT14_StreetDemon": {
+      "id": "TFT14_StreetDemon",
+      "name": "街頭狂魔",
+      "image": {
+        "full": "Trait_Icon_14_StreetDemon.TFT_Set14.png"
+      }
+    },
+    "TFT14_AnimaSquad": {
+      "id": "TFT14_AnimaSquad",
+      "name": "百獸特攻隊",
+      "image": {
+        "full": "Trait_Icon_14_AnimaSquad.TFT_Set14.png"
+      }
+    },
+    "TFT14_Suits": {
+      "id": "TFT14_Suits",
+      "name": "破譯師",
+      "image": {
+        "full": "Trait_Icon_14_Cypher.TFT_Set14.png"
+      }
+    },
+    "TFT14_BallisTek": {
+      "id": "TFT14_BallisTek",
+      "name": "末日機器人",
+      "image": {
+        "full": "Trait_Icon_14_BoomBots.TFT_Set14.png"
+      }
+    },
+    "TFT14_Vanguard": {
+      "id": "TFT14_Vanguard",
+      "name": "先鋒戰士",
+      "image": {
+        "full": "Trait_Icon_12_Vanguard.TFT_Set12.png"
+      }
+    },
+    "TFT14_ViegoUniqueTrait": {
+      "id": "TFT14_ViegoUniqueTrait",
+      "name": "靈魂殺手",
+      "image": {
+        "full": "Trait_Icon_14_SoulKiller.TFT_Set14.png"
+      }
+    },
+    "TFT14_Overlord": {
+      "id": "TFT14_Overlord",
+      "name": "主宰",
+      "image": {
+        "full": "Trait_Icon_14_Overlord.TFT_Set14.png"
+      }
+    },
+    "TFT14_Virus": {
+      "id": "TFT14_Virus",
+      "name": "病毒",
+      "image": {
+        "full": "Trait_Icon_14_Virus.TFT_Set14.png"
+      }
+    }
+  }
+}

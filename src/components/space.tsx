@@ -1,25 +1,16 @@
-import trait from "../assets/tft-trait-set13.json"
+import traitJSON from "../assets/tft-trait-set13.json"
 import { useSiteStore } from "../store/siteStore"
+import { BoardUnit } from "../store/siteStore"
+import { TraitData } from "../types/shopStoreTypes"
 
-const OneGrid = ({ cardData }) => {
-  let cost
-  switch (cardData?.tier) {
-    case 1:
-      cost = "one"
-      break
-    case 2:
-      cost = "two"
-      break
-    case 3:
-      cost = "three"
-      break
-    case 4:
-      cost = "four"
-      break
-    case 5:
-      cost = "five"
-      break
-  }
+interface OneGrid {
+  cardData: BoardUnit
+}
+
+const OneGrid: React.FC<OneGrid> = ({ cardData }) => {
+  const cost = cardData?.tier
+    ? ["one", "two", "three", "four", "five"][cardData.tier - 1]
+    : undefined
 
   return (
     <div className="relative flex justify-center w-fit aspect-13/15 hover:opacity-80">
@@ -36,13 +27,13 @@ const OneGrid = ({ cardData }) => {
             <path d="M44 0 L 88 25 L 88 75 L44 100 L 0 75 L 0 25 Z" />
           </clipPath>
         </defs>
-        {!cardData.name && (
+        {!cardData && (
           <path
             d="M44 0 L 88 25 L 88 75 L44 100 L 0 75 L 0 25 Z"
             style={{ fill: `var(--color-bg-black)` }}
           />
         )}
-        {cardData.name && (
+        {cardData && cardData.name && (
           <>
             <g clipPath="url(#hexClip)">
               <image
@@ -63,11 +54,12 @@ const OneGrid = ({ cardData }) => {
           </>
         )}
       </svg>
-      {cardData.name && (
+      {cardData && cardData.name && (
         <>
           <div className="absolute z-10 flex flex-row gap-0.5 top-0 left-0 justify-center w-full pt-1.5">
-            {cardData.trait.map((traitName) => {
-              const traitData = trait.data[`TFT13_${traitName}`]
+            {cardData.trait && cardData.trait.map((traitName) => {
+              const traitData: TraitData["data"] = traitJSON.data
+              const trait = traitData[`TFT13_${traitName}`]
               return (
                 <svg
                   version="1.1"
@@ -90,7 +82,7 @@ const OneGrid = ({ cardData }) => {
                     width="70.4"
                     height="80"
                     preserveAspectRatio="xMidYMid slice"
-                    href={`img/trait/${traitData.image.full}`}
+                    href={`img/trait/${trait.image.full}`}
                     clipPath="url(#hexClip)"
                   />
                   <path
@@ -160,7 +152,7 @@ const Space = () => {
           {space
             .slice(rowIndex * 7, rowIndex * 7 + 7)
             .map((item, index) => {
-              return Object.keys(item).length !== 0 ? (
+              return !item ? (
                 <div
                   key={rowIndex * 7 + index}
                   onMouseEnter={() =>

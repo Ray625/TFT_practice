@@ -1,13 +1,22 @@
-import traitJSON from "../assets/tft-trait-set13.json"
+import traitJSON_set13 from "../assets/tft-trait-set13.json"
+import traitJSON_set14 from "../assets/tft-trait-set14.json"
 import { useSiteStore } from "../store/siteStore"
+import { useShopStore } from "../store/shopStore"
 import { BoardUnit } from "../store/siteStore"
-import { TraitData } from "../types/shopStoreTypes"
+import { TraitData, SeasonKey } from "../types/shopStoreTypes"
 
 interface OneGrid {
   cardData: BoardUnit
 }
 
+const traitJSON = {
+  set13: traitJSON_set13,
+  set14: traitJSON_set14
+}
+
 const OneGrid: React.FC<OneGrid> = ({ cardData }) => {
+  const { season } = useShopStore()
+
   const cost = cardData?.tier
     ? ["one", "two", "three", "four", "five"][cardData.tier - 1]
     : undefined
@@ -42,7 +51,7 @@ const OneGrid: React.FC<OneGrid> = ({ cardData }) => {
                 width="88"
                 height="100"
                 preserveAspectRatio="xMidYMid slice"
-                href={`img/face/${cardData.id}.avif`}
+                href={`img/face/${season}/${cardData.id}.avif`}
               />
             </g>
             <path
@@ -58,8 +67,8 @@ const OneGrid: React.FC<OneGrid> = ({ cardData }) => {
         <>
           <div className="absolute z-10 flex flex-row gap-0.5 top-0 left-0 justify-center w-full pt-1.5">
             {cardData.trait && cardData.trait.map((traitName) => {
-              const traitData: TraitData["data"] = traitJSON.data
-              const trait = traitData[`TFT13_${traitName}`]
+              const traitData: TraitData["data"] = traitJSON[season as SeasonKey].data
+              const trait = traitData[`TFT${season.slice(-2)}_${traitName}`]
               return (
                 <svg
                   version="1.1"
@@ -82,7 +91,7 @@ const OneGrid: React.FC<OneGrid> = ({ cardData }) => {
                     width="70.4"
                     height="80"
                     preserveAspectRatio="xMidYMid slice"
-                    href={`img/trait/${trait.image.full}`}
+                    href={`img/trait/${season}/${trait.image.full}`}
                     clipPath="url(#hexClip)"
                   />
                   <path
@@ -152,7 +161,7 @@ const Space = () => {
           {space
             .slice(rowIndex * 7, rowIndex * 7 + 7)
             .map((item, index) => {
-              return !item ? (
+              return item ? (
                 <div
                   key={rowIndex * 7 + index}
                   onMouseEnter={() =>

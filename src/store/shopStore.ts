@@ -1,12 +1,19 @@
 import { create } from "zustand"
-import champion from "../assets/tft-champion-set13.json"
+import champion_set13 from "../assets/tft-champion-set13.json"
+import champion_set14 from "../assets/tft-champion-set14.json"
 import shopRates from "../assets/tft-shop-drop-rates-data.json"
 import { useSiteStore } from "./siteStore"
-import { ChampionData, ChampionJSON, ShopStore, MatchesTuple, MatchesType } from "../types/shopStoreTypes"
+import { ChampionData, ChampionJSON, ShopStore, MatchesTuple, MatchesType, SeasonKey } from "../types/shopStoreTypes"
 
-const initializeBanner = (): Record<string,ChampionData> => {
+const champion = {
+  set13: champion_set13,
+  set14: champion_set14
+}
+
+const initializeBanner = (season: SeasonKey): Record<string, ChampionData> => {
+
   // 將json資料複製出來，並給角色加上卡池張數，再存於state中備用
-  const championList = { ...champion.data } as ChampionJSON["data"]
+  const championList = { ...champion[season].data } as ChampionJSON["data"]
   Object.values(championList).forEach((item) => {
     (item as ChampionData).count = [30, 25, 18, 10, 9, 9][item.tier - 1]
   })
@@ -14,6 +21,8 @@ const initializeBanner = (): Record<string,ChampionData> => {
 }
 
 export const useShopStore = create<ShopStore>((set, get) => {
+  const { setSeat, setSpace, setPlayerSide } = useSiteStore.getState()
+
   // 找尋場上及備戰席相同卡牌
   const findMatchingCards = (card: ChampionData, willBeStars: number): MatchesType => {
     const { space, seat } = useSiteStore.getState()
@@ -113,9 +122,9 @@ export const useShopStore = create<ShopStore>((set, get) => {
     level: 8,
     xp: 0,
     total: 50,
-    set: "set13",
+    season: "set14",
     shopList: Array(5).fill(null),
-    banner: initializeBanner(),
+    banner: initializeBanner("set14"),
 
     setLevel: (updater) => {
       set((state) => ({
@@ -127,6 +136,20 @@ export const useShopStore = create<ShopStore>((set, get) => {
       set((state) => ({
         total: typeof updater === "function" ? updater(state.total) : updater,
       }))
+    },
+
+    setSeason: (updater: SeasonKey) => {
+      set(() => ({
+        season: updater,
+        banner: initializeBanner(updater),
+        shopList: Array(5).fill(null),
+        level: 8,
+        xp: 0,
+        total: 50,
+      }))
+      setSeat(Array(9).fill(null))
+      setSpace(Array(28).fill(null))
+      setPlayerSide({})
     },
 
     // 刷新商店

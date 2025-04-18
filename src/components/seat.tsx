@@ -1,7 +1,9 @@
 import { useSiteStore } from "../store/siteStore"
+import { useShopStore } from "../store/shopStore"
 
 const Seat = () => {
   const { seat, seatAnimate, setHoverCard } = useSiteStore()
+  const { season } = useShopStore()
 
   return (
     <div className="flex flex-row items-center justify-center gap-0.5 w-fit h-fit mx-auto mb-4 border-2 border-bg-black bg-bg-black/30">
@@ -79,7 +81,7 @@ const Seat = () => {
                 </p>
                 <img
                   className="hover:cursor-pointer"
-                  src={`img/face/${item.id}.avif`}
+                  src={`img/face/${season}/${item.id}.avif`}
                   alt="champion"
                 />
               </div>

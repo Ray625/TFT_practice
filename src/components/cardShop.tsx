@@ -1,18 +1,30 @@
 import { useEffect } from "react"
-import champion from "../assets/tft-champion-set13.json"
-import traitJSON from "../assets/tft-trait-set13.json"
+import champion_set13 from "../assets/tft-champion-set13.json"
+import champion_set14 from "../assets/tft-champion-set14.json"
+import traitJSON_set13 from "../assets/tft-trait-set13.json"
+import traitJSON_set14 from "../assets/tft-trait-set14.json"
 import shopRates from "../assets/tft-shop-drop-rates-data.json"
 import useThrottle from "../hooks/useThrottle"
 import { useShopStore } from "../store/shopStore"
 import { useSiteStore } from "../store/siteStore"
-import { TraitData } from "../types/shopStoreTypes"
+import { TraitData, SeasonKey } from "../types/shopStoreTypes"
+
+const champion = {
+  set13: champion_set13,
+  set14: champion_set14
+}
+
+const traitJSON = {
+  set13: traitJSON_set13,
+  set14: traitJSON_set14
+}
 
 const Shop = () => {
   const {
     level,
     xp,
     total,
-    set,
+    season,
     shopList,
     drawCard,
     buyXp,
@@ -62,26 +74,26 @@ const Shop = () => {
     const championImages = []
     const traitImages = []
 
-    for (let item of Object.values(champion.data)) {
+    for (let item of Object.values(champion[season as SeasonKey].data)) {
       championImages.push(item.id)
     }
-    for (let item of Object.values(traitJSON.data)) {
+    for (let item of Object.values(traitJSON[season as SeasonKey].data)) {
       traitImages.push(item.image.full)
     }
 
     championImages.forEach((img) => {
       const imgObj = new Image()
-      imgObj.src = `img/champion/${img}.TFT_Set13.png`
+      imgObj.src = `img/champion/${season}/${img}.TFT_Set13.png`
     })
 
     championImages.forEach((img) => {
       const faceObj = new Image()
-      faceObj.src = `img/face/${img}.avif`
+      faceObj.src = `img/face/${season}/${img}.avif`
     })
 
     traitImages.forEach((img) => {
       const imgObj = new Image()
-      imgObj.src = `img/trait/${img}`
+      imgObj.src = `img/trait/${season}/${img}`
     })
   },[])
 
@@ -348,20 +360,20 @@ const Shop = () => {
                   <div className="border border-card-border">
                     <img
                       className="w-full aspect-[69/40]"
-                      src={`img/champion/${set}/${item.image.full}`}
+                      src={`img/champion/${season}/${item.image.full}`}
                       alt="champion"
                     />
                   </div>
                   <div className="absolute top-0 left-0 flex flex-col justify-end pl-1 w-full h-full">
                     {item.trait?.map((traitName) => {
-                      const traitData: TraitData["data"] = traitJSON.data
-                      const trait = traitData[`TFT13_${traitName}`]
+                      const traitData: TraitData["data"] = traitJSON[season as SeasonKey].data
+                      const trait = traitData[`TFT${season.slice(-2)}_${traitName}`]
                       return (
                         <div className="flex flex-row" key={trait.id}>
                           <div className="w-fit h-fit p-[1px] mr-1 bg-trait-icon-shadow [clip-path:polygon(0%_25%,50%_0%,100%_25%,100%_75%,50%_100%,0%_75%)]">
                             <div className="flex justify-center items-center w-5 h-6 bg-trait-icon-bg [clip-path:polygon(0%_25%,50%_0%,100%_25%,100%_75%,50%_100%,0%_75%)]">
                               <img
-                                src={`img/trait/${trait.image.full}`}
+                                src={`img/trait/${season}/${trait.image.full}`}
                                 alt="icon"
                                 className="w-3 h-3"
                               />

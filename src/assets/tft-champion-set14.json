@@ -6,7 +6,8 @@
       "tier": 4,
       "image": {
         "full": "TFT14_Brand.TFT_Set14.png"
-      }
+      },
+      "trait": ["StreetDemon", "Techie"]
     },
     "TFT14_Darius": {
       "id": "TFT14_Darius",
@@ -14,7 +15,8 @@
       "tier": 2,
       "image": {
         "full": "TFT14_Darius.TFT_Set14.png"
-      }
+      },
+      "trait": ["Mob", "Bruiser"]
     },
     "TFT14_DrMundo": {
       "id": "TFT14_DrMundo",
@@ -22,7 +24,8 @@
       "tier": 1,
       "image": {
         "full": "TFT14_DrMundo.TFT_Set14.png"
-      }
+      },
+      "trait": ["StreetDemon", "Bruiser", "Strong"]
     },
     "TFT14_Elise": {
       "id": "TFT14_Elise",
@@ -30,7 +33,8 @@
       "tier": 3,
       "image": {
         "full": "TFT14_Elise.TFT_Set14.png"
-      }
+      },
+      "trait": ["HotRod", "Thirsty"]
     },
     "TFT14_Fiddlesticks": {
       "id": "TFT14_Fiddlesticks",
@@ -38,7 +42,8 @@
       "tier": 3,
       "image": {
         "full": "TFT14_Fiddlesticks.TFT_Set14.png"
-      }
+      },
+      "trait": ["BallisTek", "Techie"]
     },
     "TFT14_Galio": {
       "id": "TFT14_Galio",
@@ -46,7 +51,8 @@
       "tier": 3,
       "image": {
         "full": "TFT14_Galio.TFT_Set14.png"
-      }
+      },
+      "trait": ["Suits", "Armorclad"]
     },
     "TFT14_Garen": {
       "id": "TFT14_Garen",
@@ -54,7 +60,8 @@
       "tier": 5,
       "image": {
         "full": "TFT14_Garen.TFT_Set14.png"
-      }
+      },
+      "trait": ["Netgod"]
     },
     "TFT14_LeBlanc": {
       "id": "TFT14_LeBlanc",
@@ -62,7 +69,8 @@
       "tier": 2,
       "image": {
         "full": "TFT14_LeBlanc.TFT_Set14.png"
-      }
+      },
+      "trait": ["Suits", "Controller"]
     },
     "TFT14_MissFortune": {
       "id": "TFT14_MissFortune",
@@ -70,7 +78,8 @@
       "tier": 4,
       "image": {
         "full": "TFT14_MissFortune.TFT_Set14.png"
-      }
+      },
+      "trait": ["Mob", "Thirsty"]
     },
     "TFT14_Morgana": {
       "id": "TFT14_Morgana",
@@ -78,7 +87,8 @@
       "tier": 1,
       "image": {
         "full": "TFT14_Morgana.TFT_Set14.png"
-      }
+      },
+      "trait": ["Divinicorp", "Thirsty"]
     },
     "TFT14_Neeko": {
       "id": "TFT14_Neeko",
@@ -86,7 +96,8 @@
       "tier": 4,
       "image": {
         "full": "TFT14_Neeko.TFT_Set14.png"
-      }
+      },
+      "trait": ["StreetDemon", "Controller"]
     },
     "TFT14_Renekton": {
       "id": "TFT14_Renekton",
@@ -94,7 +105,8 @@
       "tier": 5,
       "image": {
         "full": "TFT14_Renekton.TFT_Set14.png"
-      }
+      },
+      "trait": ["Overlord", "Divinicorp", "Armorclad"]
     },
     "TFT14_Rengar": {
       "id": "TFT14_Rengar",
@@ -102,7 +114,8 @@
       "tier": 3,
       "image": {
         "full": "TFT14_Rengar.TFT_Set14.png"
-      }
+      },
+      "trait": ["StreetDemon", "Cutter"]
     },
     "TFT14_Samira": {
       "id": "TFT14_Samira",
@@ -110,7 +123,8 @@
       "tier": 5,
       "image": {
         "full": "TFT14_Samira.TFT_Set14.png"
-      }
+      },
+      "trait": ["StreetDemon", "Supercharge"]
     },
     "TFT14_Senna": {
       "id": "TFT14_Senna",
@@ -118,7 +132,8 @@
       "tier": 3,
       "image": {
         "full": "TFT14_Senna.TFT_Set14.png"
-      }
+      },
+      "trait": ["Divinicorp", "Strong"]
     },
     "TFT14_Shaco": {
       "id": "TFT14_Shaco",
@@ -126,7 +141,8 @@
       "tier": 1,
       "image": {
         "full": "TFT14_Shaco.TFT_Set14.png"
-      }
+      },
+      "trait": ["Mob", "Strong"]
     },
     "TFT14_TwistedFate": {
       "id": "TFT14_TwistedFate",
@@ -134,7 +150,8 @@
       "tier": 2,
       "image": {
         "full": "TFT14_TwistedFate.TFT_Set14.png"
-      }
+      },
+      "trait": ["Mob", "Swift"]
     },
     "TFT14_Varus": {
       "id": "TFT14_Varus",
@@ -142,7 +159,8 @@
       "tier": 3,
       "image": {
         "full": "TFT14_Varus.TFT_Set14.png"
-      }
+      },
+      "trait": ["EdgeRunner", "Cutter"]
     },
     "TFT14_Veigar": {
       "id": "TFT14_Veigar",
@@ -150,7 +168,8 @@
       "tier": 2,
       "image": {
         "full": "TFT14_Veigar.TFT_Set14.png"
-      }
+      },
+      "trait": ["Cyberboss", "Techie"]
     },
     "TFT14_Vex": {
       "id": "TFT14_Vex",
@@ -158,7 +177,8 @@
       "tier": 4,
       "image": {
         "full": "TFT14_Vex.TFT_Set14.png"
-      }
+      },
+      "trait": ["Divinicorp", "Cutter"]
     },
     "TFT14_Zed": {
       "id": "TFT14_Zed",
@@ -166,7 +186,8 @@
       "tier": 4,
       "image": {
         "full": "TFT14_Zed.TFT_Set14.png"
-      }
+      },
+      "trait": ["Suits", "Strong"]
     },
     "TFT14_Zeri": {
       "id": "TFT14_Zeri",
@@ -174,7 +195,8 @@
       "tier": 4,
       "image": {
         "full": "TFT14_Zeri.TFT_Set14.png"
-      }
+      },
+      "trait": ["EdgeRunner", "Swift"]
     },
     "TFT14_Zyra": {
       "id": "TFT14_Zyra",
@@ -182,7 +204,8 @@
       "tier": 1,
       "image": {
         "full": "TFT14_Zyra.TFT_Set14.png"
-      }
+      },
+      "trait": ["StreetDemon", "Techie"]
     },
     "TFT14_Braum": {
       "id": "TFT14_Braum",
@@ -190,7 +213,8 @@
       "tier": 3,
       "image": {
         "full": "TFT14_Braum.TFT_Set14.png"
-      }
+      },
+      "trait": ["Mob", "Vanguard"]
     },
     "TFT14_NidaleeCougar": {
       "id": "TFT14_NidaleeCougar",
@@ -198,7 +222,8 @@
       "tier": 1,
       "image": {
         "full": "TFT14_NidaleeCougar.TFT_Set14.png"
-      }
+      },
+      "trait": ["HotRod", "Supercharge"]
     },
     "TFT14_Shyvana": {
       "id": "TFT14_Shyvana",
@@ -206,7 +231,8 @@
       "tier": 2,
       "image": {
         "full": "TFT14_Shyvana.TFT_Set14.png"
-      }
+      },
+      "trait": ["HotRod", "Armorclad", "Techie"]
     },
     "TFT14_Kindred": {
       "id": "TFT14_Kindred",
@@ -214,7 +240,8 @@
       "tier": 1,
       "image": {
         "full": "TFT14_Kindred.TFT_Set14.png"
-      }
+      },
+      "trait": ["HotRod", "Swift", "Marksman"]
     },
     "TFT14_Yuumi": {
       "id": "TFT14_Yuumi",
@@ -222,7 +249,8 @@
       "tier": 3,
       "image": {
         "full": "TFT14_Yuumi.TFT_Set14.png"
-      }
+      },
+      "trait": ["AnimaSquad", "Supercharge", "Controller"]
     },
     "TFT14_Illaoi": {
       "id": "TFT14_Illaoi",
@@ -230,7 +258,8 @@
       "tier": 2,
       "image": {
         "full": "TFT14_Illaoi.TFT_Set14.png"
-      }
+      },
+      "trait": ["AnimaSquad", "Armorclad"]
     },
     "TFT14_Seraphine": {
       "id": "TFT14_Seraphine",
@@ -238,7 +267,8 @@
       "tier": 1,
       "image": {
         "full": "TFT14_Seraphine.TFT_Set14.png"
-      }
+      },
+      "trait": ["AnimaSquad", "Techie"]
     },
     "TFT14_Xayah": {
       "id": "TFT14_Xayah",
@@ -246,7 +276,8 @@
       "tier": 4,
       "image": {
         "full": "TFT14_Xayah.TFT_Set14.png"
-      }
+      },
+      "trait": ["AnimaSquad", "Marksman"]
     },
     "TFT14_Jhin": {
       "id": "TFT14_Jhin",
@@ -254,7 +285,8 @@
       "tier": 2,
       "image": {
         "full": "TFT14_Jhin.TFT_Set14.png"
-      }
+      },
+      "trait": ["EdgeRunner", "Marksman", "Thirsty"]
     },
     "TFT14_Naafiri": {
       "id": "TFT14_Naafiri",
@@ -262,7 +294,8 @@
       "tier": 2,
       "image": {
         "full": "TFT14_Naafiri.TFT_Set14.png"
-      }
+      },
+      "trait": ["EdgeRunner", "Supercharge"]
     },
     "TFT14_Gragas": {
       "id": "TFT14_Gragas",
@@ -270,7 +303,8 @@
       "tier": 3,
       "image": {
         "full": "TFT14_Gragas.TFT_Set14.png"
-      }
+      },
+      "trait": ["Divinicorp", "Bruiser"]
     },
     "TFT14_KogMaw": {
       "id": "TFT14_KogMaw",
@@ -278,7 +312,8 @@
       "tier": 1,
       "image": {
         "full": "TFT14_KogMaw.TFT_Set14.png"
-      }
+      },
+      "trait": ["BallisTek", "Swift"]
     },
     "TFT14_Skarner": {
       "id": "TFT14_Skarner",
@@ -286,7 +321,8 @@
       "tier": 2,
       "image": {
         "full": "TFT14_Skarner.TFT_Set14.png"
-      }
+      },
+      "trait": ["BallisTek", "Vanguard"]
     },
     "TFT14_Jax": {
       "id": "TFT14_Jax",
@@ -294,7 +330,8 @@
       "tier": 1,
       "image": {
         "full": "TFT14_Jax.TFT_Set14.png"
-      }
+      },
+      "trait": ["EdgeRunner", "Armorclad"]
     },
     "TFT14_Kobuko": {
       "id": "TFT14_Kobuko",
@@ -302,7 +339,8 @@
       "tier": 5,
       "image": {
         "full": "TFT14_Kobuko.TFT_Set14.png"
-      }
+      },
+      "trait": ["Cyberboss", "Bruiser"]
     },
     "TFT14_Sejuani": {
       "id": "TFT14_Sejuani",
@@ -310,7 +348,8 @@
       "tier": 4,
       "image": {
         "full": "TFT14_Sejuani.TFT_Set14.png"
-      }
+      },
+      "trait": ["EdgeRunner", "Armorclad"]
     },
     "TFT14_Poppy": {
       "id": "TFT14_Poppy",
@@ -318,7 +357,8 @@
       "tier": 1,
       "image": {
         "full": "TFT14_Poppy.TFT_Set14.png"
-      }
+      },
+      "trait": ["Cyberboss", "Armorclad"]
     },
     "TFT14_Ziggs": {
       "id": "TFT14_Ziggs",
@@ -326,7 +366,8 @@
       "tier": 4,
       "image": {
         "full": "TFT14_Ziggs.TFT_Set14.png"
-      }
+      },
+      "trait": ["Cyberboss", "Controller"]
     },
     "TFT14_Chogath": {
       "id": "TFT14_Chogath",
@@ -334,7 +375,8 @@
       "tier": 4,
       "image": {
         "full": "TFT14_ChoGath.TFT_Set14.png"
-      }
+      },
+      "trait": ["BallisTek", "Bruiser"]
     },
     "TFT14_Urgot": {
       "id": "TFT14_Urgot",
@@ -342,7 +384,8 @@
       "tier": 5,
       "image": {
         "full": "TFT14_Urgot.TFT_Set14.png"
-      }
+      },
+      "trait": ["BallisTek", "Cutter"]
     },
     "TFT14_Sylas": {
       "id": "TFT14_Sylas",
@@ -350,7 +393,8 @@
       "tier": 1,
       "image": {
         "full": "TFT14_Sylas.TFT_Set14.png"
-      }
+      },
+      "trait": ["AnimaSquad", "Vanguard"]
     },
     "TFT14_Aurora": {
       "id": "TFT14_Aurora",
@@ -358,7 +402,8 @@
       "tier": 5,
       "image": {
         "full": "TFT14_Aurora.TFT_Set14.png"
-      }
+      },
+      "trait": ["AnimaSquad", "Thirsty"]
     },
     "TFT14_Vayne": {
       "id": "TFT14_Vayne",
@@ -366,7 +411,8 @@
       "tier": 2,
       "image": {
         "full": "TFT14_Vayne.TFT_Set14.png"
-      }
+      },
+      "trait": ["AnimaSquad", "Strong"]
     },
     "TFT14_Leona": {
       "id": "TFT14_Leona",
@@ -374,7 +420,8 @@
       "tier": 4,
       "image": {
         "full": "TFT14_Leona.TFT_Set14.png"
-      }
+      },
+      "trait": ["AnimaSquad", "Vanguard"]
     },
     "TFT14_Vi": {
       "id": "TFT14_Vi",
@@ -382,7 +429,8 @@
       "tier": 1,
       "image": {
         "full": "TFT14_Vi.TFT_Set14.png"
-      }
+      },
+      "trait": ["Suits", "Vanguard"]
     },
     "TFT14_Mordekaiser": {
       "id": "TFT14_Mordekaiser",
@@ -390,7 +438,8 @@
       "tier": 3,
       "image": {
         "full": "TFT14_Mordekaiser.TFT_Set14.png"
-      }
+      },
+      "trait": ["EdgeRunner", "Bruiser", "Techie"]
     },
     "TFT14_Alistar": {
       "id": "TFT14_Alistar",
@@ -398,7 +447,8 @@
       "tier": 1,
       "image": {
         "full": "TFT14_Alistar.TFT_Set14.png"
-      }
+      },
+      "trait": ["Immortal", "Bruiser"]
     },
     "TFT14_Viego": {
       "id": "TFT14_Viego",
@@ -406,7 +456,8 @@
       "tier": 5,
       "image": {
         "full": "TFT14_Viego.TFT_Set14.png"
-      }
+      },
+      "trait": ["Immortal", "Techie"]
     },
     "TFT14_Jarvan": {
       "id": "TFT14_Jarvan",
@@ -414,7 +465,8 @@
       "tier": 3,
       "image": {
         "full": "TFT14_Jarvan.TFT_Set14.png"
-      }
+      },
+      "trait": ["Immortal", "Vanguard", "Strong"]
     },
     "TFT14_Graves": {
       "id": "TFT14_Graves",
@@ -422,7 +474,8 @@
       "tier": 2,
       "image": {
         "full": "TFT14_Graves.TFT_Set14.png"
-      }
+      },
+      "trait": ["Immortal", "Cutter"]
     },
     "TFT14_Annie": {
       "id": "TFT14_Annie",
@@ -430,7 +483,8 @@
       "tier": 4,
       "image": {
         "full": "TFT14_Annie.TFT_Set14.png"
-      }
+      },
+      "trait": ["Immortal", "Supercharge"]
     },
     "TFT14_Rhaast": {
       "id": "TFT14_Rhaast",
@@ -438,7 +492,8 @@
       "tier": 2,
       "image": {
         "full": "TFT14_Rhaast.TFT_Set14.png"
-      }
+      },
+      "trait": ["Divinicorp", "Vanguard"]
     },
     "TFT14_Draven": {
       "id": "TFT14_Draven",
@@ -446,7 +501,8 @@
       "tier": 3,
       "image": {
         "full": "TFT14_Draven.TFT_Set14.png"
-      }
+      },
+      "trait": ["Suits", "Swift"]
     },
     "TFT14_Zac": {
       "id": "TFT14_Zac",
@@ -454,7 +510,8 @@
       "tier": 5,
       "image": {
         "full": "TFT14_Zac.TFT_Set14.png"
-      }
+      },
+      "trait": ["Virus"]
     },
     "TFT14_Jinx": {
       "id": "TFT14_Jinx",
@@ -462,7 +519,8 @@
       "tier": 3,
       "image": {
         "full": "TFT14_Jinx.TFT_Set14.png"
-      }
+      },
+      "trait": ["StreetDemon", "Marksman"]
     },
     "TFT14_Ekko": {
       "id": "TFT14_Ekko",
@@ -470,21 +528,17 @@
       "tier": 2,
       "image": {
         "full": "TFT14_Ekko.TFT_Set14.png"
-      }
+      },
+      "trait": ["StreetDemon", "Controller"]
     },
     "TFT14_Aphelios": {
       "id": "TFT14_Aphelios",
       "name": "亞菲利歐",
       "tier": 4,
       "image": {
-        "full": "TFT14_Aphelios.TFT_Set14.png",
-        "sprite": "tft-champion3.png",
-        "group": "tft-champion",
-        "x": 48,
-        "y": 48,
-        "w": 48,
-        "h": 48
-      }
+        "full": "TFT14_Aphelios.TFT_Set14.png"
+      },
+      "trait": ["Immortal", "Marksman"]
     }
   }
 }

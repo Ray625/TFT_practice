@@ -35,18 +35,21 @@ export interface TraitData {
 export type MatchesTuple = ["space" | "seat", number]
 export type MatchesType = MatchesTuple[]
 
+export type SeasonKey = "set13" | "set14"
+
 type Updater<T> = T | ((prev: T) => T)
 
 export interface ShopStore {
   level: number
   xp: number
   total: number | string
-  set: string
+  season: string
   shopList: (ChampionData | null)[]
   banner: Record<string, ChampionData>
 
   setLevel: (updater: Updater<number>) => void
   setTotal: (updater: Updater<number | string>) => void
+  setSeason: (updater: SeasonKey) => void
   drawCard: () => void
   buyXp: () => void
   buyCard: (card: ChampionData, index: number) => void

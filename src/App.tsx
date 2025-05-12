@@ -10,11 +10,13 @@ function App() {
 
   return (
     <>
-      <div className="flex flex-col items-center justify-end w-full h-fit min-h-screen pt-20 bg-neutral-300/55 text-black">
+      <div className="flex flex-col items-center justify-center w-fit min-w-screen h-fit min-h-screen pt-4 bg-neutral-300/55 text-black">
         <div className="w-fit mx-auto">
-          <div className="relative flex flex-row">
+          <div className="relative flex flex-col gap-y-4 items-start lg:flex-row mb-8 xl:mb-4 px-4 xl:w-360">
             <Directions />
-            <Space />
+            <div className="static self-center xl:absolute xl:left-1/2 xl:-translate-x-1/2">
+              <Space />
+            </div>
             <ChangeSeasonButton/>
           </div>
           <Seat />

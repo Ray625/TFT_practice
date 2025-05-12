@@ -457,7 +457,7 @@
       "image": {
         "full": "TFT14_Viego.TFT_Set14.png"
       },
-      "trait": ["Immortal", "Techie"]
+      "trait": ["ViegoUniqueTrait", "Immortal", "Techie"]
     },
     "TFT14_Jarvan": {
       "id": "TFT14_Jarvan",

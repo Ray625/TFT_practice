@@ -95,16 +95,16 @@ const Shop = () => {
       const imgObj = new Image()
       imgObj.src = `img/trait/${season}/${img}`
     })
-  },[])
+  },[season])
 
   return (
     <>
-      <div className="relative flex flex-col w-360 mx-auto font-sans">
+      <div className="relative flex flex-col w-full px-4 lg:px-0 lg:w-250 xl:w-300 2xl:w-360 mx-auto font-sans">
         <div className="relative z-10 flex items-end w-full aspect-[209/8]">
           <div className="relative top-1 z-10 h-full p-1 aspect-[75/16] bg-border-gold [clip-path:polygon(0%_0%,85%_0%,100%_100%,0%_100%)]">
             <div className="w-full p-1 aspect-[75/16] bg-bg-black [clip-path:polygon(0%_0%,85%_0%,100%_100%,0%_100%)]">
               <div className="flex flex-row items-end w-full">
-                <h5 className="text-2xl/7 pl-1 text-text-white text-left">
+                <h5 className="text-xl/7 xl:text-2xl/7 pl-1 text-text-white text-left">
                   {`等級 ${level}`}
                 </h5>
                 <div className="flex flex-row gap-1 items-center h-7 ml-2">
@@ -116,9 +116,7 @@ const Shop = () => {
                     }}
                     title="Level up"
                   >
-                    <div className="flex justify-center items-center text-sm select-none">
-                      <i className="fa-solid fa-plus fa-sm"></i>
-                    </div>
+                    <p className="text-center text-sm/3 lg:text-base/3 xl:base/4 select-none">+</p>
                   </button>
                   <button
                     className="w-4 h-4 m-0 p-0 border border-white rounded-full bg-bg-black text-white hover:cursor-pointer hover:opacity-80"
@@ -128,17 +126,15 @@ const Shop = () => {
                     }}
                     title="Level down"
                   >
-                    <div className="flex justify-center items-center text-sm select-none">
-                      <i className="fa-solid fa-minus fa-sm"></i>
-                    </div>
+                    <p className="text-center text-sm/3 lg:text-xl/3 xl:base/4 select-none">-</p>
                   </button>
                 </div>
-                <p className="text-l ml-[20%] text-text-white">{`${xp}/${levelNeededXp}`}</p>
+                <p className="text-sm ml-2 xl:ml-6 text-text-white">{`${xp}/${levelNeededXp}`}</p>
               </div>
             </div>
           </div>
           <div className="relative -left-[2.2%] h-4/6 aspect-[54/6] bg-bg-black/80 [clip-path:polygon(0%_0%,92.5%_0%,100%_100%,6.5%_100%)]">
-            <div className="flex flex-row items-center justify-between w-4/5 h-full mx-auto opacity-90">
+            <div className="flex flex-row items-center justify-between w-4/5 h-full mx-auto opacity-90 text-sm xl:text-base">
               <div className="flex flex-row items-center gap-2">
                 <div className="w-2 h-2 bg-one-cost rounded-full"></div>
                 <p className="text-one-cost font-extralight">{`${levelRate[0].rate}%`}</p>
@@ -163,13 +159,13 @@ const Shop = () => {
           </div>
           <div className="absolute left-1/2 h-full p-1 aspect-[15/4] bg-border-gold [clip-path:polygon(20%_0%,80%_0%,100%_100%,0%_100%)]">
             <div className="w-full aspect-[15/4] p-1.5 bg-gold-bg [clip-path:polygon(20%_0%,80%_0%,100%_100%,0%_100%)]">
-              <h5 className="flex items-center justify-center gap-2 text-2xl/7 text-text-white text-center">
+              <h5 className="flex items-center justify-center gap-1 xl:gap-2 text-base xl:text-2xl/7 text-text-white text-center">
                 <img className="w-5 h-5" src="img/item/Gold.png" alt="icon" />
                 <input
                   name="gold"
                   type="num"
                   value={total}
-                  className="w-12 h-fit m-0 flex items-center justify-center pt-1 text-2xl/7 text-text-white text-center"
+                  className="w-8 xl:w-12 h-fit m-0 flex items-center justify-center pt-1 text-text-white text-center"
                   min={0}
                   max={999}
                   title="Enter money"
@@ -224,10 +220,10 @@ const Shop = () => {
               onClick={throttleBuyXp}
               title="購買經驗(F)"
             >
-              <h6 className="text-xl m-0 pt-1 pl-2 text-text-white text-left">
+              <h6 className="text-lg xl:text-xl m-0 pt-1 pl-2 text-text-white text-left">
                 購買XP
               </h6>
-              <p className="flex items-center justify-start pl-2 text-xl  text-text-white">
+              <p className="flex items-center justify-start pl-2 text-lg xl:text-xl text-text-white">
                 <img
                   className="w-4 h-4 mr-2 mt-1"
                   src="img/item/Gold.png"
@@ -235,9 +231,9 @@ const Shop = () => {
                 />
                 4
               </p>
-              <div className="absolute right-0 top-0 w-full h-full bg-xp-icon [clip-path:polygon(42%_0%,100%_0%,100%_100%,73%_100%)]">
+              <div className="absolute right-0 top-0 w-full h-full bg-xp-icon [clip-path:polygon(48%_0%,100%_0%,100%_100%,73%_100%)] xl:[clip-path:polygon(42%_0%,100%_0%,100%_100%,73%_100%)]">
                 <img
-                  className="absolute right-3 top-3 w-12 h-12"
+                  className="absolute right-3 top-3 w-8 xl:w-12 h-8 xl:h-12"
                   src="img/svg/xp.svg"
                   alt="icon"
                 />
@@ -248,10 +244,10 @@ const Shop = () => {
               title="刷新商店(D)"
               onClick={throttleDrawCard}
             >
-              <h6 className="text-xl m-0 pt-1 pl-2 text-text-white text-left">
+              <h6 className="text-lg xl:text-xl m-0 pt-1 pl-2 text-text-white text-left">
                 刷新
               </h6>
-              <p className="flex items-center justify-start pl-2 text-xl  text-text-white">
+              <p className="flex items-center justify-start pl-2 text-lg xl:text-xl text-text-white">
                 <img
                   className="w-4 h-4 mr-2 mt-1"
                   src="img/item/Gold.png"
@@ -259,9 +255,9 @@ const Shop = () => {
                 />
                 2
               </p>
-              <div className="absolute right-0 top-0 w-full h-full bg-reroll-icon [clip-path:polygon(42%_0%,100%_0%,100%_100%,73%_100%)]">
+              <div className="absolute right-0 top-0 w-full h-full bg-reroll-icon [clip-path:polygon(48%_0%,100%_0%,100%_100%,73%_100%)] xl:[clip-path:polygon(42%_0%,100%_0%,100%_100%,73%_100%)]">
                 <img
-                  className="absolute right-3 top-3 w-12 h-12"
+                  className="absolute right-3 top-3 w-8 xl:w-12 h-8 xl:h-12"
                   src="img/svg/reroll.svg"
                   alt="icon"
                 />
@@ -379,7 +375,7 @@ const Shop = () => {
                               />
                             </div>
                           </div>
-                          <p className="text-lg text-text-white text-left">
+                          <p className="text-base xl:text-lg text-text-white text-left">
                             {trait.name}
                           </p>
                         </div>
@@ -390,8 +386,8 @@ const Shop = () => {
                 <div
                   className={`flex flex-row justify-between items-center px-2 bg-linear-to-r ${cardFooterColorFrom[cost]} ${cardFooterColorTo[cost]} grow`}
                 >
-                  <p className="text-xl text-text-white">{item.name}</p>
-                  <p className="flex items-end justify-start text-lg text-text-white font-light font-sans leading-none ">
+                  <p className="text-xl xl:text-lg text-text-white">{item.name}</p>
+                  <p className="flex items-end justify-start text-base xl:text-lg text-text-white font-light font-sans leading-none ">
                     <img
                       className="w-4 h-4 mr-2 mt-1"
                       src="img/item/Gold.png"
@@ -405,7 +401,7 @@ const Shop = () => {
 
             return (
               <div
-                className={`flex flex-col h-full p-0.5 border bg-empty-card-wrapper hover:opacity-90 hover:cursor-pointer transition-opacity duration-150`}
+                className={`flex flex-col justify-center h-full p-0.5 border bg-empty-card-wrapper hover:opacity-90 hover:cursor-pointer transition-opacity duration-150`}
                 key={index}
               >
                 <div

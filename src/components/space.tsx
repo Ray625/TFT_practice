@@ -22,7 +22,7 @@ const OneGrid: React.FC<OneGrid> = ({ cardData }) => {
     : undefined
 
   return (
-    <div className="relative flex justify-center w-fit aspect-13/15 hover:opacity-80">
+    <div className="relative flex justify-center w-16 xl:w-19.5 aspect-13/15 hover:opacity-80">
       <svg
         version="1.1"
         baseProfile="full"
@@ -155,7 +155,7 @@ const Space = () => {
         <div
           key={rowIndex}
           className={`flex flex-row gap-2 ${
-            rowIndex % 2 === 1 ? "ml-10.75" : ""
+            rowIndex % 2 === 1 ? "ml-9 xl:ml-10.75" : ""
           }`}
         >
           {space

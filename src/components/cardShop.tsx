@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useRef } from "react"
 import champion_set13 from "../assets/tft-champion-set13.json"
 import champion_set14 from "../assets/tft-champion-set14.json"
 import traitJSON_set13 from "../assets/tft-trait-set13.json"
@@ -8,6 +8,7 @@ import useThrottle from "../hooks/useThrottle"
 import { useShopStore } from "../store/shopStore"
 import { useSiteStore } from "../store/siteStore"
 import { TraitData, SeasonKey } from "../types/shopStoreTypes"
+import { ChampionData } from "../types/shopStoreTypes"
 
 const champion = {
   set13: champion_set13,
@@ -26,6 +27,8 @@ const Shop = () => {
     total,
     season,
     shopList,
+    dragTargetIndex,
+    isDragging,
     drawCard,
     buyXp,
     setLevel,
@@ -33,11 +36,21 @@ const Shop = () => {
     buyCard,
     sellCard,
     placeCard,
+    setDragTargetIndex,
+    dropToSellCard
   } = useShopStore()
-  const { playerSide, hoverCard, } = useSiteStore()
+  const { playerSide, hoverCard, dragOver } = useSiteStore()
   const xpList = [2, 2, 6, 10, 20, 36, 48, 76, 84, 0]
   const levelNeededXp = xpList[level - 1]
   const levelRate = shopRates.data.Shop[`${level - 1}`].dropRatesByTier
+
+  const parentRef = useRef<HTMLDivElement | null>(null)
+  const dragDataRef = useRef<{ data: ChampionData, index: number } | null>(null)
+  const startPosition = useRef({ x: 0, y: 0 })
+  const lastPosition = useRef({ x: 0, y: 0 })
+  const dragOffset = useRef({ x: 0, y: 0 })
+  const dragTargetRef = useRef<HTMLDivElement | null>(null)
+  const frameIdRef = useRef<number | null>(null)
 
   const throttleDrawCard = useThrottle(drawCard, 250)
   const throttleBuyXp = useThrottle(buyXp, 100)
@@ -45,20 +58,26 @@ const Shop = () => {
   // 設立監聽器，當使用者按下F時購買經驗，D刷新商店，E販賣hover卡牌
   useEffect(() => {
     const handlePressKey = (event: any) => {
-      if (event.keyCode === 70) {
-        throttleBuyXp()
-      }
-
-      if (event.keyCode === 68) {
-        throttleDrawCard()
-      }
-
-      if (event.keyCode === 69 && hoverCard) {
-        sellCard(hoverCard)
-      }
-
-      if (event.keyCode === 87 && hoverCard) {
-        placeCard(hoverCard)
+      switch (event.key.toLowerCase()) {
+        case 'f':
+          throttleBuyXp();
+          break;
+        case 'd':
+          throttleDrawCard();
+          break;
+        case 'g':
+          setTotal((prev) => {
+            const num = Number(prev || "0");
+            const added = Math.min(num + 10, 999);
+            return added;
+          });
+          break;
+        case 'e':
+          if (hoverCard) sellCard(hoverCard);
+          break;
+        case 'w':
+          if (hoverCard) placeCard(hoverCard);
+          break;
       }
     }
 
@@ -95,11 +114,87 @@ const Shop = () => {
       const imgObj = new Image()
       imgObj.src = `img/trait/${season}/${img}`
     })
-  },[season])
+  }, [season])
+
+  // 拖曳動畫
+  const dragAnimate = () => {
+    if (dragTargetRef.current) {
+      dragTargetRef.current.style.transform = `translate(${dragOffset.current.x}px, ${dragOffset.current.y}px)`
+    }
+    // 重複下一幀
+    frameIdRef.current = requestAnimationFrame(dragAnimate)
+  }
+
+  const handleMouseDown = (e: React.MouseEvent, data: ChampionData, index: number) => {
+    // 將拖曳目標資料存入ref，於放開後購買卡牌
+    const dragData = { data, index }
+    dragDataRef.current = dragData
+    dragTargetRef.current = e.currentTarget as HTMLDivElement
+
+    // 紀錄初始位置，用於製作拖曳動畫
+    startPosition.current = { x: e.clientX, y: e.clientY }
+
+    // setState改變拖曳目標z-index，讓目標浮於圖層上
+    setDragTargetIndex(index)
+
+    // 開始動畫並記錄於ref用於清除
+    frameIdRef.current = requestAnimationFrame(dragAnimate)
+
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mouseup", handleMouseUp);
+  };
+
+  // 紀錄滑鼠位置，用於拖曳製作動畫
+  const handleMouseMove = (e: MouseEvent) => {
+    if (!dragTargetRef.current) return
+    const { clientX, clientY } = e
+
+    lastPosition.current = { x: e.clientX, y: e.clientY }
+    dragOffset.current = { x: clientX - startPosition.current.x, y: clientY - startPosition.current.y }
+  }
+
+  // 於滑鼠放開時計算是否將卡牌拖曳出商店，判斷是否購買卡牌
+  const handleMouseUp = () => {
+    if (!parentRef.current) return
+    const parentRect = parentRef.current.getBoundingClientRect()
+
+    // 若使用者單擊沒有拖曳，則lastPosition會是(0, 0)，達到單擊購買的效果
+    const rightPosition = lastPosition.current
+    const isNowOutside =
+    rightPosition.x < parentRect.left ||
+    rightPosition.x > parentRect.right ||
+    rightPosition.y < parentRect.top ||
+    rightPosition.y > parentRect.bottom
+
+    if (isNowOutside && dragDataRef.current) {
+      const dragData = dragDataRef.current
+      const item = dragData.data
+      const startIndex = dragData.index
+
+      buyCard(item, startIndex)
+    }
+
+    // 重置ref及動畫
+    dragDataRef.current = null
+    if (dragTargetRef.current !== null) {
+      dragTargetRef.current.style.transform = "none"
+      dragTargetRef.current = null
+    }
+    startPosition.current = { x: 0, y: 0 }
+    lastPosition.current = { x: 0, y: 0 }
+    dragOffset.current = {x: 0, y: 0}
+    if (frameIdRef.current) {
+      cancelAnimationFrame(frameIdRef.current)
+    }
+    setDragTargetIndex(null)
+
+    window.removeEventListener("mousemove", handleMouseMove);
+    window.removeEventListener("mouseup", handleMouseUp);
+  }
 
   return (
     <>
-      <div className="relative flex flex-col w-full px-4 lg:px-0 lg:w-250 xl:w-300 2xl:w-360 mx-auto font-sans">
+      <div className="relative flex flex-col w-full px-4 lg:px-0 lg:w-250 xl:w-300 2xl:w-360 mx-auto font-sans select-none">
         <div className="relative z-10 flex items-end w-full aspect-[209/8]">
           <div className="relative top-1 z-10 h-full p-1 aspect-[75/16] bg-border-gold [clip-path:polygon(0%_0%,85%_0%,100%_100%,0%_100%)]">
             <div className="w-full p-1 aspect-[75/16] bg-bg-black [clip-path:polygon(0%_0%,85%_0%,100%_100%,0%_100%)]">
@@ -195,7 +290,7 @@ const Shop = () => {
                 <div className="mt-0.5">
                   <button
                     className="flex justify-center items-center w-5 h-5 m-0 p-0 bg-bg-black rounded-full border border-white hover:opacity-80 hover:cursor-pointer select-none"
-                    title="+10 Gold"
+                    title="+10 Gold (G)"
                     onClick={() => {
                       setTotal((prev) => {
                         const num = Number(prev || "0");
@@ -213,12 +308,17 @@ const Shop = () => {
             </div>
           </div>
         </div>
-        <div className="relative z-0 grid grid-cols-6 gap-2 w-full p-2 aspect-[104/14] bg-bg-black border-4 border-border-gold shadow-[4px_4px_4px_0_rgba(0,0,0,0.25)]">
+        <div
+          className="relative grid grid-cols-6 gap-2 w-full p-2 aspect-[104/14] xl:aspect-[300/42] 2xl:aspect-[104/14] bg-bg-black border-4 border-border-gold shadow-[4px_4px_4px_0_rgba(0,0,0,0.25)]"
+          ref={parentRef}
+          onDragOver={(e) => dragOver(e)}
+          onDrop={() => dropToSellCard(hoverCard)}
+        >
           <div className="flex flex-col gap-2 h-full bg-bg-black">
             <button
-              className="relative h-full flex flex-col bg-xp-bg border-2 border-xp-border active:opacity-90 hover:opacity-80 hover:cursor-pointer transition-opacity duration-150"
+              className={`relative h-full flex flex-col bg-xp-bg border-2 border-xp-border hover:cursor-pointer transition-opacity duratio ${Number(total) < 4 ? "opacity-60" : "active:opacity-90 hover:opacity-80"}`}
               onClick={throttleBuyXp}
-              title="購買經驗(F)"
+              title={`${Number(total) < 4 ? "購買經驗(F) (金錢不足)" :"購買經驗(F)"}`}
             >
               <h6 className="text-lg xl:text-xl m-0 pt-1 pl-2 text-text-white text-left">
                 購買XP
@@ -233,15 +333,15 @@ const Shop = () => {
               </p>
               <div className="absolute right-0 top-0 w-full h-full bg-xp-icon [clip-path:polygon(48%_0%,100%_0%,100%_100%,73%_100%)] xl:[clip-path:polygon(42%_0%,100%_0%,100%_100%,73%_100%)]">
                 <img
-                  className="absolute right-3 top-3 w-8 xl:w-12 h-8 xl:h-12"
+                  className="absolute right-3 top-3 w-8 xl:w-10 2xl:x-12 h-8 xl:h-10 2xl:h-12"
                   src="img/svg/xp.svg"
                   alt="icon"
                 />
               </div>
             </button>
             <button
-              className="relative h-full flex flex-col bg-reroll-bg border-2 border-reroll-border active:opacity-90 hover:opacity-80 hover:cursor-pointer transition-opacity duration-150"
-              title="刷新商店(D)"
+              className={`relative h-full flex flex-col bg-reroll-bg border-2 border-reroll-border  hover:cursor-pointer transition-opacity duration-150 ${Number(total) < 2 ? "opacity-60" : "active:opacity-90 hover:opacity-80"}`}
+              title={`${Number(total) < 2 ? "刷新商店(D) (金錢不足)" :"刷新商店(D)"}`}
               onClick={throttleDrawCard}
             >
               <h6 className="text-lg xl:text-xl m-0 pt-1 pl-2 text-text-white text-left">
@@ -257,14 +357,17 @@ const Shop = () => {
               </p>
               <div className="absolute right-0 top-0 w-full h-full bg-reroll-icon [clip-path:polygon(48%_0%,100%_0%,100%_100%,73%_100%)] xl:[clip-path:polygon(42%_0%,100%_0%,100%_100%,73%_100%)]">
                 <img
-                  className="absolute right-3 top-3 w-8 xl:w-12 h-8 xl:h-12"
+                  className="absolute right-3 top-3 w-8 xl:w-10 2xl:x-12 h-8 xl:h-10 2xl:h-12"
                   src="img/svg/reroll.svg"
                   alt="icon"
                 />
               </div>
             </button>
           </div>
-          {shopList.map((item, index) => {
+          {isDragging &&
+            <div className="relative col-start-2 col-end-7 flex justify-center items-center w-full h-full text-2xl text-white">{`出售以獲得 ${hoverCard?.cardData?.tier} 金錢`}</div>
+          }
+          {!isDragging && shopList.map((item, index) => {
             // 卡被抽出後，留下空位
             if (!item) {
               return (
@@ -310,12 +413,12 @@ const Shop = () => {
             }
 
             const body = (
-              <>
+              <div
+                draggable={false}
+                onMouseDown={(e) => handleMouseDown(e, item, index)}
+              >
                 <div
                   className={`relative border-2 ${borderColors[cost]}`}
-                  onClick={() => {
-                    buyCard(item, index)
-                  }}
                 >
                   {/* 可升星時出現提示 */}
                   {canIncreaseStars && (
@@ -375,7 +478,7 @@ const Shop = () => {
                               />
                             </div>
                           </div>
-                          <p className="text-base xl:text-lg text-text-white text-left">
+                          <p className="text-base xl:text-base text-text-white text-left">
                             {trait.name}
                           </p>
                         </div>
@@ -386,7 +489,7 @@ const Shop = () => {
                 <div
                   className={`flex flex-row justify-between items-center px-2 bg-linear-to-r ${cardFooterColorFrom[cost]} ${cardFooterColorTo[cost]} grow`}
                 >
-                  <p className="text-xl xl:text-lg text-text-white">{item.name}</p>
+                  <p className="text-xl xl:text-base 2xl:text-lg text-text-white">{item.name}</p>
                   <p className="flex items-end justify-start text-base xl:text-lg text-text-white font-light font-sans leading-none ">
                     <img
                       className="w-4 h-4 mr-2 mt-1"
@@ -396,18 +499,16 @@ const Shop = () => {
                     {item.tier}
                   </p>
                 </div>
-              </>
+              </div>
             )
 
             return (
               <div
-                className={`flex flex-col justify-center h-full p-0.5 border bg-empty-card-wrapper hover:opacity-90 hover:cursor-pointer transition-opacity duration-150`}
+                className={`relative ${dragDataRef.current && index === dragTargetIndex ? "z-100" : "z-2"} flex flex-col justify-center h-full p-0.5 border bg-empty-card-wrapper  hover:cursor-pointer transition-opacity duration-150 ${Number(total) < item.tier ? "opacity-80" : "hover:opacity-90 "}`}
                 key={index}
               >
                 <div
-                  className={`relative z-1 p-0.5 ${
-                    !canIncreaseStars && "bg-empty-card-wrapper"
-                  }`}
+                  className={`relative z-1 p-0.5 ${!canIncreaseStars && "bg-empty-card-wrapper"} select-none`}
                 >
                   {canIncreaseStars && (
                     <>

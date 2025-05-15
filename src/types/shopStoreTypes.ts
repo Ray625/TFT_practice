@@ -46,13 +46,21 @@ export interface ShopStore {
   season: string
   shopList: (ChampionData | null)[]
   banner: Record<string, ChampionData>
+  isOutside: boolean
+  dragTargetIndex: number | null
+  isDragging: boolean
 
   setLevel: (updater: Updater<number>) => void
   setTotal: (updater: Updater<number | string>) => void
   setSeason: (updater: SeasonKey) => void
+  setIsOutside: (updater: boolean) => void
+  setDragTargetIndex: (updater: number | null) => void
+  setIsDragging: (updater: boolean) => void
   drawCard: () => void
   buyXp: () => void
   buyCard: (card: ChampionData, index: number) => void
   sellCard: (hoverCard: Record<string, any>) => void
   placeCard: (hoverCard: Record<string, any>) => void
+  checkIsOutside: (x: number, y: number, rect: DOMRect) => void
+  dropToSellCard: (hoverCard: Record<string, any> | null) => void
 }

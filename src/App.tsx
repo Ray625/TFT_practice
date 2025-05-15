@@ -10,7 +10,7 @@ function App() {
 
   return (
     <>
-      <div className="flex flex-col items-center justify-center w-fit min-w-screen h-fit min-h-screen pt-4 bg-neutral-300/55 text-black">
+      <div className="flex flex-col items-center justify-center w-fit min-w-screen h-fit min-h-screen pt-4 bg-neutral-300/55 text-black overflow-hidden">
         <div className="w-fit mx-auto">
           <div className="relative flex flex-col gap-y-4 items-start lg:flex-row mb-8 xl:mb-4 px-4 xl:w-360">
             <Directions />

@@ -2,8 +2,8 @@ import { useSiteStore } from "../store/siteStore"
 import { useShopStore } from "../store/shopStore"
 
 const Seat = () => {
-  const { seat, seatAnimate, setHoverCard } = useSiteStore()
-  const { season } = useShopStore()
+  const { seat, seatAnimate, setHoverCard, dragStart, drop, dragOver } = useSiteStore()
+  const { season, setIsDragging } = useShopStore()
 
   return (
     <div className="flex flex-row items-center justify-center gap-0.5 w-fit h-fit mx-auto mb-4 border-2 border-bg-black bg-bg-black/30">
@@ -23,6 +23,8 @@ const Seat = () => {
           <div
             className="w-25.5 h-25.5 bg-seat-bg p-2 hover:opacity-80"
             key={index}
+            onDragOver={(e) => dragOver(e)}
+            onDrop={(e) => drop(e, index, "seat")}
           >
             {item && item.name && (
               <div
@@ -35,6 +37,9 @@ const Seat = () => {
                   })
                 }
                 onMouseLeave={() => setHoverCard(null)}
+                draggable={true}
+                onDragStart={(event) => dragStart(event, item, index, "seat")}
+                onDragEnd={() => setIsDragging(false)}
               >
                 {item.star === 2 && (
                   <>

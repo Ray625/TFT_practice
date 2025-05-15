@@ -125,6 +125,12 @@ export const useShopStore = create<ShopStore>((set, get) => {
     season: "set14",
     shopList: Array(5).fill(null),
     banner: initializeBanner("set14"),
+    isOutside: false,
+    startPosition: {x:0, y:0},
+    lastPosition: {x:0, y:0},
+    dragOffset: { x: 0, y: 0 },
+    dragTargetIndex: null,
+    isDragging: false,
 
     setLevel: (updater) => {
       set((state) => ({
@@ -151,6 +157,10 @@ export const useShopStore = create<ShopStore>((set, get) => {
       setSpace(Array(28).fill(null))
       setPlayerSide({})
     },
+
+    setIsOutside: (updater) => set({ isOutside: updater }),
+    setDragTargetIndex: (updater) => set({ dragTargetIndex: updater }),
+    setIsDragging: (updater) => set({isDragging: updater}),
 
     // 刷新商店
     drawCard: () => {
@@ -422,17 +432,13 @@ export const useShopStore = create<ShopStore>((set, get) => {
       // 對著備戰區卡牌使用時
       if (hoverCard.place === "seat") {
         // 檢查戰區位置是否已達等級上限(可放置張數與等級相同)
-        let full = true
-
         const spaceCount = space.reduce((acc, item) => {
           if (item) acc += 1
           return acc
         }, 0)
 
-        if (spaceCount < level) full = false
-
         // 若戰區已滿則return
-        if (full) return
+        if (spaceCount >= level) return
 
         // 將備戰區該位置清空
         setSeat((prev) => prev.map((item, i) => (i === hoverCard.index ? null : item)))
@@ -486,6 +492,26 @@ export const useShopStore = create<ShopStore>((set, get) => {
       }
 
       setHoverCard(null)
+    },
+
+    // 確認拖曳目標是否離開父層框內
+    checkIsOutside: (x, y, rect) => {
+      const isNowOutside = x < rect.left || x > rect.right || y < rect.top || y > rect.bottom
+
+      set((state) => {
+        if (state.isOutside !== isNowOutside) {
+          return ({isOutside: isNowOutside})
+        }
+        return state
+      })
+    },
+
+    // 拖曳以販售
+    dropToSellCard: (hoverCard) => {
+      if (!hoverCard) return
+      const { sellCard, setIsDragging } = get()
+      sellCard(hoverCard)
+      setIsDragging(false)
     }
   }
 })

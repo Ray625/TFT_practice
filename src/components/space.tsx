@@ -147,7 +147,8 @@ const OneGrid: React.FC<OneGrid> = ({ cardData }) => {
 }
 
 const Space = () => {
-  const { space, spaceAnimate, setHoverCard } = useSiteStore()
+  const { space, spaceAnimate, setHoverCard, dragStart, drop, dragOver } = useSiteStore()
+  const { setIsDragging } = useShopStore()
 
   return (
     <div className="flex flex-col w-fit h-fit mb-8 mx-auto p-8 bg-seat-bg">
@@ -156,7 +157,8 @@ const Space = () => {
           key={rowIndex}
           className={`flex flex-row gap-2 ${
             rowIndex % 2 === 1 ? "ml-9 xl:ml-10.75" : ""
-          }`}
+            }`}
+
         >
           {space
             .slice(rowIndex * 7, rowIndex * 7 + 7)
@@ -173,6 +175,11 @@ const Space = () => {
                   }
                   onMouseLeave={() => setHoverCard(null)}
                   className="relative"
+                  draggable={true}
+                  onDragOver={(e) => dragOver(e)}
+                  onDrop={(e) => drop(e, rowIndex * 7 + index, "space")}
+                  onDragStart={(event) => dragStart(event, item, rowIndex * 7 + index, "space")}
+                  onDragEnd={() => setIsDragging(false)}
                 >
                   <OneGrid cardData={item} />
                   {spaceAnimate.has(rowIndex * 7 + index) &&
@@ -197,7 +204,11 @@ const Space = () => {
                     )}
                 </div>
               ) : (
-                <div key={rowIndex * 7 + index}>
+                  <div
+                    key={rowIndex * 7 + index}
+                    onDragOver={(e) => dragOver(e)}
+                    onDrop={(e) => drop(e, rowIndex * 7 + index, "space")}
+                  >
                   <OneGrid cardData={item} />
                 </div>
               )

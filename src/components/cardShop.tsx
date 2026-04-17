@@ -94,20 +94,20 @@ const Shop = () => {
     const traitImages = []
 
     for (let item of Object.values(champion[season as SeasonKey].data)) {
-      championImages.push(item.id)
+      championImages.push(item)
     }
     for (let item of Object.values(traitJSON[season as SeasonKey].data)) {
       traitImages.push(item.image.full)
     }
 
-    championImages.forEach((img) => {
+    championImages.forEach((champion) => {
       const imgObj = new Image()
-      imgObj.src = `img/champion/${season}/${img}.TFT_Set13.png`
+      imgObj.src = `img/champion/${season}/${champion.image.full}`
     })
 
-    championImages.forEach((img) => {
+    championImages.forEach((champion) => {
       const faceObj = new Image()
-      faceObj.src = `img/face/${season}/${img}.avif`
+      faceObj.src = `img/face/${season}/${champion.id}.avif`
     })
 
     traitImages.forEach((img) => {

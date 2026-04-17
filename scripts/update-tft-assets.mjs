@@ -74,6 +74,9 @@ const main = async () => {
       .filter((trait) => trait.id?.startsWith(tftPrefix))
       .map((trait) => [trait.name, trait])
   )
+  const cdragonTraitsByName = new Map(
+    cdragonSet.traits.map((trait) => [trait.name, trait])
+  )
 
   const cdragonChampions = cdragonSet.champions
     .filter((champion) => {
@@ -135,6 +138,7 @@ const main = async () => {
   const traitData = {}
   for (const trait of Object.values(ddragonTraits.data)) {
     if (!usedTraitIds.has(trait.id)) continue
+    const cdragonTrait = cdragonTraitsByName.get(trait.name)
 
     traitData[trait.id] = {
       id: trait.id,
@@ -142,6 +146,14 @@ const main = async () => {
       image: {
         full: trait.image.full,
       },
+      effects: (cdragonTrait?.effects ?? [])
+        .map((effect) => ({
+          minUnits: effect.minUnits,
+          maxUnits: effect.maxUnits,
+          style: effect.style,
+        }))
+        .filter((effect) => effect.minUnits > 0)
+        .sort((a, b) => a.minUnits - b.minUnits),
     }
 
     downloads.push({

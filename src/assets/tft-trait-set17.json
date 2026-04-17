@@ -7,252 +7,738 @@
       "name": "星靈牧者",
       "image": {
         "full": "Trait_Icon_17_Shepherd.TFT_Set17.png"
-      }
+      },
+      "effects": [
+        {
+          "minUnits": 3,
+          "maxUnits": 4,
+          "style": 1
+        },
+        {
+          "minUnits": 5,
+          "maxUnits": 6,
+          "style": 3
+        },
+        {
+          "minUnits": 7,
+          "maxUnits": 25000,
+          "style": 5
+        }
+      ]
     },
     "TFT17_ADMIN": {
       "id": "TFT17_ADMIN",
       "name": "仲裁者",
       "image": {
         "full": "Trait_Icon_17_Arbiter.TFT_Set17.png"
-      }
+      },
+      "effects": [
+        {
+          "minUnits": 2,
+          "maxUnits": 2,
+          "style": 1
+        },
+        {
+          "minUnits": 3,
+          "maxUnits": 25000,
+          "style": 5
+        }
+      ]
     },
     "TFT17_RangedTrait": {
       "id": "TFT17_RangedTrait",
       "name": "狙擊專家",
       "image": {
         "full": "Trait_Icon_6_Sniper.png"
-      }
+      },
+      "effects": [
+        {
+          "minUnits": 2,
+          "maxUnits": 2,
+          "style": 1
+        },
+        {
+          "minUnits": 3,
+          "maxUnits": 3,
+          "style": 3
+        },
+        {
+          "minUnits": 4,
+          "maxUnits": 25000,
+          "style": 5
+        }
+      ]
     },
     "TFT17_APTrait": {
       "id": "TFT17_APTrait",
       "name": "復刻師",
       "image": {
         "full": "Trait_Icon_17_Replicator.TFT_Set17.png"
-      }
+      },
+      "effects": [
+        {
+          "minUnits": 2,
+          "maxUnits": 3,
+          "style": 1
+        },
+        {
+          "minUnits": 4,
+          "maxUnits": 25000,
+          "style": 5
+        }
+      ]
     },
     "TFT17_ASTrait": {
       "id": "TFT17_ASTrait",
       "name": "極速快手",
       "image": {
         "full": "Trait_Icon_17_Challenger.TFT_Set17.png"
-      }
+      },
+      "effects": [
+        {
+          "minUnits": 2,
+          "maxUnits": 2,
+          "style": 1
+        },
+        {
+          "minUnits": 3,
+          "maxUnits": 3,
+          "style": 3
+        },
+        {
+          "minUnits": 4,
+          "maxUnits": 4,
+          "style": 3
+        },
+        {
+          "minUnits": 5,
+          "maxUnits": 25000,
+          "style": 5
+        }
+      ]
     },
     "TFT17_AnimaSquad": {
       "id": "TFT17_AnimaSquad",
       "name": "百獸",
       "image": {
         "full": "Trait_Icon_17_AnimaTech.TFT_Set17.png"
-      }
+      },
+      "effects": [
+        {
+          "minUnits": 3,
+          "maxUnits": 5,
+          "style": 1
+        },
+        {
+          "minUnits": 6,
+          "maxUnits": 25000,
+          "style": 5
+        }
+      ]
     },
     "TFT17_AssassinTrait": {
       "id": "TFT17_AssassinTrait",
       "name": "神影刺客",
       "image": {
         "full": "Trait_Icon_17_Rogue.TFT_Set17.png"
-      }
+      },
+      "effects": [
+        {
+          "minUnits": 2,
+          "maxUnits": 2,
+          "style": 1
+        },
+        {
+          "minUnits": 3,
+          "maxUnits": 3,
+          "style": 3
+        },
+        {
+          "minUnits": 4,
+          "maxUnits": 4,
+          "style": 3
+        },
+        {
+          "minUnits": 5,
+          "maxUnits": 25000,
+          "style": 5
+        }
+      ]
     },
     "TFT17_Astronaut": {
       "id": "TFT17_Astronaut",
       "name": "米普星人",
       "image": {
         "full": "Trait_Icon_17_Astronaut.TFT_Set17.png"
-      }
+      },
+      "effects": [
+        {
+          "minUnits": 3,
+          "maxUnits": 4,
+          "style": 1
+        },
+        {
+          "minUnits": 5,
+          "maxUnits": 6,
+          "style": 3
+        },
+        {
+          "minUnits": 7,
+          "maxUnits": 9,
+          "style": 5
+        },
+        {
+          "minUnits": 10,
+          "maxUnits": 25000,
+          "style": 6
+        }
+      ]
     },
     "TFT17_DRX": {
       "id": "TFT17_DRX",
       "name": "超新星",
       "image": {
         "full": "Trait_Icon_17_NOVA.TFT_Set17.png"
-      }
+      },
+      "effects": [
+        {
+          "minUnits": 2,
+          "maxUnits": 4,
+          "style": 1
+        },
+        {
+          "minUnits": 5,
+          "maxUnits": 25000,
+          "style": 5
+        }
+      ]
     },
     "TFT17_DarkStar": {
       "id": "TFT17_DarkStar",
       "name": "幽冥煞星",
       "image": {
         "full": "Trait_Icon_17_DarkStar.TFT_Set17.png"
-      }
+      },
+      "effects": [
+        {
+          "minUnits": 2,
+          "maxUnits": 3,
+          "style": 1
+        },
+        {
+          "minUnits": 4,
+          "maxUnits": 5,
+          "style": 3
+        },
+        {
+          "minUnits": 6,
+          "maxUnits": 8,
+          "style": 5
+        },
+        {
+          "minUnits": 9,
+          "maxUnits": 25000,
+          "style": 6
+        }
+      ]
     },
     "TFT17_FlexTrait": {
       "id": "TFT17_FlexTrait",
       "name": "星際旅人",
       "image": {
         "full": "Trait_Icon_17_Voyager.TFT_Set17.png"
-      }
+      },
+      "effects": [
+        {
+          "minUnits": 2,
+          "maxUnits": 2,
+          "style": 1
+        },
+        {
+          "minUnits": 3,
+          "maxUnits": 3,
+          "style": 3
+        },
+        {
+          "minUnits": 4,
+          "maxUnits": 4,
+          "style": 3
+        },
+        {
+          "minUnits": 5,
+          "maxUnits": 5,
+          "style": 3
+        },
+        {
+          "minUnits": 6,
+          "maxUnits": 25000,
+          "style": 5
+        }
+      ]
     },
     "TFT17_ZedUniqueTrait": {
       "id": "TFT17_ZedUniqueTrait",
       "name": "銀河獵手",
       "image": {
         "full": "Trait_Icon_17_GalaxyHunter.TFT_Set17.png"
-      }
+      },
+      "effects": [
+        {
+          "minUnits": 1,
+          "maxUnits": 25000,
+          "style": 4
+        }
+      ]
     },
     "TFT17_FioraUniqueTrait": {
       "id": "TFT17_FioraUniqueTrait",
       "name": "神鬥士",
       "image": {
         "full": "Trait_Icon_17_DivineDuelist.TFT_Set17.png"
-      }
+      },
+      "effects": [
+        {
+          "minUnits": 1,
+          "maxUnits": 25000,
+          "style": 4
+        }
+      ]
     },
     "TFT17_MissFortuneUniqueTrait": {
       "id": "TFT17_MissFortuneUniqueTrait",
       "name": "重槍女武神",
       "image": {
         "full": "Trait_Icon_17_GunGoddess.TFT_Set17.png"
-      }
+      },
+      "effects": [
+        {
+          "minUnits": 1,
+          "maxUnits": 25000,
+          "style": 4
+        }
+      ]
     },
     "TFT17_HPTank": {
       "id": "TFT17_HPTank",
       "name": "武鬥家",
       "image": {
         "full": "Trait_Icon_Brawler.png"
-      }
+      },
+      "effects": [
+        {
+          "minUnits": 2,
+          "maxUnits": 3,
+          "style": 1
+        },
+        {
+          "minUnits": 4,
+          "maxUnits": 5,
+          "style": 3
+        },
+        {
+          "minUnits": 6,
+          "maxUnits": 25000,
+          "style": 5
+        }
+      ]
     },
     "TFT17_ManaTrait": {
       "id": "TFT17_ManaTrait",
       "name": "降靈師",
       "image": {
         "full": "Trait_Icon_17_Channeler.TFT_Set17.png"
-      }
+      },
+      "effects": [
+        {
+          "minUnits": 2,
+          "maxUnits": 2,
+          "style": 1
+        },
+        {
+          "minUnits": 3,
+          "maxUnits": 3,
+          "style": 3
+        },
+        {
+          "minUnits": 4,
+          "maxUnits": 4,
+          "style": 3
+        },
+        {
+          "minUnits": 5,
+          "maxUnits": 25000,
+          "style": 5
+        }
+      ]
     },
     "TFT17_Mecha": {
       "id": "TFT17_Mecha",
       "name": "機械戰甲",
       "image": {
         "full": "Trait_Icon_17_Mecha.TFT_Set17.png"
-      }
+      },
+      "effects": [
+        {
+          "minUnits": 3,
+          "maxUnits": 3,
+          "style": 1
+        },
+        {
+          "minUnits": 4,
+          "maxUnits": 5,
+          "style": 3
+        },
+        {
+          "minUnits": 6,
+          "maxUnits": 25000,
+          "style": 5
+        }
+      ]
     },
     "TFT17_MeleeTrait": {
       "id": "TFT17_MeleeTrait",
       "name": "劫掠者",
       "image": {
         "full": "Trait_Icon_16_Slayer.png"
-      }
+      },
+      "effects": [
+        {
+          "minUnits": 2,
+          "maxUnits": 3,
+          "style": 1
+        },
+        {
+          "minUnits": 4,
+          "maxUnits": 5,
+          "style": 3
+        },
+        {
+          "minUnits": 6,
+          "maxUnits": 25000,
+          "style": 5
+        }
+      ]
     },
     "TFT17_Primordian": {
       "id": "TFT17_Primordian",
       "name": "遠古霸者",
       "image": {
         "full": "Trait_Icon_17_Primordian.TFT_Set17.png"
-      }
+      },
+      "effects": [
+        {
+          "minUnits": 2,
+          "maxUnits": 2,
+          "style": 1
+        },
+        {
+          "minUnits": 3,
+          "maxUnits": 25000,
+          "style": 5
+        }
+      ]
     },
     "TFT17_Timebreaker": {
       "id": "TFT17_Timebreaker",
       "name": "時間破壞者",
       "image": {
         "full": "Trait_Icon_17_Timebreaker.TFT_Set17.png"
-      }
+      },
+      "effects": [
+        {
+          "minUnits": 2,
+          "maxUnits": 2,
+          "style": 1
+        },
+        {
+          "minUnits": 3,
+          "maxUnits": 3,
+          "style": 3
+        },
+        {
+          "minUnits": 4,
+          "maxUnits": 25000,
+          "style": 5
+        }
+      ]
     },
     "TFT17_Fateweaver": {
       "id": "TFT17_Fateweaver",
       "name": "命運編織者",
       "image": {
         "full": "Trait_Icon_17_Fateweaver.TFT_Set17.png"
-      }
+      },
+      "effects": [
+        {
+          "minUnits": 2,
+          "maxUnits": 3,
+          "style": 1
+        },
+        {
+          "minUnits": 4,
+          "maxUnits": 25000,
+          "style": 5
+        }
+      ]
     },
     "TFT17_ResistTank": {
       "id": "TFT17_ResistTank",
       "name": "堡壘衛士",
       "image": {
         "full": "Trait_Icon_9_Bastion.png"
-      }
+      },
+      "effects": [
+        {
+          "minUnits": 2,
+          "maxUnits": 3,
+          "style": 1
+        },
+        {
+          "minUnits": 4,
+          "maxUnits": 5,
+          "style": 3
+        },
+        {
+          "minUnits": 6,
+          "maxUnits": 25000,
+          "style": 5
+        }
+      ]
     },
     "TFT17_ShieldTank": {
       "id": "TFT17_ShieldTank",
       "name": "先鋒戰士",
       "image": {
         "full": "Trait_Icon_12_Vanguard.TFT_Set12.png"
-      }
+      },
+      "effects": [
+        {
+          "minUnits": 2,
+          "maxUnits": 3,
+          "style": 1
+        },
+        {
+          "minUnits": 4,
+          "maxUnits": 5,
+          "style": 3
+        },
+        {
+          "minUnits": 6,
+          "maxUnits": 25000,
+          "style": 5
+        }
+      ]
     },
     "TFT17_SpaceGroove": {
       "id": "TFT17_SpaceGroove",
       "name": "太空律動",
       "image": {
         "full": "Trait_Icon_17_SpaceGroove.TFT_Set17.png"
-      }
+      },
+      "effects": [
+        {
+          "minUnits": 1,
+          "maxUnits": 2,
+          "style": 1
+        },
+        {
+          "minUnits": 3,
+          "maxUnits": 4,
+          "style": 3
+        },
+        {
+          "minUnits": 5,
+          "maxUnits": 6,
+          "style": 3
+        },
+        {
+          "minUnits": 7,
+          "maxUnits": 9,
+          "style": 5
+        },
+        {
+          "minUnits": 10,
+          "maxUnits": 25000,
+          "style": 6
+        }
+      ]
     },
     "TFT17_PsyOps": {
       "id": "TFT17_PsyOps",
       "name": "靈能使",
       "image": {
         "full": "Trait_Icon_17_PsyOps.TFT_Set17.png"
-      }
+      },
+      "effects": [
+        {
+          "minUnits": 2,
+          "maxUnits": 3,
+          "style": 1
+        },
+        {
+          "minUnits": 4,
+          "maxUnits": 25000,
+          "style": 5
+        }
+      ]
     },
     "TFT17_SonaUniqueTrait": {
       "id": "TFT17_SonaUniqueTrait",
       "name": "指揮官",
       "image": {
         "full": "Trait_Icon_17_Commander.TFT_Set17.png"
-      }
+      },
+      "effects": [
+        {
+          "minUnits": 1,
+          "maxUnits": 25000,
+          "style": 4
+        }
+      ]
     },
     "TFT17_BlitzcrankUniqueTrait": {
       "id": "TFT17_BlitzcrankUniqueTrait",
       "name": "派對咖",
       "image": {
         "full": "Trait_Icon_17_PartyAnimal.TFT_Set17.png"
-      }
+      },
+      "effects": [
+        {
+          "minUnits": 1,
+          "maxUnits": 25000,
+          "style": 4
+        }
+      ]
     },
     "TFT17_VexUniqueTrait": {
       "id": "TFT17_VexUniqueTrait",
       "name": "厄運使者",
       "image": {
         "full": "Trait_Icon_17_Doomer.TFT_Set17.png"
-      }
+      },
+      "effects": [
+        {
+          "minUnits": 1,
+          "maxUnits": 25000,
+          "style": 4
+        }
+      ]
     },
     "TFT17_ShenUniqueTrait": {
       "id": "TFT17_ShenUniqueTrait",
       "name": "星界壁壘",
       "image": {
         "full": "Trait_Icon_17_Bulwark.TFT_Set17.png"
-      }
+      },
+      "effects": [
+        {
+          "minUnits": 1,
+          "maxUnits": 25000,
+          "style": 4
+        }
+      ]
     },
     "TFT17_GravesTrait": {
       "id": "TFT17_GravesTrait",
       "name": "再造神兵",
       "image": {
         "full": "Trait_Icon_17_FactoryNew.TFT_Set17.png"
-      }
+      },
+      "effects": [
+        {
+          "minUnits": 1,
+          "maxUnits": 25000,
+          "style": 4
+        }
+      ]
     },
     "TFT17_RhaastUniqueTrait": {
       "id": "TFT17_RhaastUniqueTrait",
       "name": "救世主",
       "image": {
         "full": "Trait_Icon_17_Redeemer.TFT_Set17.png"
-      }
+      },
+      "effects": [
+        {
+          "minUnits": 1,
+          "maxUnits": 25000,
+          "style": 4
+        }
+      ]
     },
     "TFT17_Stargazer_Wolf": {
       "id": "TFT17_Stargazer_Wolf",
       "name": "占星師",
       "image": {
         "full": "Trait_Icon_17_Stargazer.TFT_Set17.png"
-      }
+      },
+      "effects": [
+        {
+          "minUnits": 3,
+          "maxUnits": 4,
+          "style": 1
+        },
+        {
+          "minUnits": 5,
+          "maxUnits": 6,
+          "style": 3
+        },
+        {
+          "minUnits": 7,
+          "maxUnits": 25000,
+          "style": 5
+        }
+      ]
     },
     "TFT17_TahmKenchUniqueTrait": {
       "id": "TFT17_TahmKenchUniqueTrait",
       "name": "神諭",
       "image": {
         "full": "Trait_Icon_12_Arcana.TFT_Set12.png"
-      }
+      },
+      "effects": [
+        {
+          "minUnits": 1,
+          "maxUnits": 25000,
+          "style": 4
+        }
+      ]
     },
     "TFT17_MorganaUniqueTrait": {
       "id": "TFT17_MorganaUniqueTrait",
       "name": "闇翼魔女",
       "image": {
         "full": "Trait_Icon_17_DarkLady.TFT_Set17.png"
-      }
+      },
+      "effects": [
+        {
+          "minUnits": 1,
+          "maxUnits": 1,
+          "style": 4
+        }
+      ]
     },
     "TFT17_JhinUniqueTrait": {
       "id": "TFT17_JhinUniqueTrait",
       "name": "燼滅之華",
       "image": {
         "full": "Trait_Icon_17_Singularity.TFT_Set17.png"
-      }
+      },
+      "effects": [
+        {
+          "minUnits": 1,
+          "maxUnits": 1,
+          "style": 4
+        }
+      ]
     },
     "TFT17_MissFortuneUndeterminedTrait": {
       "id": "TFT17_MissFortuneUndeterminedTrait",
       "name": "選擇特性",
       "image": {
         "full": "Trait_Icon_17_MissFortuneUndetermindedTrait.TFT_Set17.png"
-      }
+      },
+      "effects": []
     }
   }
 }

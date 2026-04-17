@@ -29,6 +29,11 @@ export interface TraitData {
       image: {
         full: string
       }
+      effects?: {
+        minUnits: number
+        maxUnits: number
+        style: number
+      }[]
     }
   }
 }

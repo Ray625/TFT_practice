@@ -3,7 +3,6 @@ import './App.css'
 import Shop from "./components/cardShop"
 import Seat from "./components/seat"
 import Space from "./components/space"
-import ChangeSeasonButton from "./components/changeSeasonButton"
 import TraitPanel from "./components/traitPanel"
 
 function App() {
@@ -12,16 +11,14 @@ function App() {
     <>
       <div className="flex flex-col items-center justify-center w-fit min-w-screen h-fit min-h-screen pt-4 bg-neutral-300/55 text-black overflow-hidden">
         <div className="w-fit mx-auto">
-          <div className="flex flex-col gap-4 items-start lg:flex-row lg:items-start mb-8 xl:mb-4 px-4 xl:w-360">
-            <div className="w-full lg:w-fit shrink-0">
+          <div className="grid grid-cols-1 gap-4 items-start mb-8 px-4 lg:grid-cols-[14.5rem_auto_14.5rem] xl:grid-cols-[14.5rem_auto_14.5rem] xl:w-360 xl:mb-4">
+            <div className="w-full lg:w-fit">
               <TraitPanel />
             </div>
-            <div className="shrink-0">
-              <ChangeSeasonButton/>
-            </div>
-            <div className="self-center lg:self-start">
+            <div className="justify-self-center">
               <Space />
             </div>
+            <div className="hidden lg:block" aria-hidden="true" />
           </div>
           <Seat />
           <Shop />

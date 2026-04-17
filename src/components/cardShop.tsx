@@ -61,27 +61,27 @@ const Shop = () => {
 
   // 設立監聽器，當使用者按下F時購買經驗，D刷新商店，E販賣hover卡牌
   useEffect(() => {
-    const handlePressKey = (event: any) => {
-      switch (event.key.toLowerCase()) {
-        case 'f':
-          throttleBuyXp();
-          break;
-        case 'd':
-          throttleDrawCard();
-          break;
-        case 'g':
+    const handlePressKey = (event: KeyboardEvent) => {
+      switch (event.code) {
+        case "KeyF":
+          throttleBuyXp()
+          break
+        case "KeyD":
+          throttleDrawCard()
+          break
+        case "KeyG":
           setTotal((prev) => {
-            const num = Number(prev || "0");
-            const added = Math.min(num + 10, 999);
-            return added;
-          });
-          break;
-        case 'e':
-          if (hoverCard) sellCard(hoverCard);
-          break;
-        case 'w':
-          if (hoverCard) placeCard(hoverCard);
-          break;
+            const num = Number(prev || "0")
+            const added = Math.min(num + 10, 999)
+            return added
+          })
+          break
+        case "KeyE":
+          if (hoverCard) sellCard(hoverCard)
+          break
+        case "KeyW":
+          if (hoverCard) placeCard(hoverCard)
+          break
       }
     }
 

@@ -33,7 +33,7 @@ const activeStyles: Record<string, string> = {
 }
 
 const inactiveStyle = "border-reroll-border bg-bg-black/85 text-text-white"
-const traitsPerPage = 8
+const traitsPerPage = 6
 
 const getTraitRows = (
   season: SeasonKey,
@@ -124,7 +124,7 @@ const TraitPanel = () => {
       {rows.length === 0 ? (
         <p className="text-sm text-text-white/70">尚未放置英雄</p>
       ) : (
-        <div className="flex flex-col gap-2 overflow-hidden">
+        <div className="flex flex-col gap-2 grow overflow-hidden">
           {visibleRows.map((row) => {
             const target = row.nextEffect?.minUnits ?? row.activeEffect?.minUnits ?? row.count
             const style = row.activeEffect

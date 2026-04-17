@@ -7,6 +7,7 @@ export interface ChampionData {
   name: string
   tier: number
   image: ChampionImage
+  faceImage?: ChampionImage
   count: number
   trait: string[]
   star?: number
@@ -35,7 +36,7 @@ export interface TraitData {
 export type MatchesTuple = ["space" | "seat", number]
 export type MatchesType = MatchesTuple[]
 
-export type SeasonKey = "set13" | "set14"
+export type SeasonKey = "set13" | "set14" | "set17"
 
 type Updater<T> = T | ((prev: T) => T)
 

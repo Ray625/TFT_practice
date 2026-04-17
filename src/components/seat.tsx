@@ -86,7 +86,7 @@ const Seat = () => {
                 </p>
                 <img
                   className="hover:cursor-pointer"
-                  src={`img/face/${season}/${item.id}.avif`}
+                  src={`img/face/${season}/${item.faceImage?.full ?? `${item.id}.avif`}`}
                   alt="champion"
                 />
               </div>

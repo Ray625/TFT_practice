@@ -1,8 +1,10 @@
 import { useEffect, useRef } from "react"
 import champion_set13 from "../assets/tft-champion-set13.json"
 import champion_set14 from "../assets/tft-champion-set14.json"
+import champion_set17 from "../assets/tft-champion-set17.json"
 import traitJSON_set13 from "../assets/tft-trait-set13.json"
 import traitJSON_set14 from "../assets/tft-trait-set14.json"
+import traitJSON_set17 from "../assets/tft-trait-set17.json"
 import shopRates from "../assets/tft-shop-drop-rates-data.json"
 import useThrottle from "../hooks/useThrottle"
 import { useShopStore } from "../store/shopStore"
@@ -12,12 +14,14 @@ import { ChampionData } from "../types/shopStoreTypes"
 
 const champion = {
   set13: champion_set13,
-  set14: champion_set14
+  set14: champion_set14,
+  set17: champion_set17
 }
 
 const traitJSON = {
   set13: traitJSON_set13,
-  set14: traitJSON_set14
+  set14: traitJSON_set14,
+  set17: traitJSON_set17
 }
 
 const Shop = () => {
@@ -107,7 +111,7 @@ const Shop = () => {
 
     championImages.forEach((champion) => {
       const faceObj = new Image()
-      faceObj.src = `img/face/${season}/${champion.id}.avif`
+      faceObj.src = `img/face/${season}/${champion.faceImage?.full ?? `${champion.id}.avif`}`
     })
 
     traitImages.forEach((img) => {

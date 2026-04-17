@@ -1,5 +1,6 @@
 import traitJSON_set13 from "../assets/tft-trait-set13.json"
 import traitJSON_set14 from "../assets/tft-trait-set14.json"
+import traitJSON_set17 from "../assets/tft-trait-set17.json"
 import { useSiteStore } from "../store/siteStore"
 import { useShopStore } from "../store/shopStore"
 import { BoardUnit } from "../store/siteStore"
@@ -11,7 +12,8 @@ interface OneGrid {
 
 const traitJSON = {
   set13: traitJSON_set13,
-  set14: traitJSON_set14
+  set14: traitJSON_set14,
+  set17: traitJSON_set17
 }
 
 const OneGrid: React.FC<OneGrid> = ({ cardData }) => {
@@ -51,7 +53,7 @@ const OneGrid: React.FC<OneGrid> = ({ cardData }) => {
                 width="88"
                 height="100"
                 preserveAspectRatio="xMidYMid slice"
-                href={`img/face/${season}/${cardData.id}.avif`}
+                href={`img/face/${season}/${cardData.faceImage?.full ?? `${cardData.id}.avif`}`}
               />
             </g>
             <path

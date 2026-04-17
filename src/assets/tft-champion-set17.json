@@ -1,0 +1,956 @@
+{
+  "data": {
+    "TFT17_Aatrox": {
+      "id": "TFT17_Aatrox",
+      "name": "厄薩斯",
+      "tier": 1,
+      "image": {
+        "full": "TFT17_Aatrox_splash_centered_30.TFT_Set17.png"
+      },
+      "faceImage": {
+        "full": "TFT17_Aatrox.png"
+      },
+      "trait": [
+        "DRX",
+        "ResistTank"
+      ]
+    },
+    "TFT17_Briar": {
+      "id": "TFT17_Briar",
+      "name": "布蕾爾",
+      "tier": 1,
+      "image": {
+        "full": "TFT17_Briar_splash_centered_10.TFT_Set17.png"
+      },
+      "faceImage": {
+        "full": "TFT17_Briar.png"
+      },
+      "trait": [
+        "AnimaSquad",
+        "Primordian",
+        "AssassinTrait"
+      ]
+    },
+    "TFT17_Ezreal": {
+      "id": "TFT17_Ezreal",
+      "name": "伊澤瑞爾",
+      "tier": 1,
+      "image": {
+        "full": "TFT17_Ezreal_splash_centered_5.TFT_Set17.png"
+      },
+      "faceImage": {
+        "full": "TFT17_Ezreal.png"
+      },
+      "trait": [
+        "Timebreaker",
+        "RangedTrait"
+      ]
+    },
+    "TFT17_Poppy": {
+      "id": "TFT17_Poppy",
+      "name": "波比",
+      "tier": 1,
+      "image": {
+        "full": "TFT17_Poppy_splash_centered_16.TFT_Set17.png"
+      },
+      "faceImage": {
+        "full": "TFT17_Poppy.png"
+      },
+      "trait": [
+        "Astronaut",
+        "ResistTank"
+      ]
+    },
+    "TFT17_Chogath": {
+      "id": "TFT17_Chogath",
+      "name": "科加斯",
+      "tier": 1,
+      "image": {
+        "full": "TFT17_Chogath_splash_centered_7.TFT_Set17.png"
+      },
+      "faceImage": {
+        "full": "TFT17_Chogath.png"
+      },
+      "trait": [
+        "DarkStar",
+        "HPTank"
+      ]
+    },
+    "TFT17_Nasus": {
+      "id": "TFT17_Nasus",
+      "name": "納瑟斯",
+      "tier": 1,
+      "image": {
+        "full": "TFT17_Nasus_splash_centered_25.TFT_Set17.png"
+      },
+      "faceImage": {
+        "full": "TFT17_Nasus.png"
+      },
+      "trait": [
+        "SpaceGroove",
+        "ShieldTank"
+      ]
+    },
+    "TFT17_TwistedFate": {
+      "id": "TFT17_TwistedFate",
+      "name": "逆命",
+      "tier": 1,
+      "image": {
+        "full": "TFT17_TwistedFate_splash_centered_45.TFT_Set17.png"
+      },
+      "faceImage": {
+        "full": "TFT17_TwistedFate.png"
+      },
+      "trait": [
+        "Stargazer_Wolf",
+        "Fateweaver"
+      ]
+    },
+    "TFT17_Caitlyn": {
+      "id": "TFT17_Caitlyn",
+      "name": "凱特琳",
+      "tier": 1,
+      "image": {
+        "full": "TFT17_Caitlyn_splash_centered_48.TFT_Set17.png"
+      },
+      "faceImage": {
+        "full": "TFT17_Caitlyn.png"
+      },
+      "trait": [
+        "DRX",
+        "Fateweaver"
+      ]
+    },
+    "TFT17_Teemo": {
+      "id": "TFT17_Teemo",
+      "name": "提摩",
+      "tier": 1,
+      "image": {
+        "full": "TFT17_Teemo_splash_centered_47.TFT_Set17.png"
+      },
+      "faceImage": {
+        "full": "TFT17_Teemo.png"
+      },
+      "trait": [
+        "SpaceGroove",
+        "SummonTrait"
+      ]
+    },
+    "TFT17_Talon": {
+      "id": "TFT17_Talon",
+      "name": "塔隆",
+      "tier": 1,
+      "image": {
+        "full": "TFT17_Talon_splash_centered_39.TFT_Set17.png"
+      },
+      "faceImage": {
+        "full": "TFT17_Talon.png"
+      },
+      "trait": [
+        "Stargazer_Wolf",
+        "AssassinTrait"
+      ]
+    },
+    "TFT17_RekSai": {
+      "id": "TFT17_RekSai",
+      "name": "雷珂煞",
+      "tier": 1,
+      "image": {
+        "full": "TFT17_RekSai_splash_centered_26.TFT_Set17.png"
+      },
+      "faceImage": {
+        "full": "TFT17_RekSai.png"
+      },
+      "trait": [
+        "Primordian",
+        "HPTank"
+      ]
+    },
+    "TFT17_Leona": {
+      "id": "TFT17_Leona",
+      "name": "雷歐娜",
+      "tier": 1,
+      "image": {
+        "full": "TFT17_Leona_splash_centered_64.TFT_Set17.png"
+      },
+      "faceImage": {
+        "full": "TFT17_Leona.png"
+      },
+      "trait": [
+        "ADMIN",
+        "ShieldTank"
+      ]
+    },
+    "TFT17_Veigar": {
+      "id": "TFT17_Veigar",
+      "name": "維迦",
+      "tier": 1,
+      "image": {
+        "full": "TFT17_Veigar_splash_centered_32.TFT_Set17.png"
+      },
+      "faceImage": {
+        "full": "TFT17_Veigar.png"
+      },
+      "trait": [
+        "Astronaut",
+        "APTrait"
+      ]
+    },
+    "TFT17_Lissandra": {
+      "id": "TFT17_Lissandra",
+      "name": "麗珊卓",
+      "tier": 1,
+      "image": {
+        "full": "TFT17_Lissandra_splash_centered_12.TFT_Set17.png"
+      },
+      "faceImage": {
+        "full": "TFT17_Lissandra.png"
+      },
+      "trait": [
+        "DarkStar",
+        "SummonTrait",
+        "APTrait"
+      ]
+    },
+    "TFT17_IvernMinion": {
+      "id": "TFT17_IvernMinion",
+      "name": "小米普",
+      "tier": 2,
+      "image": {
+        "full": "TFT17_IvernMinion_splash_centered_27.TFT_Set17.png"
+      },
+      "faceImage": {
+        "full": "TFT17_IvernMinion.png"
+      },
+      "trait": [
+        "Astronaut",
+        "SummonTrait",
+        "FlexTrait"
+      ]
+    },
+    "TFT17_Gragas": {
+      "id": "TFT17_Gragas",
+      "name": "古拉格斯",
+      "tier": 2,
+      "image": {
+        "full": "TFT17_Gragas_splash_centered_10.TFT_Set17.png"
+      },
+      "faceImage": {
+        "full": "TFT17_Gragas.png"
+      },
+      "trait": [
+        "PsyOps",
+        "HPTank"
+      ]
+    },
+    "TFT17_Jinx": {
+      "id": "TFT17_Jinx",
+      "name": "吉茵珂絲",
+      "tier": 2,
+      "image": {
+        "full": "TFT17_Jinx_splash_centered_38.TFT_Set17.png"
+      },
+      "faceImage": {
+        "full": "TFT17_Jinx.png"
+      },
+      "trait": [
+        "AnimaSquad",
+        "ASTrait"
+      ]
+    },
+    "TFT17_Milio": {
+      "id": "TFT17_Milio",
+      "name": "米里歐",
+      "tier": 2,
+      "image": {
+        "full": "TFT17_Milio_splash_centered_0.TFT_Set17.png"
+      },
+      "faceImage": {
+        "full": "TFT17_Milio.png"
+      },
+      "trait": [
+        "Timebreaker",
+        "Fateweaver"
+      ]
+    },
+    "TFT17_Gnar": {
+      "id": "TFT17_Gnar",
+      "name": "吶兒",
+      "tier": 2,
+      "image": {
+        "full": "TFT17_Gnar_splash_centered_15.TFT_Set17.png"
+      },
+      "faceImage": {
+        "full": "TFT17_Gnar.png"
+      },
+      "trait": [
+        "Astronaut",
+        "RangedTrait"
+      ]
+    },
+    "TFT17_Belveth": {
+      "id": "TFT17_Belveth",
+      "name": "貝爾薇斯",
+      "tier": 2,
+      "image": {
+        "full": "TFT17_Belveth_splash_centered_19.TFT_Set17.png"
+      },
+      "faceImage": {
+        "full": "TFT17_Belveth.png"
+      },
+      "trait": [
+        "Primordian",
+        "ASTrait",
+        "MeleeTrait"
+      ]
+    },
+    "TFT17_Akali": {
+      "id": "TFT17_Akali",
+      "name": "阿卡莉",
+      "tier": 2,
+      "image": {
+        "full": "TFT17_Akali_splash_centered_68.TFT_Set17.png"
+      },
+      "faceImage": {
+        "full": "TFT17_Akali.png"
+      },
+      "trait": [
+        "DRX",
+        "MeleeTrait"
+      ]
+    },
+    "TFT17_Zoe": {
+      "id": "TFT17_Zoe",
+      "name": "柔依",
+      "tier": 2,
+      "image": {
+        "full": "TFT17_Zoe_splash_centered_43.TFT_Set17.png"
+      },
+      "faceImage": {
+        "full": "TFT17_Zoe.png"
+      },
+      "trait": [
+        "ADMIN",
+        "ManaTrait"
+      ]
+    },
+    "TFT17_Pyke": {
+      "id": "TFT17_Pyke",
+      "name": "派克",
+      "tier": 2,
+      "image": {
+        "full": "TFT17_Pyke_splash_centered_25.TFT_Set17.png"
+      },
+      "faceImage": {
+        "full": "TFT17_Pyke.png"
+      },
+      "trait": [
+        "PsyOps",
+        "FlexTrait"
+      ]
+    },
+    "TFT17_Jax": {
+      "id": "TFT17_Jax",
+      "name": "賈克斯",
+      "tier": 2,
+      "image": {
+        "full": "TFT17_Jax.TFT_Set17.png"
+      },
+      "faceImage": {
+        "full": "TFT17_Jax.png"
+      },
+      "trait": [
+        "Stargazer_Wolf",
+        "ResistTank"
+      ]
+    },
+    "TFT17_Pantheon": {
+      "id": "TFT17_Pantheon",
+      "name": "潘森",
+      "tier": 2,
+      "image": {
+        "full": "TFT17_Pantheon_splash_centered_16.TFT_Set17.png"
+      },
+      "faceImage": {
+        "full": "TFT17_Pantheon.png"
+      },
+      "trait": [
+        "Timebreaker",
+        "HPTank",
+        "APTrait"
+      ]
+    },
+    "TFT17_Gwen": {
+      "id": "TFT17_Gwen",
+      "name": "關",
+      "tier": 2,
+      "image": {
+        "full": "TFT17_Gwen_splash_centered_1.TFT_Set17.png"
+      },
+      "faceImage": {
+        "full": "TFT17_Gwen.png"
+      },
+      "trait": [
+        "SpaceGroove",
+        "AssassinTrait"
+      ]
+    },
+    "TFT17_Mordekaiser": {
+      "id": "TFT17_Mordekaiser",
+      "name": "魔鬥凱薩",
+      "tier": 2,
+      "image": {
+        "full": "TFT17_Mordekaiser_splash_centered_6.TFT_Set17.png"
+      },
+      "faceImage": {
+        "full": "TFT17_Mordekaiser.png"
+      },
+      "trait": [
+        "DarkStar",
+        "ManaTrait",
+        "ShieldTank"
+      ]
+    },
+    "TFT17_Illaoi": {
+      "id": "TFT17_Illaoi",
+      "name": "伊羅旖",
+      "tier": 3,
+      "image": {
+        "full": "TFT17_Illaoi_splash_centered_27.TFT_Set17.png"
+      },
+      "faceImage": {
+        "full": "TFT17_Illaoi.png"
+      },
+      "trait": [
+        "AnimaSquad",
+        "ShieldTank",
+        "SummonTrait"
+      ]
+    },
+    "TFT17_MissFortune": {
+      "id": "TFT17_MissFortune",
+      "name": "好運姐",
+      "tier": 3,
+      "image": {
+        "full": "TFT17_MissFortune_splash_centered_16.TFT_Set17.png"
+      },
+      "faceImage": {
+        "full": "TFT17_MissFortune.png"
+      },
+      "trait": [
+        "MissFortuneUniqueTrait",
+        "MissFortuneUndeterminedTrait"
+      ]
+    },
+    "TFT17_Maokai": {
+      "id": "TFT17_Maokai",
+      "name": "茂凱",
+      "tier": 3,
+      "image": {
+        "full": "TFT17_Maokai_splash_centered_33.TFT_Set17.png"
+      },
+      "faceImage": {
+        "full": "TFT17_Maokai.png"
+      },
+      "trait": [
+        "DRX",
+        "HPTank"
+      ]
+    },
+    "TFT17_Fizz": {
+      "id": "TFT17_Fizz",
+      "name": "飛斯",
+      "tier": 3,
+      "image": {
+        "full": "TFT17_Fizz_splash_centered_26.TFT_Set17.png"
+      },
+      "faceImage": {
+        "full": "TFT17_Fizz.png"
+      },
+      "trait": [
+        "Astronaut",
+        "AssassinTrait"
+      ]
+    },
+    "TFT17_Urgot": {
+      "id": "TFT17_Urgot",
+      "name": "烏爾加特",
+      "tier": 3,
+      "image": {
+        "full": "TFT17_Urgot_splash_centered_32.TFT_Set17.png"
+      },
+      "faceImage": {
+        "full": "TFT17_Urgot.png"
+      },
+      "trait": [
+        "Mecha",
+        "HPTank",
+        "MeleeTrait"
+      ]
+    },
+    "TFT17_Rhaast": {
+      "id": "TFT17_Rhaast",
+      "name": "勒哈斯特",
+      "tier": 3,
+      "image": {
+        "full": "TFT17_KaynSplash_Uncentered.TFT_Set17.png"
+      },
+      "faceImage": {
+        "full": "TFT17_Rhaast.png"
+      },
+      "trait": [
+        "RhaastUniqueTrait"
+      ]
+    },
+    "TFT17_Kaisa": {
+      "id": "TFT17_Kaisa",
+      "name": "凱莎",
+      "tier": 3,
+      "image": {
+        "full": "TFT17_Kaisa_splash_centered_69.TFT_Set17.png"
+      },
+      "faceImage": {
+        "full": "TFT17_Kaisa.png"
+      },
+      "trait": [
+        "DarkStar",
+        "AssassinTrait"
+      ]
+    },
+    "TFT17_Ornn": {
+      "id": "TFT17_Ornn",
+      "name": "鄂爾",
+      "tier": 3,
+      "image": {
+        "full": "TFT17_Ornn_splash_centered_11.TFT_Set17.png"
+      },
+      "faceImage": {
+        "full": "TFT17_Ornn.png"
+      },
+      "trait": [
+        "SpaceGroove",
+        "ResistTank"
+      ]
+    },
+    "TFT17_Samira": {
+      "id": "TFT17_Samira",
+      "name": "煞蜜拉",
+      "tier": 3,
+      "image": {
+        "full": "TFT17_Samira_splash_centered_10.TFT_Set17.png"
+      },
+      "faceImage": {
+        "full": "TFT17_Samira.png"
+      },
+      "trait": [
+        "SpaceGroove",
+        "RangedTrait"
+      ]
+    },
+    "TFT17_Viktor": {
+      "id": "TFT17_Viktor",
+      "name": "維克特",
+      "tier": 3,
+      "image": {
+        "full": "TFT17_Viktor_splash_centered_5.TFT_Set17.png"
+      },
+      "faceImage": {
+        "full": "TFT17_Viktor.png"
+      },
+      "trait": [
+        "PsyOps",
+        "ManaTrait"
+      ]
+    },
+    "TFT17_Aurora": {
+      "id": "TFT17_Aurora",
+      "name": "歐羅拉",
+      "tier": 3,
+      "image": {
+        "full": "TFT17_Aurora_splash_centered_1.TFT_Set17.png"
+      },
+      "faceImage": {
+        "full": "TFT17_Aurora.png"
+      },
+      "trait": [
+        "AnimaSquad",
+        "FlexTrait"
+      ]
+    },
+    "TFT17_Diana": {
+      "id": "TFT17_Diana",
+      "name": "黛安娜",
+      "tier": 3,
+      "image": {
+        "full": "TFT17_DianaSplash_PC.TFT_Set17.png"
+      },
+      "faceImage": {
+        "full": "TFT17_Diana.png"
+      },
+      "trait": [
+        "ADMIN",
+        "ASTrait"
+      ]
+    },
+    "TFT17_Lulu": {
+      "id": "TFT17_Lulu",
+      "name": "露璐",
+      "tier": 3,
+      "image": {
+        "full": "TFT17_Lulu_splash_centered_14.TFT_Set17.png"
+      },
+      "faceImage": {
+        "full": "TFT17_Lulu.png"
+      },
+      "trait": [
+        "Stargazer_Wolf",
+        "APTrait"
+      ]
+    },
+    "TFT17_Karma": {
+      "id": "TFT17_Karma",
+      "name": "卡瑪",
+      "tier": 4,
+      "image": {
+        "full": "TFT17_Karma_splash_centered_8.TFT_Set17.png"
+      },
+      "faceImage": {
+        "full": "TFT17_Karma.png"
+      },
+      "trait": [
+        "DarkStar",
+        "FlexTrait"
+      ]
+    },
+    "TFT17_Nunu": {
+      "id": "TFT17_Nunu",
+      "name": "努努和威朗普",
+      "tier": 4,
+      "image": {
+        "full": "TFT17_Nunu_splash_centered_35.TFT_Set17.png"
+      },
+      "faceImage": {
+        "full": "TFT17_Nunu.png"
+      },
+      "trait": [
+        "Stargazer_Wolf",
+        "ShieldTank"
+      ]
+    },
+    "TFT17_Rammus": {
+      "id": "TFT17_Rammus",
+      "name": "拉姆斯",
+      "tier": 4,
+      "image": {
+        "full": "TFT17_Rammus_splash_centered_17.TFT_Set17.png"
+      },
+      "faceImage": {
+        "full": "TFT17_Rammus.png"
+      },
+      "trait": [
+        "Astronaut",
+        "ResistTank"
+      ]
+    },
+    "TFT17_MasterYi": {
+      "id": "TFT17_MasterYi",
+      "name": "易大師",
+      "tier": 4,
+      "image": {
+        "full": "TFT17_MasterYi_splash_centered_33.TFT_Set17.png"
+      },
+      "faceImage": {
+        "full": "TFT17_MasterYi.png"
+      },
+      "trait": [
+        "PsyOps",
+        "MeleeTrait"
+      ]
+    },
+    "TFT17_Xayah": {
+      "id": "TFT17_Xayah",
+      "name": "剎雅",
+      "tier": 4,
+      "image": {
+        "full": "TFT17_Xayah_splash_centered_1.TFT_Set17.png"
+      },
+      "faceImage": {
+        "full": "TFT17_Xayah.png"
+      },
+      "trait": [
+        "Stargazer_Wolf",
+        "RangedTrait"
+      ]
+    },
+    "TFT17_Nami": {
+      "id": "TFT17_Nami",
+      "name": "娜米",
+      "tier": 4,
+      "image": {
+        "full": "TFT17_Nami_splash_centered_41.TFT_Set17.png"
+      },
+      "faceImage": {
+        "full": "TFT17_Nami.png"
+      },
+      "trait": [
+        "SpaceGroove",
+        "APTrait"
+      ]
+    },
+    "TFT17_Corki": {
+      "id": "TFT17_Corki",
+      "name": "庫奇",
+      "tier": 4,
+      "image": {
+        "full": "TFT17_Corki_splash_centered_26.TFT_Set17.png"
+      },
+      "faceImage": {
+        "full": "TFT17_Corki.png"
+      },
+      "trait": [
+        "Astronaut",
+        "Fateweaver"
+      ]
+    },
+    "TFT17_Leblanc": {
+      "id": "TFT17_Leblanc",
+      "name": "勒布朗",
+      "tier": 4,
+      "image": {
+        "full": "TFT17_Leblanc_splash_centered_29.TFT_Set17.png"
+      },
+      "faceImage": {
+        "full": "TFT17_Leblanc.png"
+      },
+      "trait": [
+        "ADMIN",
+        "SummonTrait"
+      ]
+    },
+    "TFT17_TahmKench": {
+      "id": "TFT17_TahmKench",
+      "name": "貪啃奇",
+      "tier": 4,
+      "image": {
+        "full": "TFT17_TahmKench_splash_centered_11.TFT_Set17.png"
+      },
+      "faceImage": {
+        "full": "TFT17_TahmKench.png"
+      },
+      "trait": [
+        "TahmKenchUniqueTrait",
+        "HPTank"
+      ]
+    },
+    "TFT17_Galio": {
+      "id": "TFT17_Galio",
+      "name": "超能機甲",
+      "tier": 4,
+      "image": {
+        "full": "TFT17_Galio.TFT_Set17.png"
+      },
+      "faceImage": {
+        "full": "TFT17_Galio.png"
+      },
+      "trait": [
+        "Mecha",
+        "FlexTrait"
+      ]
+    },
+    "TFT17_Riven": {
+      "id": "TFT17_Riven",
+      "name": "雷玟",
+      "tier": 4,
+      "image": {
+        "full": "TFT17_Riven_splash_centered_18.TFT_Set17.png"
+      },
+      "faceImage": {
+        "full": "TFT17_Riven.png"
+      },
+      "trait": [
+        "Timebreaker",
+        "AssassinTrait"
+      ]
+    },
+    "TFT17_AurelionSol": {
+      "id": "TFT17_AurelionSol",
+      "name": "翱銳龍獸",
+      "tier": 4,
+      "image": {
+        "full": "TFT17_AurelionSol_splash_centered_2.TFT_Set17.png"
+      },
+      "faceImage": {
+        "full": "TFT17_AurelionSol.png"
+      },
+      "trait": [
+        "Mecha",
+        "ManaTrait"
+      ]
+    },
+    "TFT17_Kindred": {
+      "id": "TFT17_Kindred",
+      "name": "鏡爪",
+      "tier": 4,
+      "image": {
+        "full": "TFT17_Kindred_splash_centered_23.TFT_Set17.png"
+      },
+      "faceImage": {
+        "full": "TFT17_Kindred.png"
+      },
+      "trait": [
+        "DRX",
+        "ASTrait"
+      ]
+    },
+    "TFT17_Bard": {
+      "id": "TFT17_Bard",
+      "name": "巴德",
+      "tier": 5,
+      "image": {
+        "full": "TFT17_Bard_splash_centered_8.TFT_Set17.png"
+      },
+      "faceImage": {
+        "full": "TFT17_Bard.png"
+      },
+      "trait": [
+        "Astronaut",
+        "ManaTrait"
+      ]
+    },
+    "TFT17_Blitzcrank": {
+      "id": "TFT17_Blitzcrank",
+      "name": "布里茨",
+      "tier": 5,
+      "image": {
+        "full": "TFT17_Blitzcrank_splash_uncentered_65.TFT_Set17.png"
+      },
+      "faceImage": {
+        "full": "TFT17_Blitzcrank.png"
+      },
+      "trait": [
+        "BlitzcrankUniqueTrait",
+        "SpaceGroove",
+        "ShieldTank"
+      ]
+    },
+    "TFT17_Zed": {
+      "id": "TFT17_Zed",
+      "name": "劫",
+      "tier": 5,
+      "image": {
+        "full": "TFT17_Zed_splash_centered_68.TFT_Set17.png"
+      },
+      "faceImage": {
+        "full": "TFT17_Zed.png"
+      },
+      "trait": [
+        "ZedUniqueTrait"
+      ]
+    },
+    "TFT17_Sona": {
+      "id": "TFT17_Sona",
+      "name": "索娜",
+      "tier": 5,
+      "image": {
+        "full": "TFT17_Sona_splash_centered_17.TFT_Set17.png"
+      },
+      "faceImage": {
+        "full": "TFT17_Sona.png"
+      },
+      "trait": [
+        "SonaUniqueTrait",
+        "PsyOps",
+        "SummonTrait"
+      ]
+    },
+    "TFT17_Fiora": {
+      "id": "TFT17_Fiora",
+      "name": "菲歐拉",
+      "tier": 5,
+      "image": {
+        "full": "TFT17_Fiora_splash_centered_51.TFT_Set17.png"
+      },
+      "faceImage": {
+        "full": "TFT17_Fiora.png"
+      },
+      "trait": [
+        "FioraUniqueTrait",
+        "AnimaSquad",
+        "MeleeTrait"
+      ]
+    },
+    "TFT17_Shen": {
+      "id": "TFT17_Shen",
+      "name": "慎",
+      "tier": 5,
+      "image": {
+        "full": "TFT17_shen_splash_centered_49.TFT_Set17.png"
+      },
+      "faceImage": {
+        "full": "TFT17_Shen.png"
+      },
+      "trait": [
+        "ShenUniqueTrait",
+        "ResistTank"
+      ]
+    },
+    "TFT17_Graves": {
+      "id": "TFT17_Graves",
+      "name": "葛雷夫",
+      "tier": 5,
+      "image": {
+        "full": "TFT17_Graves_splash_centered_18.TFT_Set17.png"
+      },
+      "faceImage": {
+        "full": "TFT17_Graves.png"
+      },
+      "trait": [
+        "GravesTrait"
+      ]
+    },
+    "TFT17_Vex": {
+      "id": "TFT17_Vex",
+      "name": "薇可絲",
+      "tier": 5,
+      "image": {
+        "full": "TFT17_vex_splash_centered_10.TFT_Set17.png"
+      },
+      "faceImage": {
+        "full": "TFT17_Vex.png"
+      },
+      "trait": [
+        "VexUniqueTrait"
+      ]
+    },
+    "TFT17_Jhin": {
+      "id": "TFT17_Jhin",
+      "name": "燼",
+      "tier": 5,
+      "image": {
+        "full": "TFT17_Jhin_splash_centered_37.TFT_Set17.png"
+      },
+      "faceImage": {
+        "full": "TFT17_Jhin.png"
+      },
+      "trait": [
+        "DarkStar",
+        "JhinUniqueTrait",
+        "RangedTrait"
+      ]
+    },
+    "TFT17_Morgana": {
+      "id": "TFT17_Morgana",
+      "name": "魔甘娜",
+      "tier": 5,
+      "image": {
+        "full": "TFT17_Morgana_splash_centered_50.TFT_Set17.png"
+      },
+      "faceImage": {
+        "full": "TFT17_Morgana.png"
+      },
+      "trait": [
+        "MorganaUniqueTrait"
+      ]
+    }
+  }
+}

@@ -9,6 +9,7 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
+    "update:tft": "node scripts/update-tft-assets.mjs",
     "preddeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },

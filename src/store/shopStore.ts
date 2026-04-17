@@ -1,13 +1,15 @@
 import { create } from "zustand"
 import champion_set13 from "../assets/tft-champion-set13.json"
 import champion_set14 from "../assets/tft-champion-set14.json"
+import champion_set17 from "../assets/tft-champion-set17.json"
 import shopRates from "../assets/tft-shop-drop-rates-data.json"
 import { useSiteStore } from "./siteStore"
 import { ChampionData, ChampionJSON, ShopStore, MatchesTuple, MatchesType, SeasonKey } from "../types/shopStoreTypes"
 
 const champion = {
   set13: champion_set13,
-  set14: champion_set14
+  set14: champion_set14,
+  set17: champion_set17
 }
 
 const initializeBanner = (season: SeasonKey): Record<string, ChampionData> => {
@@ -122,9 +124,9 @@ export const useShopStore = create<ShopStore>((set, get) => {
     level: 8,
     xp: 0,
     total: 50,
-    season: "set14",
+    season: "set17",
     shopList: Array(5).fill(null),
-    banner: initializeBanner("set14"),
+    banner: initializeBanner("set17"),
     isOutside: false,
     startPosition: {x:0, y:0},
     lastPosition: {x:0, y:0},

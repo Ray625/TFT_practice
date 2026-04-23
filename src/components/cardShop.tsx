@@ -7,6 +7,7 @@ import traitJSON_set14 from "../assets/tft-trait-set14.json"
 import traitJSON_set17 from "../assets/tft-trait-set17.json"
 import shopRates from "../assets/tft-shop-drop-rates-data.json"
 import useThrottle from "../hooks/useThrottle"
+import LevelUpBorder from "./levelUpBorder"
 import LevelUpHint from "./levelUpHint"
 import { useShopStore } from "../store/shopStore"
 import { useSiteStore } from "../store/siteStore"
@@ -482,23 +483,8 @@ const Shop = () => {
                 <div
                   className={`relative z-1 p-0.5 ${!canIncreaseStars && "bg-empty-card-wrapper"} select-none`}
                 >
-                  {canIncreaseStars && (
-                    <>
-                      <div className="absolute top-0 right-0 left-0 bottom-0 -z-10 overflow-hidden">
-                        <img src="img/svg/levelUp.svg" alt="levelUpAnimation" />
-                      </div>
-                    </>
-                  )}
-                  {canIncreaseThreeStars && (
-                    <>
-                      <div className="absolute top-0 right-0 left-0 bottom-0 -z-10 overflow-hidden">
-                        <img
-                          src="img/svg/levelUpThreeStar.svg"
-                          alt="levelUpAnimation"
-                        />
-                      </div>
-                    </>
-                  )}
+                  {canIncreaseStars && <LevelUpBorder star={2} />}
+                  {canIncreaseThreeStars && <LevelUpBorder star={3} />}
                   {body}
                 </div>
               </div>

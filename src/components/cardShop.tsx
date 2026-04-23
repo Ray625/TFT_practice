@@ -7,6 +7,7 @@ import traitJSON_set14 from "../assets/tft-trait-set14.json"
 import traitJSON_set17 from "../assets/tft-trait-set17.json"
 import shopRates from "../assets/tft-shop-drop-rates-data.json"
 import useThrottle from "../hooks/useThrottle"
+import LevelUpHint from "./levelUpHint"
 import { useShopStore } from "../store/shopStore"
 import { useSiteStore } from "../store/siteStore"
 import { TraitData, SeasonKey } from "../types/shopStoreTypes"
@@ -425,41 +426,8 @@ const Shop = () => {
                   className={`relative border-2 ${borderColors[cost]}`}
                 >
                   {/* 可升星時出現提示 */}
-                  {canIncreaseStars && (
-                    <div className="absolute top-0 left-2 flex flex-row gap-0.5 -translate-y-2/5 animate-flash">
-                      {[1, 2].map((item) => {
-                        return (
-                          <img
-                            src="img/svg/twoStar.svg"
-                            alt="starIcon"
-                            className="drop-shadow-black"
-                            key={item}
-                          />
-                        )
-                      })}
-                    </div>
-                  )}
-                  {canIncreaseThreeStars && (
-                    <div className="absolute top-0 left-2 flex flex-col items-center -translate-y-1/5 animate-flash">
-                      <img
-                        src="img/svg/threeStar.svg"
-                        alt="starIcon"
-                        className="drop-shadow-black"
-                      />
-                      <div className="flex flex-row items-center">
-                        {[1, 2].map((item) => {
-                          return (
-                            <img
-                              src="img/svg/threeStar.svg"
-                              alt="starIcon"
-                              className="drop-shadow-black"
-                              key={item}
-                            />
-                          )
-                        })}
-                      </div>
-                    </div>
-                  )}
+                  {canIncreaseStars && <LevelUpHint star={2} />}
+                  {canIncreaseThreeStars && <LevelUpHint star={3} />}
                   <div className="border border-card-border">
                     <img
                       className="w-full aspect-[69/40]"

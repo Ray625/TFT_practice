@@ -5,9 +5,11 @@ import { useSiteStore } from "../store/siteStore"
 import { useShopStore } from "../store/shopStore"
 import { BoardUnit } from "../store/siteStore"
 import { TraitData, SeasonKey } from "../types/shopStoreTypes"
+import StarLevelUpEffect from "./starLevelUpEffect"
 
 interface OneGrid {
   cardData: BoardUnit
+  hideStars?: boolean
 }
 
 const traitJSON = {
@@ -16,7 +18,7 @@ const traitJSON = {
   set17: traitJSON_set17
 }
 
-const OneGrid: React.FC<OneGrid> = ({ cardData }) => {
+const OneGrid: React.FC<OneGrid> = ({ cardData, hideStars = false }) => {
   const { season } = useShopStore()
 
   const cost = cardData?.tier
@@ -107,7 +109,7 @@ const OneGrid: React.FC<OneGrid> = ({ cardData }) => {
             })}
           </div>
 
-          {cardData.star === 2 && (
+          {cardData.star === 2 && !hideStars && (
             <>
               <div className="absolute top-0 left-0 right-0 flex flex-row justify-center gap-0.5 pt-7 pointer-events-none scale-75">
                 {[1, 2].map((item) => {
@@ -123,7 +125,7 @@ const OneGrid: React.FC<OneGrid> = ({ cardData }) => {
               </div>
             </>
           )}
-          {cardData.star === 3 && (
+          {cardData.star === 3 && !hideStars && (
             <>
               <div className="absolute top-0 left-0 right-0 flex flex-row justify-center gap-0.5 pt-7 pointer-events-none scale-75">
                 {[1, 2, 3].map((item) => {
@@ -165,13 +167,17 @@ const Space = () => {
           {space
             .slice(rowIndex * 7, rowIndex * 7 + 7)
             .map((item, index) => {
+              const boardIndex = rowIndex * 7 + index
+              const levelUpStar = spaceAnimate.get(boardIndex)
+              const isLevelingUp = levelUpStar === 2 || levelUpStar === 3
+
               return item ? (
                 <div
-                  key={rowIndex * 7 + index}
+                  key={boardIndex}
                   onMouseEnter={() =>
                     setHoverCard({
                       place: "space",
-                      index: rowIndex * 7 + index,
+                      index: boardIndex,
                       cardData: item,
                     })
                   }
@@ -179,37 +185,20 @@ const Space = () => {
                   className="relative"
                   draggable={true}
                   onDragOver={(e) => dragOver(e)}
-                  onDrop={(e) => drop(e, rowIndex * 7 + index, "space")}
-                  onDragStart={(event) => dragStart(event, item, rowIndex * 7 + index, "space")}
+                  onDrop={(e) => drop(e, boardIndex, "space")}
+                  onDragStart={(event) => dragStart(event, item, boardIndex, "space")}
                   onDragEnd={() => setIsDragging(false)}
                 >
-                  <OneGrid cardData={item} />
-                  {spaceAnimate.has(rowIndex * 7 + index) &&
-                    spaceAnimate.get(index) === 2 && (
-                      <div className="absolute top-0 left-0 right-0 bottom-0">
-                        <img
-                          src="img/svg/twoStarsUp.svg"
-                          alt="animate"
-                          className="animate-level-up opacity-0 pointer-events-none select-none"
-                        />
-                      </div>
-                    )}
-                  {spaceAnimate.has(rowIndex * 7 + index) &&
-                    spaceAnimate.get(index) === 3 && (
-                      <div className="absolute top-0 left-0 right-0 bottom-0">
-                        <img
-                          src="img/svg/threeStarsUp.svg"
-                          alt="animate"
-                          className="animate-level-up opacity-0 pointer-events-none select-none"
-                        />
-                      </div>
-                    )}
+                  <OneGrid cardData={item} hideStars={isLevelingUp} />
+                  {isLevelingUp && (
+                    <StarLevelUpEffect star={levelUpStar} shape="hex" placement="space" />
+                  )}
                 </div>
               ) : (
                   <div
-                    key={rowIndex * 7 + index}
+                    key={boardIndex}
                     onDragOver={(e) => dragOver(e)}
-                    onDrop={(e) => drop(e, rowIndex * 7 + index, "space")}
+                    onDrop={(e) => drop(e, boardIndex, "space")}
                   >
                   <OneGrid cardData={item} />
                 </div>

@@ -1,5 +1,6 @@
 import { useSiteStore } from "../store/siteStore"
 import { useShopStore } from "../store/shopStore"
+import StarLevelUpEffect from "./starLevelUpEffect"
 
 const Seat = () => {
   const { seat, seatAnimate, setHoverCard, dragStart, drop, dragOver } = useSiteStore()
@@ -10,6 +11,8 @@ const Seat = () => {
       {seat.map((item, index) => {
         let cost = ""
         if (item && item.tier) cost = ["one", "two", "three", "four", "five"][item.tier - 1]
+        const levelUpStar = seatAnimate.get(index)
+        const isLevelingUp = levelUpStar === 2 || levelUpStar === 3
 
         const borderColors: Record<string, string> = {
           one: "border-one-cost-card-light",
@@ -41,7 +44,7 @@ const Seat = () => {
                 onDragStart={(event) => dragStart(event, item, index, "seat")}
                 onDragEnd={() => setIsDragging(false)}
               >
-                {item.star === 2 && (
+                {item.star === 2 && !isLevelingUp && (
                   <>
                     <div className="absolute top-0 left-0 right-0 flex flex-row justify-center gap-0.5 pt-2 pointer-events-none select-none">
                       {[1, 2].map((item) => {
@@ -57,7 +60,7 @@ const Seat = () => {
                     </div>
                   </>
                 )}
-                {item.star === 3 && (
+                {item.star === 3 && !isLevelingUp && (
                   <>
                     <div className="absolute top-0 left-0 right-0 flex flex-row justify-center gap-0.5 pt-2 pointer-events-none select-none">
                       {[1, 2, 3].map((item) => {
@@ -73,14 +76,9 @@ const Seat = () => {
                     </div>
                   </>
                 )}
-                {seatAnimate.has(index) &&
-                  seatAnimate.get(index) === 2 && (
-                    <div className="absolute top-0 left-0 right-0 bottom-0 bg-two-star-light animate-level-up opacity-0 pointer-events-none select-none"></div>
-                  )}
-                {seatAnimate.has(index) &&
-                  seatAnimate.get(index) === 3 && (
-                    <div className="absolute top-0 left-0 right-0 bottom-0 bg-three-star-light animate-level-up opacity-0 pointer-events-none select-none"></div>
-                  )}
+                {isLevelingUp && (
+                  <StarLevelUpEffect star={levelUpStar} />
+                )}
                 <p className="absolute left-0 bottom-0 w-full pb-1 text-white text-lg whitespace-nowrap overflow-hidden pointer-events-none text-shadow">
                   {item.name}
                 </p>

@@ -282,7 +282,7 @@ export const useShopStore = create<ShopStore>((set, get) => {
     // 購買經驗
     buyXp: () => {
       const { level, total, xp } = get();
-      const xpList = [2, 2, 6, 10, 20, 36, 48, 76, 84, 0];
+      const xpList = [2, 2, 6, 10, 20, 36, 48, 68, 84, 0];
       const levelNeededXp = xpList[level - 1];
       const numberTotal = Number(total);
 

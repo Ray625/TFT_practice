@@ -47,7 +47,7 @@ const Shop = () => {
     dropToSellCard
   } = useShopStore()
   const { playerSide, hoverCard, dragOver } = useSiteStore()
-  const xpList = [2, 2, 6, 10, 20, 36, 48, 76, 84, 0]
+  const xpList = [2, 2, 6, 10, 20, 36, 48, 68, 84, 0]
   const levelNeededXp = xpList[level - 1]
   const levelRate = shopRates.data.Shop[`${level - 1}`].dropRatesByTier
   const xpPerLamp = 4

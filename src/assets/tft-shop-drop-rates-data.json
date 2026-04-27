@@ -72,9 +72,9 @@
       {
         "level": 7,
         "dropRatesByTier": [
-          { "cost": 1, "rate": 19 },
+          { "cost": 1, "rate": 16 },
           { "cost": 2, "rate": 30 },
-          { "cost": 3, "rate": 40 },
+          { "cost": 3, "rate": 43 },
           { "cost": 4, "rate": 10 },
           { "cost": 5, "rate": 1 },
           { "cost": 6, "rate": 0 }
@@ -83,10 +83,10 @@
       {
         "level": 8,
         "dropRatesByTier": [
-          { "cost": 1, "rate": 18 },
-          { "cost": 2, "rate": 25 },
+          { "cost": 1, "rate": 15 },
+          { "cost": 2, "rate": 20 },
           { "cost": 3, "rate": 32 },
-          { "cost": 4, "rate": 22 },
+          { "cost": 4, "rate": 30 },
           { "cost": 5, "rate": 3 },
           { "cost": 6, "rate": 0 }
         ]
@@ -94,11 +94,11 @@
       {
         "level": 9,
         "dropRatesByTier": [
-          { "cost": 1, "rate": 15 },
-          { "cost": 2, "rate": 20 },
+          { "cost": 1, "rate": 10 },
+          { "cost": 2, "rate": 17 },
           { "cost": 3, "rate": 25 },
-          { "cost": 4, "rate": 30 },
-          { "cost": 5, "rate": 10 },
+          { "cost": 4, "rate": 33 },
+          { "cost": 5, "rate": 15 },
           { "cost": 6, "rate": 0 }
         ]
       },

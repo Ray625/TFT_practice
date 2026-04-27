@@ -50,6 +50,9 @@ const Shop = () => {
   const xpList = [2, 2, 6, 10, 20, 36, 48, 76, 84, 0]
   const levelNeededXp = xpList[level - 1]
   const levelRate = shopRates.data.Shop[`${level - 1}`].dropRatesByTier
+  const xpPerLamp = 4
+  const xpLampCount = levelNeededXp > 0 ? Math.ceil(levelNeededXp / xpPerLamp) : 0
+  const litXpLampCount = Math.min(xpLampCount, Math.floor(xp / xpPerLamp))
   const [goldInput, setGoldInput] = useState(String(total))
 
   const parentRef = useRef<HTMLDivElement | null>(null)
@@ -300,33 +303,53 @@ const Shop = () => {
         <div className="relative z-10 flex items-end w-full aspect-[209/8]">
           <div className="relative top-1 z-10 h-full p-1 aspect-[75/16] bg-border-gold [clip-path:polygon(0%_0%,85%_0%,100%_100%,0%_100%)]">
             <div className="w-full p-1 aspect-[75/16] bg-bg-black [clip-path:polygon(0%_0%,85%_0%,100%_100%,0%_100%)]">
-              <div className="flex flex-row items-end w-full">
-                <h5 className="text-xl/7 xl:text-2xl/7 pl-1 text-text-white text-left">
-                  {`等級 ${level}`}
-                </h5>
-                <div className="flex flex-row gap-1 items-center h-7 ml-2">
-                  <button
-                    className="w-4 h-4 m-0 p-0 border border-white rounded-full bg-bg-black text-white hover:cursor-pointer hover:opacity-80"
-                    onClick={() => {
-                      if (level >= 10) return
-                      setLevel(prev => prev + 1)
-                    }}
-                    title="Level up"
-                  >
-                    <p className="text-center text-sm/3 lg:text-base/3 xl:base/4 select-none">+</p>
-                  </button>
-                  <button
-                    className="w-4 h-4 m-0 p-0 border border-white rounded-full bg-bg-black text-white hover:cursor-pointer hover:opacity-80"
-                    onClick={() => {
-                      if (level <= 1) return
-                      setLevel((prev) => prev - 1)
-                    }}
-                    title="Level down"
-                  >
-                    <p className="text-center text-sm/3 lg:text-xl/3 xl:base/4 select-none">-</p>
-                  </button>
+              <div className="flex h-full flex-col justify-between pl-1 pr-3 py-1">
+                <div className="flex flex-row items-end w-full">
+                  <h5 className="text-xl/7 xl:text-2xl/7 text-text-white text-left">
+                    {`等級 ${level}`}
+                  </h5>
+                  <div className="flex flex-row gap-1 items-center h-7 ml-2">
+                    <button
+                      className="w-4 h-4 m-0 p-0 border border-white rounded-full bg-bg-black text-white hover:cursor-pointer hover:opacity-80"
+                      onClick={() => {
+                        if (level >= 10) return
+                        setLevel(prev => prev + 1)
+                      }}
+                      title="Level up"
+                    >
+                      <p className="text-center text-sm/3 lg:text-base/3 xl:base/4 select-none">+</p>
+                    </button>
+                    <button
+                      className="w-4 h-4 m-0 p-0 border border-white rounded-full bg-bg-black text-white hover:cursor-pointer hover:opacity-80"
+                      onClick={() => {
+                        if (level <= 1) return
+                        setLevel((prev) => prev - 1)
+                      }}
+                      title="Level down"
+                    >
+                      <p className="text-center text-sm/3 lg:text-xl/3 xl:base/4 select-none">-</p>
+                    </button>
+                  </div>
+                  <p className="text-sm ml-2 xl:ml-6 text-text-white">{`${xp}/${levelNeededXp}`}</p>
                 </div>
-                <p className="text-sm ml-2 xl:ml-6 text-text-white">{`${xp}/${levelNeededXp}`}</p>
+                {xpLampCount > 0 && (
+                  <div className="flex w-[78%] max-w-34 items-center gap-0.125 self-start">
+                    {Array.from({ length: xpLampCount }, (_, index) => {
+                      const isLit = index < litXpLampCount
+
+                      return (
+                        <span
+                          className={`h-1.5 flex-1 border ${
+                            isLit
+                              ? "border-cyan-200 bg-cyan-300 shadow-[0_0_6px_rgba(125,211,252,0.65)]"
+                              : "border-xp-border/70 bg-xp-icon/55"
+                          }`}
+                          key={index}
+                        />
+                      )
+                    })}
+                  </div>
+                )}
               </div>
             </div>
           </div>

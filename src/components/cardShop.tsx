@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import gsap from "gsap"
 import champion_set13 from "../assets/tft-champion-set13.json"
 import champion_set14 from "../assets/tft-champion-set14.json"
@@ -50,6 +50,7 @@ const Shop = () => {
   const xpList = [2, 2, 6, 10, 20, 36, 48, 76, 84, 0]
   const levelNeededXp = xpList[level - 1]
   const levelRate = shopRates.data.Shop[`${level - 1}`].dropRatesByTier
+  const [goldInput, setGoldInput] = useState(String(total))
 
   const parentRef = useRef<HTMLDivElement | null>(null)
   const dragDataRef = useRef<{ data: ChampionData, index: number } | null>(null)
@@ -67,6 +68,31 @@ const Shop = () => {
   const throttleBuyXp = useThrottle(buyXp, 100)
   const canBuyXp = Number(total) >= 4
   const canReroll = Number(total) >= 2
+
+  useEffect(() => {
+    setGoldInput(String(total))
+  }, [total])
+
+  const commitGoldInput = () => {
+    const trimmedValue = goldInput.trim()
+
+    if (trimmedValue.length === 0) {
+      setTotal("0")
+      setGoldInput("0")
+      return
+    }
+
+    if (!/^\d+$/.test(trimmedValue)) {
+      setGoldInput(String(total))
+      return
+    }
+
+    const normalizedValue = Math.min(999, Math.max(0, Number(trimmedValue)))
+    const nextValue = String(normalizedValue)
+
+    setTotal(nextValue)
+    setGoldInput(nextValue)
+  }
 
   const playButtonFeedback = ({
     button,
@@ -334,34 +360,21 @@ const Shop = () => {
                 <img className="w-5 h-5" src="img/item/Gold.png" alt="icon" />
                 <input
                   name="gold"
-                  type="num"
-                  value={total}
+                  type="text"
+                  inputMode="numeric"
+                  value={goldInput}
                   className="w-8 xl:w-12 h-fit m-0 flex items-center justify-center pt-1 text-text-white text-center"
-                  min={0}
-                  max={999}
                   title="Enter money"
                   onChange={(event) => {
-                    const value = event.target.value
-                    if (value.length === 0) return setTotal("")
-
-                    const numeric = Number(value)
-                    if (isNaN(numeric)) {
-                      alert("請輸入數字")
-                      return
-                    }
-                    if (numeric > 999) return setTotal("999")
-                    if (numeric <= 0) return setTotal("0")
-
-                    setTotal(value)
+                    setGoldInput(event.target.value)
                   }}
                   onKeyDown={(event) => {
                     if (event.key === "Enter") {
+                      commitGoldInput()
                       event.currentTarget.blur()
                     }
                   }}
-                  onBlur={() => {
-                    if (typeof total === "string" && total.length === 0) setTotal("0")
-                  }}
+                  onBlur={commitGoldInput}
                 />
                 <div className="mt-0.5">
                   <button

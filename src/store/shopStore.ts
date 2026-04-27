@@ -28,6 +28,26 @@ const initializeBanner = (season: SeasonKey): Record<string, ChampionData> => {
   return championList as Record<string, ChampionData>;
 };
 
+const preferredRowsByRange = (range?: number) => {
+  if (!range || range <= 1) return [0, 1, 2, 3];
+  if (range === 2) return [1, 2, 0, 3];
+  if (range === 3) return [2, 3, 1, 0];
+  return [3, 2, 1, 0];
+};
+
+const findPreferredSpaceIndex = (space: (ChampionData | null)[], range?: number) => {
+  const rowOrder = preferredRowsByRange(range);
+
+  for (const row of rowOrder) {
+    for (let column = 0; column < 7; column += 1) {
+      const index = row * 7 + column;
+      if (space[index] === null) return index;
+    }
+  }
+
+  return -1;
+};
+
 export const useShopStore = create<ShopStore>((set, get) => {
   const {
     setSeat,
@@ -499,18 +519,21 @@ export const useShopStore = create<ShopStore>((set, get) => {
         );
 
         // 移至戰區
-        setSpace((prev) => {
-          let done = false;
-          return prev.map((item) => {
-            if (!item && !done) {
-              done = true;
-              return {
-                ...hoverCard.cardData,
-              };
-            }
-            return item;
-          });
-        });
+        const targetIndex = findPreferredSpaceIndex(
+          space,
+          hoverCard.cardData.range,
+        );
+        if (targetIndex === -1) return;
+
+        setSpace((prev) =>
+          prev.map((item, index) =>
+            index === targetIndex
+              ? {
+                  ...hoverCard.cardData,
+                }
+              : item,
+          ),
+        );
       }
 
       // 對著戰區卡牌使用時

@@ -13,7 +13,9 @@
       "trait": [
         "DRX",
         "ResistTank"
-      ]
+      ],
+      "range": 1,
+      "role": "ADTank"
     },
     "TFT17_Briar": {
       "id": "TFT17_Briar",
@@ -29,7 +31,9 @@
         "AnimaSquad",
         "Primordian",
         "AssassinTrait"
-      ]
+      ],
+      "range": 1,
+      "role": "ADFighter"
     },
     "TFT17_Ezreal": {
       "id": "TFT17_Ezreal",
@@ -44,7 +48,9 @@
       "trait": [
         "Timebreaker",
         "RangedTrait"
-      ]
+      ],
+      "range": 6,
+      "role": "ADCaster"
     },
     "TFT17_Poppy": {
       "id": "TFT17_Poppy",
@@ -59,7 +65,9 @@
       "trait": [
         "Astronaut",
         "ResistTank"
-      ]
+      ],
+      "range": 1,
+      "role": "APTank"
     },
     "TFT17_Chogath": {
       "id": "TFT17_Chogath",
@@ -74,7 +82,9 @@
       "trait": [
         "DarkStar",
         "HPTank"
-      ]
+      ],
+      "range": 1,
+      "role": "APTank"
     },
     "TFT17_Nasus": {
       "id": "TFT17_Nasus",
@@ -89,7 +99,9 @@
       "trait": [
         "SpaceGroove",
         "ShieldTank"
-      ]
+      ],
+      "range": 1,
+      "role": "APTank"
     },
     "TFT17_TwistedFate": {
       "id": "TFT17_TwistedFate",
@@ -104,7 +116,9 @@
       "trait": [
         "Stargazer_Wolf",
         "Fateweaver"
-      ]
+      ],
+      "range": 4,
+      "role": "APCaster"
     },
     "TFT17_Caitlyn": {
       "id": "TFT17_Caitlyn",
@@ -119,7 +133,9 @@
       "trait": [
         "DRX",
         "Fateweaver"
-      ]
+      ],
+      "range": 4,
+      "role": "ADSpecialist"
     },
     "TFT17_Teemo": {
       "id": "TFT17_Teemo",
@@ -134,7 +150,9 @@
       "trait": [
         "SpaceGroove",
         "SummonTrait"
-      ]
+      ],
+      "range": 4,
+      "role": "APCarry"
     },
     "TFT17_Talon": {
       "id": "TFT17_Talon",
@@ -149,7 +167,9 @@
       "trait": [
         "Stargazer_Wolf",
         "AssassinTrait"
-      ]
+      ],
+      "range": 1,
+      "role": "ADReaper"
     },
     "TFT17_RekSai": {
       "id": "TFT17_RekSai",
@@ -164,7 +184,9 @@
       "trait": [
         "Primordian",
         "HPTank"
-      ]
+      ],
+      "range": 1,
+      "role": "APTank"
     },
     "TFT17_Leona": {
       "id": "TFT17_Leona",
@@ -179,7 +201,9 @@
       "trait": [
         "ADMIN",
         "ShieldTank"
-      ]
+      ],
+      "range": 1,
+      "role": "APTank"
     },
     "TFT17_Veigar": {
       "id": "TFT17_Veigar",
@@ -194,7 +218,9 @@
       "trait": [
         "Astronaut",
         "APTrait"
-      ]
+      ],
+      "range": 4,
+      "role": "APCaster"
     },
     "TFT17_Lissandra": {
       "id": "TFT17_Lissandra",
@@ -210,7 +236,9 @@
         "DarkStar",
         "SummonTrait",
         "APTrait"
-      ]
+      ],
+      "range": 4,
+      "role": "APCaster"
     },
     "TFT17_IvernMinion": {
       "id": "TFT17_IvernMinion",
@@ -226,7 +254,9 @@
         "Astronaut",
         "SummonTrait",
         "FlexTrait"
-      ]
+      ],
+      "range": 1,
+      "role": "APTank"
     },
     "TFT17_Gragas": {
       "id": "TFT17_Gragas",
@@ -241,7 +271,9 @@
       "trait": [
         "PsyOps",
         "HPTank"
-      ]
+      ],
+      "range": 1,
+      "role": "APTank"
     },
     "TFT17_Jinx": {
       "id": "TFT17_Jinx",
@@ -256,7 +288,9 @@
       "trait": [
         "AnimaSquad",
         "ASTrait"
-      ]
+      ],
+      "range": 4,
+      "role": "ADCarry"
     },
     "TFT17_Milio": {
       "id": "TFT17_Milio",
@@ -271,7 +305,9 @@
       "trait": [
         "Timebreaker",
         "Fateweaver"
-      ]
+      ],
+      "range": 4,
+      "role": "APCaster"
     },
     "TFT17_Gnar": {
       "id": "TFT17_Gnar",
@@ -286,7 +322,9 @@
       "trait": [
         "Astronaut",
         "RangedTrait"
-      ]
+      ],
+      "range": 6,
+      "role": "ADSpecialist"
     },
     "TFT17_Belveth": {
       "id": "TFT17_Belveth",
@@ -302,7 +340,9 @@
         "Primordian",
         "ASTrait",
         "MeleeTrait"
-      ]
+      ],
+      "range": 2,
+      "role": "ADFighter"
     },
     "TFT17_Akali": {
       "id": "TFT17_Akali",
@@ -317,7 +357,9 @@
       "trait": [
         "DRX",
         "MeleeTrait"
-      ]
+      ],
+      "range": 1,
+      "role": "ADFighter"
     },
     "TFT17_Zoe": {
       "id": "TFT17_Zoe",
@@ -332,7 +374,9 @@
       "trait": [
         "ADMIN",
         "ManaTrait"
-      ]
+      ],
+      "range": 4,
+      "role": "APCaster"
     },
     "TFT17_Pyke": {
       "id": "TFT17_Pyke",
@@ -347,7 +391,9 @@
       "trait": [
         "PsyOps",
         "FlexTrait"
-      ]
+      ],
+      "range": 1,
+      "role": "ADReaper"
     },
     "TFT17_Jax": {
       "id": "TFT17_Jax",
@@ -362,7 +408,9 @@
       "trait": [
         "Stargazer_Wolf",
         "ResistTank"
-      ]
+      ],
+      "range": 1,
+      "role": "APTank"
     },
     "TFT17_Pantheon": {
       "id": "TFT17_Pantheon",
@@ -378,7 +426,9 @@
         "Timebreaker",
         "HPTank",
         "APTrait"
-      ]
+      ],
+      "range": 1,
+      "role": "ADTank"
     },
     "TFT17_Gwen": {
       "id": "TFT17_Gwen",
@@ -393,7 +443,9 @@
       "trait": [
         "SpaceGroove",
         "AssassinTrait"
-      ]
+      ],
+      "range": 2,
+      "role": "APReaper"
     },
     "TFT17_Mordekaiser": {
       "id": "TFT17_Mordekaiser",
@@ -409,7 +461,9 @@
         "DarkStar",
         "ManaTrait",
         "ShieldTank"
-      ]
+      ],
+      "range": 1,
+      "role": "APTank"
     },
     "TFT17_Illaoi": {
       "id": "TFT17_Illaoi",
@@ -425,7 +479,9 @@
         "AnimaSquad",
         "ShieldTank",
         "SummonTrait"
-      ]
+      ],
+      "range": 1,
+      "role": "APTank"
     },
     "TFT17_MissFortune": {
       "id": "TFT17_MissFortune",
@@ -440,7 +496,9 @@
       "trait": [
         "MissFortuneUniqueTrait",
         "MissFortuneUndeterminedTrait"
-      ]
+      ],
+      "range": 6,
+      "role": null
     },
     "TFT17_Maokai": {
       "id": "TFT17_Maokai",
@@ -455,7 +513,9 @@
       "trait": [
         "DRX",
         "HPTank"
-      ]
+      ],
+      "range": 1,
+      "role": "APTank"
     },
     "TFT17_Fizz": {
       "id": "TFT17_Fizz",
@@ -470,7 +530,9 @@
       "trait": [
         "Astronaut",
         "AssassinTrait"
-      ]
+      ],
+      "range": 1,
+      "role": "APReaper"
     },
     "TFT17_Urgot": {
       "id": "TFT17_Urgot",
@@ -486,7 +548,9 @@
         "Mecha",
         "HPTank",
         "MeleeTrait"
-      ]
+      ],
+      "range": 2,
+      "role": "ADFighter"
     },
     "TFT17_Rhaast": {
       "id": "TFT17_Rhaast",
@@ -500,7 +564,9 @@
       },
       "trait": [
         "RhaastUniqueTrait"
-      ]
+      ],
+      "range": 1,
+      "role": "ADTank"
     },
     "TFT17_Kaisa": {
       "id": "TFT17_Kaisa",
@@ -515,7 +581,9 @@
       "trait": [
         "DarkStar",
         "AssassinTrait"
-      ]
+      ],
+      "range": 4,
+      "role": "ADCaster"
     },
     "TFT17_Ornn": {
       "id": "TFT17_Ornn",
@@ -530,7 +598,9 @@
       "trait": [
         "SpaceGroove",
         "ResistTank"
-      ]
+      ],
+      "range": 1,
+      "role": "APTank"
     },
     "TFT17_Samira": {
       "id": "TFT17_Samira",
@@ -545,7 +615,9 @@
       "trait": [
         "SpaceGroove",
         "RangedTrait"
-      ]
+      ],
+      "range": 6,
+      "role": "ADCaster"
     },
     "TFT17_Viktor": {
       "id": "TFT17_Viktor",
@@ -560,7 +632,9 @@
       "trait": [
         "PsyOps",
         "ManaTrait"
-      ]
+      ],
+      "range": 4,
+      "role": "APCaster"
     },
     "TFT17_Aurora": {
       "id": "TFT17_Aurora",
@@ -575,7 +649,9 @@
       "trait": [
         "AnimaSquad",
         "FlexTrait"
-      ]
+      ],
+      "range": 4,
+      "role": "APCaster"
     },
     "TFT17_Diana": {
       "id": "TFT17_Diana",
@@ -590,7 +666,9 @@
       "trait": [
         "ADMIN",
         "ASTrait"
-      ]
+      ],
+      "range": 1,
+      "role": "APFighter"
     },
     "TFT17_Lulu": {
       "id": "TFT17_Lulu",
@@ -605,7 +683,9 @@
       "trait": [
         "Stargazer_Wolf",
         "APTrait"
-      ]
+      ],
+      "range": 4,
+      "role": "APCaster"
     },
     "TFT17_Karma": {
       "id": "TFT17_Karma",
@@ -620,7 +700,9 @@
       "trait": [
         "DarkStar",
         "FlexTrait"
-      ]
+      ],
+      "range": 4,
+      "role": "APCaster"
     },
     "TFT17_Nunu": {
       "id": "TFT17_Nunu",
@@ -635,7 +717,9 @@
       "trait": [
         "Stargazer_Wolf",
         "ShieldTank"
-      ]
+      ],
+      "range": 1,
+      "role": "APTank"
     },
     "TFT17_Rammus": {
       "id": "TFT17_Rammus",
@@ -650,7 +734,9 @@
       "trait": [
         "Astronaut",
         "ResistTank"
-      ]
+      ],
+      "range": 1,
+      "role": "APTank"
     },
     "TFT17_MasterYi": {
       "id": "TFT17_MasterYi",
@@ -665,7 +751,9 @@
       "trait": [
         "PsyOps",
         "MeleeTrait"
-      ]
+      ],
+      "range": 1,
+      "role": "ADFighter"
     },
     "TFT17_Xayah": {
       "id": "TFT17_Xayah",
@@ -680,7 +768,9 @@
       "trait": [
         "Stargazer_Wolf",
         "RangedTrait"
-      ]
+      ],
+      "range": 6,
+      "role": "ADCarry"
     },
     "TFT17_Nami": {
       "id": "TFT17_Nami",
@@ -695,7 +785,9 @@
       "trait": [
         "SpaceGroove",
         "APTrait"
-      ]
+      ],
+      "range": 4,
+      "role": "APCaster"
     },
     "TFT17_Corki": {
       "id": "TFT17_Corki",
@@ -710,7 +802,9 @@
       "trait": [
         "Astronaut",
         "Fateweaver"
-      ]
+      ],
+      "range": 4,
+      "role": "ADCaster"
     },
     "TFT17_Leblanc": {
       "id": "TFT17_Leblanc",
@@ -725,7 +819,9 @@
       "trait": [
         "ADMIN",
         "SummonTrait"
-      ]
+      ],
+      "range": 4,
+      "role": "APCarry"
     },
     "TFT17_TahmKench": {
       "id": "TFT17_TahmKench",
@@ -740,7 +836,9 @@
       "trait": [
         "TahmKenchUniqueTrait",
         "HPTank"
-      ]
+      ],
+      "range": 1,
+      "role": "APTank"
     },
     "TFT17_Galio": {
       "id": "TFT17_Galio",
@@ -755,7 +853,9 @@
       "trait": [
         "Mecha",
         "FlexTrait"
-      ]
+      ],
+      "range": 1,
+      "role": "ADTank"
     },
     "TFT17_Riven": {
       "id": "TFT17_Riven",
@@ -770,7 +870,9 @@
       "trait": [
         "Timebreaker",
         "AssassinTrait"
-      ]
+      ],
+      "range": 1,
+      "role": "HFighter"
     },
     "TFT17_AurelionSol": {
       "id": "TFT17_AurelionSol",
@@ -785,7 +887,9 @@
       "trait": [
         "Mecha",
         "ManaTrait"
-      ]
+      ],
+      "range": 6,
+      "role": "APCaster"
     },
     "TFT17_Kindred": {
       "id": "TFT17_Kindred",
@@ -800,7 +904,9 @@
       "trait": [
         "DRX",
         "ASTrait"
-      ]
+      ],
+      "range": 6,
+      "role": "ADCarry"
     },
     "TFT17_Bard": {
       "id": "TFT17_Bard",
@@ -815,7 +921,9 @@
       "trait": [
         "Astronaut",
         "ManaTrait"
-      ]
+      ],
+      "range": 4,
+      "role": "APCaster"
     },
     "TFT17_Blitzcrank": {
       "id": "TFT17_Blitzcrank",
@@ -831,7 +939,9 @@
         "BlitzcrankUniqueTrait",
         "SpaceGroove",
         "ShieldTank"
-      ]
+      ],
+      "range": 1,
+      "role": "APFighter"
     },
     "TFT17_Zed": {
       "id": "TFT17_Zed",
@@ -845,7 +955,9 @@
       },
       "trait": [
         "ZedUniqueTrait"
-      ]
+      ],
+      "range": 1,
+      "role": "ADFighter"
     },
     "TFT17_Sona": {
       "id": "TFT17_Sona",
@@ -861,7 +973,9 @@
         "SonaUniqueTrait",
         "PsyOps",
         "SummonTrait"
-      ]
+      ],
+      "range": 4,
+      "role": "APCaster"
     },
     "TFT17_Fiora": {
       "id": "TFT17_Fiora",
@@ -877,7 +991,9 @@
         "FioraUniqueTrait",
         "AnimaSquad",
         "MeleeTrait"
-      ]
+      ],
+      "range": 1,
+      "role": "ADFighter"
     },
     "TFT17_Shen": {
       "id": "TFT17_Shen",
@@ -892,7 +1008,9 @@
       "trait": [
         "ShenUniqueTrait",
         "ResistTank"
-      ]
+      ],
+      "range": 1,
+      "role": "APFighter"
     },
     "TFT17_Graves": {
       "id": "TFT17_Graves",
@@ -906,7 +1024,9 @@
       },
       "trait": [
         "GravesTrait"
-      ]
+      ],
+      "range": 4,
+      "role": "ADCarry"
     },
     "TFT17_Vex": {
       "id": "TFT17_Vex",
@@ -920,7 +1040,9 @@
       },
       "trait": [
         "VexUniqueTrait"
-      ]
+      ],
+      "range": 10,
+      "role": "APCarry"
     },
     "TFT17_Jhin": {
       "id": "TFT17_Jhin",
@@ -936,7 +1058,9 @@
         "DarkStar",
         "JhinUniqueTrait",
         "RangedTrait"
-      ]
+      ],
+      "range": 6,
+      "role": "ADCarry"
     },
     "TFT17_Morgana": {
       "id": "TFT17_Morgana",
@@ -950,7 +1074,9 @@
       },
       "trait": [
         "MorganaUniqueTrait"
-      ]
+      ],
+      "range": 2,
+      "role": "APFighter"
     }
   }
 }

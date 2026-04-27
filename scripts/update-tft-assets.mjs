@@ -113,6 +113,8 @@ const main = async () => {
       id: champion.apiName,
       name: champion.name,
       tier: champion.cost,
+      range: champion.stats?.range,
+      role: champion.role ?? null,
       image: {
         full: ddragonChampion.image.full,
       },

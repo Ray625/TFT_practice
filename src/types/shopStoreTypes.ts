@@ -10,6 +10,8 @@ export interface ChampionData {
   faceImage?: ChampionImage
   count: number
   trait: string[]
+  range?: number
+  role?: string | null
   star?: number
 }
 

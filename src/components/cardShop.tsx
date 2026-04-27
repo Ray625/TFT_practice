@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react"
+import gsap from "gsap"
 import champion_set13 from "../assets/tft-champion-set13.json"
 import champion_set14 from "../assets/tft-champion-set14.json"
 import champion_set17 from "../assets/tft-champion-set17.json"
@@ -57,18 +58,87 @@ const Shop = () => {
   const dragOffset = useRef({ x: 0, y: 0 })
   const dragTargetRef = useRef<HTMLDivElement | null>(null)
   const frameIdRef = useRef<number | null>(null)
+  const xpButtonRef = useRef<HTMLButtonElement | null>(null)
+  const xpGlowRef = useRef<HTMLDivElement | null>(null)
+  const rerollButtonRef = useRef<HTMLButtonElement | null>(null)
+  const rerollGlowRef = useRef<HTMLDivElement | null>(null)
 
   const throttleDrawCard = useThrottle(drawCard, 250)
   const throttleBuyXp = useThrottle(buyXp, 100)
+  const canBuyXp = Number(total) >= 4
+  const canReroll = Number(total) >= 2
+
+  const playButtonFeedback = ({
+    button,
+    glow,
+  }: {
+    button: HTMLButtonElement | null
+    glow: HTMLDivElement | null
+  }) => {
+    if (!button || !glow) return
+
+    gsap.killTweensOf([button, glow])
+
+    const timeline = gsap.timeline({
+      defaults: { ease: "power2.out" },
+    })
+
+    timeline
+      .set(glow, {
+        opacity: 0,
+        scale: 0.96,
+      })
+      .to(
+        button,
+        {
+          scale: 0.99,
+          y: 0,
+          duration: 0.08,
+        }
+      )
+      .to(
+        button,
+        {
+          scale: 1,
+          y: 0,
+          duration: 0.18,
+          ease: "back.out(2.2)",
+        }
+      )
+      .fromTo(
+        glow,
+        {
+          opacity: 0.7,
+          scale: 0.98,
+        },
+        {
+          opacity: 0,
+          scale: 1.04,
+          duration: 0.24,
+          ease: "power1.out",
+        },
+        0
+      )
+  }
 
   // 設立監聽器，當使用者按下F時購買經驗，D刷新商店，E販賣hover卡牌
   useEffect(() => {
     const handlePressKey = (event: KeyboardEvent) => {
       switch (event.code) {
         case "KeyF":
+          if (!canBuyXp) return
+          playButtonFeedback({
+            button: xpButtonRef.current,
+            glow: xpGlowRef.current,
+          })
           throttleBuyXp()
           break
         case "KeyD":
+          if (!canReroll) return
+          playButtonFeedback({
+            button: rerollButtonRef.current,
+            glow: rerollGlowRef.current,
+          })
           throttleDrawCard()
           break
         case "KeyG":
@@ -92,7 +162,7 @@ const Shop = () => {
     return () => {
       window.removeEventListener("keydown", handlePressKey)
     }
-  }, [hoverCard, throttleBuyXp, throttleDrawCard, sellCard, placeCard])
+  }, [canBuyXp, canReroll, hoverCard, throttleBuyXp, throttleDrawCard, sellCard, placeCard])
 
   // 預載英雄、特性圖片
   useEffect(() => {
@@ -323,9 +393,25 @@ const Shop = () => {
           <div className="flex flex-col gap-2 h-full bg-bg-black">
             <button
               className={`relative h-full flex flex-col bg-xp-bg border-2 border-xp-border hover:cursor-pointer transition-opacity duratio ${Number(total) < 4 ? "opacity-60" : "active:opacity-90 hover:opacity-80"}`}
-              onClick={throttleBuyXp}
+              onClick={() => {
+                if (!canBuyXp) return
+                playButtonFeedback({
+                  button: xpButtonRef.current,
+                  glow: xpGlowRef.current,
+                })
+                throttleBuyXp()
+              }}
               title={`${Number(total) < 4 ? "購買經驗(F) (金錢不足)" :"購買經驗(F)"}`}
+              ref={xpButtonRef}
             >
+              <div
+                ref={xpGlowRef}
+                className="absolute -inset-1 rounded-[2px] border border-cyan-200/70 opacity-0 pointer-events-none"
+                style={{
+                  boxShadow: "0 0 12px rgba(125, 211, 252, 0.55), inset 0 0 8px rgba(125, 211, 252, 0.35)",
+                }}
+                aria-hidden="true"
+              />
               <h6 className="text-lg xl:text-xl m-0 pt-1 pl-2 text-text-white text-left">
                 購買XP
               </h6>
@@ -348,8 +434,24 @@ const Shop = () => {
             <button
               className={`relative h-full flex flex-col bg-reroll-bg border-2 border-reroll-border  hover:cursor-pointer transition-opacity duration-150 ${Number(total) < 2 ? "opacity-60" : "active:opacity-90 hover:opacity-80"}`}
               title={`${Number(total) < 2 ? "刷新商店(D) (金錢不足)" :"刷新商店(D)"}`}
-              onClick={throttleDrawCard}
+              onClick={() => {
+                if (!canReroll) return
+                playButtonFeedback({
+                  button: rerollButtonRef.current,
+                  glow: rerollGlowRef.current,
+                })
+                throttleDrawCard()
+              }}
+              ref={rerollButtonRef}
             >
+              <div
+                ref={rerollGlowRef}
+                className="absolute -inset-1 rounded-[2px] border border-amber-200/70 opacity-0 pointer-events-none"
+                style={{
+                  boxShadow: "0 0 12px rgba(253, 186, 116, 0.55), inset 0 0 8px rgba(253, 186, 116, 0.35)",
+                }}
+                aria-hidden="true"
+              />
               <h6 className="text-lg xl:text-xl m-0 pt-1 pl-2 text-text-white text-left">
                 刷新
               </h6>

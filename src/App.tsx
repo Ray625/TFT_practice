@@ -1,6 +1,7 @@
 import "normalize.css"
 import './App.css'
 import Shop from "./components/cardShop"
+import SessionControls from "./components/sessionControls"
 import Seat from "./components/seat"
 import Space from "./components/space"
 import TraitPanel from "./components/traitPanel"
@@ -18,7 +19,9 @@ function App() {
             <div className="justify-self-center">
               <Space />
             </div>
-            <div className="hidden lg:block" aria-hidden="true" />
+            <div className="w-full lg:w-fit">
+              <SessionControls />
+            </div>
           </div>
           <Seat />
           <Shop />

@@ -59,6 +59,7 @@ export interface ShopStore {
   setLevel: (updater: Updater<number>) => void
   setTotal: (updater: Updater<number | string>) => void
   setSeason: (updater: SeasonKey) => void
+  resetRun: (initialLevel: number, initialTotal: number) => void
   setIsOutside: (updater: boolean) => void
   setDragTargetIndex: (updater: number | null) => void
   setIsDragging: (updater: boolean) => void

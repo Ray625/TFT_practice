@@ -29,7 +29,14 @@ const initializeBanner = (season: SeasonKey): Record<string, ChampionData> => {
 };
 
 export const useShopStore = create<ShopStore>((set, get) => {
-  const { setSeat, setSpace, setPlayerSide } = useSiteStore.getState();
+  const {
+    setSeat,
+    setSpace,
+    setPlayerSide,
+    setHoverCard,
+    setSeatAnimate,
+    setSpaceAnimate,
+  } = useSiteStore.getState();
 
   // 找尋場上及備戰席相同卡牌
   const findMatchingCards = (
@@ -176,6 +183,30 @@ export const useShopStore = create<ShopStore>((set, get) => {
       setSeat(Array(9).fill(null));
       setSpace(Array(28).fill(null));
       setPlayerSide({});
+    },
+
+    resetRun: (initialLevel: number, initialTotal: number) => {
+      const { season } = get();
+      const normalizedLevel = Math.min(10, Math.max(1, initialLevel));
+      const normalizedTotal = Math.min(999, Math.max(0, initialTotal));
+
+      set(() => ({
+        level: normalizedLevel,
+        xp: 0,
+        total: normalizedTotal,
+        shopList: Array(5).fill(null),
+        banner: initializeBanner(season as SeasonKey),
+        isOutside: false,
+        dragTargetIndex: null,
+        isDragging: false,
+      }));
+
+      setSeat(Array(9).fill(null));
+      setSpace(Array(28).fill(null));
+      setPlayerSide({});
+      setHoverCard(null);
+      setSeatAnimate(new Map());
+      setSpaceAnimate(new Map());
     },
 
     setIsOutside: (updater) => set({ isOutside: updater }),

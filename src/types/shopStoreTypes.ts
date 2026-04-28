@@ -13,6 +13,9 @@ export interface ChampionData {
   range?: number
   role?: string | null
   star?: number
+  isSummon?: boolean
+  summonTraitId?: string
+  summonBreakpoint?: number
 }
 
 export interface ChampionJSON {

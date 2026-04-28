@@ -5,6 +5,7 @@ import { useSiteStore } from "../store/siteStore"
 import { useShopStore } from "../store/shopStore"
 import { BoardUnit } from "../store/siteStore"
 import { TraitData, SeasonKey } from "../types/shopStoreTypes"
+import { isSummonUnit } from "../utils/boardUnits"
 import StarLevelUpEffect from "./starLevelUpEffect"
 
 interface OneGrid {
@@ -46,7 +47,7 @@ const OneGrid: React.FC<OneGrid> = ({ cardData, hideStars = false }) => {
             style={{ fill: `var(--color-bg-black)` }}
           />
         )}
-        {cardData && cardData.name && (
+        {cardData && cardData.name && !cardData.isSummon && (
           <>
             <g clipPath="url(#hexClip)">
               <image
@@ -66,10 +67,33 @@ const OneGrid: React.FC<OneGrid> = ({ cardData, hideStars = false }) => {
             />
           </>
         )}
+        {cardData && cardData.name && cardData.isSummon && (
+          <>
+            <path
+              d="M44 0 L 88 25 L 88 75 L44 100 L 0 75 L 0 25 Z"
+              style={{ fill: "var(--color-bg-black)" }}
+            />
+            <path
+              d="M44 2 L86 26 L86 74 L44 98 L2 74 L2 26 Z"
+              strokeWidth="4px"
+              fill="none"
+              style={{ stroke: `var(--color-${cost}-cost-card-light)` }}
+            />
+            <image
+              x="20"
+              y="16"
+              width="48"
+              height="48"
+              preserveAspectRatio="xMidYMid slice"
+              href={`img/trait/${season}/${cardData.image.full}`}
+            />
+          </>
+        )}
       </svg>
       {cardData && cardData.name && (
         <>
-          <div className="absolute z-10 flex flex-row gap-0.5 top-0 left-0 justify-center w-full pt-1.5">
+          {!cardData.isSummon && (
+            <div className="absolute z-10 flex flex-row gap-0.5 top-0 left-0 justify-center w-full pt-1.5">
             {cardData.trait && cardData.trait.map((traitName) => {
               const traitData: TraitData["data"] = traitJSON[season as SeasonKey].data
               const trait = traitData[`TFT${season.slice(-2)}_${traitName}`]
@@ -107,9 +131,10 @@ const OneGrid: React.FC<OneGrid> = ({ cardData, hideStars = false }) => {
                 </svg>
               )
             })}
-          </div>
+            </div>
+          )}
 
-          {cardData.star === 2 && !hideStars && (
+          {cardData.star === 2 && !hideStars && !cardData.isSummon && (
             <>
               <div className="absolute top-0 left-0 right-0 flex flex-row justify-center gap-0.5 pt-7 pointer-events-none scale-75">
                 {[1, 2].map((item) => {
@@ -125,7 +150,7 @@ const OneGrid: React.FC<OneGrid> = ({ cardData, hideStars = false }) => {
               </div>
             </>
           )}
-          {cardData.star === 3 && !hideStars && (
+          {cardData.star === 3 && !hideStars && !cardData.isSummon && (
             <>
               <div className="absolute top-0 left-0 right-0 flex flex-row justify-center gap-0.5 pt-7 pointer-events-none scale-75">
                 {[1, 2, 3].map((item) => {
@@ -141,7 +166,9 @@ const OneGrid: React.FC<OneGrid> = ({ cardData, hideStars = false }) => {
               </div>
             </>
           )}
-          <p className="absolute flex justify-center items-end z-10 min-w-full w-fit h-full pb-5 text-white text-sm whitespace-nowrap pointer-events-none text-shadow">
+          <p className={`absolute flex justify-center items-end z-10 min-w-full w-fit h-full whitespace-nowrap pointer-events-none text-shadow ${
+            cardData.isSummon ? "pb-4 text-[13px] font-semibold" : "pb-5 text-sm"
+          } text-white`}>
             {cardData.name}
           </p>
         </>
@@ -170,6 +197,7 @@ const Space = () => {
               const boardIndex = rowIndex * 7 + index
               const levelUpStar = spaceAnimate.get(boardIndex)
               const isLevelingUp = levelUpStar === 2 || levelUpStar === 3
+              const isSummon = isSummonUnit(item)
 
               return item ? (
                 <div
@@ -190,7 +218,7 @@ const Space = () => {
                   onDragEnd={() => setIsDragging(false)}
                 >
                   <OneGrid cardData={item} hideStars={isLevelingUp} />
-                  {isLevelingUp && (
+                  {isLevelingUp && !isSummon && (
                     <StarLevelUpEffect star={levelUpStar} shape="hex" placement="space" />
                   )}
                 </div>

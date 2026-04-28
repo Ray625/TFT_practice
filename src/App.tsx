@@ -4,6 +4,7 @@ import Shop from "./components/cardShop"
 import SessionControls from "./components/sessionControls"
 import Seat from "./components/seat"
 import Space from "./components/space"
+import TraitSummonSync from "./components/traitSummonSync"
 import TraitPanel from "./components/traitPanel"
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
     <>
       <div className="flex flex-col items-center justify-center w-fit min-w-screen h-fit min-h-screen pt-4 bg-neutral-300/55 text-black overflow-hidden">
         <div className="relative w-fit mx-auto">
+          <TraitSummonSync />
           <div className="absolute top-0 right-4 z-20 xl:right-0">
             <SessionControls />
           </div>

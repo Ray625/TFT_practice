@@ -5,6 +5,7 @@ import traitJSON_set17 from "../assets/tft-trait-set17.json"
 import { useShopStore } from "../store/shopStore"
 import { useSiteStore } from "../store/siteStore"
 import { SeasonKey, TraitData } from "../types/shopStoreTypes"
+import { getDeployableUnitCount, isSummonUnit } from "../utils/boardUnits"
 
 const traitJSON = {
   set13: traitJSON_set13,
@@ -44,7 +45,7 @@ const getTraitRows = (
   const traitCounts = new Map<string, number>()
 
   space.forEach((champion) => {
-    if (!champion || countedChampions.has(champion.id)) return
+    if (!champion || isSummonUnit(champion) || countedChampions.has(champion.id)) return
 
     countedChampions.add(champion.id)
     champion.trait.forEach((traitName) => {
@@ -85,7 +86,7 @@ const TraitPanel = () => {
   const currentSeason = season as SeasonKey
   const rows = useMemo(() => getTraitRows(currentSeason, space), [currentSeason, space])
   const unitCount = useMemo(
-    () => space.reduce((count, champion) => (champion ? count + 1 : count), 0),
+    () => getDeployableUnitCount(space),
     [space],
   )
   const isUnitCapReached = unitCount >= level

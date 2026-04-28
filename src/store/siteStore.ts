@@ -1,5 +1,6 @@
 import { create } from "zustand"
 import { ChampionData } from "../types/shopStoreTypes"
+import { getDeployableUnitCount } from "../utils/boardUnits"
 import { useShopStore } from "./shopStore"
 
 export type BoardUnit = ChampionData | null
@@ -126,10 +127,7 @@ export const useSiteStore = create<SiteStore>((set, get) => {
           const { level } = useShopStore.getState()
           // 若移至戰區則須考慮戰區卡牌上限，最高和等級相同，只能與戰區卡牌交換，不可放至空格
           if (space[endIndex] === null) {
-            const spaceCount = space.reduce((acc, item) => {
-              if (item) acc += 1
-              return acc
-            }, 0)
+            const spaceCount = getDeployableUnitCount(space)
 
             if (spaceCount >= level) {
               setBlockedSeatIndex(startIndex)
@@ -153,6 +151,10 @@ export const useSiteStore = create<SiteStore>((set, get) => {
       // 若由戰區開始拖曳
       if (startPlace === "space") {
         if (endPlace === "seat") {
+          if (item?.isSummon) {
+            setIsDragging(false)
+            return
+          }
           set((state) => {
             const newSpace = [...state.space]
             const newSeat = [...state.seat]

@@ -5,6 +5,7 @@ import champion_set17 from "../assets/tft-champion-set17.json";
 import shopRates from "../assets/tft-shop-drop-rates-data.json";
 import { set17TransitionBoards } from "../data/transitionBoards";
 import { useSiteStore } from "./siteStore";
+import { getDeployableUnitCount } from "../utils/boardUnits";
 import {
   ChampionData,
   ChampionJSON,
@@ -36,7 +37,10 @@ const preferredRowsByRange = (range?: number) => {
   return [3, 2, 1, 0];
 };
 
-const findPreferredSpaceIndex = (space: (ChampionData | null)[], range?: number) => {
+const findPreferredSpaceIndex = (
+  space: (ChampionData | null)[],
+  range?: number,
+) => {
   const rowOrder = preferredRowsByRange(range);
 
   for (const row of rowOrder) {
@@ -186,9 +190,9 @@ export const useShopStore = create<ShopStore>((set, get) => {
   };
 
   return {
-    level: 3,
+    level: 7,
     xp: 0,
-    total: 999,
+    total: 84,
     season: "set17",
     shopList: Array(5).fill(null),
     banner: initializeBanner("set17"),
@@ -254,9 +258,12 @@ export const useShopStore = create<ShopStore>((set, get) => {
       const { season, total } = get();
       if (season !== "set17") return;
 
-      const seasonChampions = champion[season as SeasonKey].data as ChampionJSON["data"];
+      const seasonChampions = champion[season as SeasonKey]
+        .data as ChampionJSON["data"];
       const template =
-        set17TransitionBoards[Math.floor(Math.random() * set17TransitionBoards.length)];
+        set17TransitionBoards[
+          Math.floor(Math.random() * set17TransitionBoards.length)
+        ];
       const twoStarCount = Math.min(
         template.preferredTwoStarIds.length,
         Math.floor(Math.random() * 3) + 1,
@@ -296,11 +303,14 @@ export const useShopStore = create<ShopStore>((set, get) => {
         if (nextSlot === undefined) return;
         nextSpace[nextSlot] = unit;
         nextPlayerSide[unit.id] = {
-          owned: (nextPlayerSide[unit.id]?.owned ?? 0) + (unit.star === 2 ? 3 : 1),
+          owned:
+            (nextPlayerSide[unit.id]?.owned ?? 0) + (unit.star === 2 ? 3 : 1),
         };
       };
 
-      shuffle(frontliners).forEach((unit) => placeUnit(unit, availableFrontSlots));
+      shuffle(frontliners).forEach((unit) =>
+        placeUnit(unit, availableFrontSlots),
+      );
       shuffle(midliners).forEach((unit) => {
         const targetPool =
           availableBackSlots.length > availableFrontSlots.length
@@ -308,7 +318,9 @@ export const useShopStore = create<ShopStore>((set, get) => {
             : availableFrontSlots;
         placeUnit(unit, targetPool);
       });
-      shuffle(backliners).forEach((unit) => placeUnit(unit, availableBackSlots));
+      shuffle(backliners).forEach((unit) =>
+        placeUnit(unit, availableBackSlots),
+      );
 
       set(() => ({
         level: 7,
@@ -541,6 +553,8 @@ export const useShopStore = create<ShopStore>((set, get) => {
 
     // 販賣卡牌
     sellCard: (hoverCard) => {
+      if (hoverCard?.cardData?.isSummon) return;
+
       const { banner, total } = get();
       const { setSeat, setSpace, setPlayerSide, setHoverCard } =
         useSiteStore.getState();
@@ -605,16 +619,15 @@ export const useShopStore = create<ShopStore>((set, get) => {
       // 對著備戰區卡牌使用時
       if (hoverCard.place === "seat") {
         // 檢查戰區位置是否已達等級上限(可放置張數與等級相同)
-        const spaceCount = space.reduce((acc, item) => {
-          if (item) acc += 1;
-          return acc;
-        }, 0);
+        const spaceCount = getDeployableUnitCount(space);
 
         // 若戰區已滿則return
         if (spaceCount >= level) {
           setBlockedSeatIndex(hoverCard.index);
           setTimeout(() => {
-            setBlockedSeatIndex((prev) => (prev === hoverCard.index ? null : prev));
+            setBlockedSeatIndex((prev) =>
+              prev === hoverCard.index ? null : prev,
+            );
           }, 260);
           return;
         }
@@ -644,6 +657,11 @@ export const useShopStore = create<ShopStore>((set, get) => {
 
       // 對著戰區卡牌使用時
       if (hoverCard.place === "space") {
+        if (hoverCard.cardData.isSummon) {
+          setHoverCard(null);
+          return;
+        }
+
         // 檢查備戰區是否已滿
         let full = true;
 
@@ -696,6 +714,10 @@ export const useShopStore = create<ShopStore>((set, get) => {
     // 拖曳以販售
     dropToSellCard: (hoverCard) => {
       if (!hoverCard) return;
+      if (hoverCard.cardData?.isSummon) {
+        get().setIsDragging(false);
+        return;
+      }
       const { sellCard, setIsDragging } = get();
       sellCard(hoverCard);
       setIsDragging(false);

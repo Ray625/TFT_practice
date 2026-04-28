@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useShopStore } from "../store/shopStore"
 
 const SessionControls = () => {
-  const { level, total, resetRun } = useShopStore()
+  const { level, total, resetRun, loadRandomTransitionBoard } = useShopStore()
   const [initialLevel, setInitialLevel] = useState(String(level))
   const [initialGold, setInitialGold] = useState(String(total))
   const [timerSetting, setTimerSetting] = useState("30")
@@ -76,7 +76,7 @@ const SessionControls = () => {
   }, [initialGold, initialLevel])
 
   return (
-    <section className="flex flex-col gap-3 w-full lg:w-58 px-4 py-4 text-text-white bg-reroll-bg border-2 border-reroll-border">
+    <section className="flex flex-col gap-3 w-52 px-3 py-3 text-text-white bg-reroll-bg/95 border-2 border-reroll-border shadow-[0_8px_20px_rgba(0,0,0,0.28)] backdrop-blur-[2px]">
       <h3 className="text-base font-semibold text-left">開局設定</h3>
       <label className="flex flex-col gap-1.5 text-left">
         <span className="text-xs text-text-white/75">初始等級</span>
@@ -151,6 +151,16 @@ const SessionControls = () => {
             </button>
           </div>
         </div>
+      </div>
+      <div className="mt-1 border-t border-reroll-border/80 pt-3">
+        <button
+          type="button"
+          onClick={loadRandomTransitionBoard}
+          className="flex items-center justify-between h-10 px-3 w-full border border-purple-300/70 bg-four-cost-card-dark text-sm font-medium text-text-white transition-all duration-150 hover:cursor-pointer hover:border-purple-200 hover:brightness-110 active:scale-[0.99]"
+        >
+          <span>過渡盤面</span>
+          <span className="text-xs text-text-white/80">隨機</span>
+        </button>
       </div>
     </section>
   )

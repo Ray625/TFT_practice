@@ -3,6 +3,7 @@ import champion_set13 from "../assets/tft-champion-set13.json";
 import champion_set14 from "../assets/tft-champion-set14.json";
 import champion_set17 from "../assets/tft-champion-set17.json";
 import shopRates from "../assets/tft-shop-drop-rates-data.json";
+import { set17TransitionBoards } from "../data/transitionBoards";
 import { useSiteStore } from "./siteStore";
 import {
   ChampionData,
@@ -46,6 +47,24 @@ const findPreferredSpaceIndex = (space: (ChampionData | null)[], range?: number)
   }
 
   return -1;
+};
+
+const shuffle = <T>(items: T[]) => {
+  const next = [...items];
+  for (let index = next.length - 1; index > 0; index -= 1) {
+    const swapIndex = Math.floor(Math.random() * (index + 1));
+    [next[index], next[swapIndex]] = [next[swapIndex], next[index]];
+  }
+  return next;
+};
+
+const frontSlots = [1, 3, 5, 8, 10, 12];
+
+const backSlotsByCount = (count: number) => {
+  if (count >= 4) return [21, 23, 25, 27, 15, 17, 19];
+  if (count === 3) return [21, 24, 27, 15, 19, 17];
+  if (count === 2) return [21, 27, 24, 15, 19, 17];
+  return [24, 21, 27, 17, 15, 19];
 };
 
 export const useShopStore = create<ShopStore>((set, get) => {
@@ -226,6 +245,86 @@ export const useShopStore = create<ShopStore>((set, get) => {
       setSpace(Array(28).fill(null));
       setPlayerSide({});
       setHoverCard(null);
+      setBlockedSeatIndex(null);
+      setSeatAnimate(new Map());
+      setSpaceAnimate(new Map());
+    },
+
+    loadRandomTransitionBoard: () => {
+      const { season, total } = get();
+      if (season !== "set17") return;
+
+      const seasonChampions = champion[season as SeasonKey].data as ChampionJSON["data"];
+      const template =
+        set17TransitionBoards[Math.floor(Math.random() * set17TransitionBoards.length)];
+      const twoStarCount = Math.min(
+        template.preferredTwoStarIds.length,
+        Math.floor(Math.random() * 3) + 1,
+      );
+      const twoStarIds = new Set(
+        shuffle(template.preferredTwoStarIds).slice(0, twoStarCount),
+      );
+
+      const boardUnits = template.unitIds
+        .map((unitId) => {
+          const championData = seasonChampions[unitId];
+          if (!championData) return null;
+
+          return {
+            ...championData,
+            count: [30, 25, 18, 10, 9, 9][championData.tier - 1],
+            star: twoStarIds.has(unitId) ? 2 : 1,
+          } satisfies ChampionData;
+        })
+        .filter((unit): unit is ChampionData => Boolean(unit));
+
+      const frontliners = boardUnits.filter((unit) => (unit.range ?? 1) <= 2);
+      const backliners = boardUnits.filter((unit) => (unit.range ?? 1) >= 4);
+      const midliners = boardUnits.filter((unit) => {
+        const range = unit.range ?? 1;
+        return range === 3;
+      });
+
+      const nextSpace = Array(28).fill(null) as (ChampionData | null)[];
+      const nextSeat = Array(9).fill(null) as (ChampionData | null)[];
+      const nextPlayerSide: Record<string, { owned: number }> = {};
+      const availableFrontSlots = [...frontSlots];
+      const availableBackSlots = [...backSlotsByCount(backliners.length)];
+
+      const placeUnit = (unit: ChampionData, slotPool: number[]) => {
+        const nextSlot = slotPool.shift();
+        if (nextSlot === undefined) return;
+        nextSpace[nextSlot] = unit;
+        nextPlayerSide[unit.id] = {
+          owned: (nextPlayerSide[unit.id]?.owned ?? 0) + (unit.star === 2 ? 3 : 1),
+        };
+      };
+
+      shuffle(frontliners).forEach((unit) => placeUnit(unit, availableFrontSlots));
+      shuffle(midliners).forEach((unit) => {
+        const targetPool =
+          availableBackSlots.length > availableFrontSlots.length
+            ? availableBackSlots
+            : availableFrontSlots;
+        placeUnit(unit, targetPool);
+      });
+      shuffle(backliners).forEach((unit) => placeUnit(unit, availableBackSlots));
+
+      set(() => ({
+        level: 7,
+        xp: 0,
+        total,
+        shopList: Array(5).fill(null),
+        isOutside: false,
+        dragTargetIndex: null,
+        isDragging: false,
+      }));
+
+      setSeat(nextSeat);
+      setSpace(nextSpace);
+      setPlayerSide(nextPlayerSide);
+      setHoverCard(null);
+      setBlockedSeatIndex(null);
       setSeatAnimate(new Map());
       setSpaceAnimate(new Map());
     },

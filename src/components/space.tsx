@@ -1,16 +1,19 @@
 import traitJSON_set13 from "../assets/tft-trait-set13.json"
 import traitJSON_set14 from "../assets/tft-trait-set14.json"
 import traitJSON_set17 from "../assets/tft-trait-set17.json"
+import { useMemo } from "react"
 import { useSiteStore } from "../store/siteStore"
 import { useShopStore } from "../store/shopStore"
 import { BoardUnit } from "../store/siteStore"
 import { TraitData, SeasonKey } from "../types/shopStoreTypes"
 import { isSummonUnit } from "../utils/boardUnits"
+import { boardTraitIconPalette, getActiveTraitStyleMap } from "../utils/traits"
 import StarLevelUpEffect from "./starLevelUpEffect"
 
 interface OneGrid {
   cardData: BoardUnit
   hideStars?: boolean
+  activeTraitStyles: Map<string, number>
 }
 
 const traitJSON = {
@@ -19,7 +22,7 @@ const traitJSON = {
   set17: traitJSON_set17
 }
 
-const OneGrid: React.FC<OneGrid> = ({ cardData, hideStars = false }) => {
+const OneGrid: React.FC<OneGrid> = ({ cardData, hideStars = false, activeTraitStyles }) => {
   const { season } = useShopStore()
 
   const cost = cardData?.tier
@@ -97,6 +100,10 @@ const OneGrid: React.FC<OneGrid> = ({ cardData, hideStars = false }) => {
             {cardData.trait && cardData.trait.map((traitName) => {
               const traitData: TraitData["data"] = traitJSON[season as SeasonKey].data
               const trait = traitData[`TFT${season.slice(-2)}_${traitName}`]
+              const isActive = activeTraitStyles.has(trait.id)
+              const palette = isActive
+                ? boardTraitIconPalette.active
+                : boardTraitIconPalette.inactive
               return (
                 <svg
                   version="1.1"
@@ -107,10 +114,21 @@ const OneGrid: React.FC<OneGrid> = ({ cardData, hideStars = false }) => {
                   height="18"
                   key={traitName}
                 >
+                  <defs>
+                    <filter id={`trait-active-icon-${trait.id}`}>
+                      <feColorMatrix
+                        type="matrix"
+                        values="0 0 0 0 0
+                                0 0 0 0 0
+                                0 0 0 0 0
+                                0 0 0 1 0"
+                      />
+                    </filter>
+                  </defs>
                   <rect
                     width="88"
                     height="100"
-                    style={{ fill: "var(--color-trait-bg)" }}
+                    style={{ fill: palette?.fill ?? "var(--color-trait-bg)" }}
                     clipPath="url(#hexClip)"
                   />
                   <image
@@ -121,12 +139,13 @@ const OneGrid: React.FC<OneGrid> = ({ cardData, hideStars = false }) => {
                     preserveAspectRatio="xMidYMid slice"
                     href={`img/trait/${season}/${trait.image.full}`}
                     clipPath="url(#hexClip)"
+                    filter={isActive ? `url(#trait-active-icon-${trait.id})` : undefined}
                   />
                   <path
                     d="M44 4 L84 27 L84 73 L44 96 L4 73 L4 27 Z"
                     strokeWidth="4px"
                     fill="none"
-                    style={{ stroke: "var(--color-trait-border)" }}
+                    style={{ stroke: palette.border }}
                   />
                 </svg>
               )
@@ -180,6 +199,11 @@ const OneGrid: React.FC<OneGrid> = ({ cardData, hideStars = false }) => {
 const Space = () => {
   const { space, spaceAnimate, setHoverCard, dragStart, drop, dragOver } = useSiteStore()
   const { setIsDragging } = useShopStore()
+  const { season } = useShopStore()
+  const activeTraitStyles = useMemo(
+    () => getActiveTraitStyleMap(season as SeasonKey, space),
+    [season, space],
+  )
 
   return (
     <div className="flex flex-col w-fit h-fit mb-8 p-8 bg-seat-bg">
@@ -217,7 +241,11 @@ const Space = () => {
                   onDragStart={(event) => dragStart(event, item, boardIndex, "space")}
                   onDragEnd={() => setIsDragging(false)}
                 >
-                  <OneGrid cardData={item} hideStars={isLevelingUp} />
+                  <OneGrid
+                    cardData={item}
+                    hideStars={isLevelingUp}
+                    activeTraitStyles={activeTraitStyles}
+                  />
                   {isLevelingUp && !isSummon && (
                     <StarLevelUpEffect star={levelUpStar} shape="hex" placement="space" />
                   )}
@@ -228,7 +256,7 @@ const Space = () => {
                     onDragOver={(e) => dragOver(e)}
                     onDrop={(e) => drop(e, boardIndex, "space")}
                   >
-                  <OneGrid cardData={item} />
+                  <OneGrid cardData={item} activeTraitStyles={activeTraitStyles} />
                 </div>
               )
             })}

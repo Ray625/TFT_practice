@@ -1,19 +1,19 @@
 export interface TransitionBoardTemplate {
-  id: string
-  name: string
-  unitIds: string[]
-  preferredTwoStarIds: string[]
+  id: string;
+  name: string;
+  unitIds: string[];
+  preferredTwoStarIds: string[];
 }
 
 export const set17TransitionBoards: TransitionBoardTemplate[] = [
   {
-    id: "drx-fateweaver-wide",
-    name: "DRX 命運寬羈絆",
+    id: "stargazer-wide-traits",
+    name: "占星拼多多",
     unitIds: [
       "TFT17_Aatrox",
       "TFT17_Maokai",
       "TFT17_Pantheon",
-      "TFT17_Caitlyn",
+      "TFT17_Jax",
       "TFT17_TwistedFate",
       "TFT17_Milio",
       "TFT17_Lulu",
@@ -22,31 +22,119 @@ export const set17TransitionBoards: TransitionBoardTemplate[] = [
       "TFT17_Aatrox",
       "TFT17_Maokai",
       "TFT17_Pantheon",
-      "TFT17_Caitlyn",
+      "TFT17_Jax",
       "TFT17_Milio",
       "TFT17_Lulu",
     ],
   },
   {
-    id: "space-timebreaker-wide",
-    name: "太空時間寬羈絆",
+    id: "mip-sniper",
+    name: "米普狙擊手",
     unitIds: [
-      "TFT17_Nasus",
       "TFT17_Poppy",
+      "TFT17_IvernMinion",
       "TFT17_Pantheon",
-      "TFT17_Teemo",
-      "TFT17_Veigar",
-      "TFT17_Samira",
-      "TFT17_Milio",
+      "TFT17_Maokai",
+      "TFT17_Aatrox",
+      "TFT17_Ezreal",
+      "TFT17_Gnar",
     ],
     preferredTwoStarIds: [
-      "TFT17_Nasus",
       "TFT17_Poppy",
+      "TFT17_IvernMinion",
       "TFT17_Pantheon",
-      "TFT17_Teemo",
-      "TFT17_Veigar",
-      "TFT17_Samira",
-      "TFT17_Milio",
+      "TFT17_Maokai",
+      "TFT17_Aatrox",
+      "TFT17_Ezreal",
+      "TFT17_Gnar",
     ],
   },
-]
+  {
+    id: "stargazer-assassin-wide-traits",
+    name: "占星刺客拼多多",
+    unitIds: [
+      "TFT17_Jax",
+      "TFT17_Talon",
+      "TFT17_Aatrox",
+      "TFT17_Rhaast",
+      "TFT17_Gwen",
+      "TFT17_TwistedFate",
+      "TFT17_Caitlyn",
+    ],
+    preferredTwoStarIds: [
+      "TFT17_Jax",
+      "TFT17_Talon",
+      "TFT17_Aatrox",
+      "TFT17_Rhaast",
+      "TFT17_Gwen",
+      "TFT17_TwistedFate",
+      "TFT17_Caitlyn",
+    ],
+  },
+  {
+    id: "wide-mana-summoner",
+    name: "拼多降靈師",
+    unitIds: [
+      "TFT17_Mordekaiser",
+      "TFT17_Pyke",
+      "TFT17_Rhaast",
+      "TFT17_Illaoi",
+      "TFT17_IvernMinion",
+      "TFT17_Viktor",
+      "TFT17_Lissandra",
+    ],
+    preferredTwoStarIds: [
+      "TFT17_Mordekaiser",
+      "TFT17_Pyke",
+      "TFT17_Rhaast",
+      "TFT17_Illaoi",
+      "TFT17_IvernMinion",
+      "TFT17_Viktor",
+      "TFT17_Lissandra",
+    ],
+  },
+  {
+    id: "primordian-wide-traits",
+    name: "遠古霸者拼多多",
+    unitIds: [
+      "TFT17_Briar",
+      "TFT17_RekSai",
+      "TFT17_Maokai",
+      "TFT17_Aatrox",
+      "TFT17_Rhaast",
+      "TFT17_Gwen",
+      "TFT17_Belveth",
+    ],
+    preferredTwoStarIds: [
+      "TFT17_Briar",
+      "TFT17_RekSai",
+      "TFT17_Maokai",
+      "TFT17_Aatrox",
+      "TFT17_Rhaast",
+      "TFT17_Gwen",
+      "TFT17_Belveth",
+    ],
+  },
+  {
+    id: "vanguard-shepherd",
+    name: "高先鋒牧者",
+    unitIds: [
+      "TFT17_Mordekaiser",
+      "TFT17_Illaoi",
+      "TFT17_Leona",
+      "TFT17_Nasus",
+      "TFT17_Teemo",
+      "TFT17_Lissandra",
+      "TFT17_Zoe",
+    ],
+    preferredTwoStarIds: [
+      "TFT17_Mordekaiser",
+      "TFT17_Illaoi",
+      "TFT17_Leona",
+      "TFT17_Nasus",
+      "TFT17_Teemo",
+      "TFT17_Lissandra",
+      "TFT17_Zoe",
+    ],
+  },
+];

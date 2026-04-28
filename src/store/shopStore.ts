@@ -62,7 +62,8 @@ const shuffle = <T>(items: T[]) => {
   return next;
 };
 
-const frontSlots = [1, 3, 5, 8, 10, 12];
+const frontTankSlots = [3, 2, 4, 1, 5, 0, 6];
+const frontReachSlots = [10, 9, 11, 8, 12, 7, 13];
 
 const backSlotsByCount = (count: number) => {
   if (count >= 4) return [21, 23, 25, 27, 15, 17, 19];
@@ -266,7 +267,7 @@ export const useShopStore = create<ShopStore>((set, get) => {
         ];
       const twoStarCount = Math.min(
         template.preferredTwoStarIds.length,
-        Math.floor(Math.random() * 3) + 1,
+        Math.floor(Math.random() * 4) + 1,
       );
       const twoStarIds = new Set(
         shuffle(template.preferredTwoStarIds).slice(0, twoStarCount),
@@ -285,7 +286,10 @@ export const useShopStore = create<ShopStore>((set, get) => {
         })
         .filter((unit): unit is ChampionData => Boolean(unit));
 
-      const frontliners = boardUnits.filter((unit) => (unit.range ?? 1) <= 2);
+      const frontliners = boardUnits.filter((unit) => (unit.range ?? 1) <= 1);
+      const reachFrontliners = boardUnits.filter(
+        (unit) => (unit.range ?? 1) === 2,
+      );
       const backliners = boardUnits.filter((unit) => (unit.range ?? 1) >= 4);
       const midliners = boardUnits.filter((unit) => {
         const range = unit.range ?? 1;
@@ -295,7 +299,8 @@ export const useShopStore = create<ShopStore>((set, get) => {
       const nextSpace = Array(28).fill(null) as (ChampionData | null)[];
       const nextSeat = Array(9).fill(null) as (ChampionData | null)[];
       const nextPlayerSide: Record<string, { owned: number }> = {};
-      const availableFrontSlots = [...frontSlots];
+      const availableFrontSlots = [...frontTankSlots];
+      const availableReachFrontSlots = [...frontReachSlots];
       const availableBackSlots = [...backSlotsByCount(backliners.length)];
 
       const placeUnit = (unit: ChampionData, slotPool: number[]) => {
@@ -311,11 +316,17 @@ export const useShopStore = create<ShopStore>((set, get) => {
       shuffle(frontliners).forEach((unit) =>
         placeUnit(unit, availableFrontSlots),
       );
+      shuffle(reachFrontliners).forEach((unit) =>
+        placeUnit(unit, availableReachFrontSlots),
+      );
       shuffle(midliners).forEach((unit) => {
         const targetPool =
-          availableBackSlots.length > availableFrontSlots.length
+          availableBackSlots.length >
+          availableFrontSlots.length + availableReachFrontSlots.length
             ? availableBackSlots
-            : availableFrontSlots;
+            : availableReachFrontSlots.length > 0
+              ? availableReachFrontSlots
+              : availableFrontSlots;
         placeUnit(unit, targetPool);
       });
       shuffle(backliners).forEach((unit) =>

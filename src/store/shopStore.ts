@@ -191,16 +191,21 @@ export const useShopStore = create<ShopStore>((set, get) => {
   };
 
   const loadTransitionBoardFromTemplate = (templateId?: string) => {
-    const { season, total } = get();
+    const { season, total, lastTransitionBoardId } = get();
     if (season !== "set17") return;
 
     const seasonChampions = champion[season as SeasonKey]
       .data as ChampionJSON["data"];
     const template = templateId
       ? set17TransitionBoards.find((item) => item.id === templateId)
-      : set17TransitionBoards[
-          Math.floor(Math.random() * set17TransitionBoards.length)
-        ];
+      : (() => {
+          const candidates =
+            set17TransitionBoards.length > 1
+              ? set17TransitionBoards.filter((item) => item.id !== lastTransitionBoardId)
+              : set17TransitionBoards;
+
+          return candidates[Math.floor(Math.random() * candidates.length)];
+        })();
 
     if (!template) return;
 
@@ -280,6 +285,7 @@ export const useShopStore = create<ShopStore>((set, get) => {
       isOutside: false,
       dragTargetIndex: null,
       isDragging: false,
+      lastTransitionBoardId: template.id,
     }));
 
     setSeat(nextSeat);
@@ -304,6 +310,7 @@ export const useShopStore = create<ShopStore>((set, get) => {
     dragOffset: { x: 0, y: 0 },
     dragTargetIndex: null,
     isDragging: false,
+    lastTransitionBoardId: null,
 
     setLevel: (updater) => {
       set((state) => ({

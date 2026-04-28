@@ -60,6 +60,7 @@ export interface ShopStore {
   isOutside: boolean
   dragTargetIndex: number | null
   isDragging: boolean
+  lastTransitionBoardId?: string | null
 
   setLevel: (updater: Updater<number>) => void
   setTotal: (updater: Updater<number | string>) => void

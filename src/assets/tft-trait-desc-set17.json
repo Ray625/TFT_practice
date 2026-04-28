@@ -1,0 +1,1519 @@
+{
+  "data": {
+    "TFT17_VexUniqueTrait": {
+      "name": "厄運使者",
+      "desc": "戰鬥開始時：對所有敵軍施加厄障標記。<br><br>每場戰鬥中，敵軍首次受到傷害時，消耗他們的厄障標記，並竊取其@ADAP1@%物攻和魔攻，賦予我方最強大的薇可絲。",
+      "effects": [
+        {
+          "minUnits": 1,
+          "maxUnits": 25000,
+          "style": 4,
+          "variables": {
+            "ADAP1": 12
+          }
+        }
+      ]
+    },
+    "TFT17_ASTrait": {
+      "name": "極速快手",
+      "desc": "我方隊伍增加@TeamwideAS*100@%攻速，極速快手獲得額外攻速。目標陣亡時，極速快手衝向新目標並額外提升@BurstPercent*100@%攻速，持續@BurstDuration@秒。<br><br><row>(@MinUnits@) @AttackSpeedPercent*100@% %i:scaleAS%</row><br><row>(@MinUnits@) @AttackSpeedPercent*100@% %i:scaleAS%</row><br><row>(@MinUnits@) @AttackSpeedPercent*100@% %i:scaleAS%</row><br><row>(@MinUnits@) @AttackSpeedPercent*100@% %i:scaleAS%</row>",
+      "effects": [
+        {
+          "minUnits": 2,
+          "maxUnits": 2,
+          "style": 1,
+          "variables": {
+            "AttackSpeedPercent": 0.15000000596046448,
+            "BurstDuration": 2.5,
+            "BurstPercent": 0.5,
+            "DamageReduction": null,
+            "TeamwideAS": 0.10000000149011612
+          }
+        },
+        {
+          "minUnits": 3,
+          "maxUnits": 3,
+          "style": 3,
+          "variables": {
+            "AttackSpeedPercent": 0.2199999988079071,
+            "BurstDuration": 2.5,
+            "BurstPercent": 0.5,
+            "DamageReduction": null,
+            "TeamwideAS": 0.10000000149011612
+          }
+        },
+        {
+          "minUnits": 4,
+          "maxUnits": 4,
+          "style": 3,
+          "variables": {
+            "AttackSpeedPercent": 0.36000001430511475,
+            "BurstDuration": 2.5,
+            "BurstPercent": 0.5,
+            "DamageReduction": null,
+            "TeamwideAS": 0.10000000149011612
+          }
+        },
+        {
+          "minUnits": 5,
+          "maxUnits": 25000,
+          "style": 5,
+          "variables": {
+            "AttackSpeedPercent": 0.47999998927116394,
+            "BurstDuration": 2.5,
+            "BurstPercent": 0.5,
+            "DamageReduction": null,
+            "TeamwideAS": 0.10000000149011612
+          }
+        }
+      ]
+    },
+    "TFT17_MissFortuneUndeterminedTrait": {
+      "name": "選擇特性",
+      "desc": "部署好運姐時，可以選擇降靈師模式、極速快手模式，或復刻師模式。好運姐會根據所選模式獲得獨特技能及對應的特性。",
+      "effects": []
+    },
+    "TFT17_Stargazer_Wolf": {
+      "name": "占星師",
+      "desc": "占星師每局都會描繪不同的星圖。本局星圖：<TFTStargazer>野豬座</TFTStargazer>。<br><br>贏得玩家戰鬥後，獲得金錢。強化棋格內的友軍獲得@Wolf_Health_Teamwide*100@%生命、物攻和魔攻。占星師能獲得更多。<br><br>(已獲得金錢：@TFTUnitProperty.trait:TFT17_Stargazer_Wolf_TotalGold@)<br><br><expandRow>(@MinUnits@) @Wolf_Gold@金錢、@Wolf_Health*100@% %i:scaleHealth%、@Wolf_ADAP@% %i:scaleAD%%i:scaleAP%</expandRow><br><br><rules>提升玩家等級會揭露更多棋格。</rules>",
+      "effects": [
+        {
+          "minUnits": 3,
+          "maxUnits": 3,
+          "style": 1,
+          "variables": {
+            "Wolf_ADAP": 10,
+            "Wolf_Gold": 1,
+            "Wolf_Health": 0.019999999552965164,
+            "Wolf_Health_Teamwide": 0.07999999821186066,
+            "{f5b00dd5}": 8
+          }
+        },
+        {
+          "minUnits": 4,
+          "maxUnits": 4,
+          "style": 3,
+          "variables": {
+            "Wolf_ADAP": 15,
+            "Wolf_Gold": 2,
+            "Wolf_Health": 0.07999999821186066,
+            "Wolf_Health_Teamwide": 0.07999999821186066,
+            "{f5b00dd5}": 8
+          }
+        },
+        {
+          "minUnits": 5,
+          "maxUnits": 5,
+          "style": 3,
+          "variables": {
+            "Wolf_ADAP": 25,
+            "Wolf_Gold": 4,
+            "Wolf_Health": 0.15000000596046448,
+            "Wolf_Health_Teamwide": 0.07999999821186066,
+            "{f5b00dd5}": 8
+          }
+        },
+        {
+          "minUnits": 6,
+          "maxUnits": 25000,
+          "style": 5,
+          "variables": {
+            "Wolf_ADAP": 30,
+            "Wolf_Gold": 6,
+            "Wolf_Health": 0.2199999988079071,
+            "Wolf_Health_Teamwide": 0.07999999821186066,
+            "{f5b00dd5}": 8
+          }
+        }
+      ]
+    },
+    "TFT17_APTrait": {
+      "name": "復刻師",
+      "desc": "復刻師會額外施放一次效果減弱的技能。<br><br><expandRow>(@MinUnits@) @Effectiveness*100@%強度</expandRow>",
+      "effects": [
+        {
+          "minUnits": 2,
+          "maxUnits": 3,
+          "style": 1,
+          "variables": {
+            "Effectiveness": 0.2199999988079071
+          }
+        },
+        {
+          "minUnits": 4,
+          "maxUnits": 25000,
+          "style": 5,
+          "variables": {
+            "Effectiveness": 0.44999998807907104
+          }
+        }
+      ]
+    },
+    "TFT17_ShieldTank": {
+      "name": "先鋒戰士",
+      "desc": "受護盾保護時，先鋒戰士獲得@DamageReductionPct*100@%續戰力。<br><br>戰鬥開始及生命降至@HealthThreshold*100@%時：獲得最大生命的護盾，持續@ShieldDuration@秒。<br><br><row>(@MinUnits@) @ShieldPercentAmount*100@%最大生命</row><br><row>(@MinUnits@) @ShieldPercentAmount*100@%最大生命</row><br><row>(@MinUnits@) @ShieldPercentAmount*100@%最大生命；<br>擁有護盾時@EnhancedDurability*100@% %i:scaleDR%</row>",
+      "effects": [
+        {
+          "minUnits": 2,
+          "maxUnits": 3,
+          "style": 1,
+          "variables": {
+            "DamageReductionPct": 0.05000000074505806,
+            "EnhancedDurability": 0.07999999821186066,
+            "HealthThreshold": 0.5,
+            "ShieldDuration": 10,
+            "ShieldPercentAmount": 0.1599999964237213
+          }
+        },
+        {
+          "minUnits": 4,
+          "maxUnits": 5,
+          "style": 3,
+          "variables": {
+            "DamageReductionPct": 0.05000000074505806,
+            "EnhancedDurability": 0.07999999821186066,
+            "HealthThreshold": 0.5,
+            "ShieldDuration": 10,
+            "ShieldPercentAmount": 0.30000001192092896
+          }
+        },
+        {
+          "minUnits": 6,
+          "maxUnits": 25000,
+          "style": 5,
+          "variables": {
+            "DamageReductionPct": 0.05000000074505806,
+            "EnhancedDurability": 0.07999999821186066,
+            "HealthThreshold": 0.5,
+            "ShieldDuration": 10,
+            "ShieldPercentAmount": 0.4000000059604645
+          }
+        }
+      ]
+    },
+    "TFT17_PsyOps": {
+      "name": "靈能使",
+      "desc": "獲得可為任意友軍裝備的靈能道具。<br><br><row>(@MinUnits@)獲得@TFTUnitProperty.trait:TFT17_PsyOps_Item1@</row><br><row>(@MinUnits@)獲得@TFTUnitProperty.trait:TFT17_PsyOps_Item2@，靈能道具在靈能使身上會發揮更大效果</row><br><br><br>",
+      "effects": [
+        {
+          "minUnits": 2,
+          "maxUnits": 3,
+          "style": 1,
+          "variables": {
+            "{1b889d1c}": null
+          }
+        },
+        {
+          "minUnits": 4,
+          "maxUnits": 25000,
+          "style": 5,
+          "variables": {
+            "{1b889d1c}": 50
+          }
+        }
+      ]
+    },
+    "TFT17_JhinUniqueTrait": {
+      "name": "燼滅之華",
+      "desc": "敵軍的雙防降低@PctResists*100@%。",
+      "effects": [
+        {
+          "minUnits": 1,
+          "maxUnits": 1,
+          "style": 4,
+          "variables": {
+            "PctResists": 0.10000000149011612
+          }
+        }
+      ]
+    },
+    "TFT17_Timebreaker": {
+      "name": "時間破壞者",
+      "desc": "<row>(@MinUnits@)落敗時，獲得免費重抽。獲勝時，將經驗值儲存於時空核心(隨階段成長)。</row><br><row>(@MinUnits@)外加友軍獲得@AttackSpeed*100@%攻速。</row><br><row>(@MinUnits@)外加時間破壞者額外獲得@TimebreakerAdditionalAS*100@%攻速</row><br><br><rules>落敗的重抽數：@TFTUnitProperty.:TFT17_Timebreaker_NumRerollsTooltip@<br>獲勝的經驗值：@TFTUnitProperty.:TFT17_Timebreaker_NumXPTooltip@</rules>",
+      "effects": [
+        {
+          "minUnits": 2,
+          "maxUnits": 2,
+          "style": 1,
+          "variables": {
+            "AttackSpeed": null,
+            "TimebreakerAdditionalAS": null,
+            "{aaae13a0}": 1
+          }
+        },
+        {
+          "minUnits": 3,
+          "maxUnits": 3,
+          "style": 3,
+          "variables": {
+            "AttackSpeed": 0.25,
+            "TimebreakerAdditionalAS": null,
+            "{aaae13a0}": 1
+          }
+        },
+        {
+          "minUnits": 4,
+          "maxUnits": 25000,
+          "style": 5,
+          "variables": {
+            "AttackSpeed": 0.25,
+            "TimebreakerAdditionalAS": 0.4000000059604645,
+            "{aaae13a0}": 1
+          }
+        }
+      ]
+    },
+    "TFT17_MeleeTrait": {
+      "name": "劫掠者",
+      "desc": "我方隊伍獲得@TeamwideBonus*100@%全能吸血。劫掠者獲得更多全能吸血、物攻，且全能吸血的超量治療會轉化為護盾(最多@MaxPercentHealthShield*100@%最大生命)。<br><br><row>(@MinUnits@) @Omnivamp*100@% %i:scaleSV%，@AD*100@% %i:scaleAD%</row><br><row>(@MinUnits@) @Omnivamp*100@% %i:scaleSV%，@AD*100@% %i:scaleAD%</row><br><row>(@MinUnits@) @Omnivamp*100@% %i:scaleSV%，@AD*100@% %i:scaleAD%。</row>",
+      "effects": [
+        {
+          "minUnits": 2,
+          "maxUnits": 3,
+          "style": 1,
+          "variables": {
+            "AD": 0.20000000298023224,
+            "MaxPercentHealthShield": 0.25,
+            "Omnivamp": 0.05000000074505806,
+            "ShieldAD": null,
+            "TeamwideBonus": 0.05000000074505806
+          }
+        },
+        {
+          "minUnits": 4,
+          "maxUnits": 5,
+          "style": 3,
+          "variables": {
+            "AD": 0.4000000059604645,
+            "MaxPercentHealthShield": 0.25,
+            "Omnivamp": 0.07000000029802322,
+            "ShieldAD": null,
+            "TeamwideBonus": 0.05000000074505806
+          }
+        },
+        {
+          "minUnits": 6,
+          "maxUnits": 25000,
+          "style": 5,
+          "variables": {
+            "AD": 0.6000000238418579,
+            "MaxPercentHealthShield": 0.25,
+            "Omnivamp": 0.10000000149011612,
+            "ShieldAD": 0.20000000298023224,
+            "TeamwideBonus": 0.05000000074505806
+          }
+        }
+      ]
+    },
+    "TFT17_MissFortuneUniqueTrait": {
+      "name": "重槍女武神",
+      "desc": "部署好運姐時，可以選擇降靈師模式、極速快手模式，或復刻師模式。好運姐會根據所選模式獲得獨特技能及對應的特性。",
+      "effects": [
+        {
+          "minUnits": 1,
+          "maxUnits": 25000,
+          "style": 4,
+          "variables": {
+            "Allies": 2,
+            "DamageAmp": 0.009999999776482582,
+            "FlatDamage": 100,
+            "Mana": 2,
+            "NumAttacks": 3
+          }
+        }
+      ]
+    },
+    "TFT17_AnimaSquad": {
+      "name": "百獸",
+      "desc": "玩家戰鬥落敗後，獲得@TechPerCombat@科技，並額外獲得@TechPerLoss@乘以連敗場數的科技。此外，百獸每參與擊殺1次，都會獲得@TechPerKill@科技。<br><br>每當百獸獲得@TechBreakpoint@科技，就會研發全新百獸武器。你可以領取武器或保留科技，以利下次換取更強大的武器。<br><br><row>(@MinUnits@)開始研究！</row><br><row>(@MinUnits@)贏得玩家戰鬥後獲得戰利品！</row>",
+      "effects": [
+        {
+          "minUnits": 3,
+          "maxUnits": 5,
+          "style": 1,
+          "variables": {
+            "TechBreakpoint": 100,
+            "TechPerCombat": 20,
+            "TechPerCombat_DU": 15,
+            "TechPerDeath_PVE": 1,
+            "TechPerKill": 2,
+            "TechPerLoss": 5,
+            "TechPerLoss_DU": 5,
+            "TechPerRound_PVE": 20,
+            "{18a09431}": 0.5
+          }
+        },
+        {
+          "minUnits": 6,
+          "maxUnits": 25000,
+          "style": 5,
+          "variables": {
+            "TechBreakpoint": 100,
+            "TechPerCombat": 20,
+            "TechPerCombat_DU": 15,
+            "TechPerDeath_PVE": 1,
+            "TechPerKill": 2,
+            "TechPerLoss": 5,
+            "TechPerLoss_DU": 5,
+            "TechPerRound_PVE": 20,
+            "{18a09431}": 0.5
+          }
+        }
+      ]
+    },
+    "TFT17_Fateweaver": {
+      "name": "命運編織者",
+      "desc": "天賦：命運編織者擁有<TFTKeyword>精準</TFTKeyword>。<br><br><row>(@MinUnits@)技能的機率性效果會變得<TFTKeyword>幸運</TFTKeyword>。</row><br><row>(@MinUnits@)獲得@CritChance*100@%暴擊率和@CritDamage@%暴擊傷害。暴擊同樣會觸發<TFTKeyword>幸運</TFTKeyword>。</row><br><br>{{TFT_Keyword_Precision}}<br><rules>幸運：判定兩次，並選擇較好的結果。</rules>",
+      "effects": [
+        {
+          "minUnits": 2,
+          "maxUnits": 3,
+          "style": 1,
+          "variables": {
+            "CritDamage": null
+          }
+        },
+        {
+          "minUnits": 4,
+          "maxUnits": 25000,
+          "style": 5,
+          "variables": {
+            "CritChance": 0.20000000298023224,
+            "CritDamage": 20
+          }
+        }
+      ]
+    },
+    "TFT17_ZedUniqueTrait": {
+      "name": "銀河獵手",
+      "desc": "透過「影忍煞星：劫」增幅裝置獲得劫。<br><br>只要有至少一個影分身存活，劫便獲得@BonusAD*100@%額外物攻。",
+      "effects": [
+        {
+          "minUnits": 1,
+          "maxUnits": 25000,
+          "style": 4,
+          "variables": {
+            "BonusAD": 0.4000000059604645
+          }
+        }
+      ]
+    },
+    "TFT17_ShenUniqueTrait": {
+      "name": "星界壁壘",
+      "desc": "召喚一件可放置的聖物。戰鬥開始時，賦予鄰近友軍@PercentHealthShield*100@%最大生命的護盾與@AttackSpeed*100@%攻速。",
+      "effects": [
+        {
+          "minUnits": 1,
+          "maxUnits": 25000,
+          "style": 4,
+          "variables": {
+            "AttackSpeed": 0.10000000149011612,
+            "AttackSpeedDuration": 60,
+            "PercentHealthShield": 0.10000000149011612,
+            "ShieldDuration": 60
+          }
+        }
+      ]
+    },
+    "TFT17_SonaUniqueTrait": {
+      "name": "指揮官",
+      "desc": "(@MinUnits@)索娜每@RoundsPerMod@回合賦予一個隨機指令模組，讓你改變友軍的戰鬥模式。每個指令模組持續@RoundsPerMod@場玩家戰鬥，即使未被裝備。",
+      "effects": [
+        {
+          "minUnits": 1,
+          "maxUnits": 25000,
+          "style": 4,
+          "variables": {
+            "AS": 0.15000000596046448,
+            "HealthRatio": 0.15000000596046448,
+            "RoundsPerMod": 2
+          }
+        }
+      ]
+    },
+    "TFT17_Stargazer_Medallion": {
+      "name": "占星師",
+      "desc": "占星師每局都會描繪不同的星圖。本局星圖：<TFTStargazer>勳章座</TFTStargazer>。<br><br><row>強化棋格內的(@MinUnits@)位友軍獲得@Medallion_DA@%傷害增幅，每有1位3星友軍便增加@Medallion_IncreasePer3Star@%。</row><br><br>(目前增益：@TFTUnitProperty.trait:TFT17_Stargazer_Medallion_Increase@% %i:scaleDA%)<br><br><rules>提升玩家等級會揭露更多棋格。</rules>",
+      "effects": [
+        {
+          "minUnits": 3,
+          "maxUnits": 25000,
+          "style": 5,
+          "variables": {
+            "Medallion_DA": 12,
+            "Medallion_IncreasePer3Star": 6.5,
+            "{37204635}": 10,
+            "{3d49cc86}": 20,
+            "{c32af02f}": 0.05000000074505806
+          }
+        }
+      ]
+    },
+    "TFT17_Stargazer_Huntress": {
+      "name": "占星師",
+      "desc": "占星師每局都會描繪不同的星圖。本局星圖：<TFTStargazer>獵女座</TFTStargazer>。<br><br>戰鬥開始時：標記生命最高的敵軍。<br><br>強化棋格內的友軍獲得@Huntress_AS_Teamwide*100@%攻速。強化棋格內的占星師獲得更多，標記的敵軍死亡時，回復自身@Huntress_Heal*100@%最大生命。<br><br><row>(@MinUnits@) @Huntress_AS*100@% %i:scaleAS%，@NumMarks@個標記</row><br><row>(@MinUnits@) @Huntress_AS*100@% %i:scaleAS%，@NumMarks@個標記</row><br><row>(@MinUnits@) @Huntress_AS*100@% %i:scaleAS%，@NumMarks@個標記</row><br><br><rules>提升玩家等級會揭露更多棋格。</rules>",
+      "effects": [
+        {
+          "minUnits": 3,
+          "maxUnits": 4,
+          "style": 1,
+          "variables": {
+            "Huntress_AS": 0.10000000149011612,
+            "Huntress_AS_Teamwide": 0.15000000596046448,
+            "Huntress_Heal": 0.10000000149011612,
+            "NumMarks": 3
+          }
+        },
+        {
+          "minUnits": 5,
+          "maxUnits": 6,
+          "style": 3,
+          "variables": {
+            "Huntress_AS": 0.30000001192092896,
+            "Huntress_AS_Teamwide": 0.15000000596046448,
+            "Huntress_Heal": 0.10000000149011612,
+            "NumMarks": 5
+          }
+        },
+        {
+          "minUnits": 7,
+          "maxUnits": 25000,
+          "style": 5,
+          "variables": {
+            "Huntress_AS": 0.44999998807907104,
+            "Huntress_AS_Teamwide": 0.15000000596046448,
+            "Huntress_Heal": 0.10000000149011612,
+            "NumMarks": 7
+          }
+        }
+      ]
+    },
+    "TFT17_Stargazer_Serpent": {
+      "name": "占星師",
+      "desc": "占星師每局都會描繪不同的星圖。本局星圖：<TFTStargazer>巨蛇座</TFTStargazer>。<br><br>強化棋格內的友軍獲得@Serpent_DR_Teamwide*100@%續戰力。強化棋格內的占星師獲得更多，並使敵軍中毒，將部分所造成傷害轉為持續@Serpent_Duration@秒的魔法傷害。<br><br><expandRow>(@MinUnits@) @Serpent_DR*100@% %i:scaleDR%，@Serpent_Poison*100@%中毒傷害</expandRow><br><br><rules>提升玩家等級會揭露更多棋格。</rules>",
+      "effects": [
+        {
+          "minUnits": 3,
+          "maxUnits": 4,
+          "style": 1,
+          "variables": {
+            "Serpent_DR": 0.05000000074505806,
+            "Serpent_DR_Teamwide": 0.05000000074505806,
+            "Serpent_Duration": 3,
+            "Serpent_Poison": 0.25
+          }
+        },
+        {
+          "minUnits": 5,
+          "maxUnits": 6,
+          "style": 3,
+          "variables": {
+            "Serpent_DR": 0.10000000149011612,
+            "Serpent_DR_Teamwide": 0.05000000074505806,
+            "Serpent_Duration": 3,
+            "Serpent_Poison": 0.4000000059604645
+          }
+        },
+        {
+          "minUnits": 7,
+          "maxUnits": 25000,
+          "style": 5,
+          "variables": {
+            "Serpent_DR": 0.15000000596046448,
+            "Serpent_DR_Teamwide": 0.05000000074505806,
+            "Serpent_Duration": 3,
+            "Serpent_Poison": 0.6000000238418579
+          }
+        }
+      ]
+    },
+    "TFT17_Stargazer_Shield": {
+      "name": "占星師",
+      "desc": "占星師每局都會描繪不同的星圖。本局星圖：<TFTStargazer>祭壇座</TFTStargazer>。<br><br><row>(@MinUnits@)任意英雄死亡時，將其獻祭給祭壇。強化棋格內的友軍獲得@Shield_Health_Teamwide@%生命與@Shield_AS_Teamwide@%攻速。<br><br>獻祭@Shield_NumDeaths@單位後，強化棋格內的占星師額外獲得@Shield_CashoutHP@% %i:scaleHealth%和@Shield_CashoutAS@% %i:scaleAS%<br><br>獻祭：(@TFTUnitProperty.trait:TFT17_Stargazer_Shield_Deaths@ / @Shield_NumDeaths@)</row><br><br><rules>提升玩家等級會揭露更多棋格。</rules>",
+      "effects": [
+        {
+          "minUnits": 3,
+          "maxUnits": 25000,
+          "style": 5,
+          "variables": {
+            "Shield_AS_Teamwide": 8,
+            "Shield_CashoutAS": 18,
+            "Shield_CashoutHP": 20,
+            "Shield_Health_Teamwide": 8,
+            "Shield_NumDeaths": 60
+          }
+        }
+      ]
+    },
+    "TFT17_Stargazer_Fountain": {
+      "name": "占星師",
+      "desc": "占星師每局都會描繪不同的星圖。本局星圖：<TFTStargazer>甘泉座</TFTStargazer>。<br><br>強化棋格內的友軍獲得@Fountain_ManaRegen_Teamwide@魔力回復。強化棋格內的占星師獲得更多，並能以技能治療生命最低的友軍。<br><br><expandRow>(@MinUnits@) @Fountain_ManaRegen@ %i:TFTManaRegen%，@Fountain_HealPercent*100@%技能傷害治療</expandRow><br><br><rules>提升玩家等級會揭露更多棋格。</rules>",
+      "effects": [
+        {
+          "minUnits": 3,
+          "maxUnits": 4,
+          "style": 1,
+          "variables": {
+            "Fountain_HealPercent": 0.18000000715255737,
+            "Fountain_ManaRegen": 1,
+            "Fountain_ManaRegen_Teamwide": 1
+          }
+        },
+        {
+          "minUnits": 5,
+          "maxUnits": 25000,
+          "style": 5,
+          "variables": {
+            "Fountain_HealPercent": 0.25,
+            "Fountain_ManaRegen": 5,
+            "Fountain_ManaRegen_Teamwide": 1
+          }
+        }
+      ]
+    },
+    "TFT17_AssassinTrait": {
+      "name": "神影刺客",
+      "desc": "神影刺客增加物攻與魔攻。他們的生命首次低於@HealthThreshold*100@%時，會潛入暗影之中。以其為目標的敵軍，會轉為攻擊鄰近的單位，並優先以坦克為目標。<br><br><row>(@MinUnits@) @AP@% %i:scaleAD% %i:scaleAP%</row><br><row>(@MinUnits@) @AP@% %i:scaleAD% %i:scaleAP%</row><br><row>(@MinUnits@) @AP@% %i:scaleAD% %i:scaleAP%</row><br><row>(@MinUnits@) @AP@% %i:scaleAD% %i:scaleAP%</row>",
+      "effects": [
+        {
+          "minUnits": 2,
+          "maxUnits": 2,
+          "style": 1,
+          "variables": {
+            "AD": 0.11999999731779099,
+            "AP": 12,
+            "Duration": 3,
+            "HealthThreshold": 0.5
+          }
+        },
+        {
+          "minUnits": 3,
+          "maxUnits": 3,
+          "style": 3,
+          "variables": {
+            "AD": 0.25,
+            "AP": 25,
+            "Duration": 3,
+            "HealthThreshold": 0.5
+          }
+        },
+        {
+          "minUnits": 4,
+          "maxUnits": 4,
+          "style": 3,
+          "variables": {
+            "AD": 0.4000000059604645,
+            "AP": 40,
+            "Duration": 3,
+            "HealthThreshold": 0.5
+          }
+        },
+        {
+          "minUnits": 5,
+          "maxUnits": 25000,
+          "style": 5,
+          "variables": {
+            "AD": 0.550000011920929,
+            "AP": 55,
+            "Duration": 3,
+            "HealthThreshold": 0.5
+          }
+        }
+      ]
+    },
+    "TFT17_DarkStar": {
+      "name": "幽冥煞星",
+      "desc": "<row>(@MinUnits@)幽冥煞星會創造黑洞，吞噬最大生命降至@ExecuteHPPercent*100@%的敵軍。</row><br><row>(@MinUnits@)外加獲得@ADAP@%%i:scaleAD%%i:scaleAP%。</row><br><row>(@MinUnits@)外加最強的幽冥煞星單位會進入超質量狀態，從幽冥煞星獲得@SupermassivePercentBonus*100@%效果，並創造2個微型黑洞。</row><br><row>(@MinUnits@)所有幽冥煞星進入超質量狀態。達10等時，吞噬萬物。</row>",
+      "effects": [
+        {
+          "minUnits": 2,
+          "maxUnits": 3,
+          "style": 1,
+          "variables": {
+            "ADAP": 45,
+            "ExecuteHPPercent": 0.07999999821186066,
+            "PercentHealth": 0.30000001192092896,
+            "SupermassivePercentBonus": 0.8500000238418579
+          }
+        },
+        {
+          "minUnits": 4,
+          "maxUnits": 5,
+          "style": 3,
+          "variables": {
+            "ADAP": 45,
+            "ExecuteHPPercent": 0.07999999821186066,
+            "PercentHealth": 0.30000001192092896,
+            "SupermassivePercentBonus": 0.8500000238418579
+          }
+        },
+        {
+          "minUnits": 6,
+          "maxUnits": 8,
+          "style": 5,
+          "variables": {
+            "ADAP": 45,
+            "ExecuteHPPercent": 0.07999999821186066,
+            "PercentHealth": 0.30000001192092896,
+            "SupermassivePercentBonus": 0.8500000238418579
+          }
+        },
+        {
+          "minUnits": 9,
+          "maxUnits": 25000,
+          "style": 6,
+          "variables": {
+            "ADAP": 45,
+            "ExecuteHPPercent": 0.07999999821186066,
+            "PercentHealth": 0.30000001192092896,
+            "SupermassivePercentBonus": 0.8500000238418579
+          }
+        }
+      ]
+    },
+    "TFT17_Primordian": {
+      "name": "遠古霸者",
+      "desc": "<row>(@MinUnits@)造成傷害時，根據專屬遠古霸者星級召喚獸群。</row><br><row>(@MinUnits@)額外召喚@PercentMoreSwarmlings@%獸群！每次玩家戰鬥結束後，隨機獲得1個1費或2費英雄。</row><br><br><rules>所受傷害的@DamageTakenPercentModifier*100@%會計為召喚獸群所需傷害。</rules>",
+      "effects": [
+        {
+          "minUnits": 2,
+          "maxUnits": 2,
+          "style": 1,
+          "variables": {
+            "DamageMultiplier": 1,
+            "DamageTakenPercentModifier": 0.07999999821186066,
+            "PercentMoreSwarmlings": 45,
+            "{3ed71f24}": 6
+          }
+        },
+        {
+          "minUnits": 3,
+          "maxUnits": 25000,
+          "style": 5,
+          "variables": {
+            "DamageMultiplier": 1.4500000476837158,
+            "DamageTakenPercentModifier": 0.07999999821186066,
+            "PercentMoreSwarmlings": 45,
+            "{3ed71f24}": 6
+          }
+        }
+      ]
+    },
+    "TFT17_SpaceGroove": {
+      "name": "太空律動",
+      "desc": "<row>(@MinUnits@)律動英雄可以進入{{TFT17_SpaceGroove_TheGroove}}狀態。進入律動狀態時，他們會獲得攻速和最大生命回復，且增益隨律動英雄人數提升。</row><br><row>(@MinUnits@)所有律動英雄在戰鬥開始時進入{{TFT17_SpaceGroove_TheGroove}}狀態，持續@StartOfCombatDuration@秒。</row><br><row>(@MinUnits@)在{{TFT17_SpaceGroove_TheGroove}}狀態中每維持1秒，獲得@ADAPPerSecond@%可累加的物攻和魔攻。</row><br><row>(@MinUnits@)效果提升@EffectBonus@%！</row><br><row>(@MinUnits@) {{TFT17_SpaceGroove_Groove}}</row><br><br>{{TFT17_SpaceGroove_TheGroove}}:@TFTUnitProperty.:TFT17_SpaceGroove_AS*100@% %i:scaleAS%，@TFTUnitProperty.:TFT17_SpaceGroove_HealthRegen*100@% %i:scaleHPRegen%",
+      "effects": [
+        {
+          "minUnits": 1,
+          "maxUnits": 2,
+          "style": 1,
+          "variables": {
+            "ADAPPerSecond": null,
+            "EffectBonus": null,
+            "StartOfCombatDuration": null
+          }
+        },
+        {
+          "minUnits": 3,
+          "maxUnits": 4,
+          "style": 3,
+          "variables": {
+            "ADAPPerSecond": null,
+            "EffectBonus": null,
+            "StartOfCombatDuration": 3
+          }
+        },
+        {
+          "minUnits": 5,
+          "maxUnits": 6,
+          "style": 3,
+          "variables": {
+            "ADAPPerSecond": 5,
+            "EffectBonus": null,
+            "StartOfCombatDuration": 3
+          }
+        },
+        {
+          "minUnits": 7,
+          "maxUnits": 9,
+          "style": 5,
+          "variables": {
+            "ADAPPerSecond": 5,
+            "EffectBonus": 10,
+            "StartOfCombatDuration": 3
+          }
+        },
+        {
+          "minUnits": 10,
+          "maxUnits": 25000,
+          "style": 6,
+          "variables": {
+            "ADAPPerSecond": 10,
+            "EffectBonus": 500,
+            "StartOfCombatDuration": 60,
+            "{32ed1fda}": 800,
+            "{3e46e556}": 1500
+          }
+        }
+      ]
+    },
+    "TFT17_ADMIN": {
+      "name": "仲裁者",
+      "desc": "制定一條專有的神聖律法，在所選前因發生時，為仲裁者帶來選定的後果。<br><br><row>(@MinUnits@)為律法選擇前因後果</row><br><row>(@MinUnits@)效果增強。</row>",
+      "effects": [
+        {
+          "minUnits": 2,
+          "maxUnits": 2,
+          "style": 1,
+          "variables": {
+            "DamageInstances": 10,
+            "HealthThreshold": 0.4000000059604645,
+            "ManaToSpend": 50,
+            "NumAttacks": 3,
+            "NumSeconds": 4,
+            "ShieldDuration": 4,
+            "{fefec6fb}": 1
+          }
+        },
+        {
+          "minUnits": 3,
+          "maxUnits": 25000,
+          "style": 5,
+          "variables": {
+            "DamageInstances": 10,
+            "HealthThreshold": 0.4000000059604645,
+            "ManaToSpend": 50,
+            "NumAttacks": 3,
+            "NumSeconds": 4,
+            "ShieldDuration": 4,
+            "{fefec6fb}": 1
+          }
+        }
+      ]
+    },
+    "TFT17_Stargazer_Mountain": {
+      "name": "占星師",
+      "desc": "占星師每局都會描繪不同的星圖。本局星圖：<TFTStargazer>峰岳座</TFTStargazer>。<br><br>每@Mountain_RoundsPerEmblem@場玩家戰鬥，獲得1枚占星師徽章。強化棋格內的占星師會獲得各種增益。<br>(剩餘戰鬥：@TFTUnitProperty.trait:TFT17_Stargazer_Mountain_CombatsRemaining@)<br><br><row>(@MinUnits@)獲得@Mountain_Health*100@%生命</row><br><row>(@MinUnits@)以及@Mountain_ADAP*100@%物攻與魔攻</row><br><row>(@MinUnits@)以及@Mountain_Resists@雙防</row><br><row>(@MinUnits@)以及@Mountain_AS*100@%攻速</row><br><row>(@MinUnits@)以及@Mountain_DR*100@%續戰力</row><br><row>(@MinUnits@)以及使所有其他增益提升@Mountain_StatIncrease*100@%</row><br><br><rules>提升玩家等級會揭露更多棋格。</rules>",
+      "effects": [
+        {
+          "minUnits": 3,
+          "maxUnits": 3,
+          "style": 1,
+          "variables": {
+            "Mountain_ADAP": null,
+            "Mountain_AS": null,
+            "Mountain_DR": null,
+            "Mountain_Health": 0.11999999731779099,
+            "Mountain_Resists": null,
+            "Mountain_RoundsPerEmblem": 5,
+            "Mountain_StatIncrease": null,
+            "{67e491c6}": 25000,
+            "{9d012fe8}": null
+          }
+        },
+        {
+          "minUnits": 4,
+          "maxUnits": 4,
+          "style": 3,
+          "variables": {
+            "Mountain_ADAP": 0.11999999731779099,
+            "Mountain_AS": null,
+            "Mountain_DR": null,
+            "Mountain_Health": 0.11999999731779099,
+            "Mountain_Resists": null,
+            "Mountain_RoundsPerEmblem": 5,
+            "Mountain_StatIncrease": null,
+            "{67e491c6}": 25000,
+            "{9d012fe8}": null
+          }
+        },
+        {
+          "minUnits": 5,
+          "maxUnits": 5,
+          "style": 3,
+          "variables": {
+            "Mountain_ADAP": 0.11999999731779099,
+            "Mountain_AS": null,
+            "Mountain_DR": null,
+            "Mountain_Health": 0.11999999731779099,
+            "Mountain_Resists": 12,
+            "Mountain_RoundsPerEmblem": 5,
+            "Mountain_StatIncrease": null,
+            "{67e491c6}": 25000,
+            "{9d012fe8}": null
+          }
+        },
+        {
+          "minUnits": 6,
+          "maxUnits": 6,
+          "style": 3,
+          "variables": {
+            "Mountain_ADAP": 0.11999999731779099,
+            "Mountain_AS": 0.11999999731779099,
+            "Mountain_DR": null,
+            "Mountain_Health": 0.11999999731779099,
+            "Mountain_Resists": 12,
+            "Mountain_RoundsPerEmblem": 5,
+            "Mountain_StatIncrease": null,
+            "{67e491c6}": 25000,
+            "{9d012fe8}": null
+          }
+        },
+        {
+          "minUnits": 7,
+          "maxUnits": 7,
+          "style": 3,
+          "variables": {
+            "Mountain_ADAP": 0.11999999731779099,
+            "Mountain_AS": 0.11999999731779099,
+            "Mountain_DR": 0.05999999865889549,
+            "Mountain_Health": 0.11999999731779099,
+            "Mountain_Resists": 12,
+            "Mountain_RoundsPerEmblem": 5,
+            "Mountain_StatIncrease": null,
+            "{67e491c6}": 25000,
+            "{9d012fe8}": null
+          }
+        },
+        {
+          "minUnits": 8,
+          "maxUnits": 8,
+          "style": 5,
+          "variables": {
+            "Mountain_ADAP": 0.11999999731779099,
+            "Mountain_AS": 0.11999999731779099,
+            "Mountain_DR": 0.05999999865889549,
+            "Mountain_Health": 0.11999999731779099,
+            "Mountain_Resists": 12,
+            "Mountain_RoundsPerEmblem": 5,
+            "Mountain_StatIncrease": 0.10000000149011612,
+            "{67e491c6}": 25000,
+            "{9d012fe8}": null
+          }
+        },
+        {
+          "minUnits": 9,
+          "maxUnits": 9,
+          "style": 5,
+          "variables": {
+            "Mountain_ADAP": 0.11999999731779099,
+            "Mountain_AS": 0.11999999731779099,
+            "Mountain_DR": 0.05999999865889549,
+            "Mountain_Health": 0.11999999731779099,
+            "Mountain_Resists": 12,
+            "Mountain_RoundsPerEmblem": 5,
+            "Mountain_StatIncrease": 0.10000000149011612,
+            "{67e491c6}": 25000,
+            "{9d012fe8}": null
+          }
+        },
+        {
+          "minUnits": 10,
+          "maxUnits": 10,
+          "style": 5,
+          "variables": {
+            "Mountain_ADAP": 0.11999999731779099,
+            "Mountain_AS": 0.11999999731779099,
+            "Mountain_DR": 0.05999999865889549,
+            "Mountain_Health": 0.11999999731779099,
+            "Mountain_Resists": 12,
+            "Mountain_RoundsPerEmblem": 5,
+            "Mountain_StatIncrease": 0.10000000149011612,
+            "{67e491c6}": 25000,
+            "{9d012fe8}": null
+          }
+        },
+        {
+          "minUnits": 11,
+          "maxUnits": 25000,
+          "style": 6,
+          "variables": {
+            "Mountain_ADAP": 0.11999999731779099,
+            "Mountain_AS": 0.11999999731779099,
+            "Mountain_DR": 0.05999999865889549,
+            "Mountain_Health": 0.11999999731779099,
+            "Mountain_Resists": 12,
+            "Mountain_RoundsPerEmblem": 5,
+            "Mountain_StatIncrease": 0.10000000149011612,
+            "{67e491c6}": 25000,
+            "{9d012fe8}": null
+          }
+        }
+      ]
+    },
+    "TFT17_SummonTrait": {
+      "name": "星靈牧者",
+      "desc": "星靈牧者召喚星辰羈絆協助戰鬥。<br><br><row>(@MinUnits@)召喚比亞</row><br><row>(@MinUnits@)召喚拜亞</row><br><row>(@MinUnits@)比亞與拜亞的羈絆加深</row><br><br><rules>比亞與拜亞的力量會根據所有星靈牧者的總星級增強。</rules>",
+      "effects": [
+        {
+          "minUnits": 3,
+          "maxUnits": 4,
+          "style": 1,
+          "variables": {}
+        },
+        {
+          "minUnits": 5,
+          "maxUnits": 6,
+          "style": 3,
+          "variables": {}
+        },
+        {
+          "minUnits": 7,
+          "maxUnits": 25000,
+          "style": 5,
+          "variables": {}
+        }
+      ]
+    },
+    "TFT17_RhaastUniqueTrait": {
+      "name": "救世主",
+      "desc": "<row>(@MinUnits@)每有一項啟動中的非唯一特性，我方隊伍會獲得@BonusOffensiveStat1*100@%/@BonusOffensiveStat2*100@%/@BonusOffensiveStat3*100@%攻速和@BonusDefensiveStat1@/@BonusDefensiveStat2@/@BonusDefensiveStat3@雙防。</row><br><br>隊伍攻速：@TFTUnitProperty.trait:TFT17_RhaastUnique_OffensiveStatToGain@%%i:scaleAS%<br>隊伍雙防：@TFTUnitProperty.trait:TFT17_RhaastUnique_DefensiveStatToGain@ %i:scaleArmor%%i:scaleMR%",
+      "effects": [
+        {
+          "minUnits": 1,
+          "maxUnits": 25000,
+          "style": 4,
+          "variables": {
+            "BonusDefensiveStat1": 2,
+            "BonusDefensiveStat2": 2.5,
+            "BonusDefensiveStat3": 3,
+            "BonusOffensiveStat1": 0.019999999552965164,
+            "BonusOffensiveStat2": 0.02500000037252903,
+            "BonusOffensiveStat3": 0.029999999329447746
+          }
+        }
+      ]
+    },
+    "TFT17_HPTank": {
+      "name": "武鬥家",
+      "desc": "我方隊伍增加@TeamwideBonus*100@%生命。武鬥家獲得更多。<br><br><expandRow>(@MinUnits@) +@HealthBonus*100@%最大生命</expandRow>",
+      "effects": [
+        {
+          "minUnits": 2,
+          "maxUnits": 3,
+          "style": 1,
+          "variables": {
+            "HealthBonus": 0.20000000298023224,
+            "TeamwideBonus": 0.05000000074505806
+          }
+        },
+        {
+          "minUnits": 4,
+          "maxUnits": 5,
+          "style": 3,
+          "variables": {
+            "HealthBonus": 0.4000000059604645,
+            "TeamwideBonus": 0.05000000074505806
+          }
+        },
+        {
+          "minUnits": 6,
+          "maxUnits": 25000,
+          "style": 5,
+          "variables": {
+            "HealthBonus": 0.6000000238418579,
+            "TeamwideBonus": 0.05000000074505806
+          }
+        }
+      ]
+    },
+    "TFT17_ResistTank": {
+      "name": "堡壘衛士",
+      "desc": "我方隊伍增加@TeamwideResists@雙防。<br><br>堡壘衛士增加更多，且戰鬥開始後@Duration@秒內數值加倍。<br><br><row>(@MinUnits@) @BonusArmor@ %i:scaleArmor%%i:scaleMR%</row><br><row>(@MinUnits@) @BonusArmor@ %i:scaleArmor%%i:scaleMR%</row><br><row>(@MinUnits@) @BonusArmor@ %i:scaleArmor%%i:scaleMR%；非堡壘衛士單位獲得額外@EnhancedTeamwideArmor@ %i:scaleArmor%%i:scaleMR%。</row>",
+      "effects": [
+        {
+          "minUnits": 2,
+          "maxUnits": 3,
+          "style": 1,
+          "variables": {
+            "BonusArmor": 16,
+            "BonusMR": 16,
+            "Duration": 10,
+            "EnhancedTeamwideArmor": 20,
+            "StatMultiplier": 2,
+            "TeamwideResists": 15
+          }
+        },
+        {
+          "minUnits": 4,
+          "maxUnits": 5,
+          "style": 3,
+          "variables": {
+            "BonusArmor": 40,
+            "BonusMR": 40,
+            "Duration": 10,
+            "EnhancedTeamwideArmor": 20,
+            "StatMultiplier": 2,
+            "TeamwideResists": 15
+          }
+        },
+        {
+          "minUnits": 6,
+          "maxUnits": 25000,
+          "style": 5,
+          "variables": {
+            "BonusArmor": 60,
+            "BonusMR": 60,
+            "Duration": 10,
+            "EnhancedTeamwideArmor": 20,
+            "StatMultiplier": 2,
+            "TeamwideResists": 15
+          }
+        }
+      ]
+    },
+    "TFT17_Astronaut": {
+      "name": "米普星人",
+      "desc": "米普星人會吸引米普，米普會用獨家方法強化米普星人的技能。他們還會獲得額外生命。<br><br><row>(@MinUnits@) @Meeps@ %i:set14AmpIcon%，@BonusHealth@ %i:scaleHealth%</row><br><row>(@MinUnits@) @Meeps@ %i:set14AmpIcon%，@BonusHealth@ %i:scaleHealth%</row><br><row>(@MinUnits@) @Meeps@ %i:set14AmpIcon%，@BonusHealth@ %i:scaleHealth%。在備戰區打造一格複製區。複製完成時，獲得金錢及置於該處之英雄的1星複製體。</row><br><row>(@MinUnits@) @Meeps@ %i:set14AmpIcon%，@BonusHealth@ %i:scaleHealth%。召喚米普四天王！</row><br><br><rules>複製所需時間等於英雄費用</rules>",
+      "effects": [
+        {
+          "minUnits": 3,
+          "maxUnits": 4,
+          "style": 1,
+          "variables": {
+            "BonusHealth": 100,
+            "Meeps": 2
+          }
+        },
+        {
+          "minUnits": 5,
+          "maxUnits": 6,
+          "style": 3,
+          "variables": {
+            "BonusHealth": 400,
+            "Meeps": 3
+          }
+        },
+        {
+          "minUnits": 7,
+          "maxUnits": 9,
+          "style": 5,
+          "variables": {
+            "BonusHealth": 400,
+            "Meeps": 4
+          }
+        },
+        {
+          "minUnits": 10,
+          "maxUnits": 25000,
+          "style": 6,
+          "variables": {
+            "BonusHealth": 500,
+            "Meeps": 6
+          }
+        }
+      ]
+    },
+    "TFT17_ManaTrait": {
+      "name": "降靈師",
+      "desc": "天賦：降靈師從所有來源獲得@InnateManaGain*100@%額外魔力。<br><br>我方隊伍獲得魔力回復，降神師獲得更多。<br><br><expandRow>(@MinUnits@) @TeamManaRegen@ %i:TFTManaRegen% | @ChannelerManaRegen@ %i:TFTManaRegen%</expandRow><br><br>",
+      "effects": [
+        {
+          "minUnits": 2,
+          "maxUnits": 2,
+          "style": 1,
+          "variables": {
+            "ChannelerManaRegen": 3,
+            "InnateManaGain": 0.20000000298023224,
+            "TeamManaRegen": 1
+          }
+        },
+        {
+          "minUnits": 3,
+          "maxUnits": 3,
+          "style": 3,
+          "variables": {
+            "ChannelerManaRegen": 5,
+            "InnateManaGain": 0.20000000298023224,
+            "TeamManaRegen": 1
+          }
+        },
+        {
+          "minUnits": 4,
+          "maxUnits": 4,
+          "style": 3,
+          "variables": {
+            "ChannelerManaRegen": 7,
+            "InnateManaGain": 0.20000000298023224,
+            "TeamManaRegen": 2
+          }
+        },
+        {
+          "minUnits": 5,
+          "maxUnits": 25000,
+          "style": 5,
+          "variables": {
+            "ChannelerManaRegen": 9,
+            "InnateManaGain": 0.20000000298023224,
+            "TeamManaRegen": 3
+          }
+        }
+      ]
+    },
+    "TFT17_Mecha": {
+      "name": "機械戰甲",
+      "desc": "天賦：機械戰甲單位可變身為究極型態，技能會升級並獲得@TransformedPercentHealth*100@%生命。變身後的機械戰甲單位會佔據兩個隊伍人口，且機甲特性加倍計算。<br><br><row>(@MinUnits@)能量核心：機械戰甲獲得@AP@% %i:scaleAP%%i:scaleAD%。</row><br><row>(@MinUnits@)超頻核心：提升至@AP@% %i:scaleAD%%i:scaleAP%。</row><br><row>(@MinUnits@)精準工程：隊伍規模上限+@TeamSize@</row><br><br><rules>使用機甲變形道具切換你的機械戰甲單位型態</rules>",
+      "effects": [
+        {
+          "minUnits": 3,
+          "maxUnits": 3,
+          "style": 1,
+          "variables": {
+            "AD": 0.20000000298023224,
+            "AP": 20,
+            "TeamSize": 1,
+            "TransformedPercentHealth": 0.5
+          }
+        },
+        {
+          "minUnits": 4,
+          "maxUnits": 5,
+          "style": 3,
+          "variables": {
+            "AD": 0.3499999940395355,
+            "AP": 35,
+            "TeamSize": 1,
+            "TransformedPercentHealth": 0.5
+          }
+        },
+        {
+          "minUnits": 6,
+          "maxUnits": 25000,
+          "style": 5,
+          "variables": {
+            "AD": 0.3499999940395355,
+            "AP": 35,
+            "TeamSize": 1,
+            "TransformedPercentHealth": 0.5
+          }
+        }
+      ]
+    },
+    "TFT17_GravesTrait": {
+      "name": "再造神兵",
+      "desc": "參與戰鬥後，開啟寶庫，為我方最強大的葛雷夫購買一項永久升級。<br><br>每升級@NumberOfUpgradesBeforeRoundCostIncrease@次，後續升級將額外耗時一回合。<br><br><rules>下次升級：@TFTUnitProperty.trait:TFT17_GravesTrait_RoundsUntilUpgrade@回合。</rules>",
+      "effects": [
+        {
+          "minUnits": 1,
+          "maxUnits": 25000,
+          "style": 4,
+          "variables": {
+            "NumberOfUpgradesBeforeRoundCostIncrease": 3
+          }
+        }
+      ]
+    },
+    "TFT17_Stargazer": {
+      "name": "占星師",
+      "desc": "占星師每局都會描繪不同的星圖。<br><br>強化棋格內的占星師會獲得各種增益，達(@MinUnits@)個單位時生效。<br><br><rules>提升玩家等級會揭露更多棋格。</rules>",
+      "effects": [
+        {
+          "minUnits": 3,
+          "maxUnits": 4,
+          "style": 1,
+          "variables": {
+            "Family_BaseSharePercent": 0.10000000149011612,
+            "Family_HexesToReveal_TOOLTIPONLY": 3,
+            "Family_Stats": 10,
+            "Fountain_HealPercent": 0.10000000149011612,
+            "Fountain_ManaRegen": 3,
+            "Fountain_ManaRegen_Teamwide": 1,
+            "Huntress_AS": 0.30000001192092896,
+            "Huntress_AS_Teamwide": 0.15000000596046448,
+            "Huntress_Heal": 0.05000000074505806,
+            "Medallion_DA": 0.20000000298023224,
+            "Medallion_IncreasePer3Star": 20,
+            "Mountain_Health": 0.20000000298023224,
+            "Serpent_DR": 0.15000000596046448,
+            "Serpent_DR_Teamwide": 0.07999999821186066,
+            "Serpent_Duration": 3,
+            "Serpent_Poison": 0.30000001192092896,
+            "Shield_Duration": 10,
+            "{326db998}": 0.15000000596046448,
+            "{37204635}": 10,
+            "{3b1fef00}": 1,
+            "{3d49cc86}": 20,
+            "{457fd35a}": 1,
+            "{56df89e0}": 1000,
+            "{57ccf261}": 0.25,
+            "{74ccce14}": 0.07999999821186066,
+            "{a6419a0b}": 0.5,
+            "{aa686d69}": 10,
+            "{abed8603}": 1.2999999523162842,
+            "{b44d11c3}": 0.10000000149011612,
+            "{c32af02f}": 0.05000000074505806,
+            "{e5275a69}": 0.019999999552965164,
+            "{e8338a44}": 0.15000000596046448
+          }
+        },
+        {
+          "minUnits": 5,
+          "maxUnits": 6,
+          "style": 3,
+          "variables": {
+            "Family_BaseSharePercent": 0.10000000149011612,
+            "Family_HexesToReveal_TOOLTIPONLY": 2,
+            "Family_Stats": 35,
+            "Fountain_HealPercent": 0.15000000596046448,
+            "Fountain_ManaRegen": 4,
+            "Fountain_ManaRegen_Teamwide": 1,
+            "Huntress_AS": 0.44999998807907104,
+            "Huntress_AS_Teamwide": 0.15000000596046448,
+            "Huntress_Heal": 0.07999999821186066,
+            "Medallion_DA": 0.30000001192092896,
+            "Medallion_IncreasePer3Star": 20,
+            "Mountain_Health": 0.30000001192092896,
+            "Serpent_DR": 0.20000000298023224,
+            "Serpent_DR_Teamwide": 0.07999999821186066,
+            "Serpent_Duration": 3,
+            "Serpent_Poison": 0.44999998807907104,
+            "Shield_Duration": 10,
+            "{326db998}": 0.25,
+            "{37204635}": 10,
+            "{3b1fef00}": 1,
+            "{3d49cc86}": 30,
+            "{457fd35a}": 2,
+            "{56df89e0}": 1000,
+            "{57ccf261}": 0.3499999940395355,
+            "{74ccce14}": 0.07999999821186066,
+            "{a6419a0b}": 0.5,
+            "{aa686d69}": 10,
+            "{abed8603}": 1.5,
+            "{b44d11c3}": 0.10000000149011612,
+            "{c32af02f}": 0.05000000074505806,
+            "{e5275a69}": 0.029999999329447746,
+            "{e8338a44}": 0.15000000596046448
+          }
+        },
+        {
+          "minUnits": 7,
+          "maxUnits": 25000,
+          "style": 5,
+          "variables": {
+            "Family_BaseSharePercent": 0.10000000149011612,
+            "Family_EmpoweredSharePercent": 0.30000001192092896,
+            "Family_Stats": 35,
+            "Fountain_HealPercent": 0.20000000298023224,
+            "Fountain_ManaRegen": 5,
+            "Fountain_ManaRegen_Teamwide": 1,
+            "Huntress_AS": 0.6000000238418579,
+            "Huntress_AS_Teamwide": 0.15000000596046448,
+            "Huntress_Heal": 0.10000000149011612,
+            "Medallion_DA": 0.4000000059604645,
+            "Medallion_IncreasePer3Star": 20,
+            "Mountain_Health": 0.44999998807907104,
+            "Serpent_DR": 0.25,
+            "Serpent_DR_Teamwide": 0.07999999821186066,
+            "Serpent_Duration": 3,
+            "Serpent_Poison": 0.6000000238418579,
+            "Shield_Duration": 10,
+            "{326db998}": 0.3499999940395355,
+            "{37204635}": 10,
+            "{3b1fef00}": 1,
+            "{3d49cc86}": 40,
+            "{457fd35a}": 3,
+            "{4f055cc9}": 0.009999999776482582,
+            "{56df89e0}": 1000,
+            "{57ccf261}": 0.44999998807907104,
+            "{74ccce14}": 0.07999999821186066,
+            "{a6419a0b}": 0.5,
+            "{aa686d69}": 10,
+            "{abed8603}": 1.75,
+            "{b44d11c3}": 0.10000000149011612,
+            "{c32af02f}": 0.05000000074505806,
+            "{c4d51662}": 2,
+            "{e5275a69}": 0.03999999910593033,
+            "{e8338a44}": 0.15000000596046448
+          }
+        }
+      ]
+    },
+    "TFT17_FlexTrait": {
+      "name": "星際旅人",
+      "desc": "戰鬥開始：坦克獲得持續@ShieldDuration@秒的護盾。其他友軍獲得傷害增幅。<br><br>星際旅人獲得雙倍增益。<br><br><expandRow>(@MinUnits@)@ShieldHP@護盾，@BonusDA*100@%%i:scaleDA%</expandRow><br>",
+      "effects": [
+        {
+          "minUnits": 2,
+          "maxUnits": 2,
+          "style": 1,
+          "variables": {
+            "BonusDA": 0.09000000357627869,
+            "ShieldDuration": 15,
+            "ShieldHP": 175,
+            "{2ad3e251}": 2
+          }
+        },
+        {
+          "minUnits": 3,
+          "maxUnits": 3,
+          "style": 3,
+          "variables": {
+            "BonusDA": 0.15000000596046448,
+            "ShieldDuration": 15,
+            "ShieldHP": 250,
+            "{2ad3e251}": 2
+          }
+        },
+        {
+          "minUnits": 4,
+          "maxUnits": 4,
+          "style": 3,
+          "variables": {
+            "BonusDA": 0.18000000715255737,
+            "ShieldDuration": 15,
+            "ShieldHP": 350,
+            "{2ad3e251}": 2
+          }
+        },
+        {
+          "minUnits": 5,
+          "maxUnits": 5,
+          "style": 3,
+          "variables": {
+            "BonusDA": 0.2199999988079071,
+            "ShieldDuration": 15,
+            "ShieldHP": 500,
+            "{2ad3e251}": 2
+          }
+        },
+        {
+          "minUnits": 6,
+          "maxUnits": 25000,
+          "style": 5,
+          "variables": {
+            "BonusDA": 0.27000001072883606,
+            "ShieldDuration": 15,
+            "ShieldHP": 700,
+            "{2ad3e251}": 2
+          }
+        }
+      ]
+    },
+    "TFT17_BlitzcrankUniqueTrait": {
+      "name": "派對咖",
+      "desc": "每場戰鬥一次，生命低於@HealthThreshold*100@%時，進入無法被指定狀態，且每秒回復@PercentHealthHeal*100@%最大生命。生命回滿或友軍全數陣亡時，回歸戰鬥。生命回滿時，布里茨會進入{{TFT17_SpaceGroove_TheGroove}}狀態，且「不速之客」的被動發射速度變為四倍，持續到戰鬥結束。",
+      "effects": [
+        {
+          "minUnits": 1,
+          "maxUnits": 25000,
+          "style": 4,
+          "variables": {
+            "HealthThreshold": 0.44999998807907104,
+            "PercentHealthHeal": 0.15000000596046448
+          }
+        }
+      ]
+    },
+    "TFT17_DRX": {
+      "name": "超新星",
+      "desc": "<row>(@MinUnits@) 戰鬥開始@TeamAttackDelay@秒後，超新星根據英雄特性，賦予友軍能量激增。</row><br><row>(@MinUnits@) 獲得1件強襲選擇裝置。所選的超新星會在能量激增期間啟動強襲效果。</row><br><br><ShowIf.TFT17_DRX_HasAatrox><status>厄薩斯：</status>友軍傷害對敵軍施加@ShredAndSunder*100@%<TFTKeyword>削抗</TFTKeyword>和<TFTKeyword>破甲</TFTKeyword></ShowIf.TFT17_DRX_HasAatrox><ShowIfNot.TFT17_DRX_HasAatrox><TFTGuildInactive>厄薩斯：對敵軍施加削抗和破甲</TFTGuildInactive></ShowIfNot.TFT17_DRX_HasAatrox><br><ShowIf.TFT17_DRX_HasCaitlyn><status>凱特琳：</status>賦予友軍@AS*100@%攻速</ShowIf.TFT17_DRX_HasCaitlyn><ShowIfNot.TFT17_DRX_HasCaitlyn><TFTGuildInactive>凱特琳：賦予攻速</TFTGuildInactive></ShowIfNot.TFT17_DRX_HasCaitlyn><br><ShowIf.TFT17_DRX_HasAkali><status>阿卡莉：</status>友軍獲得<TFTKeyword>精準</TFTKeyword></ShowIf.TFT17_DRX_HasAkali><ShowIfNot.TFT17_DRX_HasAkali><TFTGuildInactive>阿卡莉：友軍獲得精準</TFTGuildInactive></ShowIfNot.TFT17_DRX_HasAkali><br><ShowIf.TFT17_DRX_HasMaokai><status>茂凱：</status>友軍回復@Heal*100@%最大生命</ShowIf.TFT17_DRX_HasMaokai><ShowIfNot.TFT17_DRX_HasMaokai><TFTGuildInactive>茂凱：治療友軍</TFTGuildInactive></ShowIfNot.TFT17_DRX_HasMaokai><br><ShowIf.TFT17_DRX_HasKindred><status>鏡爪：</status>賦予最強大的坦克<TFTBonus>@ShieldValue@</TFTBonus>護盾</ShowIf.TFT17_DRX_HasKindred><ShowIfNot.TFT17_DRX_HasKindred><TFTGuildInactive>鏡爪：為友軍提供護盾</TFTGuildInactive></ShowIfNot.TFT17_DRX_HasKindred><br><ShowIf.TFT17_DRX_HasEmblem><status>徽章：</status>友軍造成額外@BonusTrueDamage*100@%可累加的真實傷害</ShowIf.TFT17_DRX_HasEmblem><ShowIfNot.TFT17_DRX_HasEmblem><TFTGuildInactive>徽章：造成額外真實傷害</TFTGuildInactive></ShowIfNot.TFT17_DRX_HasEmblem>",
+      "effects": [
+        {
+          "minUnits": 2,
+          "maxUnits": 4,
+          "style": 1,
+          "variables": {
+            "AS": 0.20000000298023224,
+            "BonusTrueDamage": 0.10000000149011612,
+            "Heal": 0.11999999731779099,
+            "ShieldValue": 800,
+            "ShredAndSunder": 0.30000001192092896,
+            "TeamAttackDelay": 6
+          }
+        },
+        {
+          "minUnits": 5,
+          "maxUnits": 25000,
+          "style": 5,
+          "variables": {
+            "AS": 0.20000000298023224,
+            "BonusTrueDamage": 0.10000000149011612,
+            "Heal": 0.11999999731779099,
+            "ShieldValue": 800,
+            "ShredAndSunder": 0.30000001192092896,
+            "TeamAttackDelay": 6
+          }
+        }
+      ]
+    },
+    "TFT17_TahmKenchUniqueTrait": {
+      "name": "神諭",
+      "desc": "每@Rounds@回合，貪啃奇會給予一個獎勵！<br><br>剩餘回合數：@TFTUnitProperty.trait:TFT17_TahmKench_RoundsRemaining@<br>上次獎勵：@TFTUnitProperty.trait:TFT17_TahmKench_LastReward@",
+      "effects": [
+        {
+          "minUnits": 1,
+          "maxUnits": 25000,
+          "style": 4,
+          "variables": {
+            "rounds": 3
+          }
+        }
+      ]
+    },
+    "TFT17_RangedTrait": {
+      "name": "狙擊專家",
+      "desc": "狙擊專家獲得傷害增幅，目標越遠增幅越大。<br><br><row>(@MinUnits@)@PercentDamageIncrease@% %i:scaleDA%；每格+@PerHexIncrease@% %i:scaleDA%</row><br><row>(@MinUnits@)@PercentDamageIncrease@% %i:scaleDA%；每格+@PerHexIncrease@% %i:scaleDA%</row><br><row>(@MinUnits@)@PercentDamageIncrease@% %i:scaleDA%；每格+@PerHexIncrease@% %i:scaleDA%</row>",
+      "effects": [
+        {
+          "minUnits": 2,
+          "maxUnits": 2,
+          "style": 1,
+          "variables": {
+            "PerHexIncrease": 2,
+            "PercentDamageIncrease": 18
+          }
+        },
+        {
+          "minUnits": 3,
+          "maxUnits": 3,
+          "style": 3,
+          "variables": {
+            "PerHexIncrease": 3,
+            "PercentDamageIncrease": 24
+          }
+        },
+        {
+          "minUnits": 4,
+          "maxUnits": 25000,
+          "style": 5,
+          "variables": {
+            "PerHexIncrease": 4,
+            "PercentDamageIncrease": 28
+          }
+        }
+      ]
+    },
+    "TFT17_FioraUniqueTrait": {
+      "name": "神鬥士",
+      "desc": "你的聯盟棋手會根據勝利時造成的玩家傷害，回復@PlayerOmnivamp*100@%生命。<br><br>菲歐拉在一對一決鬥中必勝。",
+      "effects": [
+        {
+          "minUnits": 1,
+          "maxUnits": 25000,
+          "style": 4,
+          "variables": {
+            "DUHeal": 1,
+            "PVEHP": 1,
+            "PVENumWins": 4,
+            "PlayerOmnivamp": 0.15000000596046448
+          }
+        }
+      ]
+    },
+    "TFT17_MorganaUniqueTrait": {
+      "name": "闇翼魔女",
+      "desc": "友軍受到的技能傷害減少@UntransformedAbilityDA*100@%，魔甘娜處於綻放闇翼型態時，提升至@TransformedAbilityDA*100@%。",
+      "effects": [
+        {
+          "minUnits": 1,
+          "maxUnits": 1,
+          "style": 4,
+          "variables": {
+            "TransformedAbilityDA": 0.10000000149011612,
+            "UntransformedAbilityDA": 0.05000000074505806
+          }
+        }
+      ]
+    }
+  }
+}

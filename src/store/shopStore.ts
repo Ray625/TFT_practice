@@ -78,7 +78,10 @@ const rollShopCards = (
     ),
   );
 
-  const totalRate = availableLevels.reduce((sum, rateTier) => sum + rateTier.rate, 0);
+  const totalRate = availableLevels.reduce(
+    (sum, rateTier) => sum + rateTier.rate,
+    0,
+  );
   const finalRate =
     totalRate === 100
       ? levelRate
@@ -265,7 +268,15 @@ export const useShopStore = create<ShopStore>((set, get) => {
   };
 
   const loadTransitionBoardFromTemplate = (templateId?: string) => {
-    const { season, total, lastTransitionBoardId, level, xp, shopList, banner } = get();
+    const {
+      season,
+      total,
+      lastTransitionBoardId,
+      level,
+      xp,
+      shopList,
+      banner,
+    } = get();
     if (season !== "set17") return;
     const { playerSide } = useSiteStore.getState();
 
@@ -276,7 +287,9 @@ export const useShopStore = create<ShopStore>((set, get) => {
       : (() => {
           const candidates =
             set17TransitionBoards.length > 1
-              ? set17TransitionBoards.filter((item) => item.id !== lastTransitionBoardId)
+              ? set17TransitionBoards.filter(
+                  (item) => item.id !== lastTransitionBoardId,
+                )
               : set17TransitionBoards;
 
           return candidates[Math.floor(Math.random() * candidates.length)];
@@ -348,9 +361,7 @@ export const useShopStore = create<ShopStore>((set, get) => {
             : availableFrontSlots;
       placeUnit(unit, targetPool);
     });
-    shuffle(backliners).forEach((unit) =>
-      placeUnit(unit, availableBackSlots),
-    );
+    shuffle(backliners).forEach((unit) => placeUnit(unit, availableBackSlots));
 
     const nextLevel = level < 7 ? 7 : level;
     const nextXp = level < 7 ? 0 : xp;
@@ -363,8 +374,10 @@ export const useShopStore = create<ShopStore>((set, get) => {
       level: nextLevel,
       xp: nextXp,
       total,
-      shopList: shouldRefillShop ? nextShopResult?.shop ?? Array(5).fill(null) : shopList,
-      banner: shouldRefillShop ? nextShopResult?.banner ?? banner : banner,
+      shopList: shouldRefillShop
+        ? (nextShopResult?.shop ?? Array(5).fill(null))
+        : shopList,
+      banner: shouldRefillShop ? (nextShopResult?.banner ?? banner) : banner,
       isOutside: false,
       dragTargetIndex: null,
       isDragging: false,
@@ -383,7 +396,7 @@ export const useShopStore = create<ShopStore>((set, get) => {
   return {
     level: 7,
     xp: 0,
-    total: 84,
+    total: 80,
     season: "set17",
     shopList: Array(5).fill(null),
     banner: initializeBanner("set17"),
@@ -437,10 +450,10 @@ export const useShopStore = create<ShopStore>((set, get) => {
         xp: 0,
         total: normalizedTotal,
         shopList: shouldRefillShop
-          ? nextShopResult?.shop ?? Array(5).fill(null)
+          ? (nextShopResult?.shop ?? Array(5).fill(null))
           : shopList,
         banner: shouldRefillShop
-          ? nextShopResult?.banner ?? resetBanner
+          ? (nextShopResult?.banner ?? resetBanner)
           : resetBanner,
         isOutside: false,
         dragTargetIndex: null,

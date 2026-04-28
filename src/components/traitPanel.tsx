@@ -80,10 +80,14 @@ const getTraitRows = (
 
 const TraitPanel = () => {
   const [page, setPage] = useState(0)
-  const { season } = useShopStore()
+  const { season, level } = useShopStore()
   const { space } = useSiteStore()
   const currentSeason = season as SeasonKey
   const rows = useMemo(() => getTraitRows(currentSeason, space), [currentSeason, space])
+  const unitCount = useMemo(
+    () => space.reduce((count, champion) => (champion ? count + 1 : count), 0),
+    [space],
+  )
   const totalPages = Math.max(1, Math.ceil(rows.length / traitsPerPage))
   const currentPage = Math.min(page, totalPages - 1)
   const visibleRows = rows.slice(
@@ -94,9 +98,14 @@ const TraitPanel = () => {
   return (
     <section className="flex flex-col w-full lg:w-58 h-80 xl:h-100 px-4 py-3 lg:mx-2 text-text-white bg-reroll-bg border-2 border-reroll-border">
       <div className="flex items-center justify-between mb-3">
-        <h3 className="text-xl font-bold">羈絆</h3>
         <div className="flex items-center gap-2">
-          <p className="text-sm text-text-white/75">{rows.filter((row) => row.activeEffect).length}/{rows.length}</p>
+          <h3 className="text-xl font-bold">羈絆</h3>
+          <div className="flex items-center gap-1.5 px-2 py-1 border border-reroll-border bg-bg-black/80 text-xs text-text-white/85 tabular-nums">
+            <span className="text-text-white/60">人口</span>
+            <span>{unitCount}/{level}</span>
+          </div>
+        </div>
+        <div className="flex items-center gap-2">
           {totalPages > 1 && (
             <div className="flex items-center gap-1">
               <button

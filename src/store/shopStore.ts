@@ -54,6 +54,7 @@ export const useShopStore = create<ShopStore>((set, get) => {
     setSpace,
     setPlayerSide,
     setHoverCard,
+    setBlockedSeatIndex,
     setSeatAnimate,
     setSpaceAnimate,
   } = useSiteStore.getState();
@@ -511,7 +512,13 @@ export const useShopStore = create<ShopStore>((set, get) => {
         }, 0);
 
         // 若戰區已滿則return
-        if (spaceCount >= level) return;
+        if (spaceCount >= level) {
+          setBlockedSeatIndex(hoverCard.index);
+          setTimeout(() => {
+            setBlockedSeatIndex((prev) => (prev === hoverCard.index ? null : prev));
+          }, 260);
+          return;
+        }
 
         // 將備戰區該位置清空
         setSeat((prev) =>

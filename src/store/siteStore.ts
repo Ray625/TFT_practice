@@ -16,6 +16,7 @@ interface SiteStore {
   space: BoardUnit[]
   seatAnimate: AnimationMap
   spaceAnimate: AnimationMap
+  blockedSeatIndex: number | null
   hoverCard: HoverCard | null
   playerSide: {
     [key: string]: {
@@ -30,6 +31,7 @@ interface SiteStore {
   }}>) => void
   setSeatAnimate: (updater: Updater<AnimationMap>) => void
   setSpaceAnimate: (updater: Updater<AnimationMap>) => void
+  setBlockedSeatIndex: (updater: Updater<number | null>) => void
   setHoverCard: (updater: Updater<HoverCard | null>) => void
   dragStart: (event: React.DragEvent<HTMLElement>, item: BoardUnit, index: number, place:string) => void
   drop: (event: React.DragEvent<HTMLElement>, endIndex: number, endPlace: string) => void
@@ -42,6 +44,7 @@ export const useSiteStore = create<SiteStore>((set, get) => {
     space: Array(28).fill(null),
     seatAnimate: new Map(),
     spaceAnimate: new Map(),
+    blockedSeatIndex: null,
     hoverCard: null,
     playerSide: {},
     setSeat: (updater) => {
@@ -72,6 +75,12 @@ export const useSiteStore = create<SiteStore>((set, get) => {
           typeof updater === "function" ? updater(state.spaceAnimate) : updater,
       }))
     },
+    setBlockedSeatIndex: (updater) => {
+      set((state) => ({
+        blockedSeatIndex:
+          typeof updater === "function" ? updater(state.blockedSeatIndex) : updater,
+      }))
+    },
     setHoverCard: (updater) => {
       set((state) => ({
         hoverCard:
@@ -99,6 +108,7 @@ export const useSiteStore = create<SiteStore>((set, get) => {
       const startPlace = parseData.startPlace
       const item = parseData.item
       const { setIsDragging } = useShopStore.getState()
+      const { setBlockedSeatIndex } = get()
 
       // 若由備戰席開始拖曳
       if (startPlace === "seat") {
@@ -121,7 +131,14 @@ export const useSiteStore = create<SiteStore>((set, get) => {
               return acc
             }, 0)
 
-            if (spaceCount >= level) return
+            if (spaceCount >= level) {
+              setBlockedSeatIndex(startIndex)
+              setTimeout(() => {
+                setBlockedSeatIndex((prev) => (prev === startIndex ? null : prev))
+              }, 260)
+              setIsDragging(false)
+              return
+            }
           }
           set((state) => {
             const newSeat = [...state.seat]

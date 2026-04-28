@@ -1,10 +1,44 @@
+import gsap from "gsap"
+import { useEffect, useRef } from "react"
 import { useSiteStore } from "../store/siteStore"
 import { useShopStore } from "../store/shopStore"
 import StarLevelUpEffect from "./starLevelUpEffect"
 
 const Seat = () => {
-  const { seat, seatAnimate, setHoverCard, dragStart, drop, dragOver } = useSiteStore()
+  const {
+    seat,
+    seatAnimate,
+    blockedSeatIndex,
+    setHoverCard,
+    dragStart,
+    drop,
+    dragOver,
+  } = useSiteStore()
   const { season, setIsDragging } = useShopStore()
+  const seatCardRefs = useRef<(HTMLDivElement | null)[]>([])
+
+  useEffect(() => {
+    if (blockedSeatIndex === null) return
+
+    const target = seatCardRefs.current[blockedSeatIndex]
+    if (!target) return
+
+    gsap.killTweensOf(target)
+    gsap.fromTo(
+      target,
+      { x: 0 },
+      {
+        keyframes: [
+          { x: -6, duration: 0.05 },
+          { x: 6, duration: 0.05 },
+          { x: -4, duration: 0.04 },
+          { x: 4, duration: 0.04 },
+          { x: 0, duration: 0.05 },
+        ],
+        ease: "power1.out",
+      },
+    )
+  }, [blockedSeatIndex])
 
   return (
     <div className="flex flex-row items-center justify-center gap-0.5 w-fit h-fit mx-auto mb-4 border-2 border-bg-black bg-bg-black/30">
@@ -31,6 +65,9 @@ const Seat = () => {
           >
             {item && item.name && (
               <div
+                ref={(element) => {
+                  seatCardRefs.current[index] = element
+                }}
                 className={`relative w-full h-full border-3 ${borderColors[cost]}`}
                 onMouseEnter={() =>
                   setHoverCard({

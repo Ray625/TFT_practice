@@ -88,6 +88,7 @@ const TraitPanel = () => {
     () => space.reduce((count, champion) => (champion ? count + 1 : count), 0),
     [space],
   )
+  const isUnitCapReached = unitCount >= level
   const totalPages = Math.max(1, Math.ceil(rows.length / traitsPerPage))
   const currentPage = Math.min(page, totalPages - 1)
   const visibleRows = rows.slice(
@@ -100,8 +101,14 @@ const TraitPanel = () => {
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">
           <h3 className="text-xl font-bold">羈絆</h3>
-          <div className="flex items-center gap-1.5 px-2 py-1 border border-reroll-border bg-bg-black/80 text-xs text-text-white/85 tabular-nums">
-            <span className="text-text-white/60">人口</span>
+          <div
+            className={`flex items-center gap-1.5 px-2 py-1 border text-xs tabular-nums transition-colors duration-150 ${
+              isUnitCapReached
+                ? "border-white bg-white/12 text-white shadow-[0_0_10px_rgba(255,255,255,0.18)]"
+                : "border-reroll-border bg-bg-black/80 text-text-white/85"
+            }`}
+          >
+            <span className={isUnitCapReached ? "text-white" : "text-text-white/60"}>人口</span>
             <span>{unitCount}/{level}</span>
           </div>
         </div>

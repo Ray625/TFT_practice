@@ -190,6 +190,107 @@ export const useShopStore = create<ShopStore>((set, get) => {
     mergeCards(matches, card, willBeStars);
   };
 
+  const loadTransitionBoardFromTemplate = (templateId?: string) => {
+    const { season, total } = get();
+    if (season !== "set17") return;
+
+    const seasonChampions = champion[season as SeasonKey]
+      .data as ChampionJSON["data"];
+    const template = templateId
+      ? set17TransitionBoards.find((item) => item.id === templateId)
+      : set17TransitionBoards[
+          Math.floor(Math.random() * set17TransitionBoards.length)
+        ];
+
+    if (!template) return;
+
+    const twoStarCount = Math.min(
+      template.preferredTwoStarIds.length,
+      Math.floor(Math.random() * 4) + 1,
+    );
+    const twoStarIds = new Set(
+      shuffle(template.preferredTwoStarIds).slice(0, twoStarCount),
+    );
+
+    const boardUnits = template.unitIds
+      .map((unitId) => {
+        const championData = seasonChampions[unitId];
+        if (!championData) return null;
+
+        return {
+          ...championData,
+          count: [30, 25, 18, 10, 9, 9][championData.tier - 1],
+          star: twoStarIds.has(unitId) ? 2 : 1,
+        } satisfies ChampionData;
+      })
+      .filter((unit): unit is ChampionData => Boolean(unit));
+
+    const frontliners = boardUnits.filter((unit) => (unit.range ?? 1) <= 1);
+    const reachFrontliners = boardUnits.filter(
+      (unit) => (unit.range ?? 1) === 2,
+    );
+    const backliners = boardUnits.filter((unit) => (unit.range ?? 1) >= 4);
+    const midliners = boardUnits.filter((unit) => {
+      const range = unit.range ?? 1;
+      return range === 3;
+    });
+
+    const nextSpace = Array(28).fill(null) as (ChampionData | null)[];
+    const nextSeat = Array(9).fill(null) as (ChampionData | null)[];
+    const nextPlayerSide: Record<string, { owned: number }> = {};
+    const availableFrontSlots = [...frontTankSlots];
+    const availableReachFrontSlots = [...frontReachSlots];
+    const availableBackSlots = [...backSlotsByCount(backliners.length)];
+
+    const placeUnit = (unit: ChampionData, slotPool: number[]) => {
+      const nextSlot = slotPool.shift();
+      if (nextSlot === undefined) return;
+      nextSpace[nextSlot] = unit;
+      nextPlayerSide[unit.id] = {
+        owned:
+          (nextPlayerSide[unit.id]?.owned ?? 0) + (unit.star === 2 ? 3 : 1),
+      };
+    };
+
+    shuffle(frontliners).forEach((unit) =>
+      placeUnit(unit, availableFrontSlots),
+    );
+    shuffle(reachFrontliners).forEach((unit) =>
+      placeUnit(unit, availableReachFrontSlots),
+    );
+    shuffle(midliners).forEach((unit) => {
+      const targetPool =
+        availableBackSlots.length >
+        availableFrontSlots.length + availableReachFrontSlots.length
+          ? availableBackSlots
+          : availableReachFrontSlots.length > 0
+            ? availableReachFrontSlots
+            : availableFrontSlots;
+      placeUnit(unit, targetPool);
+    });
+    shuffle(backliners).forEach((unit) =>
+      placeUnit(unit, availableBackSlots),
+    );
+
+    set(() => ({
+      level: 7,
+      xp: 0,
+      total,
+      shopList: Array(5).fill(null),
+      isOutside: false,
+      dragTargetIndex: null,
+      isDragging: false,
+    }));
+
+    setSeat(nextSeat);
+    setSpace(nextSpace);
+    setPlayerSide(nextPlayerSide);
+    setHoverCard(null);
+    setBlockedSeatIndex(null);
+    setSeatAnimate(new Map());
+    setSpaceAnimate(new Map());
+  };
+
   return {
     level: 7,
     xp: 0,
@@ -256,100 +357,10 @@ export const useShopStore = create<ShopStore>((set, get) => {
     },
 
     loadRandomTransitionBoard: () => {
-      const { season, total } = get();
-      if (season !== "set17") return;
-
-      const seasonChampions = champion[season as SeasonKey]
-        .data as ChampionJSON["data"];
-      const template =
-        set17TransitionBoards[
-          Math.floor(Math.random() * set17TransitionBoards.length)
-        ];
-      const twoStarCount = Math.min(
-        template.preferredTwoStarIds.length,
-        Math.floor(Math.random() * 4) + 1,
-      );
-      const twoStarIds = new Set(
-        shuffle(template.preferredTwoStarIds).slice(0, twoStarCount),
-      );
-
-      const boardUnits = template.unitIds
-        .map((unitId) => {
-          const championData = seasonChampions[unitId];
-          if (!championData) return null;
-
-          return {
-            ...championData,
-            count: [30, 25, 18, 10, 9, 9][championData.tier - 1],
-            star: twoStarIds.has(unitId) ? 2 : 1,
-          } satisfies ChampionData;
-        })
-        .filter((unit): unit is ChampionData => Boolean(unit));
-
-      const frontliners = boardUnits.filter((unit) => (unit.range ?? 1) <= 1);
-      const reachFrontliners = boardUnits.filter(
-        (unit) => (unit.range ?? 1) === 2,
-      );
-      const backliners = boardUnits.filter((unit) => (unit.range ?? 1) >= 4);
-      const midliners = boardUnits.filter((unit) => {
-        const range = unit.range ?? 1;
-        return range === 3;
-      });
-
-      const nextSpace = Array(28).fill(null) as (ChampionData | null)[];
-      const nextSeat = Array(9).fill(null) as (ChampionData | null)[];
-      const nextPlayerSide: Record<string, { owned: number }> = {};
-      const availableFrontSlots = [...frontTankSlots];
-      const availableReachFrontSlots = [...frontReachSlots];
-      const availableBackSlots = [...backSlotsByCount(backliners.length)];
-
-      const placeUnit = (unit: ChampionData, slotPool: number[]) => {
-        const nextSlot = slotPool.shift();
-        if (nextSlot === undefined) return;
-        nextSpace[nextSlot] = unit;
-        nextPlayerSide[unit.id] = {
-          owned:
-            (nextPlayerSide[unit.id]?.owned ?? 0) + (unit.star === 2 ? 3 : 1),
-        };
-      };
-
-      shuffle(frontliners).forEach((unit) =>
-        placeUnit(unit, availableFrontSlots),
-      );
-      shuffle(reachFrontliners).forEach((unit) =>
-        placeUnit(unit, availableReachFrontSlots),
-      );
-      shuffle(midliners).forEach((unit) => {
-        const targetPool =
-          availableBackSlots.length >
-          availableFrontSlots.length + availableReachFrontSlots.length
-            ? availableBackSlots
-            : availableReachFrontSlots.length > 0
-              ? availableReachFrontSlots
-              : availableFrontSlots;
-        placeUnit(unit, targetPool);
-      });
-      shuffle(backliners).forEach((unit) =>
-        placeUnit(unit, availableBackSlots),
-      );
-
-      set(() => ({
-        level: 7,
-        xp: 0,
-        total,
-        shopList: Array(5).fill(null),
-        isOutside: false,
-        dragTargetIndex: null,
-        isDragging: false,
-      }));
-
-      setSeat(nextSeat);
-      setSpace(nextSpace);
-      setPlayerSide(nextPlayerSide);
-      setHoverCard(null);
-      setBlockedSeatIndex(null);
-      setSeatAnimate(new Map());
-      setSpaceAnimate(new Map());
+      loadTransitionBoardFromTemplate();
+    },
+    loadTransitionBoardById: (templateId) => {
+      loadTransitionBoardFromTemplate(templateId);
     },
 
     setIsOutside: (updater) => set({ isOutside: updater }),

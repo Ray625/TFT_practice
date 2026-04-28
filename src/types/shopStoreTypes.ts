@@ -66,6 +66,7 @@ export interface ShopStore {
   setSeason: (updater: SeasonKey) => void
   resetRun: (initialLevel: number, initialTotal: number) => void
   loadRandomTransitionBoard: () => void
+  loadTransitionBoardById: (templateId: string) => void
   setIsOutside: (updater: boolean) => void
   setDragTargetIndex: (updater: number | null) => void
   setIsDragging: (updater: boolean) => void

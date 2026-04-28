@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react"
 import { useShopStore } from "../store/shopStore"
+import { set17TransitionBoards } from "../data/transitionBoards"
 
 const SessionControls = () => {
-  const { level, total, resetRun, loadRandomTransitionBoard } = useShopStore()
+  const { level, total, resetRun, loadRandomTransitionBoard, loadTransitionBoardById } = useShopStore()
   const [initialLevel, setInitialLevel] = useState(String(level))
   const [initialGold, setInitialGold] = useState(String(total))
   const [timerSetting, setTimerSetting] = useState("30")
   const [remainingSeconds, setRemainingSeconds] = useState(30)
   const [isTimerRunning, setIsTimerRunning] = useState(false)
+  const [isTransitionMenuOpen, setIsTransitionMenuOpen] = useState(false)
 
   const commitReset = () => {
     const parsedLevel = Number(initialLevel)
@@ -74,6 +76,17 @@ const SessionControls = () => {
       window.removeEventListener("keydown", handlePressKey)
     }
   }, [initialGold, initialLevel])
+
+  useEffect(() => {
+    if (!isTransitionMenuOpen) return
+
+    const closeMenu = () => setIsTransitionMenuOpen(false)
+    window.addEventListener("click", closeMenu)
+
+    return () => {
+      window.removeEventListener("click", closeMenu)
+    }
+  }, [isTransitionMenuOpen])
 
   return (
     <section className="flex flex-col gap-3 w-52 px-3 py-3 text-text-white bg-reroll-bg/95 border-2 border-reroll-border shadow-[0_8px_20px_rgba(0,0,0,0.28)] backdrop-blur-[2px]">
@@ -153,14 +166,65 @@ const SessionControls = () => {
         </div>
       </div>
       <div className="mt-1 border-t border-reroll-border/80 pt-3">
-        <button
-          type="button"
-          onClick={loadRandomTransitionBoard}
-          className="flex items-center justify-between h-10 px-3 w-full border border-purple-300/70 bg-four-cost-card-dark text-sm font-medium text-text-white transition-all duration-150 hover:cursor-pointer hover:border-purple-200 hover:brightness-110 active:scale-[0.99]"
-        >
-          <span>過渡盤面</span>
-          <span className="text-xs text-text-white/80">隨機</span>
-        </button>
+        <div className="relative">
+          <div className="grid grid-cols-[1fr_2.25rem] gap-2">
+            <button
+              type="button"
+              onClick={loadRandomTransitionBoard}
+              className="flex items-center justify-between h-10 px-3 border border-purple-300/70 bg-four-cost-card-dark text-sm font-medium text-text-white transition-all duration-150 hover:cursor-pointer hover:border-purple-200 hover:brightness-110 active:scale-[0.99]"
+            >
+              <span>過渡盤面</span>
+              <span className="text-xs text-text-white/80">隨機</span>
+            </button>
+            <button
+              type="button"
+              onClick={(event) => {
+                event.stopPropagation()
+                setIsTransitionMenuOpen((prev) => !prev)
+              }}
+              className="flex items-center justify-center h-10 border border-reroll-border bg-bg-black text-text-white transition-all duration-150 hover:cursor-pointer hover:border-border-gold hover:bg-reroll-bg/70 active:scale-[0.99]"
+              title="展開預設陣容"
+            >
+              <span
+                className={`inline-flex h-5 w-5 items-center justify-center origin-center transition-transform duration-150 ${
+                  isTransitionMenuOpen ? "rotate-180" : ""
+                }`}
+                aria-hidden="true"
+              >
+                <svg viewBox="0 0 20 20" className="h-4 w-4" fill="none">
+                  <path
+                    d="M5 7.5L10 12.5L15 7.5"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </span>
+            </button>
+          </div>
+
+          {isTransitionMenuOpen && (
+            <div
+              className="absolute right-0 z-30 mt-2 flex w-full flex-col overflow-hidden border border-reroll-border bg-reroll-bg shadow-[0_10px_24px_rgba(0,0,0,0.28)]"
+              onClick={(event) => event.stopPropagation()}
+            >
+              {set17TransitionBoards.map((template) => (
+                <button
+                  key={template.id}
+                  type="button"
+                  onClick={() => {
+                    loadTransitionBoardById(template.id)
+                    setIsTransitionMenuOpen(false)
+                  }}
+                  className="flex items-center justify-between px-3 py-2 text-left text-sm text-text-white transition-colors duration-150 hover:cursor-pointer hover:bg-bg-black/70"
+                >
+                  <span>{template.name}</span>
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     </section>
   )

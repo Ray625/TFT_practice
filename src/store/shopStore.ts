@@ -62,6 +62,80 @@ const shuffle = <T>(items: T[]) => {
   return next;
 };
 
+const rollShopCards = (
+  level: number,
+  banner: Record<string, ChampionData>,
+  playerSide: Record<string, { owned: number }>,
+) => {
+  const costs: number[] = [];
+  const shop: ChampionData[] = [];
+  const tempBanner = { ...banner };
+  const levelRate = shopRates.data.Shop[`${level - 1}`].dropRatesByTier;
+
+  const availableLevels = levelRate.filter((rateTier) =>
+    Object.values(tempBanner).some(
+      (card) => card.tier === rateTier.cost && card.count > 0,
+    ),
+  );
+
+  const totalRate = availableLevels.reduce((sum, rateTier) => sum + rateTier.rate, 0);
+  const finalRate =
+    totalRate === 100
+      ? levelRate
+      : availableLevels.map((rateTier) => ({
+          cost: rateTier.cost,
+          rate: (rateTier.rate / totalRate) * 100,
+        }));
+
+  for (let i = 0; i < 5; i += 1) {
+    let rateSum = 0;
+    const tierIndex = Math.floor(Math.random() * 100);
+
+    for (const rateTier of finalRate) {
+      rateSum += rateTier.rate;
+      if (tierIndex < rateSum) {
+        costs.push(rateTier.cost);
+        break;
+      }
+    }
+  }
+
+  costs.forEach((cardTier) => {
+    let bannerTotal = 0;
+
+    Object.entries(tempBanner).forEach(([key, cardData]) => {
+      if (cardData.tier === cardTier) {
+        if (playerSide[key]?.owned >= 9) return;
+        bannerTotal += cardData.count;
+      }
+    });
+
+    let cardTotal = 0;
+    const cardIndex = Math.floor(Math.random() * bannerTotal);
+
+    for (const [key, cardData] of Object.entries(tempBanner)) {
+      if (cardData.tier !== cardTier) continue;
+      if (cardData.count === 0) continue;
+      if (playerSide[key]?.owned >= 9) continue;
+      cardTotal += cardData.count;
+
+      if (cardIndex < cardTotal) {
+        tempBanner[key] = {
+          ...tempBanner[key],
+          count: tempBanner[key].count - 1,
+        };
+        shop.push(cardData);
+        break;
+      }
+    }
+  });
+
+  return {
+    banner: tempBanner,
+    shop,
+  };
+};
+
 const frontTankSlots = [3, 2, 4, 1, 5, 0, 6];
 const frontReachSlots = [10, 9, 11, 8, 12, 7, 13];
 
@@ -191,8 +265,9 @@ export const useShopStore = create<ShopStore>((set, get) => {
   };
 
   const loadTransitionBoardFromTemplate = (templateId?: string) => {
-    const { season, total, lastTransitionBoardId } = get();
+    const { season, total, lastTransitionBoardId, level, xp, shopList, banner } = get();
     if (season !== "set17") return;
+    const { playerSide } = useSiteStore.getState();
 
     const seasonChampions = champion[season as SeasonKey]
       .data as ChampionJSON["data"];
@@ -277,11 +352,19 @@ export const useShopStore = create<ShopStore>((set, get) => {
       placeUnit(unit, availableBackSlots),
     );
 
+    const nextLevel = level < 7 ? 7 : level;
+    const nextXp = level < 7 ? 0 : xp;
+    const shouldRefillShop = shopList.every((card) => !card);
+    const nextShopResult = shouldRefillShop
+      ? rollShopCards(nextLevel, banner, playerSide)
+      : null;
+
     set(() => ({
-      level: 7,
-      xp: 0,
+      level: nextLevel,
+      xp: nextXp,
       total,
-      shopList: Array(5).fill(null),
+      shopList: shouldRefillShop ? nextShopResult?.shop ?? Array(5).fill(null) : shopList,
+      banner: shouldRefillShop ? nextShopResult?.banner ?? banner : banner,
       isOutside: false,
       dragTargetIndex: null,
       isDragging: false,
@@ -339,16 +422,26 @@ export const useShopStore = create<ShopStore>((set, get) => {
     },
 
     resetRun: (initialLevel: number, initialTotal: number) => {
-      const { season } = get();
+      const { season, shopList, banner } = get();
+      const { playerSide } = useSiteStore.getState();
       const normalizedLevel = Math.min(10, Math.max(1, initialLevel));
       const normalizedTotal = Math.min(999, Math.max(0, initialTotal));
+      const shouldRefillShop = shopList.every((card) => !card);
+      const resetBanner = initializeBanner(season as SeasonKey);
+      const nextShopResult = shouldRefillShop
+        ? rollShopCards(normalizedLevel, resetBanner, playerSide)
+        : null;
 
       set(() => ({
         level: normalizedLevel,
         xp: 0,
         total: normalizedTotal,
-        shopList: Array(5).fill(null),
-        banner: initializeBanner(season as SeasonKey),
+        shopList: shouldRefillShop
+          ? nextShopResult?.shop ?? Array(5).fill(null)
+          : shopList,
+        banner: shouldRefillShop
+          ? nextShopResult?.banner ?? resetBanner
+          : resetBanner,
         isOutside: false,
         dragTargetIndex: null,
         isDragging: false,
@@ -381,11 +474,7 @@ export const useShopStore = create<ShopStore>((set, get) => {
       const numberTotal = Number(total);
       if (numberTotal < 2) return;
 
-      let cards = [];
-      let shop: ChampionData[] = [];
       let tempBanner = { ...banner };
-
-      const levelRate = shopRates.data.Shop[`${level - 1}`].dropRatesByTier;
 
       // 將商店上一輪沒有買下的卡放回牌池
       shopList.forEach((card) => {
@@ -400,73 +489,11 @@ export const useShopStore = create<ShopStore>((set, get) => {
           };
         }
       });
-
-      // 如果有某一費用牌池抽空，則須重新計算機率
-      const availableLevels = levelRate.filter((level) => {
-        return Object.values(tempBanner).some(
-          (card) => card.tier === level.cost && card.count > 0,
-        );
-      });
-
-      const totalRate = availableLevels.reduce(
-        (sum, level) => sum + level.rate,
-        0,
-      );
-
-      const finalRate =
-        totalRate === 100
-          ? levelRate
-          : availableLevels.map((level) => ({
-              cost: level.cost,
-              rate: (level.rate / totalRate) * 100,
-            }));
-
-      // 抽出5張卡牌之[費用]，由等級決定抽出之機率
-      for (let i = 0; i < 5; i++) {
-        let rateSum = 0;
-        const starIndex = Math.floor(Math.random() * 100);
-        for (let item of finalRate) {
-          rateSum += item.rate;
-          if (starIndex < rateSum) {
-            cards.push(item.cost);
-            break;
-          }
-        }
-      }
-
-      // 再由費用列表中，對該費用抽出一張卡牌，若某一張卡牌使用者已擁有三星(9張相同卡牌)，則將該卡牌排除後再抽出
-      cards.forEach((cardTier) => {
-        let bannerTotal = 0;
-        Object.entries(tempBanner).forEach(([key, cardData]) => {
-          if (cardData.tier === cardTier) {
-            if (playerSide[key]?.owned >= 9) {
-              return;
-            }
-            bannerTotal += cardData.count;
-          }
-        });
-
-        let cardTotal = 0;
-        const cardIndex = Math.floor(Math.random() * bannerTotal);
-        for (let [key, cardData] of Object.entries(tempBanner)) {
-          if (cardData.tier !== cardTier) continue;
-          if (cardData.count === 0) continue;
-          if (playerSide[key]?.owned >= 9) continue;
-          cardTotal += cardData.count;
-          if (cardIndex < cardTotal) {
-            tempBanner[key] = {
-              ...tempBanner[key],
-              count: tempBanner[key].count - 1,
-            };
-            shop.push(cardData);
-            break;
-          }
-        }
-      });
+      const nextShopResult = rollShopCards(level, tempBanner, playerSide);
 
       set({
-        banner: tempBanner,
-        shopList: shop,
+        banner: nextShopResult.banner,
+        shopList: nextShopResult.shop,
         total: numberTotal - 2,
       });
     },
